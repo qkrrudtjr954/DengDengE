@@ -1,17 +1,10 @@
 package dao;
 
 public class AnimalCommentDao {
-	private static AnimalCommentDao anicomDao = null;
 	
-	private AnimalCommentDao() {
+	/*+ answer(int seq , AnimalComment dto)  : boolean*/
+	
+	public boolean answer(int seq, AnimalCommentDao anicDto) {
+		return false;
 	}
-	
-	public static AnimalCommentDao getInstance() {
-		if(anicomDao == null) {
-			anicomDao = new AnimalCommentDao();
-		}
-		return anicomDao;
-	}
-	
-
 }
