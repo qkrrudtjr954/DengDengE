@@ -12,14 +12,11 @@ import db.DBConnection;
 import dto.CommuBbsDto;
 
 public class CommuBbsDao implements iCommuBbsDao{
-	private static CommuBbsDao comDao = null;
-	public CommuBbsDao() {
-		// TODO Auto-generated constructor stub
-	}
+	private static CommuBbsDao comDao = new CommuBbsDao();
+	
+	public CommuBbsDao() {}
+	
 	public CommuBbsDao getInstance() {
-		if(comDao==null) {
-			comDao = new CommuBbsDao();
-		}
 		
 		return comDao;
 	}
@@ -28,8 +25,10 @@ public class CommuBbsDao implements iCommuBbsDao{
 	public List<CommuBbsDto> getCommulist() {
 		List<CommuBbsDto> list = new ArrayList<>();
 
-		String sql = "SELECT*FROM COMMUBBS "
-					+ " ORDER BY REG_DATE DESC ";
+		/*String sql = "SELECT TITLE, TARGET_USER_SEQ, TARGET_CATEGORY, REG_DATE "*/
+		String sql = "SELECT * "
+				+ "	FROM COMMUBBS "
+				+ " ORDER BY REG_DATE DESC ";
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -39,6 +38,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 			System.out.println("2/6 getCommulist Success");
 
 			psmt = conn.prepareStatement(sql);
+			System.out.println("sql = " + sql);
 			System.out.println("3/6 getCommulist Success");
 
 			rs = psmt.executeQuery();
@@ -49,16 +49,16 @@ public class CommuBbsDao implements iCommuBbsDao{
 				//int seq, String title, String pic1, String content, int target_user_seq, int target_category,
 				//int readcount, String reg_date, String last_update, int del
 
-				CommuBbsDto dto = new CommuBbsDto(rs.getInt(i++), // seq
+				CommuBbsDto dto = new CommuBbsDto(0, // seq
 												rs.getString(i++),// title
-												rs.getString(i++),// String pic1 
+												"",// String pic1 
 												rs.getString(i++),//String content
 												rs.getInt(i++),//int target_user_seq
 												rs.getInt(i++),//int target_category
-												rs.getInt(i++),//int readcount
+												0,//int readcount
 												rs.getString(i++),//String reg_date
-												rs.getString(i++),//String last_update 
-												rs.getInt(i++));//int del
+												"",//String last_update 
+												0);//int del
 				list.add(dto);
 			}
 			System.out.println("5/6 getCommulist Success");
@@ -66,8 +66,19 @@ public class CommuBbsDao implements iCommuBbsDao{
 		} catch (SQLException e) {
 			System.out.println("getCommulist fail");
 		} finally {
-			DBClose.close(psmt, conn, rs);
-			System.out.println("6/6 getCommulist Success");
+			   try {
+				   if(rs != null) {
+				    rs.close();
+				   }
+
+				  if(psmt != null) {
+				     psmt.close();
+				  }
+				  if(conn !=null) {
+					  conn.close();
+				  }
+			   } catch (SQLException e) {
+			   }
 		}
 
 		return list;
