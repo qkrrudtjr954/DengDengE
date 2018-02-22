@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import db.DBClose;
 import db.DBConnection;
 import dto.AnimalBbsDto;
@@ -22,9 +23,13 @@ public class AnimalBbsDao {
 */
 	// 글목록
 	public List<AnimalBbsDto> getAnimalBbsList() {
-		String sql = " SELECT SEQ, TITLE, PIC1 "
+		String sql = " SELECT SEQ, TITLE, NAME, AGE, "
+				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
+				+ " GENDER, DESCRIPTTION, PIC1, CONTENT "
+				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
+				+ " REG_DATE, LAST_UPDATE, DEL "
 				+ " FROM ANIMALBBS ";
-		
+		System.out.println("s"+sql);
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -44,7 +49,23 @@ public class AnimalBbsDao {
 				AnimalBbsDto aniBbsDto = new AnimalBbsDto();
 				aniBbsDto.setSeq(rs.getInt("SEQ"));
 				aniBbsDto.setTitle(rs.getString("TITLE"));
-				aniBbsDto.setPic1(rs.getString("PIC1"));
+				aniBbsDto.setTitle(rs.getString("NAME"));
+				aniBbsDto.setSeq(rs.getInt("AGE"));
+				aniBbsDto.setTitle(rs.getString("KINDS"));
+				aniBbsDto.setTitle(rs.getString("TYPE"));
+				aniBbsDto.setTitle(rs.getString("LOCATION"));
+				aniBbsDto.setSeq(rs.getInt("MEDICINE"));
+				aniBbsDto.setSeq(rs.getInt("NEUTRALIZATION"));
+				aniBbsDto.setSeq(rs.getInt("GENDER"));
+				aniBbsDto.setTitle(rs.getString("DESCRIPTTION"));
+				aniBbsDto.setTitle(rs.getString("PIC1"));
+				aniBbsDto.setTitle(rs.getString("CONTENT"));
+				aniBbsDto.setSeq(rs.getInt("TARGET_USER_SEQ"));
+				aniBbsDto.setPic1(rs.getString("TARGET_CONTACT"));
+				aniBbsDto.setPic1(rs.getString("TARGET_DESCRIPTION"));
+				aniBbsDto.setPic1(rs.getString("REG_DATE"));
+				aniBbsDto.setPic1(rs.getString("LAST_UPDATE"));
+				aniBbsDto.setSeq(rs.getInt("DEL"));
 				
 				list.add(aniBbsDto);
 			}
@@ -59,18 +80,155 @@ public class AnimalBbsDao {
 	}
 	
 	// 입양하기 글 작성
-	public boolean wirteAnimalBbs(AnimalBbsDto anibDto) {
-		return false;
+	public boolean wirteAnimalBbs(AnimalBbsDto aniBbsDto) {
+		String sql = " INSERT INTO ANIMALBBS(SEQ, TITLE, NAME, AGE, "
+				+ " KINDS, TYPE, LOCATION, "
+				+ " MEDICINE, NEUTRALIZATION, GENDER,  "
+				+ " DESCRIPTTION, PIC1, CONTENT "
+				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
+				+ " REG_DATE, LAST_UPDATE, DEL) "
+				+ " VALUES(SEQ_ANIMALBBS.NEXTVAL, ?, ?, ?, "
+				+ " ?, ?, ?, ?, ?, ? "
+				+ " ?, ?, ?, "
+				+ " ?, ?, ?, SYSDATE, SYSDATE, 0) ";
+		int count = 0;
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 S wirteAnimalBbs");
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 S wirteAnimalBbs");
+			count = psmt.executeUpdate();
+			System.out.println("3/6 S wirteAnimalBbs");
+			
+		} catch (SQLException e) {			
+			System.out.println("wirteAnimalBbs fail");
+		} finally{
+			DBClose.close(psmt, conn, rs);	
+			System.out.println("4/6 S wirteAnimalBbs");
+		}
+		
+		return count>0?true:false;
 	}
 	
 	// 입양하기 글 디테일
 	public AnimalBbsDto detailAnimalBbs(int seq) {
-		return null;
+		String sql = " SELECT SEQ, ID, REF, STEP, DEPTH, "
+				+ " TITLE, CONTENT, WDATE, PARENT, DEL, READCOUNT "
+				+ " FROM ANIMALBBS "
+				+ " WHERE SEQ=? ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		AnimalBbsDto dto = null;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 S detailAnimalBbs");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("2/6 S detailAnimalBbs");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/6 S detailAnimalBbs");
+			
+			while(rs.next()){
+				int i = 1;
+				/*dto = new BbsDto(
+						rs.getInt(i++),	// seq 
+						rs.getString(i++),	// id 
+						rs.getInt(i++),	// ref 
+						rs.getInt(i++), // step 
+						rs.getInt(i++), // depth 
+						rs.getString(i++), // title
+						rs.getString(i++), // content 
+						rs.getString(i++), // wdate 
+						rs.getInt(i++),    // parent 
+						rs.getInt(i++),		//	del 
+						rs.getInt(i++));	// readcount
+*/			}
+			System.out.println("4/6 S detailAnimalBbs");
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			DBClose.close(psmt, conn, rs);		
+			System.out.println("5/6 S detailAnimalBbs");
+
+		}
+		
+		return dto;
+		
 	}
 	
 	// 입양하기 글 삭제
-	public boolean deleteBbs(int seq) {
-		return false;
+	public boolean deleteAnimalBbs(int seq) {
+		String sql = " UPDATE ANIMALBBS SET "
+				+ " DEL=1 WHERE SEQ=?";
+				
+			Connection conn = null;
+			PreparedStatement psmt = null;		
+				
+			int count = 0;
+				
+				
+			try {
+				conn = DBConnection.makeConnection();
+				System.out.println("1/6 S detailAnimalBbs");
+					
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, seq);
+				System.out.println("2/6 S detailAnimalBbs");
+					
+				count = psmt.executeUpdate();
+				System.out.println("3/6 S detailAnimalBbs");
+					
+			} catch (SQLException e) {			
+				System.out.println(e.getMessage());
+			} finally{
+				DBClose.close(psmt, conn,null);
+				System.out.println("4/6 S detailAnimalBbs");
+			}
+						
+			return count>0?true:false;
+	}
+	
+	// 입양하기 글 수정
+	public boolean updateAnimalBbs(int seq, AnimalBbsDto aniBbsDto) {
+		String sql = " UPDATE ANIMALBBS SET TITLE=?, "
+				+ " CONTENT=? WHERE SEQ=?";
+		System.out.println("s:"+sql);
+			
+		Connection conn = null;
+		PreparedStatement psmt = null;		
+			
+		int count = 0;
+			
+			
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1sss");
+			psmt = conn.prepareStatement(sql);
+		
+			System.out.println("2sss");
+				
+			count = psmt.executeUpdate();
+			System.out.println("3sss");
+				
+		} catch (SQLException e) {			
+			System.out.println(e.getMessage());
+		} finally{
+			DBClose.close(psmt, conn,null);
+			System.out.println("4sss");
+		}
+					
+		return count>0?true:false;
 	}
 	
 	/*

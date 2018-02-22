@@ -70,6 +70,12 @@ if(animlist == null || animlist.size() == 0){
 	<%
 }
 %>
+<tr>
+	<td colspan="5">
+		<input type="submit" value="글쓰기">
+	</td>
+</tr>
+
 </table>
 </form>
 
