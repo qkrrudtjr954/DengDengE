@@ -31,6 +31,13 @@ public class AfterBbsController extends HttpServlet {
 		String command = req.getParameter("command");
 		
 		
+		
+		if(command.equals("AfterBbslist")) {
+			dispatch("AfterBbslist.jsp", req, resp);
+			
+		}
+		
+		
 	}
 	
 	

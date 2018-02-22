@@ -22,4 +22,19 @@
   
   
   
+  <!-- AfterBbsController url mapping -->
+  <servlet>
+  	<servlet-name>AfterBbsController</servlet-name>
+  	<servlet-class>controller.AfterBbsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AfterBbsController</servlet-name>
+  	<url-pattern>/AfterBbsController</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  
 </web-app>
