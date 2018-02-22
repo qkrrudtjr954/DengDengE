@@ -136,8 +136,8 @@ public class AnimalBbsDao {
 	
 	// 입양하기 글 디테일
 	public AnimalBbsDto detailAnimalBbs(int seq) {
-		String sql = " SELECT SEQ, ID, REF, STEP, DEPTH, "
-				+ " TITLE, CONTENT, WDATE, PARENT, DEL, READCOUNT "
+		String sql = " SELECT SEQ,  "
+				+ "  "
 				+ " FROM ANIMALBBS "
 				+ " WHERE SEQ=? ";
 		Connection conn = null;
@@ -170,8 +170,8 @@ public class AnimalBbsDao {
 						rs.getString(i++), // wdate 
 						rs.getInt(i++),    // parent 
 						rs.getInt(i++),		//	del 
-						rs.getInt(i++));	// readcount
-*/			}
+						rs.getInt(i++));	// readcount*/
+				}
 			System.out.println("4/6 S detailAnimalBbs");
 		} catch (SQLException e) {			
 			e.printStackTrace();
@@ -231,19 +231,22 @@ public class AnimalBbsDao {
 			
 		try {
 			conn = DBConnection.makeConnection();
-			System.out.println("1sss");
+			System.out.println("1/6 S detailAnimalBbs");
 			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, aniBbsDto.getTitle());
+			psmt.setString(1, aniBbsDto.getCotent());
+			psmt.setInt(3, seq);
 		
-			System.out.println("2sss");
+			System.out.println("2/6 S detailAnimalBbs");
 				
 			count = psmt.executeUpdate();
-			System.out.println("3sss");
+			System.out.println("3/6 S detailAnimalBbs");
 				
 		} catch (SQLException e) {			
 			System.out.println(e.getMessage());
 		} finally{
 			DBClose.close(psmt, conn,null);
-			System.out.println("4sss");
+			System.out.println("4/6 S detailAnimalBbs");
 		}
 					
 		return count>0?true:false;
