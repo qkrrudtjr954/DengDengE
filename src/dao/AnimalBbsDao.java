@@ -82,8 +82,7 @@ public class AnimalBbsDao {
 	// 입양하기 글 작성
 	public boolean wirteAnimalBbs(AnimalBbsDto aniBbsDto) {
 		String sql = " INSERT INTO ANIMALBBS(SEQ, TITLE, NAME, AGE, "
-				+ " KINDS, TYPE, LOCATION, "
-				+ " MEDICINE, NEUTRALIZATION, GENDER,  "
+				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER,  "
 				+ " DESCRIPTTION, PIC1, CONTENT "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
 				+ " REG_DATE, LAST_UPDATE, DEL) "
@@ -102,6 +101,25 @@ public class AnimalBbsDao {
 			conn = DBConnection.makeConnection();
 			System.out.println("1/6 S wirteAnimalBbs");
 			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, aniBbsDto.getTitle());
+			psmt.setString(1, aniBbsDto.getName());
+			psmt.setInt(3, aniBbsDto.getAge());
+			
+			psmt.setString(4, aniBbsDto.getKinds());
+			psmt.setString(5, aniBbsDto.getType());
+			psmt.setString(6, aniBbsDto.getLocation());
+			psmt.setInt(7, aniBbsDto.getMedicine());
+			psmt.setInt(8, aniBbsDto.getNeutralization());
+			psmt.setInt(9, aniBbsDto.getGender());
+			
+			psmt.setString(10, aniBbsDto.getDescripttion());
+			psmt.setString(11, aniBbsDto.getPic1());
+			psmt.setString(12, aniBbsDto.getCotent());
+			
+			psmt.setInt(13, aniBbsDto.getUserSeq());
+			psmt.setString(14, aniBbsDto.getContact());
+			psmt.setString(15, aniBbsDto.getDescription());
 			System.out.println("2/6 S wirteAnimalBbs");
 			count = psmt.executeUpdate();
 			System.out.println("3/6 S wirteAnimalBbs");

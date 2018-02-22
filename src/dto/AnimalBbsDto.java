@@ -3,38 +3,13 @@ package dto;
 import java.io.Serializable;
 
 public class AnimalBbsDto implements Serializable {
-/*
-	-- 분양글 table
-	create SEQUENCE animalbbs_seq start with 1 increment by 1;
-	create table animalbbs(
-	    seq number(8) primary key,
-	    title varchar2(100),
-	    name varchar2(50),
-	    age number(2),
-	    kinds varchar2(100),
-	    location varchar2(200),
-	    medicine number(1),
-	    neutralization number(1),
-	    gender number(1),
-	    descripttion varchar2(3000),
-	    pic1 varchar2(200),
-	    content varchar2(4000),
-	    
-	    TARGET_USER_SEQ NUMBER(8),
-	    TARGET_CONTACT varchar2(20),
-	    TARGET_DESCRIPTION	varchar2(3000),
-	    REG_DATE DATE,
-	    LAST_UPDATE DATE,
-	    DEL NUMBER(1),
-	    
-	    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq)
-	);
-*/
+
 	private int seq;
 	private String title;
 	private String name;
 	private int age;
 	private String kinds;
+	private String type;
 	private String location;
 	private int medicine;
 	private int neutralization;
@@ -52,8 +27,8 @@ public class AnimalBbsDto implements Serializable {
 	public AnimalBbsDto() {
 	}
 
-	public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String location, int medicine,
-			int neutralization, int gender, String descripttion, String pic1, String cotent, int userSeq,
+	public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String type, String location,
+			int medicine, int neutralization, int gender, String descripttion, String pic1, String cotent, int userSeq,
 			String contact, String description, String rdate, String lUpdate, int del) {
 		super();
 		this.seq = seq;
@@ -61,6 +36,7 @@ public class AnimalBbsDto implements Serializable {
 		this.name = name;
 		this.age = age;
 		this.kinds = kinds;
+		this.type = type;
 		this.location = location;
 		this.medicine = medicine;
 		this.neutralization = neutralization;
@@ -114,6 +90,14 @@ public class AnimalBbsDto implements Serializable {
 
 	public void setKinds(String kinds) {
 		this.kinds = kinds;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getLocation() {
@@ -223,13 +207,13 @@ public class AnimalBbsDto implements Serializable {
 	@Override
 	public String toString() {
 		return "AnimalBbsDto [seq=" + seq + ", title=" + title + ", name=" + name + ", age=" + age + ", kinds=" + kinds
-				+ ", location=" + location + ", medicine=" + medicine + ", neutralization=" + neutralization
-				+ ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1 + ", cotent=" + cotent
-				+ ", userSeq=" + userSeq + ", contact=" + contact + ", description=" + description + ", Rdate=" + Rdate
-				+ ", LUpdate=" + LUpdate + ", del=" + del + "]";
+				+ ", type=" + type + ", location=" + location + ", medicine=" + medicine + ", neutralization="
+				+ neutralization + ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1
+				+ ", cotent=" + cotent + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
+				+ description + ", Rdate=" + Rdate + ", LUpdate=" + LUpdate + ", del=" + del + "]";
 	}
-	
-	
+
+		
 	
 	
 }
