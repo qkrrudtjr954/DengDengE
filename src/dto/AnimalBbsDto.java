@@ -26,6 +26,7 @@ public class AnimalBbsDto implements Serializable {
 	    REG_DATE DATE,
 	    LAST_UPDATE DATE,
 	    DEL NUMBER(1),
+	    
 	    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq)
 	);
 */
@@ -41,12 +42,19 @@ public class AnimalBbsDto implements Serializable {
 	private String descripttion;
 	private String pic1;
 	private String cotent;
+	private int userSeq;
+	private String contact;
+	private String description;
+ 	private String Rdate;
+	private String LUpdate;
+	private int del;
 	
 	public AnimalBbsDto() {
 	}
 
 	public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String location, int medicine,
-			int neutralization, int gender, String descripttion, String pic1, String cotent) {
+			int neutralization, int gender, String descripttion, String pic1, String cotent, int userSeq,
+			String contact, String description, String rdate, String lUpdate, int del) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -60,6 +68,12 @@ public class AnimalBbsDto implements Serializable {
 		this.descripttion = descripttion;
 		this.pic1 = pic1;
 		this.cotent = cotent;
+		this.userSeq = userSeq;
+		this.contact = contact;
+		this.description = description;
+		Rdate = rdate;
+		LUpdate = lUpdate;
+		this.del = del;
 	}
 
 	public int getSeq() {
@@ -158,13 +172,63 @@ public class AnimalBbsDto implements Serializable {
 		this.cotent = cotent;
 	}
 
+	public int getUserSeq() {
+		return userSeq;
+	}
+
+	public void setUserSeq(int userSeq) {
+		this.userSeq = userSeq;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRdate() {
+		return Rdate;
+	}
+
+	public void setRdate(String rdate) {
+		Rdate = rdate;
+	}
+
+	public String getLUpdate() {
+		return LUpdate;
+	}
+
+	public void setLUpdate(String lUpdate) {
+		LUpdate = lUpdate;
+	}
+
+	public int getDel() {
+		return del;
+	}
+
+	public void setDel(int del) {
+		this.del = del;
+	}
+
 	@Override
 	public String toString() {
 		return "AnimalBbsDto [seq=" + seq + ", title=" + title + ", name=" + name + ", age=" + age + ", kinds=" + kinds
 				+ ", location=" + location + ", medicine=" + medicine + ", neutralization=" + neutralization
 				+ ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1 + ", cotent=" + cotent
-				+ "]";
+				+ ", userSeq=" + userSeq + ", contact=" + contact + ", description=" + description + ", Rdate=" + Rdate
+				+ ", LUpdate=" + LUpdate + ", del=" + del + "]";
 	}
+	
 	
 	
 	
