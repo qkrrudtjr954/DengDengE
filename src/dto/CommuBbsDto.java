@@ -3,46 +3,62 @@ package dto;
 import java.io.Serializable;
 
 public class CommuBbsDto implements Serializable {
+/*
+	DROP TABLE COMMUBBS
+	CASCADE CONSTRAINT;
 
-/*	CREATE TABLE COMMUBBS(
-		    SEQ NUMBER(8) PRIMARY KEY,
-		    TITLE VARCHAR2(100),
-		    PIC1 VARCHAR2(200),
-		    CONTENT VARCHAR2(4000),
-		    TARGET_USER_SEQ NUMBER(8),
-		    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
-		    TARGET_CATEGORY NUMBER(8),
-		    FOREIGN KEY (TARGET_CATEGORY) REFERENCES CATEGORY(SEQ),
-		    REG_DATE DATE,
-		    LAST_UPDATE DATE,
-		    DEL NUMBER(1)
-		);*/
+	DROP SEQUENCE COMMUBBS_SEQ;
+
+	CREATE SEQUENCE COMMUBBS_SEQ START WITH 1 INCREMENT BY 1;
+	CREATE TABLE COMMUBBS(
+	    SEQ NUMBER(8) PRIMARY KEY,
+	    TITLE VARCHAR2(100),
+	    PIC1 VARCHAR2(200),
+	    CONTENT VARCHAR2(4000),
+	    TARGET_USER_SEQ NUMBER(8),
+	    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
+	    TARGET_CATEGORY NUMBER(8),
+	    FOREIGN KEY (TARGET_CATEGORY) REFERENCES CATEGORY(SEQ),
+	    READCOUNT NUMBER(8),
+	    REG_DATE DATE,
+	    LAST_UPDATE DATE,
+	    DEL NUMBER(1)
+	);*/
 	
 	private int seq;
 	private String title;
 	private String pic1;
 	private String content;
 	private int target_user_seq;	//글쓴이 아이디 시퀀스
+	private int target_category;
+	private int readcount; 
 	private String reg_date;		//등록 날짜 
 	private String last_update;		//수정 날짜 
-	private int del;
+	private int del;				//0 게시물 있음 1 게시물 없음
 
 	public CommuBbsDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommuBbsDto(int seq, String title, String pic1, String content, int target_user_seq, String reg_date,
-			String last_update, int del) {
+
+	public CommuBbsDto(int seq, String title, String pic1, String content, int target_user_seq, int target_category,
+			int readcount, String reg_date, String last_update, int del) {
 		super();
 		this.seq = seq;
 		this.title = title;
 		this.pic1 = pic1;
 		this.content = content;
 		this.target_user_seq = target_user_seq;
+		this.target_category = target_category;
+		this.readcount = readcount;
 		this.reg_date = reg_date;
 		this.last_update = last_update;
 		this.del = del;
 	}
+
+
+
+
 
 	public int getSeq() {
 		return seq;
@@ -107,13 +123,37 @@ public class CommuBbsDto implements Serializable {
 	public void setDel(int del) {
 		this.del = del;
 	}
+	
+	
+
+	public int getReadcount() {
+		return readcount;
+	}
+
+
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
+
+	
+	public int getTarget_category() {
+		return target_category;
+	}
+
+
+	public void setTarget_category(int target_category) {
+		this.target_category = target_category;
+	}
+
 
 	@Override
 	public String toString() {
 		return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
-				+ ", target_user_seq=" + target_user_seq + ", reg_date=" + reg_date + ", last_update=" + last_update
-				+ ", del=" + del + "]";
+				+ ", target_user_seq=" + target_user_seq + ", target_category=" + target_category + ", readcount="
+				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del + "]";
 	}
+
+
 	
 	
 }
