@@ -9,6 +9,17 @@ public class AnimalBbsDao {
 	+ getAnimalBbspaging(paginBean paging) : 
 	List<AnimalDto>
 */
-
+	
+	private static AnimalBbsDao anibbsDao  = null;
+	
+	private AnimalBbsDao() {
+	}
+	
+	public static AnimalBbsDao getInstance() {
+		if(anibbsDao == null) {
+			anibbsDao = new AnimalBbsDao();
+		}
+		return anibbsDao;
+	}
 
 }
