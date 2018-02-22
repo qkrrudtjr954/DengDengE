@@ -20,7 +20,7 @@ public class OracleConnection implements DBConnection{
 		Connection conn = null;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.58:1521:xe", "hr", "hr");
 			System.out.println("Data Base is connected.");
 		} catch (SQLException e) {
 			e.printStackTrace();

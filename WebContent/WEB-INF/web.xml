@@ -10,6 +10,16 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <servlet>
+  	<servlet-name>mainControl</servlet-name>
+  	<servlet-class>controller.MainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>mainControl</servlet-name>
+  	<url-pattern>/MainControl</url-pattern>
+  </servlet-mapping>
+  
+  
   <!-- UserController url mapping -->
   <servlet>
   	<servlet-name>userControl</servlet-name>
