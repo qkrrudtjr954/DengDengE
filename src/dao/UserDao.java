@@ -20,8 +20,5 @@ public class UserDao {
 		return userDao;
 	}
 	
-	public List<User> getUsers(){
-		Connection conn = DBConnection.makeConnection();
-		PreparedStatement psmt = connlknlksadfa
-	}
+	
 }

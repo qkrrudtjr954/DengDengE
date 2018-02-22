@@ -2,12 +2,11 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import service.UserService;
 
 public class MainController extends HttpServlet{
 
@@ -25,8 +24,15 @@ public class MainController extends HttpServlet{
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// user controller는 user service를 싱글턴으로 호출합니다.
+		String command = req.getParameter("command");
 		
-		// UserService userService = UserService.getInstance();
+		if(command.equals("start")) {
+			dispatcher("index.jsp", req, resp);
+		}
+	}
+	
+	public void dispatcher(String url, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatch = req.getRequestDispatcher(url);
+		dispatch.forward(req, resp);
 	}
 }
