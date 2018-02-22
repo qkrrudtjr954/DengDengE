@@ -1,12 +1,16 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dto.AnimalBbsDto;
+import service.AnimalBbsService;
 
 public class AnimalBbsController extends HttpServlet {
 
@@ -25,8 +29,15 @@ public class AnimalBbsController extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		String command = req.getParameter("command");
+		AnimalBbsService aniBbService = AnimalBbsService.getInatance();
 		
-		if(command.equals("")) {
+		if(command.equals("animlist")) {
+			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
+			
+			req.setAttribute("animlist", animlist);
+			dispatch("AnimalBbslist.jsp", req, resp);
+		}
+		else if(command.equals("detail")) {
 			
 		}
 	}

@@ -22,9 +22,9 @@ public class AnimalBbsDao {
 */
 	// 글목록
 	public List<AnimalBbsDto> getAnimalBbsList() {
-		String sql = " SELECT  SEQ, TITLE, PIC1 "
-				+ " FROM ANIMALBBS "
-				+ " ORDER BY RDATE DESC ";
+		String sql = " SELECT SEQ, TITLE, PIC1 "
+				+ " FROM ANIMALBBS ";
+		
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
