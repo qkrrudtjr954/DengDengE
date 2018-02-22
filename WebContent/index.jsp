@@ -32,10 +32,10 @@
 						<c:when test="${current_user == null }">
 							<!-- 로그인 안했을 때 -->
 							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=signin">로그인</a>
+								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=signup">회원가입</a>
+								<a class="nav-link" href="UserControl?command=goSignUp">회원가입</a>
 							</li>
 						</c:when>
 						<c:otherwise>

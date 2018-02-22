@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
+import dto.User;
 import service.UserService;
 
 public class UserController extends HttpServlet{
@@ -39,6 +42,23 @@ public class UserController extends HttpServlet{
 			dispatcher("index.jsp", req, resp);
 		} else if(command.equals("myPage")) {
 			
+		} else if(command.equals("signin")) {
+			String email = req.getParameter("email");
+			String password = req.getParameter("password");
+			
+			User user = new User(email, password);
+			
+			UserService userService = UserService.getInstance();
+			user = userService.getUserByEmailAndPassword(user);
+			
+			if(user.getSeq() != 0) {
+				// 정상 로그인 
+				HttpSession session = req.getSession();
+				session.setAttribute("current_user", user);
+			}
+			
+			String json = new Gson().toJson(user);
+			resp.getWriter().write(json);
 		}
 	}
 	
