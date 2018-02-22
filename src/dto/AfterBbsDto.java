@@ -33,6 +33,164 @@ public class AfterBbsDto implements Serializable {
 	
 	
 	public AfterBbsDto() {}
+
+
+
+
+
+	public AfterBbsDto(int seq, String title, String pic1, String content, int userSeq, String rdate, String ldate,
+			int del) {
+		super();
+		this.seq = seq;
+		this.title = title;
+		this.pic1 = pic1;
+		this.content = content;
+		this.userSeq = userSeq;
+		Rdate = rdate;
+		Ldate = ldate;
+		this.del = del;
+	}
+
+
+
+
+
+	public int getSeq() {
+		return seq;
+	}
+
+
+
+
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
+
+
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
+
+
+	public String getPic1() {
+		return pic1;
+	}
+
+
+
+
+
+	public void setPic1(String pic1) {
+		this.pic1 = pic1;
+	}
+
+
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+
+
+	public int getUserSeq() {
+		return userSeq;
+	}
+
+
+
+
+
+	public void setUserSeq(int userSeq) {
+		this.userSeq = userSeq;
+	}
+
+
+
+
+
+	public String getRdate() {
+		return Rdate;
+	}
+
+
+
+
+
+	public void setRdate(String rdate) {
+		Rdate = rdate;
+	}
+
+
+
+
+
+	public String getLdate() {
+		return Ldate;
+	}
+
+
+
+
+
+	public void setLdate(String ldate) {
+		Ldate = ldate;
+	}
+
+
+
+
+
+	public int getDel() {
+		return del;
+	}
+
+
+
+
+
+	public void setDel(int del) {
+		this.del = del;
+	}
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "AfterBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content + ", userSeq="
+				+ userSeq + ", Rdate=" + Rdate + ", Ldate=" + Ldate + ", del=" + del + "]";
+	}
+	
+	
+	
 	
 	
 
