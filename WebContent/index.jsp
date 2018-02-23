@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<a href="AfterBbsController?command=AfterBbslist">AnimalBbslist</a>
+<a href="AnimalBbsController?command=animlist">AnimalBbslist</a>
 
 </body>
 </html>
