@@ -1,35 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>DengDengE</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-  	<servlet-name>mainControl</servlet-name>
-  	<servlet-class>controller.MainController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>mainControl</servlet-name>
-  	<url-pattern>/MainControl</url-pattern>
-  </servlet-mapping>
-  
-  
-  <!-- UserController url mapping -->
-  <servlet>
-  	<servlet-name>userControl</servlet-name>
-  	<servlet-class>controller.UserController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>userControl</servlet-name>
-  	<url-pattern>/UserControl</url-pattern>
-  </servlet-mapping>
-  
-  
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>DengDengE</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<servlet-name>mainControl</servlet-name>
+		<servlet-class>controller.MainCOntroller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mainControl</servlet-name>
+		<url-pattern>/MainControl</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- UserController url mapping -->
+	<servlet>
+		<servlet-name>userControl</servlet-name>
+		<servlet-class>controller.UserController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userControl</servlet-name>
+		<url-pattern>/UserControl</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>AnimalController</servlet-name>
+		<servlet-class>controller.AnimalController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AnimalController</servlet-name>
+		<url-pattern>/AnimalController</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AfterBbsController</servlet-name>
+		<servlet-class>controller.AfterBbsController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AfterBbsController</servlet-name>
+		<url-pattern>/AfterBbsController</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>CommuBbsController</servlet-name>
+		<servlet-class>control.CommuBbsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommuBbsController</servlet-name>
+		<url-pattern>/CommuBbsController</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>
