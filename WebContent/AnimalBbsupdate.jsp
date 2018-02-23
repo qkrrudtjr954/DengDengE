@@ -1,7 +1,7 @@
 <%@page import="dto.AnimalBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,58 +56,93 @@ if(aniBbsDto != null){
 	}
 %>
 
-<h2 style="text-decoration: underline;">댕댕이의 아이들</h2>
-<br><br><br><br><br>
+<h1>입양하기 글수정</h1>
+<br><br><br><br>
+<a href="AnimalController?command=animlist">list</a>
 <hr>
 
-<form action="AnimalBbscontroller" method="post">
-<input type="hidden" name="command" value="update">
-<h5 style="color: #00bfff"><%=aniBbsDto.getLocation() %>&nbsp;&nbsp;&nbsp;<%=aniBbsDto.getTitle() %></h5>
-<%=aniBbsDto.getType() %>&nbsp;&nbsp;&nbsp;<%=aniBbsDto.getRdate() %>
+<form action="AnimalBbsController">
+<input type="hidden" name="command" value="updateAf">
+<input type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
 <table border="1" style="margin-left: auto; margin-right: auto;">
+<col width="100"><col width="100"><col width="100"><col width="100">
 <col width="100"><col width="150"><col width="100"><col width="150">
-<tr>
-	<td>견/모종</td>
+<col width="100"><col width="100">
+<tr align="center">
+	<td>이름</td>
 	<td>
-		<%=aniBbsDto.getKinds() %>
+		<input type="text" name="name" size="20" value="<%=aniBbsDto.getName() %>" readonly="readonly">
 	</td>
 	<td>나이</td>
+	<td>
+		<input type="number" name="age" value="<%=aniBbsDto.getAge() %>" readonly="readonly">
+	</td>
+	<td>견종</td>
+	<td>
+		<input type="text" name="kinds" size="20" value="<%=aniBbsDto.getKinds() %>" readonly="readonly">
+	</td>
+	<td>분류</td>
+	<td>
+		<input type="text" name="type" size="20" value="<%=aniBbsDto.getType() %>" readonly="readonly">
+	</td>
 	
-		<td>
-			<%=aniBbsDto.getAge() %>
-		</td>	
+	<td>지역</td>
+	<td>
+		
+		<input type="text" name="location" size="20" value="<%=aniBbsDto.getLocation() %>" readonly="readonly">
+	</td> 
 </tr>
 
-<tr>
-	<td>접종유무</td>
+<tr align="center">
+	<td>예방접종</td>
 	<td>
-		<%=m %>
+		<input type="text" name="medi" value="<%=m %>" readonly="readonly">
 	</td>
-	<td>중성화유무</td>
+	<td>중성화</td>
 	<td>
-		<%=n %>
+		<input type="text" name="neu" value="<%=n %>" readonly="readonly">
 	</td>
-</tr>
-
-<tr>
 	<td>성별</td>
 	<td>
-		<%=g %>
-	</td>
-	<td>특이사항</td>
-	<td>
-		<%=aniBbsDto.getDescripttion() %>
+		<input type="text" name="gen" value="<%=g %>" readonly="readonly">
 	</td>
 </tr>
 
-</table>
-<br>
-<table style="margin-left: auto; margin-right: auto;">
-<tr>
-	<td>
-		<textarea rows="50" cols="70" readonly="readonly"><%=aniBbsDto.getContent() %></textarea>
+<tr align="center">
+	<td>제목</td>
+	<td colspan="10">
+		<input type="text" name="title" size="175" value="<%=aniBbsDto.getTitle() %>">
 	</td>
 </tr>
+
+<tr align="center">
+	<td>특이사항</td>
+	<td colspan="10">
+		<input type="text" name="descrip" size="175"  value="<%=aniBbsDto.getDescripttion() %>" readonly="readonly">
+	</td>
+</tr>
+
+<tr align="center">
+	<td>사진</td>
+	<td colspan="10">
+		파일명 : <%=aniBbsDto.getPic1() %> &nbsp;
+		<input type="file" name="pic" style="width: 400px" >
+	</td>
+</tr>
+
+<tr>
+	<td>내용</td>
+	<td colspan="10">
+		<textarea rows="20" cols="180" name="content"><%=aniBbsDto.getContent() %></textarea>
+	</td>
+</tr>
+<tr align="right">
+	<td colspan="11">
+		<input type="submit" value="수정하기">
+	</td>
+
+</tr>
+
 </table>
 </form>
 

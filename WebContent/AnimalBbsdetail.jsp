@@ -21,9 +21,6 @@ if(aniBbsDto != null){
 		int  medi = aniBbsDto.getMedicine();
 		int neu = aniBbsDto.getNeutralization();
 		int gen = aniBbsDto.getGender();
-		System.out.println("m"+medi);
-		System.out.println("n"+neu);
-		System.out.println("g"+gen);
 		
 		if(medi == 1){
 			m = "YES";
@@ -50,9 +47,7 @@ if(aniBbsDto != null){
 			
 			g = "NO";
 		}
-		System.out.println("m"+m);
-		System.out.println("n"+n);
-		System.out.println("g"+g);
+		
 	}
 %>
 

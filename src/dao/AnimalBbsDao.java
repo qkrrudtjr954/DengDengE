@@ -251,7 +251,7 @@ public class AnimalBbsDao {
 			System.out.println("1/6 S detailAnimalBbs");
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, aniBbsDto.getTitle());
-			psmt.setString(1, aniBbsDto.getContent());
+			psmt.setString(2, aniBbsDto.getContent());
 			psmt.setInt(3, seq);
 		
 			System.out.println("2/6 S detailAnimalBbs");

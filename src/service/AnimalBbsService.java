@@ -40,6 +40,11 @@ public class AnimalBbsService {
 			return aniBbsManager.deleteAnimalBbs(seq);
 		}
 		
+		// 입양하기 글 수정
+		public boolean updateAnimalBbs(int seq, AnimalBbsDto aniBbsDto) {
+			return aniBbsManager.updateAnimalBbs(seq, aniBbsDto);
+		}
+		
 		/*
 		// 페이징 처리
 		public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {

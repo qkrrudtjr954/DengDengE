@@ -97,7 +97,20 @@
 	<td colspan="11">
 		<input type="submit" value="next">
 	</td>
+</tr>
 
+<tr>
+	<td>아이디</td>
+	<td>
+		<input type="text">
+	</td>
+</tr>
+
+<tr>
+	<td>연락처</td>
+	<td>
+		<input type="text" name="con">&nbsp;<input type="submit" value="인증">
+	</td>
 </tr>
 
 </table>

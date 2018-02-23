@@ -75,6 +75,12 @@ public class AnimalBbsDto implements Serializable {
 		this.description = description;
 	}
 
+	public AnimalBbsDto(String title, String content) {
+		super();
+		this.title = title;
+		this.content = content;
+	}
+
 	public int getSeq() {
 		return seq;
 	}
