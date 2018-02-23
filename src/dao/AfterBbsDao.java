@@ -87,10 +87,55 @@ public class AfterBbsDao {
 		return list;
 		
 	}
-	
+	/*
+	"SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
+	+ " REG_DATE, LAST_UPDATE, DEL "
+	+ " FROM AFTERBBS ";
+	*/
 	//After list 글쓰기
 	public boolean wirtelAfterBbs(AfterBbsDto dto) {
-		return false;
+		String sql = "INSERT INTO AFTERBBS(SEQ, TITLE, "
+				+ " PIC1, CONTENT, TARGET_USER_SEQ, REG_DATE, "
+				+ " LAST_UPDATE, DEL) "
+				+ " VALUES(AFTERBBS_SEQ .NEXTVAL, ?, "
+				+ " ?, ?, ?, SYSDATE, SYSDATE , 0) ";
+				
+				
+		int count = 0;
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 wirtelAfterBbs Success");
+
+			
+			psmt = conn.prepareStatement(sql);
+			System.out.println("3/6 wirtelAfterBbs Success");
+
+			
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getPic1());
+			psmt.setString(3, dto.getContent());
+			psmt.setInt(4, dto.getUserSeq());
+			
+			count = psmt.executeUpdate();
+			System.out.println("4/6 wirtelAfterBbs Success");
+
+			
+		} catch (SQLException e) {			
+			System.out.println("wirtelAfterBbs fail");
+		} finally{
+			DBClose.close(psmt, conn, rs);
+			System.out.println("5/6 wirtelAfterBbs Success");
+		}
+		
+		return count>0?true:false;
+		
+		
 		
 	}
 	
@@ -119,7 +164,7 @@ public class AfterBbsDao {
 	
 	
 	
-	
+
 
 	
 	

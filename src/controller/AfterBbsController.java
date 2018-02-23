@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import dto.AfterBbsDto;
 import service.AfterBbsService;
 
@@ -40,6 +39,33 @@ public class AfterBbsController extends HttpServlet {
 			
 			dispatch("AfterBbslist.jsp", req, resp);
 			
+		}else if(command.equals("AfterBbswrite")) {
+			dispatch("AfterBbswrite.jsp", req, resp);
+		}else if(command.equals("AfterBbswriteAf")) {
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			//String suserseq = req.getParameter("userseq");
+			//int userseq = Integer.parseInt(suserseq);
+			
+			System.out.println(title+" " + content + " ");
+			
+			/*if(isNull(id) && isNull(title) && isNull(content)) {
+				req.setAttribute("msg1", "글쓰기 실패");
+				dispatch("bbswrite.jsp", req, resp);
+			}*/
+			
+			boolean isS = bbs.wirtelAfterBbs(new AfterBbsDto(title, content, 1));
+			
+			if(isS) {
+				System.out.println(isS);
+				req.setAttribute("msg1", "글작성 완료");
+				dispatch("AfterBbsController?command=AfterBbslist", req, resp);
+			}else {
+				System.out.println(isS);
+				req.setAttribute("mag1", "글작성 실패");
+				dispatch("bbswrite.jsp", req, resp);
+			}
+			
 		}
 		
 		
@@ -47,6 +73,10 @@ public class AfterBbsController extends HttpServlet {
 	
 	
 	
+	
+	public boolean isNull(String str) {
+		return str == null || str.trim().equals("");
+	}
 	
 	
 	

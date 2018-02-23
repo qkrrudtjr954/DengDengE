@@ -63,13 +63,27 @@ if(request.getParameter("nowPage") == null){
 } 
 %>
  --%>
+ <%
+ String msg = (String)request.getAttribute("msg1");
+ 
+ if(msg !=null){
+ %>
+ <script type="text/javascript">
+ 	alert("<%=msg%>");
+ 
+ </script>
+ 
+ <%
+ }
+ %>
+ 
  
  
  <table border="1" align="center">
 <col width="70"><col width="500"><col width="150"><col width="100">
 
 <tr>
-<th>번호</th><th>종류</th><th>제목</th><th>작성자</th>
+<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
 </tr>
 
 <%
@@ -96,7 +110,8 @@ for(int i = 0;i < afterBbslist.size(); i++){
 		</a>
 		<%} %>
 	</td>
-	<%-- <td><%=bbs.getId() %> </td> --%>
+	<td><%=bbs.getUserSeq() %> </td>
+	<td><%=bbs.getRdate() %></td>
 	</tr>	
 	<%
 }
@@ -107,7 +122,7 @@ for(int i = 0;i < afterBbslist.size(); i++){
  
 <div align="center">
 <form action="AfterBbsController">
-		<input type="hidden" name="command" value="bbswrite">
+		<input type="hidden" name="command" value="AfterBbswrite">
 		<input type="submit" value="글쓰기">
 </form>
 </div>

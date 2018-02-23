@@ -21,9 +21,16 @@ public class AfterBbsService {
 		}
 		return afterBbsService;
 	}
-	
+	//list
 	public List<AfterBbsDto> getAfterlBbsList(){
 		return afterBbsDao.getAfterlBbsList();
+	}
+	
+	//bbs글쓰기
+	public boolean wirtelAfterBbs(AfterBbsDto dto) {
+		return afterBbsDao.wirtelAfterBbs(dto);
+		
+		
 	}
 	
 	

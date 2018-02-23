@@ -33,6 +33,23 @@ public class AfterBbsDto implements Serializable {
 	
 	
 	public AfterBbsDto() {}
+	
+	
+	
+
+
+
+
+
+	public AfterBbsDto(String title, String content, int userSeq) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.userSeq = userSeq;
+	}
+
+
+
 
 
 
