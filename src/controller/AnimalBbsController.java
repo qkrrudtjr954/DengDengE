@@ -46,7 +46,59 @@ public class AnimalBbsController extends HttpServlet {
 		}
 		else if(command.equals("writeAf")) {
 			// 입력값
+			String name = req.getParameter("name");
+			String aage = req.getParameter("age");
+			int age = Integer.parseInt(aage);
+			String kinds = req.getParameter("kinds");
+			String ttype[] = req.getParameterValues("type");
+			String type = null;
+			String location = req.getParameter("location");
+			String mmedicine[] = req.getParameterValues("medi");
+			int medicine = 0;
+			String nneutralization[] = req.getParameterValues("neu");
+			int neutralization = 0;
+			String ggender[] = req.getParameterValues("gen");
+			int gender = 0;
+			String title = req.getParameter("title");
+			String descripttion = req.getParameter("discrip");
+			String pic1 = req.getParameter("pic");
+			String content = req.getParameter("content");
 			
+			AnimalBbsDto dto = new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, pic1, content, 1, "content", "no");
+			System.out.println(dto.toString());
+			if(ttype != null) {
+				for (int i = 0; i < ttype.length; i++) {
+					type = ttype[i];					
+				}
+				System.out.println("t:"+type);
+			}
+			else if(mmedicine != null) {
+				for (int i = 0; i < mmedicine.length; i++) {
+					String str = "";
+					str += mmedicine[i];
+					System.out.println(str);
+					medicine = Integer.parseInt(str);					
+				}
+				
+				System.out.println("m:"+medicine);
+			}
+			else if(nneutralization != null) {
+				for (int i = 0; i < nneutralization.length; i++) {
+					String str = nneutralization[i];
+					neutralization = Integer.parseInt(str);
+				}
+				System.out.println("n:"+neutralization);
+			}else if(ggender != null) {
+				for (int i = 0; i < ggender.length; i++) {
+					String str = ggender[i];
+					gender = Integer.parseInt(str);
+				}
+				System.out.println("g:"+gender);
+			}
+			/*boolean isS = aniBbService.wirteAnimalBbs(
+				new AnimalBbsDto(title, name, age, kinds, type, location, 
+							medicine, neutralization, gender, descripttion, 
+							pic1, content, 1, "서울", "없음"));*/
 			// msg
 			req.setAttribute("msg", "글 작성 완료");
 			dispatch("AnimalBbslist.jsp", req, resp);

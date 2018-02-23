@@ -16,7 +16,7 @@ public class AnimalBbsDto implements Serializable {
 	private int gender;
 	private String descripttion;
 	private String pic1;
-	private String cotent;
+	private String content;
 	private int userSeq;
 	private String contact;
 	private String description;
@@ -43,13 +43,35 @@ public class AnimalBbsDto implements Serializable {
 		this.gender = gender;
 		this.descripttion = descripttion;
 		this.pic1 = pic1;
-		this.cotent = cotent;
+		this.content = content;
 		this.userSeq = userSeq;
 		this.contact = contact;
 		this.description = description;
 		Rdate = rdate;
 		LUpdate = lUpdate;
 		this.del = del;
+	}
+
+	// 글작성
+	public AnimalBbsDto(String title, String name, int age, String kinds, String type, String location, int medicine,
+			int neutralization, int gender, String descripttion, String pic1, String cotent, int userSeq,
+			String contact, String description) {
+		super();
+		this.title = title;
+		this.name = name;
+		this.age = age;
+		this.kinds = kinds;
+		this.type = type;
+		this.location = location;
+		this.medicine = medicine;
+		this.neutralization = neutralization;
+		this.gender = gender;
+		this.descripttion = descripttion;
+		this.pic1 = pic1;
+		this.content = content;
+		this.userSeq = userSeq;
+		this.contact = contact;
+		this.description = description;
 	}
 
 	public int getSeq() {
@@ -149,11 +171,11 @@ public class AnimalBbsDto implements Serializable {
 	}
 
 	public String getCotent() {
-		return cotent;
+		return content;
 	}
 
 	public void setCotent(String cotent) {
-		this.cotent = cotent;
+		this.content = cotent;
 	}
 
 	public int getUserSeq() {
@@ -209,7 +231,7 @@ public class AnimalBbsDto implements Serializable {
 		return "AnimalBbsDto [seq=" + seq + ", title=" + title + ", name=" + name + ", age=" + age + ", kinds=" + kinds
 				+ ", type=" + type + ", location=" + location + ", medicine=" + medicine + ", neutralization="
 				+ neutralization + ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1
-				+ ", cotent=" + cotent + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
+				+ ", cotent=" + content + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
 				+ description + ", Rdate=" + Rdate + ", LUpdate=" + LUpdate + ", del=" + del + "]";
 	}
 
