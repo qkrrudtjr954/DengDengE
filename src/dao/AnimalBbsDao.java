@@ -27,7 +27,8 @@ public class AnimalBbsDao {
 				+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
 				+ " REG_DATE, LAST_UPDATE, DEL "
-				+ " FROM ANIMALBBS ";
+				+ " FROM ANIMALBBS "
+				+ " WHERE DEL=0 ";
 		System.out.println("s"+sql);
 		
 		Connection conn = null;

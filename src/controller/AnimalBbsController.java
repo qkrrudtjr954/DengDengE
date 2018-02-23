@@ -103,6 +103,21 @@ public class AnimalBbsController extends HttpServlet {
 				dispatch("AnimalBbslist.jsp", req, resp);
 			}
 			
+			}else if(command.equals("update")) {
+				
+			}else if(command.equals("updateAf")) {
+				
+			}else if(command.equals("delete")) {
+				int  seq = Integer.parseInt(req.getParameter("seq"));
+				boolean isS = aniBbService.deleteBbs(seq);
+				
+				if(isS) {
+					System.out.println("삭제 성공");
+					dispatch("AnimalBbsController?command=animlist", req, resp);
+				}else {
+					System.out.println("삭제 실패");
+					dispatch("AnimalBbsController?command=animlist", req, resp);
+				}
 			}
 			
 			

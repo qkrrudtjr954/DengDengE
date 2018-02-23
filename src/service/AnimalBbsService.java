@@ -37,7 +37,7 @@ public class AnimalBbsService {
 		
 		// 입양하기 글 삭제
 		public boolean deleteBbs(int seq) {
-			return false;
+			return aniBbsManager.deleteAnimalBbs(seq);
 		}
 		
 		/*

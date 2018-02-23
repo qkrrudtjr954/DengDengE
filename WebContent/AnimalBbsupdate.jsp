@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AnimalBbsdetail.jsp</title>
+<title>Insert title here</title>
 </head>
 <body>
 <%
@@ -61,6 +61,7 @@ if(aniBbsDto != null){
 <hr>
 
 <form action="AnimalBbscontroller" method="post">
+<input type="hidden" name="command" value="update">
 <h5 style="color: #00bfff"><%=aniBbsDto.getLocation() %>&nbsp;&nbsp;&nbsp;<%=aniBbsDto.getTitle() %></h5>
 <%=aniBbsDto.getType() %>&nbsp;&nbsp;&nbsp;<%=aniBbsDto.getRdate() %>
 <table border="1" style="margin-left: auto; margin-right: auto;">
@@ -101,24 +102,10 @@ if(aniBbsDto != null){
 
 </table>
 <br>
-
-<table style="margin-left: auto; margin-right: auto;" >
+<table style="margin-left: auto; margin-right: auto;">
 <tr>
 	<td>
 		<textarea rows="50" cols="70" readonly="readonly"><%=aniBbsDto.getContent() %></textarea>
-	</td>
-</tr>
-
-<tr align="right">
-	<td>
-		<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>">수정</a>
-		<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>">삭제</a>
-	</td>
-</tr>
-
-<tr align="right">
-	<td>
-		
 	</td>
 </tr>
 </table>
