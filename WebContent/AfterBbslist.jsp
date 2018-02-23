@@ -64,19 +64,29 @@ if(request.getParameter("nowPage") == null){
 %>
  --%>
  <%
- String msg = (String)request.getAttribute("msg1");
+ String msg1 = (String)request.getAttribute("msg1");
+ String msg2 = (String)request.getAttribute("msg2");
  
- if(msg !=null){
+ 
+ if(msg1!=null){
  %>
  <script type="text/javascript">
- 	alert("<%=msg%>");
+ 	alert("<%=msg1%>");
+ 
+ </script>
+ 
+ <%
+ }else if(msg2!=null){
+ %>
+ 
+ <script type="text/javascript">
+ 	alert("<%=msg2%>");
  
  </script>
  
  <%
  }
  %>
- 
  
  
  <table border="1" align="center">

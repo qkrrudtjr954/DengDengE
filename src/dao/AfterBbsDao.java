@@ -37,7 +37,8 @@ public class AfterBbsDao {
 	public List<AfterBbsDto> getAfterlBbsList(){
 		String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
 				+ " REG_DATE, LAST_UPDATE, DEL "
-				+ " FROM AFTERBBS ";
+				+ " FROM AFTERBBS "
+				+ " WHERE DEL=0 ";
 		
 		
 		List<AfterBbsDto> list = new ArrayList<AfterBbsDto>();
@@ -287,7 +288,28 @@ public class AfterBbsDao {
 	
 	// After list 삭제
 	public boolean AfterdeletBbs(int seq) {
-		return false;
+	     String sql=" UPDATE AFTERBBS "
+	             + " SET DEL=1 "
+	             + " WHERE SEQ=? ";
+	       
+	       int count = 0;
+	       Connection conn=null;
+	       PreparedStatement psmt=null;
+	       
+	       try {
+	          conn = DBConnection.makeConnection();         
+	          psmt=conn.prepareStatement(sql);
+	          psmt.setInt(1, seq);         
+	          count = psmt.executeUpdate();
+	          System.out.println("3/6 delete");
+	       } catch (SQLException e) {         
+	          e.printStackTrace();
+	          System.out.println("delete fail");
+	       } finally{
+	          DBClose.close(psmt, conn, null);         
+	       }
+	             
+	       return count>0?true:false;
 		
 	}
 	

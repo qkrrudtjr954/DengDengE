@@ -117,9 +117,20 @@ public class AfterBbsController extends HttpServlet {
 			}	
 			
 			
+		}else if(command.equals("AfterDelete")) {
 			
-			
-			
+			String Sseq = req.getParameter("seq");
+	         int seq = Integer.parseInt(Sseq);
+	         System.out.println("삭제 시퀀스 : " + Sseq);
+	         
+	         boolean isS = bbs.AfterdeletBbs(seq);
+	         if(isS) {
+	            req.setAttribute("msg2", "삭제했습니다");
+	            dispatch("AfterBbsController?command=AfterBbslist", req, resp);
+	         }else { 
+	            req.setAttribute("msg2", "삭제 실패");
+	            dispatch("AfterBbsController?command=AfterBbsDetail&seq="+seq, req, resp);
+	         }
 			
 			
 		}

@@ -40,10 +40,14 @@ public class AfterBbsService {
 		return afterBbsDao.AfrerBbsUpdate(bbs);	
 	}
 	
-	
+	//수정할때 가져오기
 	public AfterBbsDto getBbs(int seq) {
 		return afterBbsDao.getBbs(seq);
 		
+	}
+	
+	public boolean AfterdeletBbs(int seq) {
+		return afterBbsDao.AfterdeletBbs(seq);
 	}
 	
 	

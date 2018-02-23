@@ -48,19 +48,19 @@ alert("<%=msg%>");
    <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs1.getRdate() %>&nbsp;&nbsp;&nbsp; 조회수 : </td>
 </tr>
 <tr>
-<%-- <td colspan="2" col height="550"><%=bbs1.getContent() %></td> --%>
+ <td colspan="2" col height="550"><%=bbs1.getContent() %></td> 
 
 
-<td colspan="2">
+<%-- <td colspan="2">
 <textarea rows="100" cols="150"  
 name="content" readonly="readonly"><%=bbs1.getContent() %>
 </textarea>
-</td>
+</td> --%>
 
 
 </tr>
 <tr>
-   <td colspan="2" align="right"><button><a href="CommuBbsController?command=delete">삭제하기</a></button>
+   <td colspan="2" align="right"><button><a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>"></a>삭제하기</button>
    <input type="submit" value="수정하기"></td>
   
 </tr>
