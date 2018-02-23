@@ -92,16 +92,61 @@ public class CommuBbsDao implements iCommuBbsDao{
 
 		return list;
 	}
+	//글 읽거나 가져오기 
 	@Override
 	public CommuBbsDto getCommu(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = " SELECT a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
+				+ " FROM COMMUBBS A, CATEGORY B "
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		CommuBbsDto dto = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 S getCommu");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("3/6 S getCommu");
+
+			rs = psmt.executeQuery();
+			System.out.println("4/6 S getCommu");
+
+			while (rs.next()) {
+				int i = 1;
+				dto = new CommuBbsDto(rs.getInt(i++), // seq
+						rs.getString(i++),// title
+						"",// String pic1 
+						rs.getString(i++),//String content
+						rs.getInt(i++),//int target_user_seq
+						0,//int target_category
+						rs.getInt(i++),//int readcount
+						rs.getString(i++),//String reg_date
+						"",//String last_update 
+						rs.getInt(i++),//int del
+						rs.getString(i++)); //category_name
+			}
+			System.out.println("5/6 S getCommu");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+			System.out.println("6/6 S getBbs");
+		}
+
+		return dto;
 	}
 	@Override
 	public void readCount(int seq) {
 		// TODO Auto-generated method stub
 		
 	}
+	//글쓰기
 	@Override
 	public boolean writeCommu(CommuBbsDto comdto) {
 		String sql = "INSERT INTO COMMUBBS(SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "

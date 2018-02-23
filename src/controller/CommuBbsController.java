@@ -70,6 +70,9 @@ public class CommuBbsController extends HttpServlet {
 					dispatch("CommuBbsWrite.jsp", req, resp);
 				}
 			 
+		}else if(command.equals("read")) {
+			String Sseq = req.getParameter("seq");
+			System.out.println(Sseq);
 		}
 	}
 	//보내주는 함수

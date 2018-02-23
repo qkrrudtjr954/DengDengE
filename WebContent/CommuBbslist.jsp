@@ -44,7 +44,7 @@ for(int i = 0;i < bbslist.size(); i++){
       }
 		 else{
 	         %>
-	         <a href="CommuBbsController?command=enter&seq=<%=bbs.getSeq() %>">
+	         <a href="CommuBbsController?command=read&seq=<%=bbs.getSeq() %>">
 	         <%=bbs.getTitle() %>
 	         </a>
 	         <%

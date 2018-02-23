@@ -32,4 +32,8 @@ public class CommuBbsService {
 			// TODO Auto-generated method stub
 			return manager.writeCommu(comdto);
 		}
+		
+		public CommuBbsDto getCommu(int seq) {
+			return manager.getCommu(seq);
+		}
 }
