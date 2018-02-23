@@ -31,37 +31,45 @@ public class UserController extends HttpServlet{
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String command = req.getParameter("command");
-		
+
 		if(command.equals("goSignIn")) {
+
 			dispatcher("signin.jsp", req, resp);
+
 		} else if(command.equals("goSignUp")) {
+
 			dispatcher("signup.jsp", req, resp);
+
 		} else if(command.equals("signout")) {
+
 			HttpSession session = req.getSession();
 			session.invalidate();
 			dispatcher("index.jsp", req, resp);
+
 		} else if(command.equals("myPage")) {
-			
+
 		} else if(command.equals("signin")) {
+
 			String email = req.getParameter("email");
 			String password = req.getParameter("password");
-			
+
 			User user = new User(email, password);
-			
+
 			UserService userService = UserService.getInstance();
 			user = userService.getUserByEmailAndPassword(user);
-			
+
 			if(user.getSeq() != 0) {
-				// 정상 로그인 
+				// 정상 로그인
 				HttpSession session = req.getSession();
 				session.setAttribute("current_user", user);
 			}
-			
+
 			String json = new Gson().toJson(user);
 			resp.getWriter().write(json);
+			
 		}
 	}
-	
+
 	public void dispatcher(String url, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatch = req.getRequestDispatcher(url);
 		dispatch.forward(req, resp);

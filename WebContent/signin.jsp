@@ -28,36 +28,35 @@
 <body class="text-center">
 	<form class="form-signin">
 		<input type="hidden" value="signin" name="command">
-		
+
 		<a href="MainControl?command=start">
 			<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 		</a>
 
 		<h1 class="h3 mb-3 font-weight-normal">댕댕이</h1>
-		
-		<label for="inputEmail" class="sr-only">Email</label> 
-		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus> 
-		
-		<label for="inputPassword" class="sr-only">Password</label> 
+
+		<label for="inputEmail" class="sr-only">Email</label>
+		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+		<label for="inputPassword" class="sr-only">Password</label>
 		<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-		
+
 		<div class="checkbox mb-3">
-			<label> 
-				<input type="checkbox" value="remember-me">아이디 기억하기 
+			<label>
+				<input type="checkbox" value="remember-me">아이디 기억하기
 			</label>
 		</div>
-		
+
 		<input class="btn btn-lg btn-primary btn-block" type="button" value="로그인">
-		
+		<a href="UserControl?command=goSignUp">댕댕이가 처음이십니까?</a> 
 		<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 	</form>
-	
-	
-	
+
+
 	<script type="text/javascript">
 	// session
 	$('input[type="checkbox"]').on('click', function () {
-	
+
 		if($(this).is(':checked')){
 			// insert into session
 			if($('#inputEmail').val() == ''){
@@ -72,9 +71,8 @@
 			alert("delete!");
 			$.removeCookie("user_id", {path: '/'});
 		}
-	
 	});
-	
+
 	$('input[type="button"]').on('click', function () {
 		// make validate function
 		$.ajax({
@@ -83,7 +81,7 @@
 			data : { command : 'signin', email : $('#inputEmail').val(), password : $('#inputPassword').val() },
 			success : function (data) {
 				var user = JSON.parse(data);
-				
+
 				if(user.seq==0){
 					alert('아이디와 비밀번호를 확인해주십시오.');
 				} else {
@@ -92,18 +90,18 @@
 			}
 		})
 	});
-	
+
 	$(document).ready(function () {
 		var user_id = $.cookie("user_id");
-		
+
 		if(user_id != null){
 			$('#inputEmail').val(user_id);
 			$('input[type="checkbox"]').attr('checked', 'checked');
 		}
 	});
-	
+
 	</script>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
