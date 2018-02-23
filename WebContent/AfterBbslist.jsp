@@ -102,16 +102,16 @@ for(int i = 0;i < afterBbslist.size(); i++){
 	<td><%=i+1 %></td>
 	<td>
 		<%-- <%=arrow(bbs.getDepth()) %> --%>
-		<%if(bbs.getDel()==1){ %>
-		<b>관리자에의해 삭제된 글입니다.</b>
-		<%}else{ %>
+		<%-- <%if(bbs.getDel()==1){ %> --%>
+		<!-- <b>관리자에의해 삭제된 글입니다.</b> -->
+		<%-- <%}else{ %> --%>
 		<a href="AfterBbsController?command=AfterBbsDetail&seq=<%=bbs.getSeq() %>">
 			<%=bbs.getTitle() %>
 		</a>
-		<%} %>
+		<%-- <%} %> --%>
 	</td>
-	<td><%=bbs.getUserSeq() %> </td>
-	<td><%=bbs.getRdate() %></td>
+	 <td><%=bbs.getUserSeq() %> </td>
+	<td><%=bbs.getRdate() %></td> 
 	</tr>	
 	<%
 }

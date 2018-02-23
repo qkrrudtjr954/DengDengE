@@ -18,26 +18,44 @@ AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
 
 <h1 align="center">댕댕이 반려 동물 입양 후기</h1>
 
-<form action="CommuBbsController" method="post">
-	<input type="hidden" name="command" value="update">
-<table border="1">
+<%-- <form action="AfterBbsController" method="post">
+	<input type="hidden" name="command" value="AfterBbsDetail">
+<table border="3">
 <tr>
-	<td>카테고리</td>
-	<td>제목</td>
+   <td><%=bbs1.getTitle() %></td>
 </tr>
 <tr>
-	<td>작성자</td><td> 작성일, 조회수 </td>
+   <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs1.getRdate() %>&nbsp;&nbsp;&nbsp; 조회수 :</td>
 </tr>
 <tr>
-<td colspan="2"><textarea rows="20" cols="100"></textarea></td>
+<td colspan="2"><%=bbs1.getContent() %></td>
 </tr>
 <tr>
-	<td colspan="2" align="right"><button>삭제하기</button><input type="submit" value="수정하기"><td>
+   <td colspan="2" align="right"><button><a href="AfterBbsController?command=delete">삭제하기</a></button><input type="submit" value="수정하기"></td>
 </tr>
 </table>
 
 </form>
+ --%>
 
+<h1>디테일</h1>
+<table border="3">
+<col width="150"><col width="750">
+<form action="AfterBbsController" method="post">
+   <input type="hidden" name="command" value="AfterBbsDetail">
+<tr>
+   <td colspan="2"><%=bbs1.getTitle() %></td>
+</tr>
+<tr>
+   <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs1.getRdate() %>&nbsp;&nbsp;&nbsp; 조회수 : </td>
+</tr>
+<tr>
+<td colspan="2" col height="750"><%=bbs1.getContent() %></td>
+</tr>
+<tr>
+   <td colspan="2" align="right"><button><a href="CommuBbsController?command=delete">삭제하기</a></button><input type="submit" value="수정하기"></td>
+</tr>
+</table>
 
 
 

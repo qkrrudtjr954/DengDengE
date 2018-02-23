@@ -32,7 +32,7 @@ public class AfterBbsService {
 	}
 	
 	public AfterBbsDto detailAfterlBbs(int seq) {
-		return afterBbsService.detailAfterlBbs(seq);
+		return afterBbsDao.detailAfterlBbs(seq);
 	}
 	
 	

@@ -21,12 +21,12 @@
   
   
   <servlet>
-  <servlet-name>AnimalController</servlet-name>
-  <servlet-class>controller.AnimalController</servlet-class>  
+  <servlet-name>AnimalBbsController</servlet-name>
+  <servlet-class>controller.AnimalBbsController</servlet-class>  
   </servlet>
   <servlet-mapping>
-  <servlet-name>AnimalController</servlet-name>
-  <url-pattern>/AnimalController</url-pattern>
+  <servlet-name>AnimalBbsController</servlet-name>
+  <url-pattern>/AnimalBbsController</url-pattern>
   </servlet-mapping>
   
   
