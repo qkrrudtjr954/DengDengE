@@ -30,9 +30,20 @@ public class AfterBbsService {
 	public boolean wirtelAfterBbs(AfterBbsDto dto) {
 		return afterBbsDao.wirtelAfterBbs(dto);		
 	}
-	
+	//디테일
 	public AfterBbsDto detailAfterlBbs(int seq) {
 		return afterBbsDao.detailAfterlBbs(seq);
+	}
+	
+	//수정
+	public boolean AfrerBbsUpdate(AfterBbsDto bbs) {
+		return afterBbsDao.AfrerBbsUpdate(bbs);	
+	}
+	
+	
+	public AfterBbsDto getBbs(int seq) {
+		return afterBbsDao.getBbs(seq);
+		
 	}
 	
 	

@@ -38,12 +38,14 @@ public class AfterBbsController extends HttpServlet {
 			req.setAttribute("afterBbslist", afterBbslist);
 			
 			dispatch("AfterBbslist.jsp", req, resp);
-			
+		//글쓰기	
 		}else if(command.equals("AfterBbswrite")) {
 			dispatch("AfterBbswrite.jsp", req, resp);
+		// 글쓰기 처리	
 		}else if(command.equals("AfterBbswriteAf")) {
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
+			//String pic1 = req.getParameter("pic1");
 			//String suserseq = req.getParameter("userseq");
 			//int userseq = Integer.parseInt(suserseq);
 			
@@ -65,15 +67,60 @@ public class AfterBbsController extends HttpServlet {
 				req.setAttribute("mag1", "글작성 실패");
 				dispatch("AfterBbswrite.jsp", req, resp);
 			}
-			
+			//디테일
 		}else if(command.equals("AfterBbsDetail")) {
 			String sseq = req.getParameter("seq"); 
-			System.out.println("delete-sseq: "+sseq);
+			System.out.println("detail-sseq: "+sseq);
 			int seq = Integer.parseInt(sseq);
 			AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
-			req.setAttribute("seq", seq);
+			
 			req.setAttribute("bbs1", bbs1);
 			dispatch("AfterBbsDetail.jsp", req, resp);
+			
+		}else if(command.equals("AfterBbsUpdate")) {  
+			String sseq = req.getParameter("seq");
+			System.out.println("Update-sseq: "+sseq);
+			int seq = Integer.parseInt(sseq);
+			AfterBbsDto bbs2 = bbs.getBbs(seq);
+			//req.setAttribute("seq", seq);
+			req.setAttribute("bbs2", bbs2);
+			dispatch("AfterBbsUpdate.jsp", req, resp);
+			
+		}else if(command.equals("AfterBbsUpdateAf")){
+			String seq = req.getParameter("seq");
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			//String pic1 = req.getParameter("pic1");
+			//String suserseq = req.getParameter("userseq");
+			//int userseq = Integer.parseInt(suserseq);
+			
+			dto.setSeq(Integer.parseInt(seq));
+			dto.setTitle(title);
+			dto.setContent(content);
+			
+			System.out.println("updateBbsToString>>"+bbs.toString());
+			
+			boolean isS = bbs.AfrerBbsUpdate(dto);
+			req.setAttribute("isS", isS);
+			
+			
+			if(isS) {
+				//JOptionPane.showMessageDialog(null, "수정성공");
+				req.setAttribute("msg", "수정성공");
+				dispatch("AfterBbsController?command=AfterBbslist", req, resp);
+				
+			}else {
+				//JOptionPane.showMessageDialog(null, "수정실패");
+				req.setAttribute("msg", "수정실패");
+				dispatch("AfterBbsController?command=AfterBbsDetail", req, resp);
+				
+			}	
+			
+			
+			
+			
+			
+			
 			
 		}
 		
