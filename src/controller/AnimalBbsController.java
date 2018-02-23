@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.prism.Image;
+
 import dto.AnimalBbsDto;
 import service.AnimalBbsService;
 
@@ -40,6 +42,12 @@ public class AnimalBbsController extends HttpServlet {
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}
 		else if(command.equals("detail")) {
+			String sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(sseq);
+			System.out.println("s"+seq);
+			
+			AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
+			req.setAttribute("aniBbsDto", aniBbsDto);
 			dispatch("AnimalBbsdetail.jsp", req, resp);
 		}
 		else if(command.equals("write")) {

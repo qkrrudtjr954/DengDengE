@@ -5,23 +5,23 @@ import java.io.Serializable;
 public class AnimalBbsDto implements Serializable {
 
 	private int seq;
-	private String title;
-	private String name;
-	private int age;
-	private String kinds;
-	private String type;
-	private String location;
-	private int medicine;
-	private int neutralization;
-	private int gender;
-	private String descripttion;
-	private String pic1;
-	private String content;
-	private int userSeq;
-	private String contact;
-	private String description;
- 	private String Rdate;
-	private String LUpdate;
+	private String title;	// 제목
+	private String name;	// 이름
+	private int age;			// 나이
+	private String kinds;	// 견종
+	private String type;	// 분류
+	private String location;	// 지역
+	private int medicine;		// 예방접종 여부
+	private int neutralization;	// 중성화
+	private int gender;			// 성별
+	private String descripttion;	// 특이사항
+	private String pic1;			// 사진URL
+	private String content;		// 내용
+	private int userSeq;			// 작성자 
+	private String contact;		// 연락처
+	private String description;	// 내용
+ 	private String Rdate;			// 등록날짜
+	private String LUpdate;		// 마지막 수정날짜
 	private int del;
 	
 	public AnimalBbsDto() {

@@ -32,7 +32,7 @@ public class AnimalBbsService {
 		
 		// 입양하기 글 디테일
 		public AnimalBbsDto detailAnimalBbs(int seq) {
-			return null;
+			return aniBbsManager.detailAnimalBbs(seq);
 		}
 		
 		// 입양하기 글 삭제

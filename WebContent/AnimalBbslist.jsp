@@ -80,10 +80,11 @@ if(animlist == null || animlist.size() == 0){
 	<%
 }for(int i=0;i<animlist.size();i++){
 	AnimalBbsDto aniBbsDto = animlist.get(i);
+	System.out.println(aniBbsDto.getSeq());
 	%>
 		<tr>	
 			<td>
-				<a href="AnimalBbsController?command=detail&seq<%=aniBbsDto.getSeq() %>">
+				<a href="AnimalBbsController?command=detail&seq=<%=aniBbsDto.getSeq() %>">
 					<img src="<%=aniBbsDto.getPic1() %>"><br>					
 					<%=aniBbsDto.getTitle() %>
 				</a>

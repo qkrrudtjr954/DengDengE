@@ -140,8 +140,11 @@ public class AnimalBbsDao {
 	
 	// 입양하기 글 디테일
 	public AnimalBbsDto detailAnimalBbs(int seq) {
-		String sql = " SELECT SEQ,  "
-				+ "  "
+		String sql = " SELECT SEQ, TITLE, NAME, AGE, "
+				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
+				+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
+				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
+				+ " REG_DATE, LAST_UPDATE, DEL "
 				+ " FROM ANIMALBBS "
 				+ " WHERE SEQ=? ";
 		Connection conn = null;
@@ -163,18 +166,27 @@ public class AnimalBbsDao {
 			
 			while(rs.next()){
 				int i = 1;
-				/*dto = new BbsDto(
-						rs.getInt(i++),	// seq 
-						rs.getString(i++),	// id 
-						rs.getInt(i++),	// ref 
-						rs.getInt(i++), // step 
-						rs.getInt(i++), // depth 
-						rs.getString(i++), // title
-						rs.getString(i++), // content 
-						rs.getString(i++), // wdate 
-						rs.getInt(i++),    // parent 
-						rs.getInt(i++),		//	del 
-						rs.getInt(i++));	// readcount*/
+				dto = new AnimalBbsDto(
+										rs.getInt(i++), 
+										rs.getString(i++), 
+										rs.getString(i++), 
+										rs.getInt(i++), 
+										rs.getString(i++), 
+										rs.getString(i++),
+										rs.getString(i++), 
+										rs.getInt(i++), 
+										rs.getInt(i++), 
+										rs.getInt(i++), 
+										rs.getString(i++), 
+										rs.getString(i++), 
+										rs.getString(i++), 
+										rs.getInt(i++),  
+										rs.getString(i++),
+										rs.getString(i++),
+										rs.getString(i++),
+										rs.getString(i++),
+										rs.getInt(i++));
+						
 				}
 			System.out.println("4/6 S detailAnimalBbs");
 		} catch (SQLException e) {			

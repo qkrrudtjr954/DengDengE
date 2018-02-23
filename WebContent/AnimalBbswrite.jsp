@@ -9,7 +9,8 @@
 </head>
 <body>
 <h1>입양하기 글작성</h1>
-<br><br><br><br><br>
+<br><br><br><br>
+<a href="AnimalController?command=animlist">list</a>
 <hr>
 
 <form action="AnimalBbsController">
@@ -96,6 +97,7 @@
 	<td colspan="11">
 		<input type="submit" value="next">
 	</td>
+
 </tr>
 
 </table>
