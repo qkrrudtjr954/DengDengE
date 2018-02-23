@@ -1,6 +1,9 @@
 package service;
 
+import java.util.List;
+
 import dao.AfterBbsDao;
+import dto.AfterBbsDto;
 
 public class AfterBbsService {
 	
@@ -19,7 +22,9 @@ public class AfterBbsService {
 		return afterBbsService;
 	}
 	
-	
+	public List<AfterBbsDto> getAfterlBbsList(){
+		return afterBbsDao.getAfterlBbsList();
+	}
 	
 	
 	

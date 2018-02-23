@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +34,10 @@ public class AfterBbsController extends HttpServlet {
 		
 		
 		if(command.equals("AfterBbslist")) {
+			
+			List<AfterBbsDto> afterBbslist = bbs.getAfterlBbsList();
+			req.setAttribute("afterBbslist", afterBbslist);
+			
 			dispatch("AfterBbslist.jsp", req, resp);
 			
 		}

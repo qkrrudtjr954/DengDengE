@@ -27,12 +27,16 @@ public class AfterBbsDao {
 
 	*/
 	
+	
+	public AfterBbsDao() {
+		DBConnection.initConnect();
+	}
+	
 	//current_user 세션 저장
 	//After 게시판 화면 출력
 	public List<AfterBbsDto> getAfterlBbsList(){
 		String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, "
-				+ "	WDATE, PARENT, DEL, "
+				+ " REG_DATE, LAST_UPDATE, DEL "
 				+ " FROM AFTERBBS ";
 		
 		
@@ -47,6 +51,7 @@ public class AfterBbsDao {
 			System.out.println("2/6 getAfterlBbsList Success");
 			
 			psmt = conn.prepareStatement(sql);
+			System.out.println("spl = " + sql);
 			System.out.println("3/6 getAfterlBbsList Success");
 			
 			rs = psmt.executeQuery();
@@ -55,16 +60,18 @@ public class AfterBbsDao {
 			while(rs.next()){
 				int i = 1;
 				
+				AfterBbsDto dto = new AfterBbsDto(rs.getInt(i++),//int seq, 
+												rs.getString(i++),//String title, 
+												rs.getString(i++),//String pic1, 
+												rs.getString(i++),//String content, 
+												rs.getInt(i++),//int userSeq, 
+												rs.getString(i++),//String rdate, 
+												rs.getString(i++),//String ldate,
+												rs.getInt(i++));
 				
+						
 				
-				AfterBbsDto dto = new AfterBbsDto();
-				dto.setSeq(rs.getInt("SEQ"));
-				dto.setTitle(rs.getString("TITLE"));
-				dto.setPic1(rs.getString("PIC1"));
-				dto.setContent(rs.getString("CONTENT"));
-				dto.setUserSeq(rs.getInt("TARGET_USER_SEQ"));
-				dto.setRdate(rs.getString("REG_DATE"));
-				dto.setLdate(rs.getString("LAST_UPDATE"));
+				list.add(dto);
 										
 			}		
 			System.out.println("5/6 getAfterlBbsList Success");
