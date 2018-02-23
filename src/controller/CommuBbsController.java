@@ -78,8 +78,10 @@ public class CommuBbsController extends HttpServlet {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
 			
-			System.out.println("SEQ : " + seq+"");
-			
+	
+			/*comService.readCount(seq);*/
+			comService.readCount(seq);
+			System.out.println("지나감");
 			CommuBbsDto comdto = comService.getCommu(seq);
 			
 			req.setAttribute("comdto", comdto);
@@ -97,6 +99,17 @@ public class CommuBbsController extends HttpServlet {
 				req.setAttribute("msg", "삭제 실패");
 				dispatch("CommuBbsController?command=read&seq="+seq, req, resp);
 			}
+		}else if(command.equals("classify")) {
+			String Starget_category = req.getParameter("target_category");
+			int target_category = Integer.parseInt(Starget_category);
+			
+			List<CommuBbsDto> bbslist = comService.getCategory(target_category);
+			//짐 싸기
+			req.setAttribute("bbslist", bbslist);
+			
+			//보내주기
+			dispatch("CommuBbslist.jsp", req, resp);
+			
 		}
 	}
 	//보내주는 함수

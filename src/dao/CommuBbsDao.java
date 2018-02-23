@@ -28,10 +28,6 @@ public class CommuBbsDao implements iCommuBbsDao{
 	public List<CommuBbsDto> getCommulist() {
 		List<CommuBbsDto> list = new ArrayList<>();
 
-		/*String sql = "SELECT TITLE, TARGET_USER_SEQ, TARGET_CATEGORY, REG_DATE "*/
-	/*	String sql = "SELECT * "
-				+ "	FROM COMMUBBS "
-				+ " ORDER BY REG_DATE DESC ";*/
 		
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
 				+ " FROM COMMUBBS A, CATEGORY B "
@@ -55,8 +51,6 @@ public class CommuBbsDao implements iCommuBbsDao{
 
 			while (rs.next()) {
 				int i = 1;
-				//int seq, String title, String pic1, String content, int target_user_seq, int target_category,
-				//int readcount, String reg_date, String last_update, int del
 
 				CommuBbsDto dto = new CommuBbsDto(rs.getInt(i++), // seq
 												rs.getString(i++),// title
@@ -147,9 +141,31 @@ public class CommuBbsDao implements iCommuBbsDao{
 	//조회수 올리기
 	@Override
 	public void readCount(int seq) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("readcount");
+	String sql = " UPDATE  COMMUBBS  SET  "  
+				+ " READCOUNT=READCOUNT+1 " 
+				+ " WHERE SEQ=? ";
+	System.out.println("readcount sql : " + sql);
+
+	Connection conn = null;
+	PreparedStatement psmt = null;
+	ResultSet rs = null;
+
+	try {
+		conn = DBConnection.makeConnection();
+		psmt = conn.prepareStatement(sql);
+		System.out.println("1/6 readCount");
+		psmt.setInt(1, seq);
+		System.out.println("2/6 readCount");
+		psmt.executeUpdate();
+		System.out.println("3/6 readCount");
+	} catch (SQLException e) {
+		e.printStackTrace();
+		System.out.println("fail readCount");
+	} finally {
+		DBClose.close(psmt, conn, rs);
 	}
+}
 	
 	
 	
@@ -234,6 +250,67 @@ public class CommuBbsDao implements iCommuBbsDao{
 	public boolean udtCommu(int seq, CommuBbsDto comdto) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	
+	
+	//카테고리별 불러오기 
+	@Override
+	public List<CommuBbsDto> getCategory(int target_category) {
+		List<CommuBbsDto> list = new ArrayList<>();
+
+		
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
+				+ " FROM COMMUBBS A, CATEGORY B "
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND DEL=0 AND a.target_category=? "
+				+ " ORDER BY REG_DATE DESC ";
+	
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 getCategory Success");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("sql = " + sql);
+			psmt.setInt(1, target_category);
+			System.out.println("3/6 getCategory Success");
+
+			rs = psmt.executeQuery();
+			System.out.println("4/6 getCategory Success");
+
+			while (rs.next()) {
+				int i = 1;
+
+				CommuBbsDto dto = new CommuBbsDto(rs.getInt(i++), // seq
+												rs.getString(i++),// title
+												"",// String pic1 
+												"",//String content
+												rs.getInt(i++),//int target_user_seq
+												0,//int target_category
+												0,//int readcount
+												rs.getString(i++),//String reg_date
+												"",//String last_update 
+												rs.getInt(i++),//int del
+												rs.getString(i++)); //category_name
+				list.add(dto);
+			}
+			System.out.println("5/6 getCategory Success");
+
+		} catch (SQLException e) {
+			System.out.println("getCategory fail");
+			System.out.println(e.getMessage());
+			System.out.println(e.getErrorCode());
+			System.out.println(e.getSQLState());
+
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		
+		}
+
+		return list;
 	}
 	
 	

@@ -7,14 +7,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <%
 List<CommuBbsDto> bbslist = (List<CommuBbsDto>)request.getAttribute("bbslist");
 %>
-
-<div align="center">
 <h1>커뮤니티</h1>
+<div  align="left">
+&nbsp;&nbsp;
+<button><a href="CommuBbsController?command=list">전체보기</a></button>&nbsp;&nbsp;
+<button><a href="CommuBbsController?command=classify&target_category=1">애견Tip</a></button>&nbsp;&nbsp;
+<button><a href="CommuBbsController?command=classify&target_category=2">중고장터</a></button>&nbsp;&nbsp;
+<button><a href="CommuBbsController?command=classify&target_category=3">자유게시판</a></button>
+</div>
+<br><br><hr>
+<div align="center">
+
+
 <table border="1">
 <col width="150"><col width="70"><col width="500"><col width="150">
 

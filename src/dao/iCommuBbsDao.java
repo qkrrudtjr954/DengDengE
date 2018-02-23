@@ -24,5 +24,6 @@ public interface iCommuBbsDao {
 	//수정 
 	public boolean udtCommu(int seq, CommuBbsDto comdto);
 	
-
+	//카테고리 별로 구분
+	public List<CommuBbsDto> getCategory(int target_category);
 }

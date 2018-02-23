@@ -19,11 +19,11 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <form action="CommuBbsController" method="post">
 	<input type="hidden" name="command" value="update">
 <tr>
-	<td><%=comdto.getCategory_name() %></td>
+	<td><a href="CommuBbsController?command=classify&target_category=<%=comdto.getTarget_category() %>"><%=comdto.getCategory_name() %></a></td>
 	<td><%=comdto.getTitle() %></td>
 </tr>
 <tr>
-	<td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=comdto.getReg_date() %>&nbsp;&nbsp;&nbsp; 조회수 : <%=comdto.getReadcount() %></td>
+	<td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=comdto.getReg_date() %>&nbsp;&nbsp;&nbsp; 조회수 : <%=comdto.getReadcount() %>&nbsp;</td>
 </tr>
 <tr>
 <td colspan="2" col height="750"><div style="float:left;padding:9px 10px 0 0"><%=comdto.getContent() %></div></td>
@@ -35,18 +35,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </form>
 </div>
 
-<%-- 로그인 메시지 완료 되었을때 뜨는 메시지 --%>
-<%
-String msg = (String)request.getAttribute("msg");
 
-if(msg!=null){
-   %>
-   <script type="text/javascript">
-      alert("<%=msg%>");
-   </script>
-   <%
-}
-%>
 <%-- <div align="center">
 <form action="CommuBbsController" method="post">
 	<input type="hidden" name="command" value="update">

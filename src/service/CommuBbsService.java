@@ -40,6 +40,14 @@ public class CommuBbsService {
 		public boolean delCommu(int seq) {
 			return manager.delCommu(seq);
 		}
+		
+		public List<CommuBbsDto> getCategory(int target_category){
+			return manager.getCategory(target_category);
+		}
+		
+		public void readCount(int seq) {
+			 manager.readCount(seq);
+		}
 }
 
 
