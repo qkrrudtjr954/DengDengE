@@ -14,13 +14,18 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 <body>
+ 
 <%
 List<AnimalBbsDto> animlist = (List<AnimalBbsDto>)request.getAttribute("animlist");
-for(int i=0;i<animlist.size();i++){
+for(int i=0;i<animlist.size(); i++){
 	System.out.println(animlist.get(i).toString());
 }
 %>
-
+ 
+ 
+ ${animlist.get(0) }<br>
+ ${animlist.get(1) }
+ 
 <%
 String msg = (String)request.getAttribute("msg");
 %>

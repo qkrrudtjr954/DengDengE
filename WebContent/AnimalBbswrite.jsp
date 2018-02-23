@@ -60,8 +60,8 @@
 	</td>
 	<td>성별</td>
 	<td>
-		<input type="radio" name="gen" value="여자">여자
-		<input type="radio" name="gen" value="남자">남자
+		<input type="radio" name="gen" value="1">여자
+		<input type="radio" name="gen" value="0">남자
 	</td>
 </tr>
 

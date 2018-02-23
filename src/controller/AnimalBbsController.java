@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -27,6 +28,7 @@ public class AnimalBbsController extends HttpServlet {
 	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=UTF-8");
+
 		
 		String command = req.getParameter("command");
 		AnimalBbsService aniBbService = AnimalBbsService.getInatance();
@@ -53,57 +55,52 @@ public class AnimalBbsController extends HttpServlet {
 			String ttype[] = req.getParameterValues("type");
 			String type = null;
 			String location = req.getParameter("location");
-			String mmedicine[] = req.getParameterValues("medi");
-			int medicine = 0;
-			String nneutralization[] = req.getParameterValues("neu");
-			int neutralization = 0;
-			String ggender[] = req.getParameterValues("gen");
-			int gender = 0;
+			String mmedicine = req.getParameter("medi");
+			int medicine = Integer.parseInt(mmedicine);
+			System.out.println("m:"+mmedicine);
+			
+			String nneutralization = req.getParameter("neu");
+			int neutralization = Integer.parseInt(nneutralization);
+			System.out.println("n:"+nneutralization);
+			
+			String ggender = req.getParameter("gen");
+			int gender =  Integer.parseInt(ggender);
+			System.out.println("g:"+ggender);
+			
 			String title = req.getParameter("title");
-			String descripttion = req.getParameter("discrip");
+			String descripttion = req.getParameter("descrip");
 			String pic1 = req.getParameter("pic");
 			String content = req.getParameter("content");
+	
 			
-			AnimalBbsDto dto = new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, pic1, content, 1, "content", "no");
-			System.out.println(dto.toString());
 			if(ttype != null) {
 				for (int i = 0; i < ttype.length; i++) {
 					type = ttype[i];					
 				}
 				System.out.println("t:"+type);
 			}
-			else if(mmedicine != null) {
-				for (int i = 0; i < mmedicine.length; i++) {
-					String str = "";
-					str += mmedicine[i];
-					System.out.println(str);
-					medicine = Integer.parseInt(str);					
-				}
-				
-				System.out.println("m:"+medicine);
+			
+			boolean isS = aniBbService.wirteAnimalBbs(
+					new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, pic1, content, 1, "연락처", "내용"));
+			
+			if(isS) {
+				// msg
+				System.out.println(isS);
+				req.setAttribute("msg", "글 작성 완료");
+				dispatch("AnimalBbsController?command=animlist", req, resp);
+			}else {
+				// msg
+				System.out.println(isS);
+				req.setAttribute("msg", "글 작성 실패");
+				dispatch("AnimalBbslist.jsp", req, resp);
 			}
-			else if(nneutralization != null) {
-				for (int i = 0; i < nneutralization.length; i++) {
-					String str = nneutralization[i];
-					neutralization = Integer.parseInt(str);
-				}
-				System.out.println("n:"+neutralization);
-			}else if(ggender != null) {
-				for (int i = 0; i < ggender.length; i++) {
-					String str = ggender[i];
-					gender = Integer.parseInt(str);
-				}
-				System.out.println("g:"+gender);
+			
 			}
-			/*boolean isS = aniBbService.wirteAnimalBbs(
-				new AnimalBbsDto(title, name, age, kinds, type, location, 
-							medicine, neutralization, gender, descripttion, 
-							pic1, content, 1, "서울", "없음"));*/
-			// msg
-			req.setAttribute("msg", "글 작성 완료");
-			dispatch("AnimalBbslist.jsp", req, resp);
+			
+			
+			
 		}
-	}
+	
 	
 	public boolean isNull(String str) {
 		return str == null || str.trim().equals("");

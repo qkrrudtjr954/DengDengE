@@ -27,7 +27,7 @@ public class AnimalBbsService {
 		
 		// 입양하기 글 작성
 		public boolean wirteAnimalBbs(AnimalBbsDto anibDto) {
-			return false;
+			return aniBbsManager.wirteAnimalBbs(anibDto);
 		}
 		
 		// 입양하기 글 디테일

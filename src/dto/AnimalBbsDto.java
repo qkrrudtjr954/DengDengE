@@ -28,7 +28,7 @@ public class AnimalBbsDto implements Serializable {
 	}
 
 	public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String type, String location,
-			int medicine, int neutralization, int gender, String descripttion, String pic1, String cotent, int userSeq,
+			int medicine, int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
 			String contact, String description, String rdate, String lUpdate, int del) {
 		super();
 		this.seq = seq;
@@ -51,10 +51,11 @@ public class AnimalBbsDto implements Serializable {
 		LUpdate = lUpdate;
 		this.del = del;
 	}
+	
+	
 
-	// 글작성
 	public AnimalBbsDto(String title, String name, int age, String kinds, String type, String location, int medicine,
-			int neutralization, int gender, String descripttion, String pic1, String cotent, int userSeq,
+			int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
 			String contact, String description) {
 		super();
 		this.title = title;
@@ -170,12 +171,12 @@ public class AnimalBbsDto implements Serializable {
 		this.pic1 = pic1;
 	}
 
-	public String getCotent() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setCotent(String cotent) {
-		this.content = cotent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getUserSeq() {
@@ -231,9 +232,11 @@ public class AnimalBbsDto implements Serializable {
 		return "AnimalBbsDto [seq=" + seq + ", title=" + title + ", name=" + name + ", age=" + age + ", kinds=" + kinds
 				+ ", type=" + type + ", location=" + location + ", medicine=" + medicine + ", neutralization="
 				+ neutralization + ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1
-				+ ", cotent=" + content + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
+				+ ", content=" + content + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
 				+ description + ", Rdate=" + Rdate + ", LUpdate=" + LUpdate + ", del=" + del + "]";
 	}
+
+	
 
 		
 	

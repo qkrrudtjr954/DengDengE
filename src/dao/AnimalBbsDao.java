@@ -24,7 +24,7 @@ public class AnimalBbsDao {
 	public List<AnimalBbsDto> getAnimalBbsList() {
 		String sql = " SELECT SEQ, TITLE, NAME, AGE, "
 				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
-				+ " GENDER, DESCRIPTTION, PIC1, CONTENT "
+				+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
 				+ " REG_DATE, LAST_UPDATE, DEL "
 				+ " FROM ANIMALBBS ";
@@ -48,23 +48,23 @@ public class AnimalBbsDao {
 				AnimalBbsDto aniBbsDto = new AnimalBbsDto();
 				aniBbsDto.setSeq(rs.getInt("SEQ"));
 				aniBbsDto.setTitle(rs.getString("TITLE"));
-				aniBbsDto.setTitle(rs.getString("NAME"));
-				aniBbsDto.setSeq(rs.getInt("AGE"));
-				aniBbsDto.setTitle(rs.getString("KINDS"));
-				aniBbsDto.setTitle(rs.getString("TYPE"));
-				aniBbsDto.setTitle(rs.getString("LOCATION"));
-				aniBbsDto.setSeq(rs.getInt("MEDICINE"));
-				aniBbsDto.setSeq(rs.getInt("NEUTRALIZATION"));
-				aniBbsDto.setSeq(rs.getInt("GENDER"));
-				aniBbsDto.setTitle(rs.getString("DESCRIPTTION"));
-				aniBbsDto.setTitle(rs.getString("PIC1"));
-				aniBbsDto.setTitle(rs.getString("CONTENT"));
-				aniBbsDto.setSeq(rs.getInt("TARGET_USER_SEQ"));
-				aniBbsDto.setPic1(rs.getString("TARGET_CONTACT"));
-				aniBbsDto.setPic1(rs.getString("TARGET_DESCRIPTION"));
-				aniBbsDto.setPic1(rs.getString("REG_DATE"));
-				aniBbsDto.setPic1(rs.getString("LAST_UPDATE"));
-				aniBbsDto.setSeq(rs.getInt("DEL"));
+				aniBbsDto.setName(rs.getString("NAME"));
+				aniBbsDto.setAge(rs.getInt("AGE"));
+				aniBbsDto.setKinds(rs.getString("KINDS"));
+				aniBbsDto.setType(rs.getString("TYPE"));
+				aniBbsDto.setLocation(rs.getString("LOCATION"));
+				aniBbsDto.setMedicine(rs.getInt("MEDICINE"));
+				aniBbsDto.setNeutralization(rs.getInt("NEUTRALIZATION"));
+				aniBbsDto.setGender(rs.getInt("GENDER"));
+				aniBbsDto.setDescripttion(rs.getString("DESCRIPTTION"));
+				aniBbsDto.setPic1(rs.getString("PIC1"));
+				aniBbsDto.setContent(rs.getString("CONTENT"));
+				aniBbsDto.setUserSeq(rs.getInt("TARGET_USER_SEQ"));
+				aniBbsDto.setContact(rs.getString("TARGET_CONTACT"));
+				aniBbsDto.setDescription(rs.getString("TARGET_DESCRIPTION"));
+				aniBbsDto.setRdate(rs.getString("REG_DATE"));
+				aniBbsDto.setLUpdate(rs.getString("LAST_UPDATE"));
+				aniBbsDto.setDel(rs.getInt("DEL"));
 				
 				list.add(aniBbsDto);
 			}
@@ -80,13 +80,14 @@ public class AnimalBbsDao {
 	
 	// 입양하기 글 작성
 	public boolean wirteAnimalBbs(AnimalBbsDto aniBbsDto) {
+		System.out.println("접속");
 		String sql = " INSERT INTO ANIMALBBS(SEQ, TITLE, NAME, AGE, "
-				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER,  "
-				+ " DESCRIPTTION, PIC1, CONTENT "
+				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER,   DESCRIPTTION, PIC1, CONTENT,  "
+				+ " DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-				+ " REG_DATE, LAST_UPDATE, DEL) "
-				+ " VALUES(SEQ_ANIMALBBS.NEXTVAL, ?, ?, ?, "
-				+ " ?, ?, ?, ?, ?, ? "
+				+ " REG_DATE, LAST_UPDATE, DEL)  "
+				+ " VALUES(ANIMALBBS_SEQ.NEXTVAL, ?, ?, ?, "
+				+ " ?, ?, ?, ?, ?, ?, "
 				+ " ?, ?, ?, "
 				+ " ?, ?, ?, SYSDATE, SYSDATE, 0) ";
 		int count = 0;
@@ -102,7 +103,7 @@ public class AnimalBbsDao {
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setString(1, aniBbsDto.getTitle());
-			psmt.setString(1, aniBbsDto.getName());
+			psmt.setString(2, aniBbsDto.getName());
 			psmt.setInt(3, aniBbsDto.getAge());
 			
 			psmt.setString(4, aniBbsDto.getKinds());
@@ -114,17 +115,21 @@ public class AnimalBbsDao {
 			
 			psmt.setString(10, aniBbsDto.getDescripttion());
 			psmt.setString(11, aniBbsDto.getPic1());
-			psmt.setString(12, aniBbsDto.getCotent());
+			psmt.setString(12, aniBbsDto.getContent());
 			
 			psmt.setInt(13, aniBbsDto.getUserSeq());
 			psmt.setString(14, aniBbsDto.getContact());
 			psmt.setString(15, aniBbsDto.getDescription());
 			System.out.println("2/6 S wirteAnimalBbs");
+			System.out.println(sql);
 			count = psmt.executeUpdate();
 			System.out.println("3/6 S wirteAnimalBbs");
 			
 		} catch (SQLException e) {			
 			System.out.println("wirteAnimalBbs fail");
+	         System.out.println(e.getMessage());
+	         System.out.println(e.getErrorCode());
+	         System.out.println(e.getSQLState());
 		} finally{
 			DBClose.close(psmt, conn, rs);	
 			System.out.println("4/6 S wirteAnimalBbs");
@@ -233,7 +238,7 @@ public class AnimalBbsDao {
 			System.out.println("1/6 S detailAnimalBbs");
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, aniBbsDto.getTitle());
-			psmt.setString(1, aniBbsDto.getCotent());
+			psmt.setString(1, aniBbsDto.getContent());
 			psmt.setInt(3, seq);
 		
 			System.out.println("2/6 S detailAnimalBbs");
