@@ -12,7 +12,7 @@
   <!-- CommuBbsController -->
  <servlet>
  	<servlet-name>CommuBbsController</servlet-name>
- 	<servlet-class>control.CommuBbsController</servlet-class>
+ 	<servlet-class>controller.CommuBbsController</servlet-class>
  </servlet>
  <servlet-mapping>
  		<servlet-name>CommuBbsController</servlet-name>

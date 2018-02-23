@@ -63,7 +63,6 @@ for(int i = 0;i < bbslist.size(); i++){
 </tr>
 <tr>
 
-
 <%-- 로그인 메시지 완료 되었을때 뜨는 메시지 --%>
 <%
 String msg = (String)request.getAttribute("msg");
@@ -76,5 +75,7 @@ if(msg!=null){
    <%
 }
 %>
+
+
 </body>
 </html>

@@ -36,4 +36,10 @@ public class CommuBbsService {
 		public CommuBbsDto getCommu(int seq) {
 			return manager.getCommu(seq);
 		}
+		
+		public boolean delCommu(int seq) {
+			return manager.delCommu(seq);
+		}
 }
+
+
