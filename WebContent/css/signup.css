@@ -1,13 +1,34 @@
 @charset "UTF-8";
 
 .container {
-  max-width: 960px;
+	max-width: 960px;
+	background-color: #f8f9fabd;
+	border-radius: 50px;
+	margin-top: 30px;
 }
 
-.border-top { border-top: 1px solid #e5e5e5; }
-.border-bottom { border-bottom: 1px solid #e5e5e5; }
-.border-top-gray { border-top-color: #adb5bd; }
+body {
+	background-image: url("../img/index_bg.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.border-top {
+	border-top: 1px solid #e5e5e5;
+}
 
-.lh-condensed { line-height: 1.25; }
+.border-bottom {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.border-top-gray {
+	border-top-color: #adb5bd;
+}
+
+.box-shadow {
+	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.lh-condensed {
+	line-height: 1.25;
+}

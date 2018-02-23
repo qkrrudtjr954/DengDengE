@@ -22,6 +22,20 @@ public class UserService{
 	public User getUserByEmailAndPassword(User user) {
 		return userDao.getUserByEmailAndPassword(user);
 	}
+	public User getUserByEmail(String email) {
+		return userDao.getUserByEmail(email);
+	}
+	public User addUser(User user) {
+		boolean result = userDao.addUser(user);
+		
+		User returnUser = new User();
+		
+		if(result) {
+			returnUser = userDao.getUserByEmail(user.getEmail());
+		}
+		
+		return returnUser;
+	}
 	
 	// service 는 dao를 singleton으로 호출합니다.
 }

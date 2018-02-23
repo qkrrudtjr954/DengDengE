@@ -23,67 +23,42 @@
     <div class="container">
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>Checkout form</h2>
+        <h2>회원 가입</h2>
         <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
       </div>
 
       <div class="row">
         <div class="offset-md-3 col-md-6 order-md-1">
-          <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate>
+          
+          <form class="needs-validation" id="signUpForm" novalidate>
+          	<input type="hidden" name="command" value="signup">
             <div class="mb-3">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <input type="email" class="form-control success" name="email" id="email" placeholder="you@example.com">
               <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                이메일을 입력해주세요. 
               </div>
+              <div class="invalid-email"></div>
+              
             </div>
 
             <div class="mb-3">
               <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" required>
+              <input type="password" class="form-control" name="password1" id="password1" required>
               <div class="invalid-feedback">
-                Please enter your shipping address.
+                비밀번호를 입력해주세요.
               </div>
             </div>
             
             <div class="mb-3">
               <label for="password">Password <span style="font-size:12px;">(Confirm)</span></label>
-              <input type="password" class="form-control" id="password" required>
+              <input type="password" class="form-control" name="password2" id="password2" required>
               <div class="invalid-feedback">
-                Please enter your shipping address.
+                비밀번호를 확인해주세요.
               </div>
+              <div class="invalid-password"></div>
             </div>
 
-            <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="country">Country</label>
-                <select class="custom-select d-block w-100" id="country" required>
-                  <option value="">Choose...</option>
-                  <option>United States</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please select a valid country.
-                </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="state">State</label>
-                <select class="custom-select d-block w-100" id="state" required>
-                  <option value="">Choose...</option>
-                  <option>California</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
-              </div>
-            </div>
             <hr class="mb-4">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
@@ -95,63 +70,13 @@
             </div>
             <hr class="mb-4">
 
-            <h4 class="mb-3">Payment</h4>
-
-            <div class="d-block my-3">
-              <div class="custom-control custom-radio">
-                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                <label class="custom-control-label" for="credit">Credit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                <label class="custom-control-label" for="debit">Debit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                <label class="custom-control-label" for="paypal">Paypal</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="cc-name">Name on card</label>
-                <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                <small class="text-muted">Full name as displayed on card</small>
-                <div class="invalid-feedback">
-                  Name on card is required
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="cc-number">Credit card number</label>
-                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                <div class="invalid-feedback">
-                  Credit card number is required
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3 mb-3">
-                <label for="cc-expiration">Expiration</label>
-                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                <div class="invalid-feedback">
-                  Expiration date required
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="cc-expiration">CVV</label>
-                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                <div class="invalid-feedback">
-                  Security code required
-                </div>
-              </div>
-            </div>
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+            <button class="btn btn-success btn-lg btn-block" type="submit">댕댕이들 만나러 가기</button>
           </form>
         </div>
       </div>
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Company Name</p>
+        <p class="mb-1">&copy; 2017-2018 DengDengE</p>
         <ul class="list-inline">
           <li class="list-inline-item"><a href="#">Privacy</a></li>
           <li class="list-inline-item"><a href="#">Terms</a></li>
@@ -160,13 +85,10 @@
       </footer>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
     <script src="https://getbootstrap.com/assets/js/vendor/holder.min.js"></script>
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -180,15 +102,70 @@
           // Loop over them and prevent submission
           var validation = Array.prototype.filter.call(forms, function(form) {
             form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
+              if (form.checkValidity() === false || !$('#email').hasClass('success') || !$('#password2').hasClass('success')) {
                 event.preventDefault();
                 event.stopPropagation();
+              }else{
+            	  	var datastring = $("#signUpForm").serialize();
+          		
+          		$.ajax({
+          			url : 'UserControl',
+          			data : datastring,
+          			type : 'POST',
+          			success : function (data) {
+          				var result = JSON.parse(data);
+          				if(data.statusCode == 200){
+          					alert('회원 가입에 성공했습니다.');
+							location.href = "MainControll?command=start";          					
+          				} else {
+          					// reload
+          					alert('회원 가입에 실패했습니다.');
+          					location.href = "UserControll?command=goSignUp";
+          				}
+					}
+          		});
               }
               form.classList.add('was-validated');
             }, false);
           });
         }, false);
       })();
+      
+      
+	
+	$(document).ready(function () {
+		$('#email').keyup(function () {
+			$.ajax({
+  				url : 'UserControl',
+  				data : { command:'checkEmail', email: $('#email').val() },
+  				type : 'POST',
+  				success : function (data) {
+  					if(data=='no'){
+  						$('#email').attr('style', 'border-color:#dc3545;');
+  						$('#email').removeClass('fail');
+  						$('.invalid-email').html('<span style="font-color:#dc3545;">이미 사용중인 이메일 입니다.</span>');
+  					}else{
+  						$('#email').attr('style', 'border-color:#28a745;');
+  						$('#email').addClass('success');
+  						$('.invalid-email').html('<span style="font-color:#28a745;">사용가능한 이메일 입니다.</span>');
+  					}
+  				}
+			})
+		});
+    	  
+		$('#password2').keyup(function () {
+			if(this.value != $('#password1').val()){
+				$(this).attr('style', 'border-color:#dc3545;');
+				$(this).removeClass('success');
+				$('.invalid-password').html('<span style="font-size:80%;color:#dc3545;">비밀번호가 일치하지 않습니다..</span>');
+					
+			}else{
+				$(this).attr('style', 'border-color:#28a745;');
+				$(this).addClass('success');
+				$('.invalid-password').html('<span style="font-size:80%;color:#28a745;">비밀번호가 일치합니다.</span>');
+			}	
+		});
+	});
     </script>
   </body>
 </html>

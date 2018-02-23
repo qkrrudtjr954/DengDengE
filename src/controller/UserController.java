@@ -30,6 +30,9 @@ public class UserController extends HttpServlet{
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf8");
+		
 		String command = req.getParameter("command");
 
 		if(command.equals("goSignIn")) {
@@ -39,6 +42,37 @@ public class UserController extends HttpServlet{
 		} else if(command.equals("goSignUp")) {
 
 			dispatcher("signup.jsp", req, resp);
+
+		} else if(command.equals("signup")) {
+			boolean result = false;
+			String json = "";
+			
+ 			String email = req.getParameter("email");
+			String password1 = req.getParameter("password1");
+			String password2 = req.getParameter("password2");
+			
+			if(email.contains("@") && password1.equals(password2)) {
+				User user = new User(email, password1);
+				UserService userService = UserService.getInstance();
+				
+				User returnUser = userService.addUser(user);
+				
+				if(returnUser.getSeq()!=0) {
+					HttpSession session = req.getSession();
+//					session.setMaxInactiveInterval(30*60);	// 30분 세션 제한 
+					session.setAttribute("current_user", returnUser);
+					
+					result = true;
+				}
+			}
+			
+			if(result) {
+				json = new Gson().toJson("{ statusCode : 400, result : \"fail\"}");
+			}else {
+				json = new Gson().toJson("{ statusCode : 200, result : \"success\"}");
+			}
+			
+			resp.getWriter().write(json);
 
 		} else if(command.equals("signout")) {
 
@@ -67,6 +101,21 @@ public class UserController extends HttpServlet{
 			String json = new Gson().toJson(user);
 			resp.getWriter().write(json);
 			
+		} else if(command.equals("checkEmail")) {
+		    
+			resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+		    resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+		    
+		    String email = req.getParameter("email");
+		    
+		    UserService userService = UserService.getInstance();
+			User result = userService.getUserByEmail(email);
+			
+			if(result != null) {
+				resp.getWriter().write("no");
+			}else {
+				resp.getWriter().write("yes");
+			}
 		}
 	}
 

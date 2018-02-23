@@ -16,7 +16,7 @@
 	
 	<servlet>
 		<servlet-name>mainControl</servlet-name>
-		<servlet-class>controller.MainCOntroller</servlet-class>
+		<servlet-class>controller.MainController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mainControl</servlet-name>
