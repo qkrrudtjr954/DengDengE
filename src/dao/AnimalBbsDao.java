@@ -82,7 +82,7 @@ public class AnimalBbsDao {
 	public boolean wirteAnimalBbs(AnimalBbsDto aniBbsDto) {
 		System.out.println("접속");
 		String sql = " INSERT INTO ANIMALBBS(SEQ, TITLE, NAME, AGE, "
-				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER,   DESCRIPTTION, PIC1, CONTENT,  "
+				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER, "
 				+ " DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
 				+ " REG_DATE, LAST_UPDATE, DEL)  "

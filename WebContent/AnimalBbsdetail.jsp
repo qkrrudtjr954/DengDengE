@@ -4,9 +4,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>AnimalBbsdetail.jsp</title>
 </head>
 <body>
+
+<h2 style="text-decoration: underline;">댕댕이의 아이들</h2>
+<br><br><br><br><br>
+<hr>
+
+<form action="AnimalBbscontroller" method="post">
+<input type="hidden" name="command" value="update">
+<table border="1" style="margin-left: auto; margin-right: auto;">
+
+
+
+</table>
+</form>
 
 </body>
 </html>

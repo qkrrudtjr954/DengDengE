@@ -23,12 +23,20 @@ for(int i=0;i<animlist.size(); i++){
 %>
  
  
- ${animlist.get(0) }<br>
- ${animlist.get(1) }
+
  
-<%
+<%-- <%
 String msg = (String)request.getAttribute("msg");
 %>
+<%
+if(msg != null){
+	%>
+		<script type="text/javascript">
+			alert("<%=msg %>");
+		</script>
+	<%
+}
+%> --%>
 
 <h1>입양하기</h1>
 <br><br><br><br><br>
@@ -79,10 +87,10 @@ if(animlist == null || animlist.size() == 0){
 		<tr>	
 			<td>
 				<a href="AnimalBbsController?command=detail&seq<%=aniBbsDto.getSeq() %>">
-					<img src="<%=aniBbsDto.getPic1() %>">
+					<img src="<%=aniBbsDto.getPic1() %>"><br>					
+					<%=aniBbsDto.getTitle() %>
 				</a>
 			</td>
-			<td><%=aniBbsDto.getTitle() %></td>
 		</tr>
 	<%
 }

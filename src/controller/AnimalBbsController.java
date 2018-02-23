@@ -40,7 +40,7 @@ public class AnimalBbsController extends HttpServlet {
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}
 		else if(command.equals("detail")) {
-			
+			dispatch("AnimalBbsdetail.jsp", req, resp);
 		}
 		else if(command.equals("write")) {
 			// id
