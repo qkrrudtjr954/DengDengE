@@ -15,8 +15,8 @@ List<CommuBbsDto> bbslist = (List<CommuBbsDto>)request.getAttribute("bbslist");
 
 <div align="center">
 <h1>커뮤니티</h1>
-<table>
-<col width="70"><col width="500"><col width="150"><col width="150">
+<table border="1">
+<col width="150"><col width="70"><col width="500"><col width="150">
 
 <tr>
 <th>카테고리</th><th>번호</th><th align="center">제목</th><th>작성자</th><th>작성일</th>
@@ -35,7 +35,7 @@ for(int i = 0;i < bbslist.size(); i++){
 	CommuBbsDto bbs = bbslist.get(i);
 	%>
 	<tr>
-	<td><%=bbs.getTarget_category() %></td>
+	<td><%=bbs.getCategory_name() %></td>
 	<td><%=i+1 %></td>
 	<td>
 		<%if(bbs.getDel()==1){ %>
@@ -58,7 +58,7 @@ for(int i = 0;i < bbslist.size(); i++){
 	}
 	%>
 <tr>
-	<td colspan="3">
+	<td colspan="5" align="right">
 	<button id="write"><a href="CommuBbsController?command=write">write</button></td>
 </tr>
 <tr>

@@ -27,9 +27,9 @@ public class CommuBbsController extends HttpServlet {
 	}
 	
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		CommuBbsService comService = CommuBbsService.getInstance();
 		
-		//iCommuBbsDao dao = CommuBbsDao.getInstance();
+		CommuBbsService comService = CommuBbsService.getInstance();
+	
 		
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text./html; charset=utf-8"); 

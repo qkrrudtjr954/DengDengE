@@ -35,14 +35,14 @@ public class CommuBbsDto implements Serializable {
 	private String reg_date;		//등록 날짜 
 	private String last_update;		//수정 날짜 
 	private int del;				//0 게시물 있음 1 게시물 없음
+	private String category_name;
 
 	public CommuBbsDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public CommuBbsDto(int seq, String title, String pic1, String content, int target_user_seq, int target_category,
-			int readcount, String reg_date, String last_update, int del) {
+			int readcount, String reg_date, String last_update, int del, String category_name) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -54,11 +54,8 @@ public class CommuBbsDto implements Serializable {
 		this.reg_date = reg_date;
 		this.last_update = last_update;
 		this.del = del;
+		this.category_name = category_name;
 	}
-
-
-
-
 
 	public int getSeq() {
 		return seq;
@@ -100,6 +97,22 @@ public class CommuBbsDto implements Serializable {
 		this.target_user_seq = target_user_seq;
 	}
 
+	public int getTarget_category() {
+		return target_category;
+	}
+
+	public void setTarget_category(int target_category) {
+		this.target_category = target_category;
+	}
+
+	public int getReadcount() {
+		return readcount;
+	}
+
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
+
 	public String getReg_date() {
 		return reg_date;
 	}
@@ -123,37 +136,23 @@ public class CommuBbsDto implements Serializable {
 	public void setDel(int del) {
 		this.del = del;
 	}
-	
-	
 
-	public int getReadcount() {
-		return readcount;
+	public String getCategory_name() {
+		return category_name;
 	}
 
-
-	public void setReadcount(int readcount) {
-		this.readcount = readcount;
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
 	}
-
-	
-	public int getTarget_category() {
-		return target_category;
-	}
-
-
-	public void setTarget_category(int target_category) {
-		this.target_category = target_category;
-	}
-
 
 	@Override
 	public String toString() {
 		return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
 				+ ", target_user_seq=" + target_user_seq + ", target_category=" + target_category + ", readcount="
-				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del + "]";
+				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
+				+ ", category_name=" + category_name + "]";
 	}
 
 
-	
 	
 }
