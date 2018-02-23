@@ -21,7 +21,7 @@
 <body>
 <h1>글쓰기</h1>
 <div align="center">
-<form action="CommuBbsContoller" method="post">
+<form action="CommuBbsController" method="post">
 <input type="hidden" name="command" value="writeAf">
 <table>
 <col width="150"><col width="750">
@@ -41,13 +41,14 @@
 </td>
 </tr>
 <tr>
-<td colspan="2" align="right"><input type="submit" value="글 올리기"></td>
+<td colspan="2" align="right">
+	<input type="submit" value="글쓰기">
+</td>
 </tr>
 
 </table>
 </form>
 </div>
-
 
 
 <script type="text/javascript">

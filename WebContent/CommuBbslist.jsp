@@ -62,5 +62,19 @@ for(int i = 0;i < bbslist.size(); i++){
 	<button id="write"><a href="CommuBbsController?command=write">write</button></td>
 </tr>
 <tr>
+
+
+<%-- 로그인 메시지 완료 되었을때 뜨는 메시지 --%>
+<%
+String msg = (String)request.getAttribute("msg");
+
+if(msg!=null){
+   %>
+   <script type="text/javascript">
+      alert("<%=msg%>");
+   </script>
+   <%
+}
+%>
 </body>
 </html>

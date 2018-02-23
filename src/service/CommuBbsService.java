@@ -27,4 +27,9 @@ public class CommuBbsService {
 		public List<CommuBbsDto> getCommulist(){
 			return manager.getCommulist();
 		}
+		
+		public boolean writeCommu(CommuBbsDto comdto) {
+			// TODO Auto-generated method stub
+			return manager.writeCommu(comdto);
+		}
 }

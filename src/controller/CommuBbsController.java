@@ -47,6 +47,29 @@ public class CommuBbsController extends HttpServlet {
 			
 		}else if(command.equals("write")) {
 			dispatch("CommuBbsWrite.jsp", req, resp);
+		}else if(command.equals("writeAf")){			
+			//String id = req.getParameter("id");
+			System.out.println("writeAf 들어옴");
+			String Scategory = req.getParameter("category");
+			int category = Integer.parseInt(Scategory);
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			
+			System.out.println("category : " + Scategory);
+			System.out.println("title : " + title);
+			System.out.println("content : " + content);
+			
+			 boolean isS = comService.writeCommu(new CommuBbsDto(title, content, 1, category));
+			 //유저 시퀀스 1 로 일단 설정해둠 
+				System.out.println(isS);
+				if(isS) {
+					req.setAttribute("msg", "글 입력 성공!");
+					dispatch("CommuBbsController?command=list", req, resp);
+				}else {
+					req.setAttribute("msg", "글을 다시 입력 하십시오");
+					dispatch("CommuBbsWrite.jsp", req, resp);
+				}
+			 
 		}
 	}
 	//보내주는 함수

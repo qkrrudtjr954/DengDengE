@@ -106,9 +106,9 @@ public class CommuBbsDao implements iCommuBbsDao{
 	public boolean writeCommu(CommuBbsDto comdto) {
 		String sql = "INSERT INTO COMMUBBS(SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
 				+ " TARGET_CATEGORY, READCOUNT, REG_DATE, LAST_UPDATE, DEL ) "
-				+ " VALUES(COMMUBBS_SEQ.NEXTVAL, ?, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, 0) ";
+				+ " VALUES(COMMUBBS_SEQ.NEXTVAL, ?, '', ?, ?, ?, 0, SYSDATE, SYSDATE, 0) ";
 
-		System.out.println(sql);
+
 
 		int count = 0;
 
@@ -124,11 +124,11 @@ public class CommuBbsDao implements iCommuBbsDao{
 			System.out.println("3/6 writeCommu Success");
 
 			psmt.setString(1, comdto.getTitle());
-			psmt.setString(2, comdto.getPic1());
-			psmt.setString(3, comdto.getContent());
-			psmt.setInt(4, comdto.getTarget_user_seq());
-			psmt.setInt(5, comdto.getTarget_category());
-
+			psmt.setString(2, comdto.getContent());
+			psmt.setInt(3, comdto.getTarget_user_seq());
+			psmt.setInt(4, comdto.getTarget_category());
+			
+			System.out.println(sql);
 			count = psmt.executeUpdate();
 			System.out.println("4/6 writeCommu Success");
 

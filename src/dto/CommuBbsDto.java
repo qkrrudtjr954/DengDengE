@@ -56,6 +56,17 @@ public class CommuBbsDto implements Serializable {
 		this.del = del;
 		this.category_name = category_name;
 	}
+	
+	
+
+	public CommuBbsDto(String title, String content, int target_user_seq, int target_category) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.target_user_seq = target_user_seq;
+		this.target_category = target_category;
+	
+	}
 
 	public int getSeq() {
 		return seq;
