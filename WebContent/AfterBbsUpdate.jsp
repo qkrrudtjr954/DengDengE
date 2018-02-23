@@ -35,7 +35,7 @@ ${bbs }
    <td colspan="1"><input type="text" name="title" value="<%=bbs.getTitle() %>"></td>
 </tr>
 <tr>
-   <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs.getRdate() %>&nbsp;&nbsp;&nbsp; 조회수 : </td>
+   <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs.getRdate() %>&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
 <%-- <td colspan="2" col height="550"><%=bbs1.getContent() %></td> --%>

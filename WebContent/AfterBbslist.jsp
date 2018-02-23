@@ -93,14 +93,14 @@ if(request.getParameter("nowPage") == null){
 <col width="70"><col width="500"><col width="150"><col width="100">
 
 <tr>
-<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
+<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 </tr>
 
 <%
 if(afterBbslist == null || afterBbslist.size() == 0){
 	%>
 	<tr>
-		<td colspan="4">작성된 글이 없습니다</td>
+		<td colspan="5">작성된 글이 없습니다</td>
 	</tr>	
 	<%
 }
@@ -122,6 +122,7 @@ for(int i = 0;i < afterBbslist.size(); i++){
 	</td>
 	 <td><%=bbs.getUserSeq() %> </td>
 	<td><%=bbs.getRdate() %></td> 
+	<td><%=bbs.getReadcond() %></td>
 	</tr>	
 	<%
 }

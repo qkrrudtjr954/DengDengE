@@ -50,6 +50,11 @@ public class AfterBbsService {
 		return afterBbsDao.AfterdeletBbs(seq);
 	}
 	
+	public void readCount(int seq) {
+        afterBbsDao.readCount(seq);
+    }
+	
+	
 	
 	
 	

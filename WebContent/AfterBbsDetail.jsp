@@ -1,3 +1,4 @@
+<%@page import="service.AfterBbsService"%>
 <%@page import="dto.AfterBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,6 +14,7 @@
 
 AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
 String msg = (String)request.getAttribute("msg");
+
 
 if(msg !=null){
 
@@ -45,7 +47,7 @@ alert("<%=msg%>");
   <td><%=bbs1.getSeq() %></td>
 </tr>
 <tr>
-   <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs1.getRdate() %>&nbsp;&nbsp;&nbsp; 조회수 : </td>
+   <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs1.getRdate() %>&nbsp;&nbsp;&nbsp; 조회수 :<%=bbs1.getReadcond() %> </td>
 </tr>
 <tr>
  <td colspan="2" col height="550"><%=bbs1.getContent() %></td> 
@@ -60,13 +62,20 @@ name="content" readonly="readonly"><%=bbs1.getContent() %>
 
 </tr>
 <tr>
-   <td colspan="2" align="right"><button><a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>"></a>삭제하기</button>
-   <input type="submit" value="수정하기"></td>
+ <%--  <td colspan="2" align="right"><button><a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>"></a>삭제하기</button> --%>
+   <!-- <td><input type="submit" value="수정하기"></td> -->
+   <td><a href="AfterBbsController?command=AfterBbsUpdate&seq=<%=bbs1.getSeq() %>">수정하기</a></td>
+   <td><a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>">삭제하기</a></td>
   
 </tr>
 </table>
 
+<a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>"></a>
+
 </form>
+
+
+
 
 
 

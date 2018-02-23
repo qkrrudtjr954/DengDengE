@@ -36,6 +36,7 @@ public class AfterBbsController extends HttpServlet {
 			
 			List<AfterBbsDto> afterBbslist = bbs.getAfterlBbsList();
 			req.setAttribute("afterBbslist", afterBbslist);
+			//bbs.readCount(seq);
 			
 			dispatch("AfterBbslist.jsp", req, resp);
 		//글쓰기	
@@ -72,6 +73,8 @@ public class AfterBbsController extends HttpServlet {
 			String sseq = req.getParameter("seq"); 
 			System.out.println("detail-sseq: "+sseq);
 			int seq = Integer.parseInt(sseq);
+			bbs.readCount(seq);
+			System.out.println("seq + " + seq);
 			AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
 			
 			req.setAttribute("bbs1", bbs1);

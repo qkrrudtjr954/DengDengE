@@ -36,7 +36,7 @@ public class AfterBbsDao {
 	//After 게시판 화면 출력
 	public List<AfterBbsDto> getAfterlBbsList(){
 		String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL "
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
 				+ " FROM AFTERBBS "
 				+ " WHERE DEL=0 ";
 		
@@ -68,6 +68,7 @@ public class AfterBbsDao {
 												rs.getInt(i++),//int userSeq, 
 												rs.getString(i++),//String rdate, 
 												rs.getString(i++),//String ldate,
+												rs.getInt(i++),
 												rs.getInt(i++));
 				
 						
@@ -97,9 +98,9 @@ public class AfterBbsDao {
 	public boolean wirtelAfterBbs(AfterBbsDto dto) {
 		String sql = "INSERT INTO AFTERBBS(SEQ, TITLE, "
 				+ " PIC1, CONTENT, TARGET_USER_SEQ, REG_DATE, "
-				+ " LAST_UPDATE, DEL) "
+				+ " LAST_UPDATE, DEL ,READCOUNT) "
 				+ " VALUES(AFTERBBS_SEQ .NEXTVAL, ?, "
-				+ " ?, ?, ?, SYSDATE, SYSDATE , 0) ";
+				+ " ?, ?, ?, SYSDATE, SYSDATE , 0,0) ";
 				
 				
 		int count = 0;
@@ -148,7 +149,7 @@ public class AfterBbsDao {
 	//After list detail 
 	public AfterBbsDto detailAfterlBbs(int seq) {
 		String sql = " SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL "
+				+ " REG_DATE, LAST_UPDATE, DEL,READCOUNT "
 				+ " FROM AFTERBBS "
 				+ " WHERE SEQ=? ";
 		
@@ -179,6 +180,7 @@ public class AfterBbsDao {
 						rs.getInt(i++),//int userSeq, 
 						rs.getString(i++),//String rdate, 
 						rs.getString(i++),//String ldate,
+						rs.getInt(i++),
 						rs.getInt(i++));
 			}
 			System.out.println("5/6 S detailAfterlBbs");
@@ -236,7 +238,7 @@ public class AfterBbsDao {
 	// 수정할때 가져오기
 	public AfterBbsDto getBbs(int seq) {
 		String sql = " SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL "
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
 				+ " FROM AFTERBBS "
 				+ " WHERE SEQ=? ";
 		
@@ -267,6 +269,7 @@ public class AfterBbsDao {
 						rs.getInt(i++),//int userSeq, 
 						rs.getString(i++),//String rdate, 
 						rs.getString(i++),//String ldate,
+						rs.getInt(i++),
 						rs.getInt(i++));
 			}
 			System.out.println("5/6 S getBbs");
@@ -322,13 +325,37 @@ public class AfterBbsDao {
 	}
 	
 	
+	public void readCount(int seq) {
+	      System.out.println("readcount");
+	   String sql = " UPDATE  AFTERBBS  SET  "  
+	            + " READCOUNT=READCOUNT+1 " 
+	            + " WHERE SEQ=? ";
+	   System.out.println("readcount sql : " + sql);
+
+	   Connection conn = null;
+	   PreparedStatement psmt = null;
+	   ResultSet rs = null;
+
+	   try {
+	      conn = DBConnection.makeConnection();
+	      psmt = conn.prepareStatement(sql);
+	      System.out.println("1/6 readCount");
+	      psmt.setInt(1, seq);
+	      System.out.println("2/6 readCount");
+	      psmt.executeUpdate();
+	      System.out.println("3/6 readCount");
+	   } catch (SQLException e) {
+	      e.printStackTrace();
+	      System.out.println("fail readCount");
+	   } finally {
+	      DBClose.close(psmt, conn, rs);
+	   }
 	
 	
+	
+	}
 	
 
-
-	
-	
 	
 	
 	
