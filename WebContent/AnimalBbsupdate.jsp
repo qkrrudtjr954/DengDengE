@@ -58,7 +58,7 @@ if(aniBbsDto != null){
 
 <h1>입양하기 글수정</h1>
 <br><br><br><br>
-<a href="AnimalController?command=animlist">list</a>
+<a href="AnimalBbsController?command=animlist">list</a>
 <hr>
 
 <form action="AnimalBbsController">

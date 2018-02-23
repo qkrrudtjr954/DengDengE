@@ -45,6 +45,9 @@ public class AnimalBbsService {
 			return aniBbsManager.updateAnimalBbs(seq, aniBbsDto);
 		}
 		
+		public void readCount(int seq) {
+			aniBbsManager.readCount(seq);
+	      }
 		/*
 		// 페이징 처리
 		public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {

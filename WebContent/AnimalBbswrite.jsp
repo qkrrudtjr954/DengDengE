@@ -10,7 +10,7 @@
 <body>
 <h1>입양하기 글작성</h1>
 <br><br><br><br>
-<a href="AnimalController?command=animlist">list</a>
+<a href="AnimalBbsController?command=animlist">list</a>
 <hr>
 
 <form action="AnimalBbsController">
@@ -98,21 +98,6 @@
 		<input type="submit" value="next">
 	</td>
 </tr>
-
-<tr>
-	<td>아이디</td>
-	<td>
-		<input type="text">
-	</td>
-</tr>
-
-<tr>
-	<td>연락처</td>
-	<td>
-		<input type="text" name="con">&nbsp;<input type="submit" value="인증">
-	</td>
-</tr>
-
 </table>
 </form>
 

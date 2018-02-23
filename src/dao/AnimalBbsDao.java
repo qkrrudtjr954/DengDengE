@@ -26,7 +26,7 @@ public class AnimalBbsDao {
 				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
 				+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-				+ " REG_DATE, LAST_UPDATE, DEL "
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
 				+ " FROM ANIMALBBS "
 				+ " WHERE DEL=0 ";
 		System.out.println("s"+sql);
@@ -66,6 +66,7 @@ public class AnimalBbsDao {
 				aniBbsDto.setRdate(rs.getString("REG_DATE"));
 				aniBbsDto.setLUpdate(rs.getString("LAST_UPDATE"));
 				aniBbsDto.setDel(rs.getInt("DEL"));
+				aniBbsDto.setReadcount(rs.getInt("READCOUNT"));
 				
 				list.add(aniBbsDto);
 			}
@@ -86,11 +87,11 @@ public class AnimalBbsDao {
 				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER, "
 				+ " DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-				+ " REG_DATE, LAST_UPDATE, DEL)  "
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT)  "
 				+ " VALUES(ANIMALBBS_SEQ.NEXTVAL, ?, ?, ?, "
 				+ " ?, ?, ?, ?, ?, ?, "
 				+ " ?, ?, ?, "
-				+ " ?, ?, ?, SYSDATE, SYSDATE, 0) ";
+				+ " ?, ?, ?, SYSDATE, SYSDATE, 0, 0) ";
 		int count = 0;
 		
 		Connection conn = null;
@@ -145,7 +146,7 @@ public class AnimalBbsDao {
 				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
 				+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-				+ " REG_DATE, LAST_UPDATE, DEL "
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
 				+ " FROM ANIMALBBS "
 				+ " WHERE SEQ=? ";
 		Connection conn = null;
@@ -186,6 +187,7 @@ public class AnimalBbsDao {
 										rs.getString(i++),
 										rs.getString(i++),
 										rs.getString(i++),
+										rs.getInt(i++),
 										rs.getInt(i++));
 						
 				}
@@ -268,6 +270,34 @@ public class AnimalBbsDao {
 					
 		return count>0?true:false;
 	}
+	
+		//조회수 올리기
+	   public void readCount(int seq) {
+	      System.out.println("readcount");
+	   String sql = " UPDATE  ANIMALBBS  SET  "  
+	            + " READCOUNT=READCOUNT+1 " 
+	            + " WHERE SEQ=? ";
+	   System.out.println("readcount sql : " + sql);
+
+	   Connection conn = null;
+	   PreparedStatement psmt = null;
+	   ResultSet rs = null;
+
+	   try {
+	      conn = DBConnection.makeConnection();
+	      psmt = conn.prepareStatement(sql);
+	      System.out.println("1/6 readCount");
+	      psmt.setInt(1, seq);
+	      System.out.println("2/6 readCount");
+	      psmt.executeUpdate();
+	      System.out.println("3/6 readCount");
+	   } catch (SQLException e) {
+	      e.printStackTrace();
+	      System.out.println("fail readCount");
+	   } finally {
+	      DBClose.close(psmt, conn, rs);
+	   }
+	  }
 	
 	/*
 	// 페이징 처리

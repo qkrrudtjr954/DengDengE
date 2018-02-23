@@ -46,6 +46,7 @@ public class AnimalBbsController extends HttpServlet {
 			int seq = Integer.parseInt(sseq);
 			System.out.println("s"+seq);
 			
+			aniBbService.readCount(seq);			
 			AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
 			req.setAttribute("aniBbsDto", aniBbsDto);
 			dispatch("AnimalBbsdetail.jsp", req, resp);
