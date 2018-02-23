@@ -139,8 +139,56 @@ public class AfterBbsDao {
 		
 	}
 	
+	/*String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
+			+ " REG_DATE, LAST_UPDATE, DEL "
+			+ " FROM AFTERBBS ";*/
+	
+	
 	//After list detail 
-	public AfterBbsDto detailAfterlBbs(AfterBbsDto dto) {
+	public AfterBbsDto detailAfterlBbs(int seq) {
+		String sql = " SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
+				+ " REG_DATE, LAST_UPDATE, DEL "
+				+ " FROM AFTERBBS "
+				+ " WHERE SEQ=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		AfterBbsDto dto = null;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 S detailAfterlBbs");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("3/6 S detailAfterlBbs");
+			
+			rs = psmt.executeQuery();
+			System.out.println("4/6 S detailAfterlBbs");
+			
+			while(rs.next()){
+				int i = 1;
+				dto = new AfterBbsDto(
+						rs.getInt(i++),//int seq, 
+						rs.getString(i++),//String title, 
+						rs.getString(i++),//String pic1, 
+						rs.getString(i++),//String content, 
+						rs.getInt(i++),//int userSeq, 
+						rs.getString(i++),//String rdate, 
+						rs.getString(i++),//String ldate,
+						rs.getInt(i++));
+			}
+			System.out.println("5/6 S detailAfterlBbs");
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			DBClose.close(psmt, conn, rs);			
+			System.out.println("6/6 S detailAfterlBbs");
+		}
+		
 		return dto;
 		
 	}

@@ -63,8 +63,17 @@ public class AfterBbsController extends HttpServlet {
 			}else {
 				System.out.println(isS);
 				req.setAttribute("mag1", "글작성 실패");
-				dispatch("bbswrite.jsp", req, resp);
+				dispatch("AfterBbswrite.jsp", req, resp);
 			}
+			
+		}else if(command.equals("AfterBbsDetail")) {
+			String sseq = req.getParameter("seq"); 
+			System.out.println("delete-sseq: "+sseq);
+			int seq = Integer.parseInt(sseq);
+			AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
+			req.setAttribute("seq", seq);
+			req.setAttribute("bbs1", bbs1);
+			dispatch("AfterBbsDetail.jsp", req, resp);
 			
 		}
 		

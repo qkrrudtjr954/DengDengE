@@ -28,10 +28,14 @@ public class AfterBbsService {
 	
 	//bbs글쓰기
 	public boolean wirtelAfterBbs(AfterBbsDto dto) {
-		return afterBbsDao.wirtelAfterBbs(dto);
-		
-		
+		return afterBbsDao.wirtelAfterBbs(dto);		
 	}
+	
+	public AfterBbsDto detailAfterlBbs(int seq) {
+		return afterBbsService.detailAfterlBbs(seq);
+	}
+	
+	
 	
 	
 	
