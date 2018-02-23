@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>디테일</h1>
+
+<h1>수정하기</h1>
 <form action="CommuBbsController" method="post">
-	<input type="hidden" name="command" value="update">
+	<input type="hidden" name="command" value="updateAf">
 <table border="1">
 <tr>
 	<td>카테고리</td>
@@ -22,7 +23,7 @@
 <td colspan="2"><textarea rows="20" cols="100">ㄴㅇㅇㅇ</textarea></td>
 </tr>
 <tr>
-	<td colspan="2" align="right"><button>삭제하기</button><input type="submit" value="수정하기"><td>
+	<td colspan="2" align="right"><button>뒤로가기</button><input type="submit" value="수정하기"><td>
 </tr>
 </table>
 

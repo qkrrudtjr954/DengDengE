@@ -97,7 +97,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 	public CommuBbsDto getCommu(int seq) {
 		String sql = " SELECT a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
 				+ " FROM COMMUBBS A, CATEGORY B "
-				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY ";
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND A.SEQ=?";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

@@ -72,7 +72,7 @@ public class CommuBbsController extends HttpServlet {
 			 
 		}else if(command.equals("read")) {
 			String Sseq = req.getParameter("seq");
-			System.out.println(Sseq);
+			System.out.println("SEQ : " + Sseq);
 		}
 	}
 	//보내주는 함수
