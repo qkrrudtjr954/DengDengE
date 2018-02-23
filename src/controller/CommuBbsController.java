@@ -45,6 +45,8 @@ public class CommuBbsController extends HttpServlet {
 			//보내주기
 			dispatch("CommuBbslist.jsp", req, resp);
 			
+		}else if(command.equals("write")) {
+			dispatch("CommuBbsWrite.jsp", req, resp);
 		}
 	}
 	//보내주는 함수
