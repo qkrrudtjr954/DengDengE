@@ -40,6 +40,17 @@ public class AnimalBbsController extends HttpServlet {
 		else if(command.equals("detail")) {
 			
 		}
+		else if(command.equals("write")) {
+			// id
+			dispatch("AnimalBbswrite.jsp", req, resp);
+		}
+		else if(command.equals("writeAf")) {
+			// 입력값
+			
+			// msg
+			req.setAttribute("msg", "글 작성 완료");
+			dispatch("AnimalBbslist.jsp", req, resp);
+		}
 	}
 	
 	public boolean isNull(String str) {

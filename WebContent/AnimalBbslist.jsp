@@ -2,11 +2,16 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>AnimalBbslist.jsp</title>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 <body>
 <%
@@ -16,10 +21,12 @@ for(int i=0;i<animlist.size();i++){
 }
 %>
 <h1>입양하기</h1>
+<br><br><br><br><br>
+<hr>
 
 <form action="AnimalBbsController">
-<input type="hidden" name="command" value="write">
-<table border="1" style="margin-left: auto; margin-right: auto;">
+<table style="margin-left: auto; margin-right: auto;">
+<col width="150"><col width="150"><col width="150"><col width="150"><col width="150">
 <tr>
 	<td>
 		<input type="submit" name="area" value="수도권" style="background-color: ">
@@ -40,20 +47,20 @@ for(int i=0;i<animlist.size();i++){
 
 <tr>
 	<td>
-		<input type="text" name="kinds" value="댕댕이">
+		<input type="submit" name="kinds" value="댕댕이">
 	</td>
 	<td>
-		<input type="text" name="kinds" value="냥냥이">
+		<input type="submit" name="kinds" value="냥냥이">
 	</td>
-	<td>
-		<input type="text" name="kinds" value="etc">
+	<td colspan="3">
+		<input type="submit" name="kinds" value="etc">
 	</td>
 </tr>
 <%
 if(animlist == null || animlist.size() == 0){
 	%>
 		<tr>
-			<td colspan="5">작성된 글이 없습니다</td>
+			<td colspan="5" align="center">작성된 글이 없습니다</td>
 		</tr>
 	<%
 }for(int i=0;i<animlist.size();i++){
@@ -71,7 +78,8 @@ if(animlist == null || animlist.size() == 0){
 }
 %>
 <tr>
-	<td colspan="5">
+	<td colspan="5" align="right">
+		<input type="hidden" name="command" value="write">
 		<input type="submit" value="글쓰기">
 	</td>
 </tr>
