@@ -13,7 +13,7 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-
+	
 	<servlet>
 		<servlet-name>mainControl</servlet-name>
 		<servlet-class>controller.MainCOntroller</servlet-class>
