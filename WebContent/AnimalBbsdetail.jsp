@@ -21,12 +21,38 @@ if(aniBbsDto != null){
 		int  medi = aniBbsDto.getMedicine();
 		int neu = aniBbsDto.getNeutralization();
 		int gen = aniBbsDto.getGender();
+		System.out.println("m"+medi);
+		System.out.println("n"+neu);
+		System.out.println("g"+gen);
 		
 		if(medi == 1){
 			m = "YES";
-		}else{
+			
+		}else {
 			m = "NO";
+			
 		}
+		
+		if(neu == 1){
+			
+			n = "YES";
+			
+		}else {
+			
+			n = "NO";
+			
+		}
+		
+		if(gen == 1){
+			
+			g = "YES";
+		}else {
+			
+			g = "NO";
+		}
+		System.out.println("m"+m);
+		System.out.println("n"+n);
+		System.out.println("g"+g);
 	}
 %>
 
@@ -59,14 +85,14 @@ if(aniBbsDto != null){
 	</td>
 	<td>중성화유무</td>
 	<td>
-		<%=aniBbsDto.getNeutralization() %>
+		<%=n %>
 	</td>
 </tr>
 
 <tr>
 	<td>성별</td>
 	<td>
-		<%=aniBbsDto.getGender() %>
+		<%=g %>
 	</td>
 	<td>특이사항</td>
 	<td>
@@ -74,6 +100,14 @@ if(aniBbsDto != null){
 	</td>
 </tr>
 
+</table>
+<br>
+<table style="margin-left: auto; margin-right: auto;">
+<tr>
+	<td>
+		<textarea rows="50" cols="70" readonly="readonly"><%=aniBbsDto.getContent() %></textarea>
+	</td>
+</tr>
 </table>
 </form>
 

@@ -19,7 +19,7 @@ public class AnimalBbsDto implements Serializable {
 	private String content;		// 내용
 	private int userSeq;			// 작성자 
 	private String contact;		// 연락처
-	private String description;	// 내용
+	private String description;	// 기타사항
  	private String Rdate;			// 등록날짜
 	private String LUpdate;		// 마지막 수정날짜
 	private int del;
