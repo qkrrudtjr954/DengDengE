@@ -52,6 +52,10 @@ public class CommuBbsService {
 		public boolean udtCommu(CommuBbsDto comdto) {
 			return manager.udtCommu(comdto);
 		}
+		
+		public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord){
+			return manager.getFindCommulist(Searchtype, SearchWord);
+		}
 }
 
 

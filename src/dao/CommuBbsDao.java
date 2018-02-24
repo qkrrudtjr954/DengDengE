@@ -340,5 +340,62 @@ public class CommuBbsDao implements iCommuBbsDao{
 		return list;
 	}
 	
+
+	//검색하기
+	public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord){
+		List<CommuBbsDto> list = new ArrayList<>();
+
+		
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
+				+ " FROM COMMUBBS A, CATEGORY B "
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND DEL=0 AND " + Searchtype + " LIKE '%" + SearchWord + "%'"
+				+ " ORDER BY REG_DATE DESC ";
 	
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 getFindCommulist Success");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("sql = " + sql);
+			System.out.println("3/6 getFindCommulist Success");
+			
+		
+			rs = psmt.executeQuery();
+			System.out.println("4/6 getFindCommulist Success");
+
+			while (rs.next()) {
+				int i = 1;
+
+				CommuBbsDto dto = new CommuBbsDto(rs.getInt(i++), // seq
+												rs.getString(i++),// title
+												"",// String pic1 
+												"",//String content
+												rs.getInt(i++),//int target_user_seq
+												0,//int target_category
+												0,//int readcount
+												rs.getString(i++),//String reg_date
+												"",//String last_update 
+												rs.getInt(i++),//int del
+												rs.getString(i++)); //category_name
+				list.add(dto);
+			}
+			System.out.println("5/6 getFindCommulist Success");
+
+		} catch (SQLException e) {
+			System.out.println("getFindCommulist fail");
+			System.out.println(e.getMessage());
+			System.out.println(e.getErrorCode());
+			System.out.println(e.getSQLState());
+
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		
+		}
+
+		return list;
+	}
 }

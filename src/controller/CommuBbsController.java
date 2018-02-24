@@ -139,6 +139,21 @@ public class CommuBbsController extends HttpServlet {
 		            dispatch("CommuBbsController?command=read", req, resp);
 		            
 		         }   
+		}else if(command.equals("search")) {
+			
+			  String Searchtype = req.getParameter("Searchtype");             //검색종류(글쓴이,제목,내용)
+			  String SearchWord = req.getParameter("SearchWord");   
+			  
+			  
+			  System.out.println(" search " + Searchtype +" word "+SearchWord);
+			 
+			  List<CommuBbsDto> bbslist = comService.getFindCommulist(Searchtype, SearchWord);
+				//짐 싸기
+				req.setAttribute("bbslist", bbslist);
+				
+				//보내주기
+				dispatch("CommuBbslist.jsp", req, resp);
+			  
 		}
 	}
 	//보내주는 함수
