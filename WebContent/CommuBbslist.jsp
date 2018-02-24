@@ -5,8 +5,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+
+<script>
+   
+   
+$(document).ready(function () {
+	 $("#btnAll").click(function () {
+	        location.href="CommuBbsController?command=list";
+
+	    });
+	
+    $("#btnCatg1").click(function () {
+        $("form[name=form1]")
+        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val(), method:"post"}).submit();
+
+    });
+    
+
+    $("#btnCatg2").click(function () {
+    	 $("form[name=form1]")
+         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val(), method:"post"}).submit();
+    });
+    
+
+    $("#btnCatg3").click(function () {
+    	 $("form[name=form1]")
+         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val(), method:"post"}).submit();
+    });
+
+});
+   
+ 
+</script>
+
 
 </head>
 <body>
@@ -14,16 +49,18 @@
 List<CommuBbsDto> bbslist = (List<CommuBbsDto>)request.getAttribute("bbslist");
 %>
 <h1>커뮤니티</h1>
+<form name="form1" action="CommuBbsController" >
+<input type="hidden" id="cateNum">
 <div  align="left">
 &nbsp;&nbsp;
-<button><a href="CommuBbsController?command=list">전체보기</a></button>&nbsp;&nbsp;
-<button><a href="CommuBbsController?command=classify&target_category=1">애견Tip</a></button>&nbsp;&nbsp;
-<button><a href="CommuBbsController?command=classify&target_category=2">중고장터</a></button>&nbsp;&nbsp;
-<button><a href="CommuBbsController?command=classify&target_category=3">자유게시판</a></button>
+<button type="button" id="btnAll">전체보기</button>&nbsp;&nbsp;
+<button type="button" id="btnCatg1" value="1">애견Tip</button>&nbsp;&nbsp;
+<button type="button" id="btnCatg2" value="2">중고장터</button>&nbsp;&nbsp;
+<button type="button" id="btnCatg3" value="3">자유게시판</button>
 </div>
+</form>
 <br><br><hr>
 <div align="center">
-
 
 <table border="1">
 <col width="150"><col width="70"><col width="500"><col width="150">

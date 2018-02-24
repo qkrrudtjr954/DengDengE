@@ -48,6 +48,10 @@ public class CommuBbsService {
 		public void readCount(int seq) {
 			 manager.readCount(seq);
 		}
+		
+		public boolean udtCommu(CommuBbsDto comdto) {
+			return manager.udtCommu(comdto);
+		}
 }
 
 

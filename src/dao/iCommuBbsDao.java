@@ -22,7 +22,7 @@ public interface iCommuBbsDao {
 	public boolean delCommu(int seq);
 	
 	//수정 
-	public boolean udtCommu(int seq, CommuBbsDto comdto);
+	public boolean udtCommu(CommuBbsDto comdto);
 	
 	//카테고리 별로 구분
 	public List<CommuBbsDto> getCategory(int target_category);

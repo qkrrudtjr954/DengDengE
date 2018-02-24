@@ -34,9 +34,7 @@ public class CommuBbsController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text./html; charset=utf-8"); 
 		
-		String command = req.getParameter("command");
-		
-	
+		String command = req.getParameter("command");	
 		
 		
 		
@@ -78,10 +76,7 @@ public class CommuBbsController extends HttpServlet {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
 			
-	
-			/*comService.readCount(seq);*/
 			comService.readCount(seq);
-			System.out.println("지나감");
 			CommuBbsDto comdto = comService.getCommu(seq);
 			
 			req.setAttribute("comdto", comdto);
@@ -110,6 +105,40 @@ public class CommuBbsController extends HttpServlet {
 			//보내주기
 			dispatch("CommuBbslist.jsp", req, resp);
 			
+		}else if(command.equals("update")) {
+			String Sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(Sseq);
+			                                                                                                                                                                                    
+			CommuBbsDto comdto = comService.getCommu(seq); 		
+			
+			
+			req.setAttribute("comdto", comdto);
+			dispatch("CommuBbsUdt.jsp", req, resp);
+		}else if(command.equals("updateAf")) {
+			  String seq = req.getParameter("seq");
+		      String title = req.getParameter("title");
+		      String content = req.getParameter("content");
+		        
+		      CommuBbsDto comdto = new CommuBbsDto();
+		      comdto.setSeq(Integer.parseInt(seq));
+		      comdto.setTitle(title);
+		      comdto.setContent(content);
+		       
+		     
+		         boolean isS = comService.udtCommu(comdto);
+		         req.setAttribute("isS", isS);
+		         		         
+		         if(isS) {
+		           
+		            req.setAttribute("msg", "수정성공");
+		            dispatch("CommuBbsController?command=list", req, resp);
+		            
+		         }else {
+		            //JOptionPane.showMessageDialog(null, "수정실패");
+		            req.setAttribute("msg", "수정실패");
+		            dispatch("CommuBbsController?command=read", req, resp);
+		            
+		         }   
 		}
 	}
 	//보내주는 함수

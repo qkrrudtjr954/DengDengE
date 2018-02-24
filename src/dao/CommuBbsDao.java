@@ -247,9 +247,36 @@ public class CommuBbsDao implements iCommuBbsDao{
 	
 	//수정하기
 	@Override
-	public boolean udtCommu(int seq, CommuBbsDto comdto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean udtCommu(CommuBbsDto comdto) {
+		String sql=" UPDATE COMMUBBS SET  "
+	            +" TITLE=?, CONTENT=?"
+	            + " WHERE SEQ=? ";
+	      System.out.println("sql: "+ sql);
+	      int count = 0;
+	      Connection conn=null;
+	      PreparedStatement psmt=null;
+	      System.out.println("1/6 S udtCommu");
+	      try {
+	         conn = DBConnection.makeConnection();         
+	         psmt=conn.prepareStatement(sql);
+	         psmt.setString(1, comdto.getTitle());
+	         psmt.setString(2, comdto.getContent());
+	         psmt.setInt(3, comdto.getSeq());
+	         System.out.println("2/6 S udtCommu");
+	         count = psmt.executeUpdate();
+	         System.out.println("3/6 S udtCommu");
+	         
+	      } catch (SQLException e) {         
+	         e.printStackTrace();
+	         System.out.println("FAIL S udtCommu");
+	      } finally{
+	         DBClose.close(psmt, conn, null);   
+	         System.out.println("4/6 S udtCommu");
+	      }
+	      System.out.println("5/6 S udtCommu");
+	      return count>0?true:false;
+	      
+
 	}
 
 	
