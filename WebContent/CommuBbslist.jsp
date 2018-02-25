@@ -37,11 +37,7 @@ $(document).ready(function () {
     	 $("form[name=form1]")
          .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val(), method:"post"}).submit();
     });
-    
-/*     $("#btnSearch").click(function () {
-   	 $("form[name=searchform]")
-        .attr({action:"CommuBbsController?command=search&target_category="+$(this).val(), method:"post"}).submit();
-   }); */
+   
 
 });
    
@@ -56,7 +52,6 @@ List<CommuBbsDto> bbslist = (List<CommuBbsDto>)request.getAttribute("bbslist");
 %>
 	<h1>커뮤니티</h1>
 	<form name="form1" action="CommuBbsController">
-		<input type="hidden" id="cateNum">
 		<div align="left">
 			&nbsp;&nbsp;
 			<button type="button" id="btnAll">전체보기</button>
@@ -130,7 +125,6 @@ for(int i = 0;i < bbslist.size(); i++){
 <div id="board_search_div">
 	<form name="searchform" method="get" action="CommuBbsController">
 		<input type="hidden" name="command" value="search" />
-		<!-- <input type="hidden" name="searchflag" value="true" /> -->
 		<table id="board_search_table">
 		<tr>
 			<td class="board_search_td">
@@ -142,8 +136,7 @@ for(int i = 0;i < bbslist.size(); i++){
 			<td class="board_search_td"><input type="text" name="SearchWord"></td>
 			<td class="board_search_td">
 			<input type="submit" value="검색">
-			<!-- <a href="javascript:document.searchform.submit();">검색</a> -->
-			<!-- <button type="button" id="btnSearch">검색</a> --></td>
+			</td>
 		</tr>
 	</table>
 	</form>
