@@ -27,7 +27,7 @@ public class MainController extends HttpServlet{
 		String command = req.getParameter("command");
 		
 		if(command.equals("start")) {
-			dispatcher("index.jsp", req, resp);
+			dispatcher("main.jsp", req, resp);
 		}
 	}
 	

@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLRecoverableException;
 
+import db.DBClose;
 import db.DBConnection;
 import dto.User;
 
@@ -17,6 +19,7 @@ public class UserDao implements iUserDao{
 	@Override
 	public User getUserByEmailAndPassword(User user) {
 		String sql = " select * from denguser where email=? and password=? ";
+		
 		System.out.println(">>>>> UserDao .getUserByEmailAndPassword() sql : "+sql);
 		
 		Connection conn = DBConnection.makeConnection();
@@ -44,6 +47,8 @@ public class UserDao implements iUserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
 		}
 		return result;
 	}
@@ -76,6 +81,8 @@ public class UserDao implements iUserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
 		}
 		return result;
 	}
@@ -97,6 +104,8 @@ public class UserDao implements iUserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
 		}
 		return (count > 0) ? true : false;
 	}

@@ -8,10 +8,26 @@
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
-  background-image: url("../img/index_bg.jpg");
+  background-image: url("../img/main2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.menu {
+	width: 100%;
+}
+
+.nav-link {
+	color: white;
+}
+
+.menu-item {
+    margin: 0px 15px;
+    border: 1px solid white;
+    border-radius: 7px;
+}
+
+
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: calc(var(--jumbotron-padding-y) * 2);

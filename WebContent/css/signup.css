@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .container {
-	max-width: 960px;
+	max-width: 600px;
 	background-color: #f8f9fabd;
 	border-radius: 50px;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 body {
@@ -32,3 +32,4 @@ body {
 .lh-condensed {
 	line-height: 1.25;
 }
+
