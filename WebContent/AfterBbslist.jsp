@@ -211,7 +211,7 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 		
 		<div class="serach"text-align:center;">
 		<!-- <button type="button" class="btn btn-success" onclick="">검색</button> -->
-		<input type="submit" class="btn btn-success" value="검색">
+		<input type="submit" class="btn btn-success"  value="검색">
 		</div>
 		
          
@@ -278,17 +278,23 @@ for(int i = 0;i < afterBbslist.size(); i++){
 
 </div>
 
+<form name="form1" action="AfterBbsController" method="post" >
 <div class="row">
+<button class="offset-md-10 btn btn-outline-secondary" id="btnlist" style="background-color: #28A745; color: #fff">목록으로</button>
+&nbsp;&nbsp;&nbsp;<button id="btnwrite" class="btn btn-outline-secondary" style="background-color: #28A745; color: #fff" >글쓰기</button>
 
-<div>
+
+
+
+
+
+
+
 
 
 </div>
 
-
-
-</div>
-
+</form>
 		
 			
 			
@@ -329,7 +335,24 @@ for(int i = 0;i < afterBbslist.size(); i++){
 			$(this).children('.nav-link').css('color', 'white');
 		});
 	</script>
+	<%-- button  --%>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
+
+	$(document).ready(function(){
+	$("#btnlist").click(function(){
+        alert("목록으로 돌아 갑니다");
+       document.form1.action ="AfterBbsController?command=AfterBbslist";
+      document.form1.submit(); 
+        
+     });
+     
+     $("#btnwrite").click(function(){    
+        alert("글쓰기 화면으로 넘어갑니다");
+         document.form1.action="AfterBbsController?command=AfterBbswrite";
+         document.form1.submit();
+     });
+ });
 	
 	
 	
