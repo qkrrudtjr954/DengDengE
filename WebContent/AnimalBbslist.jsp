@@ -116,7 +116,22 @@ if(animlist == null || animlist.size() == 0){
 		<input type="submit" value="글쓰기">
 	</td>
 </tr>
+</table>
+</form>
+<form action="AnimalBbsController">
+<input type="hidden" name="command" value="search">
+<table style="margin-left: auto; margin-right: auto;">
 
+<tr>
+	<td colspan="5" align="center">
+		<select name="Searchtype" style="width:70px;height: 25px" id="search">
+			<option value="title">제목</option>
+			<option value="target_user_seq">작성자</option>
+		</select>
+		<input type="text" name="SearchWord" size="30" style="height: 25px" id="text">
+		<input type="submit" value="검색">
+	</td>
+</tr>
 </table>
 </form>
 

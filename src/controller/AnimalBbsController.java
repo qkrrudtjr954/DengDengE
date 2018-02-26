@@ -144,6 +144,20 @@ public class AnimalBbsController extends HttpServlet {
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}
 			}
+		else if(command.equals("search")) {
+			String Searchtype = req.getParameter("Searchtype");             //검색종류(글쓴이,제목,내용)
+	        String SearchWord = req.getParameter("SearchWord");   
+	           
+	           
+	           System.out.println(" search " + Searchtype +" word "+SearchWord);
+	          
+	           List<AnimalBbsDto> animlist = aniBbService.getFindBbslist(Searchtype, SearchWord);
+	            //짐 싸기
+	            req.setAttribute("animlist", animlist);
+	            
+	            //보내주기
+	            dispatch("AnimalBbslist.jsp", req, resp);
+		}
 			
 			
 			

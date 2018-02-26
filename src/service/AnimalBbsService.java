@@ -48,6 +48,10 @@ public class AnimalBbsService {
 		public void readCount(int seq) {
 			aniBbsManager.readCount(seq);
 	      }
+		
+		 public List<AnimalBbsDto> getFindBbslist(String Searchtype, String Searchtext){
+			 return aniBbsManager.getFindBbslist(Searchtype, Searchtext);
+		 }
 		/*
 		// 페이징 처리
 		public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {

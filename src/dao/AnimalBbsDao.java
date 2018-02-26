@@ -298,7 +298,168 @@ public class AnimalBbsDao {
 	      DBClose.close(psmt, conn, rs);
 	   }
 	  }
-	
+	   
+	   public List<AnimalBbsDto> getFindBbslist(String Searchtype, String Searchtext){
+		   System.out.println("s");
+		      List<AnimalBbsDto> list = new ArrayList<>();
+
+		      
+				String sql = " SELECT SEQ, TITLE, NAME, AGE, "
+						+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
+						+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
+						+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
+						+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
+						+ " FROM ANIMALBBS "
+						+ " WHERE DEL=0 AND " + Searchtype + " LIKE '%" + Searchtext + "%'"
+		            + " ORDER BY REG_DATE DESC ";
+		   
+		      Connection conn = null;
+		      PreparedStatement psmt = null;
+		      ResultSet rs = null;
+
+		      try {
+		         conn = DBConnection.makeConnection();
+		         System.out.println("2/6 getFindBbslist Success");
+
+		         psmt = conn.prepareStatement(sql);
+		         System.out.println("sql = " + sql);
+		         System.out.println("3/6 getFindBbslist Success");
+		         
+		      
+		         rs = psmt.executeQuery();
+		         System.out.println("4/6 getFindBbslist Success");
+
+		         while (rs.next()) {
+		            int i = 1;
+
+		            AnimalBbsDto aniBbsDto = new AnimalBbsDto(); //category_name
+		            aniBbsDto.setSeq(rs.getInt("SEQ"));
+					aniBbsDto.setTitle(rs.getString("TITLE"));
+					aniBbsDto.setName(rs.getString("NAME"));
+					aniBbsDto.setAge(rs.getInt("AGE"));
+					aniBbsDto.setKinds(rs.getString("KINDS"));
+					aniBbsDto.setType(rs.getString("TYPE"));
+					aniBbsDto.setLocation(rs.getString("LOCATION"));
+					aniBbsDto.setMedicine(rs.getInt("MEDICINE"));
+					aniBbsDto.setNeutralization(rs.getInt("NEUTRALIZATION"));
+					aniBbsDto.setGender(rs.getInt("GENDER"));
+					aniBbsDto.setDescripttion(rs.getString("DESCRIPTTION"));
+					aniBbsDto.setPic1(rs.getString("PIC1"));
+					aniBbsDto.setContent(rs.getString("CONTENT"));
+					aniBbsDto.setUserSeq(rs.getInt("TARGET_USER_SEQ"));
+					aniBbsDto.setContact(rs.getString("TARGET_CONTACT"));
+					aniBbsDto.setDescription(rs.getString("TARGET_DESCRIPTION"));
+					aniBbsDto.setRdate(rs.getString("REG_DATE"));
+					aniBbsDto.setLUpdate(rs.getString("LAST_UPDATE"));
+					aniBbsDto.setDel(rs.getInt("DEL"));
+					aniBbsDto.setReadcount(rs.getInt("READCOUNT"));
+		            list.add(aniBbsDto);
+		         }
+		         System.out.println("5/6 getFindBbslist Success");
+
+		      } catch (SQLException e) {
+		         System.out.println("getFindBbslist fail");
+		         System.out.println(e.getMessage());
+		         System.out.println(e.getErrorCode());
+		         System.out.println(e.getSQLState());
+
+		      } finally {
+		         DBClose.close(psmt, conn, rs);
+		      
+		      }
+
+		      return list;
+		   }
+	   /*
+	   public List<AnimalBbsDto> getSearchBbsList(String type, String text) {
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+				
+			List<AnimalBbsDto> bbslist = new ArrayList<AnimalBbsDto>();
+				
+			try {
+				conn = DBConnection.makeConnection();
+
+					
+				//글의 갯수 알아보기
+				String totalSql="";
+					
+				String Text = "'%"+text+"%'";
+					
+				if(type.equals("title")){
+					totalSql = " SELECT COUNT(SEQ) FROM BBS WHERE TITLE LIKE "+Text;
+				}
+				else if(type.equals("id")){
+					totalSql = " SELECT COUNT(SEQ) FROM BBS WHERE ID LIKE "+Text;
+				}
+				else{
+					totalSql = " SELECT COUNT(SEQ) FROM BBS WHERE CONTENT LIKE "+Text;
+				}
+					
+				System.out.println("CountSearchBbsList sql : "+totalSql);
+					
+				psmt= conn.prepareStatement(totalSql);
+				rs = psmt.executeQuery();
+					
+				int totalCount = 0;
+				
+					
+				psmt.close();
+				rs.close();
+						
+				String sql ="";
+							
+				if(type.equals("title")){
+					sql = " SELECT * FROM "
+					+ " (SELECT * FROM (SELECT * FROM BBS WHERE TITLE LIKE "+Text+" ORDER BY REF ASC, STEP DESC) "
+					+ " WHERE ROWNUM <="+paging.getStartNum()+" ORDER BY REF DESC, STEP ASC) "
+					+ " WHERE ROWNUM <="+paging.getCountPerPage();
+				}
+				else if(type.equals("id")){
+					sql = " SELECT * FROM "
+					+ " (SELECT * FROM (SELECT * FROM BBS WHERE ID LIKE "+Text+" ORDER BY REF ASC, STEP DESC) "
+					+ " WHERE ROWNUM <="+paging.getStartNum()+" ORDER BY REF DESC, STEP ASC) "
+					+ " WHERE ROWNUM <="+paging.getCountPerPage();
+				}
+				else{
+				        sql = " SELECT * FROM "
+					+ " (SELECT * FROM (SELECT * FROM BBS WHERE CONTENT LIKE "+Text+" ORDER BY REF ASC, STEP DESC) "
+					+ " WHERE ROWNUM <="+paging.getStartNum()+" ORDER BY REF DESC, STEP ASC) "
+					+ " WHERE ROWNUM <="+paging.getCountPerPage();
+				}
+				
+				System.out.println("getSearchBbsList sql : "+sql);
+				
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				while(rs.next()){
+					int i = 1;
+					BbsDto dto = new BbsDto(
+						rs.getInt(i++),	// seq 
+						rs.getString(i++),	// id 
+						rs.getInt(i++),	// ref 
+						rs.getInt(i++), // step 
+						rs.getInt(i++), // depth 
+						rs.getString(i++), // title
+						rs.getString(i++), // content 
+						rs.getString(i++), // wdate 
+						rs.getInt(i++),    // parent 
+						rs.getInt(i++),		//	del 
+						rs.getInt(i++));	// readcount
+					bbslist.add(dto);				
+				}
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally{
+				DBClose.close(psmt, conn, rs);
+			}
+				return bbslist;	
+		}
+	*/
+	   
 	/*
 	// 페이징 처리
 	public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {
