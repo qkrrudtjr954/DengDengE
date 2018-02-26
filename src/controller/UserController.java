@@ -45,7 +45,6 @@ public class UserController extends HttpServlet{
 
 		} else if(command.equals("signup")) {
 			boolean result = false;
-			String json = "";
 			
  			String email = req.getParameter("email");
 			String password1 = req.getParameter("password1");
@@ -57,7 +56,7 @@ public class UserController extends HttpServlet{
 				
 				User returnUser = userService.addUser(user);
 				
-				if(returnUser.getSeq()!=0) {
+				if(returnUser.getSeq() != 0) {
 					HttpSession session = req.getSession();
 //					session.setMaxInactiveInterval(30*60);	// 30분 세션 제한 
 					session.setAttribute("current_user", returnUser);
@@ -67,18 +66,17 @@ public class UserController extends HttpServlet{
 			}
 			
 			if(result) {
-				json = new Gson().toJson("{ statusCode : 400, result : \"fail\"}");
+				resp.sendRedirect("main.jsp");
 			}else {
-				json = new Gson().toJson("{ statusCode : 200, result : \"success\"}");
+				req.setAttribute("notice", "회원 가입에 실패했습니다.");
+				dispatcher("signup.jsp", req, resp);
 			}
-			
-			resp.getWriter().write(json);
-
 		} else if(command.equals("signout")) {
 
 			HttpSession session = req.getSession();
 			session.invalidate();
-			dispatcher("index.jsp", req, resp);
+//			dispatcher("index.jsp", req, resp);
+			resp.sendRedirect("main.jsp");
 
 		} else if(command.equals("myPage")) {
 
@@ -111,9 +109,14 @@ public class UserController extends HttpServlet{
 		    UserService userService = UserService.getInstance();
 			User result = userService.getUserByEmail(email);
 			
-			if(result != null) {
+			
+			if(result.getSeq() != 0) {
+				// result.getSeq()가 0이 아니면 아이디가 있는 것.
+				//	아이디 사용 불가능 
 				resp.getWriter().write("no");
 			}else {
+				// result.getSeq()가 0이면 아이디가 없는 것.
+				//	아이디 사용 가능  
 				resp.getWriter().write("yes");
 			}
 		}

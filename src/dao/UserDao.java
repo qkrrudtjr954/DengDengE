@@ -36,7 +36,7 @@ public class UserDao implements iUserDao{
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				result.setAuthor(rs.getInt("author"));
+				result.setAuthor(rs.getInt("auth"));
 				result.setEmail(rs.getString("email"));
 				result.setLast_update(rs.getString("last_update"));
 				result.setPassword(rs.getString("password"));
@@ -70,7 +70,7 @@ public class UserDao implements iUserDao{
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				result.setAuthor(rs.getInt("author"));
+				result.setAuthor(rs.getInt("auth"));
 				result.setEmail(rs.getString("email"));
 				result.setLast_update(rs.getString("last_update"));
 				result.setPassword(rs.getString("password"));
@@ -104,9 +104,11 @@ public class UserDao implements iUserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			count = -1;
 		} finally {
 			DBClose.close(psmt, conn, null);
 		}
+		
 		return (count > 0) ? true : false;
 	}
 	

@@ -83,7 +83,7 @@
 				if(user.seq==0){
 					alert('아이디와 비밀번호를 확인해주십시오.');
 				} else {
-					location.href = "MainController?command=start";
+					location.href = "MainControl?command=start";
 				}
 			}
 		})

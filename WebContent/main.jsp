@@ -19,17 +19,16 @@
   </head>
 
   <body>
-
-    <header>
-	    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav offset-md-7">
-					<c:choose>
-						<c:when test="${current_user == null }">
+	<header>
+		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav offset-md-7">
+						<c:choose>
+							<c:when test="${current_user == null }">
 							<!-- 로그인 안했을 때 -->
 							<li class="nav-item">
 								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
@@ -51,8 +50,7 @@
 				</ul>
 			</div>
 		</nav>
-    </header>
-
+   </header>	    
     <main role="main">
 
       <section class="jumbotron text-center">

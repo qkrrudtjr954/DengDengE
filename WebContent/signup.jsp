@@ -26,11 +26,12 @@
 		<div class="py-5 text-center">
 			<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 			<h2>회원 가입</h2>
+			${notice }
 		</div>
 
 		<div class="row">
 			<div class="offset-md-3 col-md-6 order-md-1">
-				<form class="needs-validation" id="signUpForm" novalidate>
+				<form class="needs-validation" id="signUpForm" action="UserControl" method="POST" novalidate>
 					<input type="hidden" name="command" value="signup">
 					<div class="mb-3">
 						<label for="email">Email</label> 
@@ -120,8 +121,8 @@
                 event.preventDefault();
                 event.stopPropagation();
               }else{
-            	  	var datastring = $("#signUpForm").serialize();
-          		
+            	  	console.log('hello');
+            	  	/* var datastring = $("#signUpForm").serialize();
           		$.ajax({
           			url : 'UserControl',
           			data : datastring,
@@ -137,7 +138,7 @@
           					location.href = "UserControll?command=goSignUp";
           				}
 					}
-          		});
+          		}); */
               }
               form.classList.add('was-validated');
             }, false);
@@ -154,9 +155,9 @@
   				data : { command:'checkEmail', email: $('#email').val() },
   				type : 'POST',
   				success : function (data) {
-  					if(data=='no'){
+  					if(data == 'no'){
   						$('#email').attr('style', 'border-color:#dc3545;');
-  						$('#email').removeClass('fail');
+  						$('#email').removeClass('success');
   						$('.invalid-email').html('<span style="font-color:#dc3545;">이미 사용중인 이메일 입니다.</span>');
   					}else{
   						$('#email').attr('style', 'border-color:#28a745;');
