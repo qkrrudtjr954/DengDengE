@@ -402,7 +402,7 @@ public class AfterBbsDao {
 								    				rs.getString(i++),//String rdate, 
 								    				rs.getString(i++),//String ldate,
 								    				rs.getInt(i++), //del
-								    				0); //readcount
+								    				rs.getInt(i++)); //readcount
 	            list.add(dto);
 	         }
 	         System.out.println("5/6 getFindAfterlist Success");
