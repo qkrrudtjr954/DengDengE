@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 </head>
 <body>
 <%
@@ -126,18 +128,11 @@ if(aniBbsDto != null){
 	</td>
 </tr>
 
-<tr align="center">
-	<td>사진</td>
-	<td colspan="10">
-		파일명 : <%=aniBbsDto.getPic1() %> &nbsp;
-		<input type="file" name="pic" style="width: 400px" >
-	</td>
-</tr>
-
 <tr>
 	<td>내용</td>
 	<td colspan="10">
-		<textarea rows="20" cols="180" name="content" style="background-color: #C8FAC8"><%=aniBbsDto.getContent() %></textarea>
+		<textarea rows="20" cols="180" name="content"
+		id="summernote"><%=aniBbsDto.getContent() %></textarea>
 	</td>
 </tr>
 <tr align="right">
@@ -149,6 +144,23 @@ if(aniBbsDto != null){
 
 </table>
 </form>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#summernote').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+    });
+});
+
+</script>
 
 </body>
 </html>

@@ -6,11 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AnimalBbswrite.jsp</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 </head>
 <body>
 <h1>입양하기 글작성</h1>
@@ -85,17 +81,10 @@
 	</td>
 </tr>
 
-<tr align="center">
-	<td>사진</td>
-	<td colspan="10">
-		<input type="file" name="pic" style="width: 400px">
-	</td>
-</tr>
-
 <tr>
 	<td>내용</td>
 	<td colspan="10">
-		<textarea rows="20" cols="180" name="content"></textarea>
+		<textarea rows="20" cols="180" name="content" id="summernote1"></textarea>
 	</td>
 </tr>
 </table>
@@ -121,25 +110,47 @@
 <tr>
 	<td>기타사항</td>
 	<td>
-		<textarea rows="20" cols="180" name="desc"></textarea>
+		<textarea rows="20" cols="180" name="desc" id="summernote2"></textarea>
 	</td>
 </tr>
 
 <tr align="right">
 	<td colspan="11">
-		<input type="submit" value="글동록">
+		<input type="submit" value="글등록">
 	</td>
 </tr>
 </table>
 </form>
 
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+
 <script type="text/javascript">
-$(".btn").click(function () {
-	alert("추후예정");
-	return;
+$(document).ready(function() {
+    $('#summernote1').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+    });
+    
+    
+    $('#summernote2').summernote({
+    	width: 1200,
+    	height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true                  // set focus to editable area after initializing summernote
+    	
+    });
 });
 
 </script>
+
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>

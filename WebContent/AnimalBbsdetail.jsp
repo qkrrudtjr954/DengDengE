@@ -118,10 +118,10 @@ if(aniBbsDto != null){
 </table>
 <br>
 
-<table style="margin-left: auto; margin-right: auto;" >
+<table style="margin-left: auto; margin-right: auto;" border="1">
 <tr>
 	<td>
-		<textarea rows="50" cols="70" readonly="readonly"><%=aniBbsDto.getContent() %></textarea>
+		<%=aniBbsDto.getContent() %>
 	</td>
 </tr>
 
