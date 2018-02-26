@@ -1,19 +1,100 @@
 <%@page import="dto.AfterBbsDto"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1 align="center">댕댕이 반려 동물 입양후기</h1>
-<h3 align="center">회원님들의 생생한 입양 후기들</h3>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="icon" href="./icon/favicon.ico">
 
+    <title>Deng Deng E list</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+	<header>
+		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav offset-md-7">
+						<c:choose>
+							<c:when test="${current_user == null }">
+							<!-- 로그인 안했을 때 -->
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=goSignUp">회원가입</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<!-- 로그인 했을 때 -->
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=signout">로그아웃</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=myPage">마이 페이지</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+		</nav>
+   </header>	    
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Album example</h1>
+          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <p>
+            <a href="#" class="btn btn-success my-2">Main call to action</a>
+          </p>
+        </div>
+      </section>
+      <section>
+	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	        <ul class="nav menu justify-content-center">
+			  <li class="nav-item menu-item">
+			    <a class="nav-link active " href="#">Active</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">Link</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">Link</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">Disabled</a>
+			  </li>
+			</ul>
+  		</nav>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+        
+			<div class="row">
+			<h1 align="center">댕댕이 반려 동물 입양후기</h1>
+			</div>
+			
+			<div class="row">
+			<h3 align="center">회원님들의 생생한 입양 후기들</h3>
+			</div>
+			
+		
  <%
 List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterBbslist");
  
@@ -22,45 +103,7 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 	}
  
  %>
-
-
  
-<div id="board_search_div" align="center">
-   <form name="searchform" method="get" action="AfterBbsController">
-      <input type="hidden" name="command" value="AfterBbsSearch">
-      <table id="board_search_table">
-      <tr>
-         <td class="board_search_td">
-         <select name="Searchtype">
-         <option value="target_user_seq">글쓴이</option>
-         <option value="title">제목</option>
-
-         </select></td>
-         <td class="board_search_td"><input type="text" name="SearchWord"></td>
-         <td class="board_search_td">
-         <input type="submit" value="검색">
-         </td>
-      </tr>
-   </table>
-   </form>
-</div>
- 
-
-
-<%-- <%
-// 페이징 처리 정보
-PagingBean paging = new PagingBean();
-//처음들어왔을때 nowPage == null
-if(request.getParameter("nowPage") == null){
-	//처음들어왔을때 nowPage 현재페이지를 1페이지로 세팅해준다.
-	paging.setNowPage(1);
-//페이지수를 클릭해서 들어온 경우
-}else{
-	//넘겨받은 nowPage를 int로 변환시켜 paging 객체에 넣어준다.
-	paging.setNowPage(Integer.parseInt(request.getParameter("nowPage")));
-} 
-%>
- --%>
  <%
  String msg1 = (String)request.getAttribute("msg1");
  String msg2 = (String)request.getAttribute("msg2");
@@ -87,58 +130,79 @@ if(request.getParameter("nowPage") == null){
  %>
  
  
- <table border="1" align="center">
-<col width="70"><col width="500"><col width="150"><col width="100">
-
-<tr>
-<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
-</tr>
-
-<%
-if(afterBbslist == null || afterBbslist.size() == 0){
-	%>
-	<tr>
-		<td colspan="5">작성된 글이 없습니다</td>
-	</tr>	
-	<%
-}
-
-for(int i = 0;i < afterBbslist.size(); i++){
-	AfterBbsDto bbs = afterBbslist.get(i);
-	%>
-	<tr>
-	<td><%=i+1 %></td>
-	<td>
-		<%-- <%=arrow(bbs.getDepth()) %> --%>
-		<%-- <%if(bbs.getDel()==1){ %> --%>
-		<!-- <b>관리자에의해 삭제된 글입니다.</b> -->
-		<%-- <%}else{ %> --%>
-		<a href="AfterBbsController?command=AfterBbsDetail&seq=<%=bbs.getSeq() %>">
-			<%=bbs.getTitle() %>
-		</a>
-		<%-- <%} %> --%>
-	</td>
-	 <td><%=bbs.getUserSeq() %> </td>
-	<td><%=bbs.getRdate() %></td> 
-	<td><%=bbs.getReadcond() %></td>
-	</tr>	
-	<%
-}
-%>
-
-
- </table>
  
-<div align="center">
-<form action="AfterBbsController">
-		<input type="hidden" name="command" value="AfterBbswrite">
-		<input type="submit" value="글쓰기">
+ 
+ 
+
+<form name="searchform" method="get" action="AfterBbsController">
+      <input type="hidden" name="command" value="AfterBbsSearch">
+     <div class="row">
+      
+		<div class="input-group-prepend">
+			<select class="custom-select" id="inputGroupSelect01" name="Searchtype" style="width: 150px">
+			   <option selected>선택없음</option>
+			   <option value="target_user_seq">글쓴이</option>
+			   <option value="title">제목</option>
+ 			 </select>
+    		<input type="text" class="form-control" aria-label="Text input with segmented dropdown button" size="30" name=""SearchWord">
+		</div>
+         
+  	</div>
 </form>
-</div>
- 
- 
- 
- 
 
-</body>
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+			
+			
+			
+			
+			
+			
+			
+			
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	
+	<script type="text/javascript">
+		$('.menu-item').on('mouseover', function () {
+			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
+			$(this).children('.nav-link').css('color', 'white');
+				
+		});
+		$('.menu-item').on('mouseout', function () {
+			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
+			$(this).children('.nav-link').css('color', 'white');
+		});
+	</script>
+  </body>
 </html>
