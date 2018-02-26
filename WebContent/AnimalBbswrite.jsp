@@ -92,7 +92,7 @@
 				<div class="form1">
 				
 					<div class="row">
-						<h4 style="text-decoration: underline; text-align: center;">입양하기 글 작성</h4>
+						<h4 style="text-decoration: underline;" class="offset-md-5">입양하기 글 작성</h4>
 					</div>
 
 					<div class="row">
@@ -177,12 +177,12 @@
 								<input type="checkbox" aria-label="Checkbox for following text input">
 							</div>
 							<input type="text" class="form-control" aria-label="Text input with checkbox" name="gen" size="2"
-								value="여자">
+								value="여아">
 							<div class="input-group-text">
 								<input type="checkbox" aria-label="Checkbox for following text input">
 							</div>
 							<input type="text" class="form-control" aria-label="Text input with checkbox" name="gen" size="2"
-								value="남자">
+								value="남아">
 						</div>
 					</div>
 
@@ -190,7 +190,7 @@
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">제목</span> 
-							<input type="text"	class="form-control" name="title" size="130" placeholder="제목 입력">
+							<input type="text"	class="form-control" name="title" size="135" placeholder="제목 입력">
 						</div>
 					</div>
 
@@ -198,7 +198,7 @@
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">특이사항</span> 
-							<input type="text" class="form-control" name="descrip" size="125" placeholder="특이사항 입력">
+							<input type="text" class="form-control" name="descrip" size="130" placeholder="특이사항 입력">
 						</div>
 					</div>
 
@@ -221,7 +221,7 @@
 
 				<div class="form2">
 					<div class="row">
-						<h4 style="text-decoration: underline;">작성자 인적사항</h4>
+						<h4 style="text-decoration: underline;" class="offset-md-5">작성자 인적사항</h4>
 					</div>
 
 					<div class="row">
@@ -277,7 +277,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 	
 <script type="text/javascript">
 $(document).ready(function() {
