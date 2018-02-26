@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="dto.CommuBbsDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +11,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<%!
+public String toDate(String mdate){
+	String s = mdate.substring(2, 4) + "-"    // yyyy
+	         + mdate.substring(4, 6) + "-"   // MM
+	         + mdate.substring(6, 8);    // dd
+	return s;
+}
+
+%>
 
 <script>
    
@@ -43,6 +53,7 @@ $(document).ready(function () {
    
  
 </script>
+
 
 
 </head>
