@@ -83,7 +83,29 @@
 
       <div class="album py-5 bg-light">
         <div class="container">
-
+			<div class="row">
+				<div class="offset-md-4 col-md-4 col-sm-12" style="background:red;text-align:center;">
+		          	hello world				
+				</div>
+				<div class="col-md-2 col-sm-12" style="background:blue;">
+		          	hello world				
+				</div>
+				<div class="col-md-2 col-sm-12" style="background:yellow;">
+		          	hello world				
+				</div>
+          </div>
+			
+			<div class="row">
+				<div class="col-md-8" style="background:red;text-align:center;">
+		          	hello world				
+				</div>
+				<div class="col-md-2" style="background:blue;">
+		          	hello world				
+				</div>
+				<div class="col-md-2" style="background:yellow;">
+		          	hello world				
+				</div>
+          </div>
           <div class="row">
           	<div>
 	            <iframe width="560" height="315" src="https://www.youtube.com/embed/dHmyY0iX0ww?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1"></iframe>          	
@@ -117,14 +139,7 @@
 	
 	
 	<script type="text/javascript">
-		$(document).ready({
-			
-		})
-		
 		$('.menu-item').on('mouseover', function () {
-			$(this).animate({
-				background
-			})
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
 				
