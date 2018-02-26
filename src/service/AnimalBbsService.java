@@ -32,14 +32,26 @@ public class AnimalBbsService {
 		
 		// 입양하기 글 디테일
 		public AnimalBbsDto detailAnimalBbs(int seq) {
-			return null;
+			return aniBbsManager.detailAnimalBbs(seq);
 		}
 		
 		// 입양하기 글 삭제
 		public boolean deleteBbs(int seq) {
-			return false;
+			return aniBbsManager.deleteAnimalBbs(seq);
 		}
 		
+		// 입양하기 글 수정
+		public boolean updateAnimalBbs(int seq, AnimalBbsDto aniBbsDto) {
+			return aniBbsManager.updateAnimalBbs(seq, aniBbsDto);
+		}
+		
+		public void readCount(int seq) {
+			aniBbsManager.readCount(seq);
+	      }
+		
+		 public List<AnimalBbsDto> getFindBbslist(String Searchtype, String Searchtext){
+			 return aniBbsManager.getFindBbslist(Searchtype, Searchtext);
+		 }
 		/*
 		// 페이징 처리
 		public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {

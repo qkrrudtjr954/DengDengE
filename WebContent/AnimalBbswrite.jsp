@@ -5,14 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AnimalBbswrite.jsp</title>
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 </head>
 <body>
 <h1>입양하기 글작성</h1>
-<br><br><br><br><br>
+<br><br><br><br>
+<a href="AnimalBbsController?command=animlist">list</a>
 <hr>
 
-<form action="AnimalBbsController">
+<form action="AnimalBbsController" method="post">
 <input type="hidden" name="command" value="writeAf">
 <table border="1" style="margin-left: auto; margin-right: auto;">
 <col width="100"><col width="100"><col width="100"><col width="100">
@@ -79,27 +81,76 @@
 	</td>
 </tr>
 
-<tr align="center">
-	<td>사진</td>
+<tr>
+	<td>내용</td>
 	<td colspan="10">
-		<input type="file" name="pic" style="width: 400px">
+		<textarea rows="20" cols="180" name="content" id="summernote1"></textarea>
+	</td>
+</tr>
+</table>
+<br>
+
+<h4 style="text-decoration: underline;">작성자 인적사항</h4>
+<table border="1" style="margin-left: auto; margin-right: auto;">
+<col width="100"><col width="150">
+<tr>
+	<td>아이디</td>
+	<td>
+		<input type="text" name="id" value="<%="id" %>" readonly="readonly">
 	</td>
 </tr>
 
 <tr>
-	<td>내용</td>
-	<td colspan="10">
-		<textarea rows="20" cols="180" name="content"></textarea>
-	</td>
-</tr>
-<tr align="right">
-	<td colspan="11">
-		<input type="submit" value="next">
+	<td>연락처</td>
+	<td>
+		<input type="text" name="contact">&nbsp;&nbsp;&nbsp;<input type="submit" value="인증하기" class="btn">
 	</td>
 </tr>
 
+<tr>
+	<td>기타사항</td>
+	<td>
+		<textarea rows="20" cols="180" name="desc" id="summernote2"></textarea>
+	</td>
+</tr>
+
+<tr align="right">
+	<td colspan="11">
+		<input type="submit" value="글등록">
+	</td>
+</tr>
 </table>
 </form>
+
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#summernote1').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+    });
+    
+    
+    $('#summernote2').summernote({
+    	width: 1200,
+    	height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true                  // set focus to editable area after initializing summernote
+    	
+    });
+});
+
+</script>
+
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
