@@ -84,8 +84,7 @@
 
       <div class="album py-5 bg-light">
         <div class="container">
-        
-        <%
+<%
 
 AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
 String msg = (String)request.getAttribute("msg");
@@ -103,58 +102,58 @@ alert("<%=msg%>");
 <%
 }
 %>
+          
+        
+        <div class="row">
+        <h1  class="offset-md-4">댕댕이 반려 동물 입양 후기</h1>
+        </div>
 
-
-<h1 align="center">댕댕이 반려 동물 입양 후기</h1>
-
-<h1>디테일</h1>
-<form action="AfterBbsController" method="post">
- <input type="hidden" name="command" value="AfterBbsUpdate">
- <input type="hidden" name="seq"  value="<%=bbs1.getSeq() %>"> 
+        <div class="row">
+        <h3 class="offset-md-5">생생한 입양 후기들</h3>
+        </div>
+        
+        <form action="AfterBbsController" method="post">
+ 		<input type="hidden" name="command" value="AfterBbsUpdate">
+ 		<input type="hidden" name="seq"  value="<%=bbs1.getSeq() %>"> 
+ 		
+ 		<div class="row">
+ 		<h1>글제목 : <%=bbs1.getTitle() %></h1>
+ 		</div>
+ 		<hr>
+ 		
+ 		<div class="row">
+ 		<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs1.getUserSeq() %>&nbsp;&nbsp;작성날짜 :<%=bbs1.getRdate() %>&nbsp;&nbsp;
+ 		조회수 : <%=bbs1.getReadcond() %></span>		
+ 		</div>
+ 		
+ 		<div class="row">
+ 		<img alt="" src="">
+ 		</div>
+ 		
+ 		<hr>
+ 		
+ 		<div class="row">
+ 		<span><%=bbs1.getContent() %></span>
+ 		</div>
+ 		
+ 		<hr>
+ 		
+ 		
    
-<table border="3">
-<col width="150"><col width="750">
-
-
-<tr>
-  <%--  <td colspan="2"><%=bbs1.getTitle() %></td> --%>
-  <td><%=bbs1.getTitle() %></td>
-  <td><%=bbs1.getSeq() %></td>
-</tr>
-<tr>
-   <td colspan="2" align="right">작성자 &nbsp;&nbsp;&nbsp; <%=bbs1.getRdate() %>&nbsp;&nbsp;&nbsp; 조회수 :<%=bbs1.getReadcond() %> </td>
-</tr>
-<tr>
- <td colspan="2" col height="550"><%=bbs1.getContent() %></td> 
-
-
-<%-- <td colspan="2">
-<textarea rows="100" cols="150"  
-name="content" readonly="readonly"><%=bbs1.getContent() %>
-</textarea>
-</td> --%>
-
-
-</tr>
-<tr>
- <%--  <td colspan="2" align="right"><button><a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>"></a>삭제하기</button> --%>
-   <!-- <td><input type="submit" value="수정하기"></td> -->
-   <td><a href="AfterBbsController?command=AfterBbsUpdate&seq=<%=bbs1.getSeq() %>">수정하기</a></td>
-   <td><a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>">삭제하기</a></td>
-  
-</tr>
-</table>
-
-<a href="AfterBbsController?command=AfterDelete&seq=<%=bbs1.getSeq() %>"></a>
-
-</form>
+ 		
+ 		
+ 		
+ 		
+        </form>
         
         
         
-        
-        
-        
-		
+			
+
+
+
+
+
         </div>
       </div>
 

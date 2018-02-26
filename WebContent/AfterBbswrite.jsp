@@ -16,13 +16,6 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
-    <%-- summernote --%>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet"> 
-    
-    
-    
   </head>
 
   <body>
@@ -90,40 +83,15 @@
 
       <div class="album py-5 bg-light">
         <div class="container">
-        	<div class="row">
-        	
-        	<div class="row">
-        	<h1 >글쓰기</h1> 	
-        	</div>
-        </div>
-        <form action="AfterBbsController" method="post">
-        <input type="hidden" name="command" value="AfterBbswriteAf">	
-     	<div class="row">
-        	<div class="input-group-prepend " >
-    			<span class="input-group-text" id="basic-addon1" style="width: 80px">글제목</span>
-  			</div>
-  		<input type="text" class="form-control" placeholder="제목을 입력해 주세요" aria-label="Username" 
-  		aria-describedby="basic-addon1" style="width: 1000px" name="title">
-        </div>
-        <%-- 글내용 --%>
-        <div class="row">
-        <textarea id="summernote" name="content" value="" ></textarea>
-        </div>
-        <div class="row">
-        <input type="submit" class="btn btn-success"  value="글쓰기">
-        </div>
-        </form>
         
         
-        	
-        	
-       	</div>
+        
         
         
         
 			
         </div>
-     
+      </div>
 
     </main>
 
@@ -156,38 +124,5 @@
 			$(this).children('.nav-link').css('color', 'white');
 		});
 	</script>
-	
-	<%-- summernote --%>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-	
-	
-	<script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-        	width : 1100,
-            height: 300,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
-    	});
-	});
-
-    
-    $(document).ready(function() {
-    	  $('#summernote').summernote();
-    	});
-    
-
-  </script>
-	
-	
-	
-	
-	
-	
-	
-	
   </body>
 </html>
