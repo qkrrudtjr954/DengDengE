@@ -29,7 +29,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 		List<CommuBbsDto> list = new ArrayList<>();
 
 		
-		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, del, b.title as category_name  "
 				+ " FROM COMMUBBS A, CATEGORY B "
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND DEL=0"
 				+ " ORDER BY REG_DATE DESC ";
@@ -58,7 +58,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 												"",//String content
 												rs.getInt(i++),//int target_user_seq
 												0,//int target_category
-												0,//int readcount
+												rs.getInt(i++),//int readcount
 												rs.getString(i++),//String reg_date
 												"",//String last_update 
 												rs.getInt(i++),//int del
@@ -287,7 +287,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 		List<CommuBbsDto> list = new ArrayList<>();
 
 		
-		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, del, b.title as category_name, a.READCOUNT  "
 				+ " FROM COMMUBBS A, CATEGORY B "
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND DEL=0 AND a.target_category=? "
 				+ " ORDER BY REG_DATE DESC ";
@@ -317,7 +317,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 												"",//String content
 												rs.getInt(i++),//int target_user_seq
 												0,//int target_category
-												0,//int readcount
+												rs.getInt(i++),//int readcount
 												rs.getString(i++),//String reg_date
 												"",//String last_update 
 												rs.getInt(i++),//int del
@@ -346,7 +346,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 		List<CommuBbsDto> list = new ArrayList<>();
 
 		
-		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, a.reg_date as reg_date, del, b.title as category_name  "
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, readcount, a.reg_date as reg_date, del, b.title as category_name, A.READCOUNT  "
 				+ " FROM COMMUBBS A, CATEGORY B "
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND DEL=0 AND " + Searchtype + " LIKE '%" + SearchWord + "%'"
 				+ " ORDER BY REG_DATE DESC ";
@@ -376,7 +376,7 @@ public class CommuBbsDao implements iCommuBbsDao{
 												"",//String content
 												rs.getInt(i++),//int target_user_seq
 												0,//int target_category
-												0,//int readcount
+												rs.getInt(i++),//int readcount
 												rs.getString(i++),//String reg_date
 												"",//String last_update 
 												rs.getInt(i++),//int del

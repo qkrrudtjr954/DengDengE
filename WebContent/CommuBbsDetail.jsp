@@ -11,14 +11,15 @@
 <script>
     $(document).ready(function(){
         $("#btnDelete").click(function(){
-        	alert("클릭됨");
+        if(confirm("정말 삭제하시겠습니까?")==true){
          document.form1.action ="CommuBbsController?command=delete";
          document.form1.submit(); 
-           
+        }else{
+        	return;
+        }
         });
         
         $("#btnUpdate").click(function(){    
-        	alert("클릭됨");
             document.form1.action="CommuBbsController?command=update";
             document.form1.submit();
         });

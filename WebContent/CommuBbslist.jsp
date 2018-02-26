@@ -73,6 +73,7 @@ List<CommuBbsDto> bbslist = (List<CommuBbsDto>)request.getAttribute("bbslist");
 			<col width="70">
 			<col width="500">
 			<col width="150">
+			<col width="70">
 
 			<tr>
 				<th>카테고리</th>
@@ -80,13 +81,14 @@ List<CommuBbsDto> bbslist = (List<CommuBbsDto>)request.getAttribute("bbslist");
 				<th align="center">제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>조회수</th>
 			</tr>
 
 			<%
 if(bbslist == null || bbslist.size() == 0){
 	%>
 			<tr>
-				<td colspan="3">작성된 글이 없습니다</td>
+				<td colspan="6" align="center">작성된 글이 없습니다</td>
 			</tr>
 			<%
 }
@@ -110,12 +112,13 @@ for(int i = 0;i < bbslist.size(); i++){
 				</td>
 				<td><%=bbs.getTarget_user_seq() %></td>
 				<td><%=bbs.getReg_date() %></td>
+				<td><%=bbs.getReadcount() %></td>
 			</tr>
 			<%
 	}
 	%>
 			<tr>
-				<td colspan="5" align="right">
+				<td colspan="6" align="right">
 					<button id="write">
 						<a href="CommuBbsController?command=write">write
 					</button>
@@ -141,6 +144,10 @@ for(int i = 0;i < bbslist.size(); i++){
 	</table>
 	</form>
 </div>
+
+
+
+
 
 
 <%-- 로그인 메시지 완료 되었을때 뜨는 메시지 --%>
