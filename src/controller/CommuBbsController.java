@@ -34,7 +34,9 @@ public class CommuBbsController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text./html; charset=utf-8"); 
 		
-		String command = req.getParameter("command");
+		String command = req.getParameter("command");	
+		
+		
 		
 		if(command.equals("list")) {
 			
@@ -72,7 +74,86 @@ public class CommuBbsController extends HttpServlet {
 			 
 		}else if(command.equals("read")) {
 			String Sseq = req.getParameter("seq");
-			System.out.println("SEQ : " + Sseq);
+			int seq = Integer.parseInt(Sseq);
+			
+			comService.readCount(seq);
+			CommuBbsDto comdto = comService.getCommu(seq);
+			
+			req.setAttribute("comdto", comdto);
+			dispatch("CommuBbsDetail.jsp", req, resp);
+		}else if(command.equals("delete")) {
+			String Sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(Sseq);
+			System.out.println("삭제 시퀀스 : " + Sseq);
+			
+			boolean isS = comService.delCommu(seq);
+			if(isS) {
+				req.setAttribute("msg", "삭제했습니다");
+				dispatch("CommuBbsController?command=list", req, resp);
+			}else { 
+				req.setAttribute("msg", "삭제 실패");
+				dispatch("CommuBbsController?command=read&seq="+seq, req, resp);
+			}
+		}else if(command.equals("classify")) {
+			String Starget_category = req.getParameter("target_category");
+			int target_category = Integer.parseInt(Starget_category);
+			
+			List<CommuBbsDto> bbslist = comService.getCategory(target_category);
+			//짐 싸기
+			req.setAttribute("bbslist", bbslist);
+			
+			//보내주기
+			dispatch("CommuBbslist.jsp", req, resp);
+			
+		}else if(command.equals("update")) {
+			String Sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(Sseq);
+			                                                                                                                                                                                    
+			CommuBbsDto comdto = comService.getCommu(seq); 		
+			
+			
+			req.setAttribute("comdto", comdto);
+			dispatch("CommuBbsUdt.jsp", req, resp);
+		}else if(command.equals("updateAf")) {
+			  String seq = req.getParameter("seq");
+		      String title = req.getParameter("title");
+		      String content = req.getParameter("content");
+		        
+		      CommuBbsDto comdto = new CommuBbsDto();
+		      comdto.setSeq(Integer.parseInt(seq));
+		      comdto.setTitle(title);
+		      comdto.setContent(content);
+		       
+		     
+		         boolean isS = comService.udtCommu(comdto);
+		         req.setAttribute("isS", isS);
+		         		         
+		         if(isS) {
+		           
+		            req.setAttribute("msg", "수정성공");
+		            dispatch("CommuBbsController?command=list", req, resp);
+		            
+		         }else {
+		            //JOptionPane.showMessageDialog(null, "수정실패");
+		            req.setAttribute("msg", "수정실패");
+		            dispatch("CommuBbsController?command=read", req, resp);
+		            
+		         }   
+		}else if(command.equals("search")) {
+			
+			  String Searchtype = req.getParameter("Searchtype");             //검색종류(글쓴이,제목,내용)
+			  String SearchWord = req.getParameter("SearchWord");   
+			  
+			  
+			  System.out.println(" search " + Searchtype +" word "+SearchWord);
+			 
+			  List<CommuBbsDto> bbslist = comService.getFindCommulist(Searchtype, SearchWord);
+				//짐 싸기
+				req.setAttribute("bbslist", bbslist);
+				
+				//보내주기
+				dispatch("CommuBbslist.jsp", req, resp);
+			  
 		}
 	}
 	//보내주는 함수

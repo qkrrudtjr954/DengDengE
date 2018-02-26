@@ -36,4 +36,26 @@ public class CommuBbsService {
 		public CommuBbsDto getCommu(int seq) {
 			return manager.getCommu(seq);
 		}
+		
+		public boolean delCommu(int seq) {
+			return manager.delCommu(seq);
+		}
+		
+		public List<CommuBbsDto> getCategory(int target_category){
+			return manager.getCategory(target_category);
+		}
+		
+		public void readCount(int seq) {
+			 manager.readCount(seq);
+		}
+		
+		public boolean udtCommu(CommuBbsDto comdto) {
+			return manager.udtCommu(comdto);
+		}
+		
+		public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord){
+			return manager.getFindCommulist(Searchtype, SearchWord);
+		}
 }
+
+
