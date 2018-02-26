@@ -149,11 +149,11 @@
         <div class="container">
         
 			<div class="row">
-			<h1 align="center">댕댕이 반려 동물 입양후기</h1>
+			<h1 align="center" class="offset-md-4">댕댕이 반려 동물 입양후기</h1>
 			</div>
 			
 			<div class="row">
-			<h3 align="center">회원님들의 생생한 입양 후기들</h3>
+			<h3 align="center" class="offset-md-5">생생한 입양 후기들</h3>
 			</div>
 			
 		
