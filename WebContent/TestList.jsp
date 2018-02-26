@@ -225,36 +225,32 @@ $(document).ready(function () {
 						}
 					%>
 					<div class="offset-md-1"></div>
-				</div>
-<div class="row" id="searchbar">
-<form class="form-inline my-2 my-lg-0" name="searchform" method="get" action="CommuBbsController">
-<input type="hidden" name="command" value="search" />
- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-</form>
-<!-- <div id="board_search_div">
-	<form name="searchform" method="get" action="CommuBbsController">
-		<input type="hidden" name="command" value="search" />
-		<table id="board_search_table">
-		<tr>
-			<td class="board_search_td">
-			<select name="Searchtype">
+				</div>		
+<div class="row">
+<button type="button" class="btn btn-success">글쓰기</button>
+</div>
+				
+				
+<nav class="navbar navbar-light bg-light offset-md-3">
+<form class="form-inline" name="searchform" method="get" action="CommuBbsController">
+	<input type="hidden" name="command" value="search" />
+
+	<div class="input-group">
+  		<div class="input-group-prepend">
+   		 <label class="input-group-text" for="inputGroupSelect01">검색조건</label>
+ 		 </div>
+	<select class="custom-select" name="Searchtype">
 			<option value="target_user_seq">글쓴이</option>
-			<option value="A.title">제목</option>
+			<option value="A.title">제목</option>	
+	</select>
+	</div>
+&nbsp;&nbsp;
+ <input class="form-control mr-sm-2" type="text" name="SearchWord" placeholder="Search" aria-label="Search">
+ <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 
-			</select></td>
-			<td class="board_search_td"><input type="text" name="SearchWord"></td>
-			<td class="board_search_td">
-			<input type="submit" value="검색">
-			</td>
-		</tr>
-	</table>
-	</form>
-</div>
- -->
+</form>
+</nav>
 
-
-</div>
 
 				<!-- 	-------------------------- -->
 			</div>

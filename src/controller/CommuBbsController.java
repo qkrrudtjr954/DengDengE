@@ -45,7 +45,7 @@ public class CommuBbsController extends HttpServlet {
 			req.setAttribute("bbslist", bbslist);
 			
 			//보내주기
-			dispatch("TestList.jsp", req, resp);
+			dispatch("CommuBbslist.jsp", req, resp);
 			
 		}else if(command.equals("write")) {
 			dispatch("CommuBbsWrite.jsp", req, resp);
@@ -103,7 +103,7 @@ public class CommuBbsController extends HttpServlet {
 			req.setAttribute("bbslist", bbslist);
 			
 			//보내주기
-			dispatch("TestList.jsp", req, resp);
+			dispatch("CommuBbslist.jsp", req, resp);
 			
 		}else if(command.equals("update")) {
 			String Sseq = req.getParameter("seq");
