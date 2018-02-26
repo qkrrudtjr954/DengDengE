@@ -50,9 +50,17 @@ public class AfterBbsService {
 		return afterBbsDao.AfterdeletBbs(seq);
 	}
 	
+	
+	//조회수
 	public void readCount(int seq) {
         afterBbsDao.readCount(seq);
     }
+	
+	public List<AfterBbsDto> getFindAfterlist(String Searchtype, String SearchWord){
+		return afterBbsDao.getFindAfterlist(Searchtype, SearchWord);
+	}
+	
+	
 	
 	
 	

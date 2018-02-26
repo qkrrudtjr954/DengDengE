@@ -355,7 +355,73 @@ public class AfterBbsDao {
 	
 	}
 	
+	
+	
+	//After Bbs list 검색
+	public List<AfterBbsDto> getFindAfterlist(String Searchtype, String SearchWord){
+		
+	      List<AfterBbsDto> list = new ArrayList<>();
+	      
+	      
+	      String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
+					+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
+					+ " FROM AFTERBBS "
+					+ " WHERE DEL=0 AND " + Searchtype + " LIKE '%" + SearchWord + "%'"
+		              + " ORDER BY REG_DATE DESC ";
 
+	      
+	      
+
+	   
+	      Connection conn = null;
+	      PreparedStatement psmt = null;
+	      ResultSet rs = null;
+
+	      try {
+	         conn = DBConnection.makeConnection();
+	         System.out.println("2/6 getFindAfterlist Success");
+
+	         psmt = conn.prepareStatement(sql);
+	         System.out.println("sql = " + sql);
+	         System.out.println("3/6 getFindAfterlist Success");
+	         
+	      
+	         rs = psmt.executeQuery();
+	         System.out.println("4/6 getFindAfterlist Success");
+
+	         while (rs.next()) {
+	            int i = 1;
+	            
+	      
+
+	            AfterBbsDto dto = new AfterBbsDto(rs.getInt(i++), // seq
+								            		rs.getString(i++),//String title, 
+								            		rs.getString(i++),//String pic1, 
+								            		rs.getString(i++),//String content, 
+								    				rs.getInt(i++),//int userSeq, 
+								    				rs.getString(i++),//String rdate, 
+								    				rs.getString(i++),//String ldate,
+								    				rs.getInt(i++), //del
+								    				0); //readcount
+	            list.add(dto);
+	         }
+	         System.out.println("5/6 getFindAfterlist Success");
+
+	      } catch (SQLException e) {
+	         System.out.println("getFindAfterlist fail");
+	         System.out.println(e.getMessage());
+	         System.out.println(e.getErrorCode());
+	         System.out.println(e.getSQLState());
+
+	      } finally {
+	         DBClose.close(psmt, conn, rs);
+	      
+	      }
+
+	      return list;
+
+	
+	}
 	
 	
 	

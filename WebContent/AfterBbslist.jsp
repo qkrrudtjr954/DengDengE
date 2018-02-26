@@ -25,27 +25,25 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 
 
  
-<!--  검색부분
- <table border="2" style="margin-left: auto; margin-right: auto;">
- <tr>
- <td colspan="1">	
-<select name="search" style="width:70px;height: 25px" id="search">
-	<option value="an1">강아지</option>
-	<option value="an2">고양이</option>
-	<option value="an3">기타</option>
-</select>
-<select name="search1" style="width: 70px;height: 30px id=search">
-	<option value="id">작성자</option>
-	<option value="title">제목</option>
-</select>
-<input type="text" name="text" size="30" style="height: 25px" id="text">
-<button type="button" id="searchbutton" class="btn">검색</button>
-<button type="button" id="searchreset" class="btn">목록</button>
-</td>
-</tr>
-</table>
+<div id="board_search_div" align="center">
+   <form name="searchform" method="get" action="AfterBbsController">
+      <input type="hidden" name="command" value="AfterBbsSearch">
+      <table id="board_search_table">
+      <tr>
+         <td class="board_search_td">
+         <select name="Searchtype">
+         <option value="target_user_seq">글쓴이</option>
+         <option value="title">제목</option>
 
- -->
+         </select></td>
+         <td class="board_search_td"><input type="text" name="SearchWord"></td>
+         <td class="board_search_td">
+         <input type="submit" value="검색">
+         </td>
+      </tr>
+   </table>
+   </form>
+</div>
  
 
 

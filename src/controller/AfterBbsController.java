@@ -136,7 +136,22 @@ public class AfterBbsController extends HttpServlet {
 	         }
 			
 			
-		}
+		}else if(command.equals("AfterBbsSearch")) {
+	         
+	           String Searchtype = req.getParameter("Searchtype");             //검색종류(글쓴이,제목,내용)
+	           String SearchWord = req.getParameter("SearchWord");   
+	           
+	           
+	           System.out.println(" search " + Searchtype +" word "+SearchWord);
+	          
+	           List<AfterBbsDto> afterBbslist = bbs.getFindAfterlist(Searchtype, SearchWord);
+	            //짐 싸기
+	            req.setAttribute("afterBbslist", afterBbslist);
+	            
+	            //보내주기
+	            dispatch("AfterBbslist.jsp", req, resp);
+	           
+	      }
 		
 		
 	}

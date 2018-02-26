@@ -18,7 +18,7 @@
 <%
 AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 %>
-${bbs }
+
 
 
 
