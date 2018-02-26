@@ -267,7 +267,7 @@ $(document).ready(function() {
 	$('.form2').hide();
 	
     $('#summernote1').summernote({
-    	width: 1045,
+    		width: 1045,
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor

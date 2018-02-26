@@ -36,31 +36,21 @@ if(aniBbsDto != null){
 		int gen = aniBbsDto.getGender();
 		
 		if(medi == 1){
-			m = "YES";
-			
+			m = "YES";			
 		}else {
-			m = "NO";
-			
+			m = "NO";			
 		}
 		
-		if(neu == 1){
-			
-			n = "YES";
-			
-		}else {
-			
-			n = "NO";
-			
-		}
-		
-		if(gen == 1){
-			
+		if(neu == 1){			
+			n = "YES";			
+		}else {			
+			n = "NO";			
+		}		
+		if(gen == 1){			
 			g = "여아";
-		}else {
-			
+		}else {			
 			g = "남아";
 		}
-		
 	}
 %>
 	<header>
@@ -131,8 +121,8 @@ if(aniBbsDto != null){
 			<div class="container">
 
 				<div class="row" style="margin:0 auto;width:900px;">
-					<h3 style="text-decoration: underline;"
-						class="offset-md-5" >댕댕이의 보호동물</h3>
+					<h4 style="text-decoration: underline;"
+						class="offset-md-5" >댕댕이의 보호동물</h4>
 				</div>
 
 				<br>
