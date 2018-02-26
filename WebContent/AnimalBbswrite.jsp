@@ -13,7 +13,7 @@
 <a href="AnimalBbsController?command=animlist">list</a>
 <hr>
 
-<form action="AnimalBbsController">
+<form action="AnimalBbsController" method="post">
 <input type="hidden" name="command" value="writeAf">
 <table border="1" style="margin-left: auto; margin-right: auto;">
 <col width="100"><col width="100"><col width="100"><col width="100">
@@ -93,13 +93,48 @@
 		<textarea rows="20" cols="180" name="content"></textarea>
 	</td>
 </tr>
+</table>
+<br>
+
+<h4 style="text-decoration: underline;">작성자 인적사항</h4>
+<table border="1" style="margin-left: auto; margin-right: auto;">
+<col width="100"><col width="150">
+<tr>
+	<td>아이디</td>
+	<td>
+		<input type="text" name="id" value="<%="id" %>" readonly="readonly">
+	</td>
+</tr>
+
+<tr>
+	<td>연락처</td>
+	<td>
+		<input type="text" name="contact">&nbsp;&nbsp;&nbsp;<input type="submit" value="인증하기" class="btn">
+	</td>
+</tr>
+
+<tr>
+	<td>기타사항</td>
+	<td>
+		<textarea rows="20" cols="180" name="desc"></textarea>
+	</td>
+</tr>
+
 <tr align="right">
 	<td colspan="11">
-		<input type="submit" value="next">
+		<input type="submit" value="글동록">
 	</td>
 </tr>
 </table>
 </form>
+
+<script type="text/javascript">
+$(".btn").click(function () {
+	alert("추후예정");
+	return;
+});
+
+</script>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>

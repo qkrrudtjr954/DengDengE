@@ -10,10 +10,11 @@
 <title>AnimalBbslist.jsp</title>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
-<body>
+<body>	
  
 <%
 List<AnimalBbsDto> animlist = (List<AnimalBbsDto>)request.getAttribute("animlist");
+
 for(int i=0;i<animlist.size(); i++){
 	System.out.println(animlist.get(i).toString());
 }
@@ -39,60 +40,76 @@ if(msg != null){
 <br><br><br><br><br>
 <hr>
 
-<form action="AnimalBbsController">
+
 <table style="margin-left: auto; margin-right: auto;">
 <col width="150"><col width="150"><col width="150"><col width="150"><col width="150">
 <tr>
 	<td>
-		<input type="submit" name="area" value="수도권" style="background-color: ">
+		<input type="submit" name="area" value="수도권" 
+		onclick="change1(this)">
 	</td>
 	<td>
-		<input type="submit" name="area" value="강원도">
+		<input type="submit" name="area" value="강원도"
+		onclick="change1(this)">
 	</td>
 	<td>
-		<input type="submit" name="area" value="충청도">
+		<input type="submit" name="area" value="충청도"
+		onmouseout="change2(this)">
+	<td>
+		<input type="submit" name="area" value="경상도"
+		onclick="change1(this)">
 	</td>
 	<td>
-		<input type="submit" name="area" value="경상도">
-	</td>
-	<td>
-		<input type="submit" name="area" value="전라도">
+		<input type="submit" name="area" value="전라도"
+		onclick="change1(this)">
 	</td>
 </tr>
 
 <tr>
 	<td>
-		<input type="submit" name="kinds" value="댕댕이">
+		<input type="submit" name="kinds" value="댕댕이"
+		onclick="change1(this)">
 	</td>
 	<td>
-		<input type="submit" name="kinds" value="냥냥이">
+		<input type="submit" name="kinds" value="냥냥이"
+		onclick="change1(this)">
 	</td>
 	<td colspan="3">
-		<input type="submit" name="kinds" value="etc">
+		<input type="submit" name="kinds" value="etc"
+		onclick="change1(this)">
 	</td>
 </tr>
+</table>
+
+<form action="AnimalBbsController" method="post">
+<table  style="margin-left: auto; margin-right: auto;">
+<col width="150"><col width="150"><col width="150"><col width="150"><col width="150">
 <%
 if(animlist == null || animlist.size() == 0){
 	%>
 		<tr>
 			<td colspan="5" align="center">작성된 글이 없습니다</td>
 		</tr>
+		
+		<tr>	
 	<%
 }for(int i=0;i<animlist.size();i++){
 	AnimalBbsDto aniBbsDto = animlist.get(i);
-	System.out.println(aniBbsDto.getSeq());
+	//System.out.println(aniBbsDto.getSeq());
 	%>
-		<tr>	
+		
 			<td>
 				<a href="AnimalBbsController?command=detail&seq=<%=aniBbsDto.getSeq() %>">
 					<img src="<%=aniBbsDto.getPic1() %>"><br>					
 					<%=aniBbsDto.getTitle() %>
 				</a>
 			</td>
-		</tr>
+		
 	<%
 }
 %>
+</tr>
+
 <tr>
 	<td colspan="5" align="right">
 		<input type="hidden" name="command" value="write">
@@ -102,6 +119,14 @@ if(animlist == null || animlist.size() == 0){
 
 </table>
 </form>
+
+<script type="text/javascript">
+/* function change1(obj){
+    obj.style.background = '#C8FAC8';
+    obj.style.color = 'white';
+}
+ */
+</script>
 
 </body>
 </html>

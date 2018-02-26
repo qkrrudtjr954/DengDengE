@@ -21,10 +21,10 @@ if(aniBbsDto != null){
 		int  medi = aniBbsDto.getMedicine();
 		int neu = aniBbsDto.getNeutralization();
 		int gen = aniBbsDto.getGender();
-		System.out.println("m"+medi);
+		/* System.out.println("m"+medi);
 		System.out.println("n"+neu);
 		System.out.println("g"+gen);
-		
+		 */
 		if(medi == 1){
 			m = "YES";
 			
@@ -50,9 +50,9 @@ if(aniBbsDto != null){
 			
 			g = "NO";
 		}
-		System.out.println("m"+m);
+		/* System.out.println("m"+m);
 		System.out.println("n"+n);
-		System.out.println("g"+g);
+		System.out.println("g"+g); */
 	}
 %>
 
@@ -60,6 +60,9 @@ if(aniBbsDto != null){
 <br><br><br><br>
 <a href="AnimalBbsController?command=animlist">list</a>
 <hr>
+
+*제목과 내용 수정가능
+<br>
 
 <form action="AnimalBbsController">
 <input type="hidden" name="command" value="updateAf">
@@ -111,7 +114,8 @@ if(aniBbsDto != null){
 <tr align="center">
 	<td>제목</td>
 	<td colspan="10">
-		<input type="text" name="title" size="175" value="<%=aniBbsDto.getTitle() %>">
+		<input type="text" name="title" size="175" value="<%=aniBbsDto.getTitle() %>" 
+		style="background-color: #C8FAC8">
 	</td>
 </tr>
 
@@ -133,7 +137,7 @@ if(aniBbsDto != null){
 <tr>
 	<td>내용</td>
 	<td colspan="10">
-		<textarea rows="20" cols="180" name="content"><%=aniBbsDto.getContent() %></textarea>
+		<textarea rows="20" cols="180" name="content" style="background-color: #C8FAC8"><%=aniBbsDto.getContent() %></textarea>
 	</td>
 </tr>
 <tr align="right">

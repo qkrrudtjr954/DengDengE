@@ -80,6 +80,9 @@ public class AnimalBbsController extends HttpServlet {
 			String descripttion = req.getParameter("descrip");
 			String pic1 = req.getParameter("pic");
 			String content = req.getParameter("content");
+			
+			String contect = req.getParameter("contect");
+			String description = req.getParameter("desc");
 	
 			
 			if(ttype != null) {
@@ -90,7 +93,7 @@ public class AnimalBbsController extends HttpServlet {
 			}
 			
 			boolean isS = aniBbService.wirteAnimalBbs(
-					new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, pic1, content, 1, "연락처", "내용"));
+					new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, pic1, content, 1, contect, description));
 			
 			if(isS) {
 				// msg
