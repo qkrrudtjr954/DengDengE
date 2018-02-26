@@ -61,17 +61,32 @@ public class AnimalBbsController extends HttpServlet {
 			String ttype[] = req.getParameterValues("type");
 			String type = null;
 			String location = req.getParameter("location");
+			
 			String mmedicine = req.getParameter("medi");
-			int medicine = Integer.parseInt(mmedicine);
+			int medicine;
+			if(mmedicine.equals("YES")) {
+				medicine = 1;
+			}else {
+				medicine = 0;
+			}System.out.println("m:"+medicine);	
 			
 			
 			String nneutralization = req.getParameter("neu");
-			int neutralization = Integer.parseInt(nneutralization);
+			int neutralization;
+			if(nneutralization.equals("YES")) {
+				neutralization = 1;
+			}else {
+				neutralization = 0;
+			}System.out.println("n:"+neutralization);	
 			
 			
 			String ggender = req.getParameter("gen");
-			int gender =  Integer.parseInt(ggender);
-			
+			int gender;
+			if(ggender.equals("여자")) {
+				gender = 1;
+			}else {
+				gender = 0;
+			}System.out.println("g:"+gender);	
 			
 			String title = req.getParameter("title");
 			String descripttion = req.getParameter("descrip");

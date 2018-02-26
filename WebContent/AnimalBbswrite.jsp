@@ -10,12 +10,13 @@
     <link rel="icon" href="./icon/favicon.ico">
 
     <title>Deng Deng E list</title>
-
+	
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
+    
   </head>
 
   <body>
@@ -80,120 +81,185 @@
 			</ul>
   		</nav>
       </section>
+	<form action="AnimalBbsController">
+		<input type="hidden" name="command" value="writeAf">
+		<div class="row">
+			<a href="AnimalBbsController?command=animlist">list</a>
+		</div>
 
-<form action="AnimalBbsController" method="post">
-	<input type="hidden" name="command" value="writeAf">
-      <div class="album py-5 bg-light">
-        <div class="container">
-			<div class="row">
-				<h1 align="center">입양하기 글 작성</h1>			
-          </div>
-          
-          <div class="row">
-          		<a href="AnimalBbsController?command=animlist">list</a>
-          </div>
-          
-          <div class="row">
-          	 	<div class="input-group-prepend">
-				    <span class="input-group-text" id="">이름</span>
-				    <input type="text" class="form-control" size="20" name="name" placeholder="이름">
-				</div>
-				  
-          	 	&nbsp;&nbsp;&nbsp;
-          	 	<div class="input-group-prepend">
-				    <span class="input-group-text" id="">나이</span>
-				    <input type="text" class="form-control" size="20" name="age" placeholder="나이">
-				</div>
+		<div class="album py-5 bg-light">
+			<div class="container">
+				<div class="form1">
 				
-				&nbsp;&nbsp;&nbsp;
-				<div class="input-group-prepend">
-				    <span class="input-group-text" name="kinds">묘/견종</span>
-				    <input type="text" class="form-control" size="20" name="kinds" placeholder="묘/견종">
+					<div class="row">
+						<h4 style="text-decoration: underline; text-align: center;">입양하기 글 작성</h4>
+					</div>
+
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="">이름</span> 
+							<input type="text" class="form-control" size="20" name="name" placeholder="이름">
+						</div>
+
+						&nbsp;&nbsp;&nbsp;
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="">나이</span> 
+							<input type="number" class="form-control" size="20" name="age" placeholder="나이">
+						</div>
+
+						&nbsp;&nbsp;&nbsp;
+						<div class="input-group-prepend">
+							<span class="input-group-text">묘/견종</span> 
+							<input type="text"	class="form-control" size="20" name="kinds" placeholder="묘/견종">
+						</div>
+
+						&nbsp;&nbsp;&nbsp;
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">분류</label>
+						</div>
+						<select class="custom-select" id="inputGroupSelect01" style="width: 200px" name="type">
+							<option selected>choice</option>
+							<option value="유기견">유기견</option>
+							<option value="개인분양">개인분양</option>
+							<option value="etc">etc</option>
+						</select>
+					</div>
+
+					<br>
+
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text">주소</span> 
+							<input type="text"	class="form-control" size="50" name="location"	id="sample4_roadAddress" placeholder="도로명주소">
+							<button class="btn btn-outline-secondary" type="button"
+								onclick="sample4_execDaumPostcode()">주소찾기</button>
+						</div>
+					</div>
+
+					<br>
+
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text">접종여부</span>
+							<div class="input-group-text">
+								<input type="checkbox"
+									aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" class="form-control" aria-label="Text input with checkbox" 
+							name="medi" size="2" value="YES">
+							<div class="input-group-text">
+								<input type="checkbox" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" class="form-control"
+								aria-label="Text input with checkbox" name="medi" size="2" value="NO">
+						</div>
+
+
+						&nbsp;&nbsp;&nbsp;
+						<div class="input-group-prepend">
+							<span class="input-group-text">중성화</span>
+							<div class="input-group-text">
+								<input type="checkbox" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" class="form-control" aria-label="Text input with checkbox" name="neu" size="2"
+								value="YES">
+							<div class="input-group-text">
+								<input type="checkbox" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" class="form-control" aria-label="Text input with checkbox" name="neu" size="2"
+								value="NO">
+						</div>
+
+						&nbsp;&nbsp;&nbsp;
+						<div class="input-group-prepend">
+							<span class="input-group-text">성별</span>
+							<div class="input-group-text">
+								<input type="checkbox" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" class="form-control" aria-label="Text input with checkbox" name="gen" size="2"
+								value="여자">
+							<div class="input-group-text">
+								<input type="checkbox" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" class="form-control" aria-label="Text input with checkbox" name="gen" size="2"
+								value="남자">
+						</div>
+					</div>
+
+					<br>
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="">제목</span> 
+							<input type="text"	class="form-control" name="title" size="130" placeholder="제목 입력">
+						</div>
+					</div>
+
+					<br>
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="">특이사항</span> 
+							<input type="text" class="form-control" name="descrip" size="125" placeholder="특이사항 입력">
+						</div>
+					</div>
+
+					<br>
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text" style="align-content: center;">내용</span>
+							<textarea name="content" id="summernote1"></textarea>
+						</div>
+					</div>
+
+					<br>
+					<div class="row">
+						<button class="offset-md-10 btn btn-outline-secondary"
+							type="button" id="btn" style="width: 100px">next</button>
+					</div>
+
 				</div>
-				
-				&nbsp;&nbsp;&nbsp;
-				 <div class="input-group-prepend">
-				    <label class="input-group-text" for="inputGroupSelect01">분류</label>
-				 </div>
-				 <select class="custom-select" id="inputGroupSelect01" style="width: 200px" name="type">
-					<option selected>choice</option>
-					<option value="유기견">유기견</option>
-					<option value="개인분양">개인분양</option>
-					<option value="etc">etc</option>
-				 </select>
+				<br> <br>
+
+				<div class="form2">
+					<div class="row">
+						<h4 style="text-decoration: underline;">작성자 인적사항</h4>
+					</div>
+
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="">아이디</span> 
+							<input type="text" class="form-control" size="20" name="Tid" placeholder="이름" value="로그인한 유저 id" readonly="readonly"> 
+							&nbsp;&nbsp;&nbsp;
+							<span class="input-group-text" id="">연락처</span> 
+							<input type="text" class="form-control" size="20" name="contect" placeholder="연락처">
+							<button class="btn btn-outline-secondary" type="button">인증하기</button>
+						</div>
+					</div>
+
+					<br>
+					<div class="row">
+						<div class="input-group-prepend">
+							<span class="input-group-text" style="align-content: center;">기타사항</span>
+							<textarea name="desc" id="summernote2"></textarea>
+						</div>
+					</div>
+					
+					<br>
+					<div class="row">
+						<input type="submit" class="offset-md-10 btn btn-outline-secondary" style="width: 100px" value="글등록">
+						</div>
+					</div>
+
+				</div>
+
+
+
 			</div>
-			<br>
-			
-			<div class="row">
-          	 	<div class="input-group-prepend">
-				    <span class="input-group-text">주소</span>
-				    <input type="text" class="form-control" size="50" name="location"
-				    id="sample4_roadAddress" placeholder="도로명주소">
-				    <button class="btn btn-outline-secondary" type="button" onclick="sample4_execDaumPostcode()">주소찾기</button>
-			</div>		
-          </div>
-          <br>
-          
-          <div class="row">
-			<div class="input-group-prepend">
-			<span class="input-group-text">접종여부</span>
-			    <div class="input-group-text">			    
-			      <input type="checkbox" aria-label="Checkbox for following text input">
-			    </div>
-			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="YES">
-			    <div class="input-group-text">			    
-			      <input type="checkbox" aria-label="Checkbox for following text input">
-			    </div>
-			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="NO">
-		 	</div>
-		 	
-		 	&nbsp;&nbsp;&nbsp;
-			<div class="input-group-prepend">
-			<span class="input-group-text">중성화</span>
-			    <div class="input-group-text">			    
-			      <input type="checkbox" aria-label="Checkbox for following text input">
-			    </div>
-			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="YES">
-			    <div class="input-group-text">			    
-			      <input type="checkbox" aria-label="Checkbox for following text input">
-			    </div>
-			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="NO">
-		 	</div>
-		 	  
-		 	&nbsp;&nbsp;&nbsp;
-			<div class="input-group-prepend">
-			<span class="input-group-text">성별</span>
-			    <div class="input-group-text">			    
-			      <input type="checkbox" aria-label="Checkbox for following text input">
-			    </div>
-			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="YES">
-			    <div class="input-group-text">			    
-			      <input type="checkbox" aria-label="Checkbox for following text input">
-			    </div>
-			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="NO">
-		 	</div>          
-          </div>
-          <br>
-          <div class="row">
-         	<div class="input-group-prepend">
-				    <span class="input-group-text" id="">제목</span>
-				    <input type="text" class="form-control" name="title" size="140" placeholder="제목 입력">
-				</div>           
-          </div>
-          
-          <br>
-          <div class="row">
-         	<div class="input-group-prepend">
-				    <span class="input-group-text" id="">제목</span>
-				    <input type="text" class="form-control" name="title" size="140" placeholder="제목 입력">
-				</div>           
-          </div>
-        
-        </div>
-      </div>
- </form>    
+		</div>
 
-    </main>
+	</form>
+
+
+	</main>
 
     <footer class="text-muted">
       <div class="container">
@@ -211,8 +277,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 	
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.form2').hide();
+	
+    $('#summernote1').summernote({
+    	width: 1000,
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+    });
+    
+    $('#summernote2').summernote({
+    	width: 1000,
+    	height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true                  // set focus to editable area after initializing summernote
+    	
+    });
+    
+    $('#btn').click(function () {
+		$('.form2').show();
+		$('.form1').hide();
+	})
+    
+    
+});
+
+</script>
 	
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
@@ -226,27 +322,7 @@
 		});
 	</script>
 	
-	<script type="text/javascript">
-$(document).ready(function() {
-    $('#summernote1').summernote({
-            height: 300,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
-    });
-    
-    
-    $('#summernote2').summernote({
-    	width: 1200,
-    	height: 300,                 // set editor height
-        minHeight: null,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-        focus: true                  // set focus to editable area after initializing summernote
-    	
-    });
-});
 
-</script>
 
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
