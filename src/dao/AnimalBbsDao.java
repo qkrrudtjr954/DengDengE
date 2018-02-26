@@ -207,7 +207,8 @@ public class AnimalBbsDao {
 	// 입양하기 글 삭제
 	public boolean deleteAnimalBbs(int seq) {
 		String sql = " UPDATE ANIMALBBS SET "
-				+ " DEL=1 WHERE SEQ=?";
+				+ " DEL=1 "
+				+ " WHERE SEQ=? ";
 				
 			Connection conn = null;
 			PreparedStatement psmt = null;		
