@@ -125,169 +125,175 @@ if(aniBbsDto != null){
   		</nav>
       </section>
       
-	<form action="AnimalBbsController">
+	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="list">
-		<div class="row">
-			<a href="AnimalBbsController?command=animlist">list</a>
-		</div>
-
 		<div class="album py-5 bg-light">
 			<div class="container">
 
-				<div class="row">
-					<h3 style="text-decoration: underline; text-align: center;"
-						class="offset-md-5">댕댕이의 보호동물</h3>
+				<div class="row" style="margin:0 auto;width:900px;">
+					<h3 style="text-decoration: underline;"
+						class="offset-md-5" >댕댕이의 보호동물</h3>
 				</div>
 
 				<br>
 				<div class="row">
 					<div>
-						<span style="font-size: medium"> 
-							<%=aniBbsDto.getLocation()%>&nbsp;&nbsp;
+						<span style="font-size: medium"> <%=aniBbsDto.getLocation()%>&nbsp;&nbsp;
 							<%=aniBbsDto.getTitle()%>
 						</span>
 					</div>
 				</div>
 
 				<div class="row">
-					<span style="font-size: x-small"> 
-						<%=aniBbsDto.getType()%>
-						&nbsp;&nbsp;&nbsp; 
-						<%=aniBbsDto.getRdate()%>
-					</span>&nbsp;&nbsp; 
-					<span style="font-size: x-small">
-						조회수 <%=aniBbsDto.getReadcount()%>
+					<span style="font-size: x-small"> <%=aniBbsDto.getType()%>
+						&nbsp;&nbsp;&nbsp; <%=aniBbsDto.getRdate()%>
+					</span>&nbsp;&nbsp; <span style="font-size: x-small"> 조회수 <%=aniBbsDto.getReadcount()%>
 					</span>
+					<a href="AnimalBbsController?command=animlist"
+					class="offset-md-9 btn btn-outline-secondary">list</a>	
 				</div>
 				<hr>
-				
-				<div class="row">
+
+				<div class="row" style="margin:0 auto;width:900px;">
 					<h4 class="offset-md-5">보호동물정보</h4>
 				</div>
-				
-				<div>
-				<table align="center" border="0" cellpadding="0" cellspacing="0"
-					class="__se_tbl"
-					style="border-width: 1px 1px 0px 0px; text-align: center; border-top-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-top-style: solid; border-right-style: solid;">
-					<tbody>
-						<tr>
 
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);">
-								<div style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;묘종/견종</span>
-								</div>
-							</td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);">
-								<div style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><%=aniBbsDto.getKinds() %>&nbsp;</span>
-								</div>
-							</td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);">
-								<div style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">나이&nbsp;</span>
-								</div>
-							</td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><%=aniBbsDto.getAge() %>&nbsp;</span>
-								</div></td>
-						</tr>
-						<tr>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;성별</span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=g %></span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">분류&nbsp;</span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><%=aniBbsDto.getType() %>&nbsp;</span>
-								</div></td>
-						</tr>
-						<tr>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;접종유무</span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=m %></span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;중성화</span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=n %>
-										</span>
-								</div></td>
-						</tr>
-						<tr>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;이름</span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=aniBbsDto.getName() %></span>
-								</div></td>
+				<div class="row">
+					<table align="center" border="0" cellpadding="0" cellspacing="0"
+						class="__se_tbl"
+						style="border-width: 1px 1px 0px 0px; text-align: center; border-top-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-top-style: solid; border-right-style: solid;">
+						<tbody>
+							<tr>
+
 								<td
-								style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;특이사항</span>
-								</div></td>
-							<td
-								style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
-									style="text-align: center;">
-									<span
-										style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=aniBbsDto.getDescripttion() %></span>
-								</div></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
+									style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);">
+									<div style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;묘종/견종</span>
+									</div>
+								</td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);">
+									<div style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=aniBbsDto.getKinds() %></span>
+									</div>
+								</td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);">
+									<div style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">나이&nbsp;</span>
+									</div>
+								</td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><%=aniBbsDto.getAge() %>&nbsp;</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;성별</span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=g %></span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">분류&nbsp;</span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><%=aniBbsDto.getType() %>&nbsp;</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;접종유무</span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=m %></span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;중성화</span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><%=n %>&nbsp;
+										</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 167px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;이름</span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 298px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;<%=aniBbsDto.getName() %></span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 155px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(99, 99, 99);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(255, 255, 255); font-family: 나눔고딕, NanumGothic; font-size: 10pt;">&nbsp;특이사항</span>
+									</div></td>
+								<td
+									style="border-width: 0px 0px 1px 1px; width: 311px; height: 18px; border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);"><div
+										style="text-align: center;">
+										<span
+											style="color: rgb(0, 0, 0); font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><%=aniBbsDto.getDescripttion() %>&nbsp;</span>
+									</div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 				
+				<br>
+				<div class="row" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid; border-bottom: 1px solid; 
+					height: 800px; margin:0 auto;width:900px;">
+					<span>
+						<%=aniBbsDto.getContent() %>
+					</span>
+				</div>
+				
+				<br>
+				<div class="row">	
+					<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" 
+					class="offset-md-9 btn btn-outline-secondary">수정</a>&nbsp;&nbsp;
+					<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>" 
+					class="btn btn-outline-secondary">삭제</a>
+				</div>
 
 			</div>
-
-			</div>
+		</div>
 
 	</form>
 

@@ -81,7 +81,7 @@
 			</ul>
   		</nav>
       </section>
-	<form action="AnimalBbsController">
+	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="writeAf">
 		<div class="row">
 			<a href="AnimalBbsController?command=animlist">list</a>
@@ -91,9 +91,14 @@
 			<div class="container">
 				<div class="form1">
 				
-					<div class="row">
+					<div class="row" style="margin:0 auto;width:900px;">
 						<h4 style="text-decoration: underline;" class="offset-md-5">입양하기 글 작성</h4>
 					</div>
+					<div>
+						<a href="AnimalBbsController?command=animlist"
+					class="offset-md-11 btn btn-outline-secondary">list</a>	
+					</div>
+					<hr>
 
 					<div class="row">
 						<div class="input-group-prepend">
@@ -221,7 +226,7 @@
 
 				<div class="form2">
 					<div class="row">
-						<h4 style="text-decoration: underline;" class="offset-md-5">작성자 인적사항</h4>
+						<h4 style="text-decoration: underline; background-color: #fff" class="offset-md-5" >작성자 인적사항</h4>
 					</div>
 
 					<div class="row">
@@ -301,6 +306,7 @@ $(document).ready(function() {
     });
     
     $('#btn').click(function () {
+    	// 입력값 판정
 		$('.form2').show();
 		$('.form1').hide();
 	})
