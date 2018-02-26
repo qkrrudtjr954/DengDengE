@@ -20,8 +20,8 @@ public class AnimalBbsDto implements Serializable {
 	private int userSeq;			// 작성자 
 	private String contact;		// 연락처
 	private String description;	// 기타사항
- 	private String Rdate;			// 등록날짜
-	private String LUpdate;		// 마지막 수정날짜
+ 	private String reg_date;			// 등록날짜
+	private String last_update;		// 마지막 수정날짜
 	private int del;
 	private int readcount;
 	
@@ -50,8 +50,8 @@ public class AnimalBbsDto implements Serializable {
 		this.userSeq = userSeq;
 		this.contact = contact;
 		this.description = description;
-		Rdate = rdate;
-		LUpdate = lUpdate;
+		this.reg_date = rdate;
+		this.last_update = lUpdate;
 		this.del = del;
 		this.readcount = readcount;
 	}
@@ -84,8 +84,7 @@ public class AnimalBbsDto implements Serializable {
 		this.title = title;
 		this.content = content;
 	}
-
-
+	
 
 	public int getSeq() {
 		return seq;
@@ -279,26 +278,26 @@ public class AnimalBbsDto implements Serializable {
 
 
 
-	public String getRdate() {
-		return Rdate;
+	public String getReg_date() {
+		return reg_date;
 	}
 
 
 
-	public void setRdate(String rdate) {
-		Rdate = rdate;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 
 
 
-	public String getLUpdate() {
-		return LUpdate;
+	public String getLast_update() {
+		return last_update;
 	}
 
 
 
-	public void setLUpdate(String lUpdate) {
-		LUpdate = lUpdate;
+	public void setLast_update(String last_update) {
+		this.last_update = last_update;
 	}
 
 
@@ -333,9 +332,15 @@ public class AnimalBbsDto implements Serializable {
 				+ ", type=" + type + ", location=" + location + ", medicine=" + medicine + ", neutralization="
 				+ neutralization + ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1
 				+ ", content=" + content + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
-				+ description + ", Rdate=" + Rdate + ", LUpdate=" + LUpdate + ", del=" + del + ", readcount="
-				+ readcount + "]";
+				+ description + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
+				+ ", readcount=" + readcount + "]";
 	}
+
+
+
+	
+
+
 
 	
 	

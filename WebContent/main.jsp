@@ -20,15 +20,16 @@
 
   <body>
 	<header>
+	<a href="AnimalController?command=animlist">go</a>
 		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavDropdown">
-					<ul class="navbar-nav offset-md-7">
-						<c:choose>
-							<c:when test="${current_user == null }">
+			<a class="navbar-brand offset-md-1" href="#">DengDengE</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav offset-md-9">
+					<c:choose>
+						<c:when test="${current_user == null }">
 							<!-- 로그인 안했을 때 -->
 							<li class="nav-item">
 								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
@@ -39,12 +40,10 @@
 						</c:when>
 						<c:otherwise>
 							<!-- 로그인 했을 때 -->
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=signout">로그아웃</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=myPage">마이 페이지</a>
-							</li>
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=signout">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=myPage">마이 페이지</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -58,7 +57,7 @@
           <h1 class="jumbotron-heading">Album example</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
           <p>
-            <a href="#" class="btn btn-success my-2">Main call to action</a>
+            <a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
           </p>
         </div>
       </section>
@@ -66,16 +65,16 @@
 	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	        <ul class="nav menu justify-content-center">
 			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
+			    <a class="nav-link" href="#">분양소 찾기</a>
 			  </li>
 			</ul>
   		</nav>

@@ -1,147 +1,203 @@
-<%@page import="dto.AnimalBbsDto"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AnimalBbslist.jsp</title>
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="./icon/favicon.ico">
+
+<title>Deng Deng E list</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Custom styles for this template -->
+<link href="./css/main.css" rel="stylesheet">
 </head>
-<body>	
- 
-<%
-List<AnimalBbsDto> animlist = (List<AnimalBbsDto>)request.getAttribute("animlist");
 
-for(int i=0;i<animlist.size(); i++){
-	System.out.println(animlist.get(i).toString());
-}
-%>
- 
- 
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand offset-md-1" href="#">DengDengE</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav offset-md-9">
+					<c:choose>
+						<c:when test="${current_user == null }">
+							<!-- 로그인 안했을 때 -->
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=goSignUp">회원가입</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<!-- 로그인 했을 때 -->
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=signout">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=myPage">마이 페이지</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<main role="main">
 
- 
-<%-- <%
-String msg = (String)request.getAttribute("msg");
-%>
-<%
-if(msg != null){
-	%>
-		<script type="text/javascript">
-			alert("<%=msg %>");
-		</script>
-	<%
-}
-%> --%>
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="jumbotron-heading">Album example</h1>
+			<p class="lead text-muted">Something short and leading about the
+				collection below—its contents, the creator, etc. Make it short and
+				sweet, but not too short so folks don't simply skip over it
+				entirely.</p>
+			<p>
+				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
+			</p>
+		</div>
+	</section>
+	<section>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="nav menu justify-content-center">
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">분양소 찾기</a>
+			  </li>
+			</ul>
+		</nav>
+	</section>
 
-<h1>입양하기</h1>
-<br><br><br><br><br>
-<hr>
+	
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="list-title offset-md-4 col-md-4 offset-sm-1 col-sm-10">
+					<h1>분양 동물 보기</h1>				
+				</div>
+			</div>
+			<div class="row">
+				<c:forEach items="${animlist }" var="item" varStatus="i">
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<img class="card-img-top" src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }" alt="./img/no-img.png">
+							<div class="card-body">
+								<p class="card-text">
+									${item.title }
+									<br>
+								<p>
+									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
+								</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
+									</div>
+									
+									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
+							      	<fmt:parseDate var="reg_date"  value="${item.reg_date}" pattern="yyyy-MM-dd hh:mm:ss"/>
+							      	
+							      	<jsp:useBean id="now" class="java.util.Date" />
+									<fmt:formatDate var="temp" value="${now}" pattern="yyyy-MM-dd hh:mm:ss" />
+									<fmt:parseDate var="current_date"  value="${temp}" pattern="yyyy-MM-dd hh:mm:ss"/>
+									
+									<c:set var="range_day" value="${current_date.day - reg_date.day }"/>
+									<c:set var="range_hour" value="${current_date.hours - reg_date.hours }"/>
+									<c:choose>
+										<c:when test="${range_day == 0 }">
+											<c:choose>
+												<c:when test="${range_hour==0 }">
+													<small class="text-muted">방금 전</small>
+												</c:when>
+												<c:otherwise>
+													<small class="text-muted">${ range_hour } 시간 전</small>
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+											<small class="text-muted">${ range_day } 일 전</small>
+										</c:otherwise>
+									
+									</c:choose>
+									
+									
+									
+									<small class="text-muted">${(range_date==0) ? current_date.hour-reg_date.hour : range_date } </small>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
+
+	</main>
+
+	<footer class="text-muted">
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+			<p>Album example is &copy; Bootstrap, but please download and
+				customize it for yourself!</p>
+			<p>
+				New to Bootstrap? <a href="../../">Visit the homepage</a> or read
+				our <a href="../../getting-started/">getting started guide</a>.
+			</p>
+		</div>
+	</footer>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
 
 
-<table style="margin-left: auto; margin-right: auto;">
-<col width="150"><col width="150"><col width="150"><col width="150"><col width="150">
-<tr>
-	<td>
-		<input type="submit" name="area" value="수도권" 
-		onclick="change1(this)">
-	</td>
-	<td>
-		<input type="submit" name="area" value="강원도"
-		onclick="change1(this)">
-	</td>
-	<td>
-		<input type="submit" name="area" value="충청도"
-		onmouseout="change2(this)">
-	<td>
-		<input type="submit" name="area" value="경상도"
-		onclick="change1(this)">
-	</td>
-	<td>
-		<input type="submit" name="area" value="전라도"
-		onclick="change1(this)">
-	</td>
-</tr>
+	<script type="text/javascript">
+		$('.menu-item').on(
+				'mouseover',
+				function() {
+					$(this).css('background', 'green').css('border',
+							'1px solid green').css('border-radius', '15px');
+					$(this).children('.nav-link').css('color', 'white');
 
-<tr>
-	<td>
-		<input type="submit" name="kinds" value="댕댕이"
-		onclick="change1(this)">
-	</td>
-	<td>
-		<input type="submit" name="kinds" value="냥냥이"
-		onclick="change1(this)">
-	</td>
-	<td colspan="3">
-		<input type="submit" name="kinds" value="etc"
-		onclick="change1(this)">
-	</td>
-</tr>
-</table>
-
-<form action="AnimalBbsController" method="post">
-<table  style="margin-left: auto; margin-right: auto;">
-<col width="150"><col width="150"><col width="150"><col width="150"><col width="150">
-<%
-if(animlist == null || animlist.size() == 0){
-	%>
-		<tr>
-			<td colspan="5" align="center">작성된 글이 없습니다</td>
-		</tr>
-		
-		<tr>	
-	<%
-}for(int i=0;i<animlist.size();i++){
-	AnimalBbsDto aniBbsDto = animlist.get(i);
-	//System.out.println(aniBbsDto.getSeq());
-	%>
-		
-			<td>
-				<a href="AnimalBbsController?command=detail&seq=<%=aniBbsDto.getSeq() %>">
-					<img src="<%=aniBbsDto.getPic1() %>"><br>					
-					<%=aniBbsDto.getTitle() %>
-				</a>
-			</td>
-		
-	<%
-}
-%>
-</tr>
-
-<tr>
-	<td colspan="5" align="right">
-		<input type="hidden" name="command" value="write">
-		<input type="submit" value="글쓰기">
-	</td>
-</tr>
-</table>
-</form>
-<form action="AnimalBbsController">
-<input type="hidden" name="command" value="search">
-<table style="margin-left: auto; margin-right: auto;">
-
-<tr>
-	<td colspan="5" align="center">
-		<select name="Searchtype" style="width:70px;height: 25px" id="search">
-			<option value="title">제목</option>
-			<option value="target_user_seq">작성자</option>
-		</select>
-		<input type="text" name="SearchWord" size="30" style="height: 25px" id="text">
-		<input type="submit" value="검색">
-	</td>
-</tr>
-</table>
-</form>
-
-<script type="text/javascript">
-/* function change1(obj){
-    obj.style.background = '#C8FAC8';
-    obj.style.color = 'white';
-}
- */
-</script>
-
+				});
+		$('.menu-item').on(
+				'mouseout',
+				function() {
+					$(this).css('background', '').css('border',
+							'1px solid white').css('border-radius', '5px');
+					$(this).children('.nav-link').css('color', 'white');
+				});
+	</script>
 </body>
 </html>
