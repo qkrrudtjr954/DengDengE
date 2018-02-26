@@ -23,7 +23,7 @@ for(int i=0;i<animlist.size(); i++){
  
 
  
-<%-- <%
+<%
 String msg = (String)request.getAttribute("msg");
 %>
 <%
@@ -34,7 +34,7 @@ if(msg != null){
 		</script>
 	<%
 }
-%> --%>
+%>
 
 <h1>입양하기</h1>
 <br><br><br><br><br>

@@ -89,40 +89,45 @@
 
 		<div class="album py-5 bg-light">
 			<div class="container">
-				<div class="form1">
-				
-					<div class="row" style="margin:0 auto;width:900px;">
-						<h4 style="text-decoration: underline;" class="offset-md-5">입양하기 글 작성</h4>
-					</div>
-					<div>
-						<a href="AnimalBbsController?command=animlist"
-					class="offset-md-11 btn btn-outline-secondary">list</a>	
-					</div>
-					<hr>
 
+
+				<div class="row" style="margin: 0 auto; width: 900px;">
+					<h4 style="text-decoration: underline;" class="offset-md-5">입양하기
+						글 작성</h4>
+				</div>
+				<div>
+					<a href="AnimalBbsController?command=animlist"
+						class="offset-md-11 btn btn-outline-secondary">list</a>
+				</div>
+				<hr>
+
+				<div class="form1">
 					<div class="row">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="">이름</span> 
-							<input type="text" class="form-control" size="20" name="name" placeholder="이름">
+							<span class="input-group-text">이름</span> <input
+								type="text" class="form-control" size="20" name="name" id="name"
+								placeholder="이름">
 						</div>
 
 						&nbsp;&nbsp;&nbsp;
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="">나이</span> 
-							<input type="number" class="form-control" size="20" name="age" placeholder="나이">
+							<span class="input-group-text" id="">나이</span> <input
+								type="number" class="form-control" size="20" name="age"
+								placeholder="나이">
 						</div>
 
 						&nbsp;&nbsp;&nbsp;
 						<div class="input-group-prepend">
-							<span class="input-group-text">묘/견종</span> 
-							<input type="text"	class="form-control" size="20" name="kinds" placeholder="묘/견종">
+							<span class="input-group-text">묘/견종</span> <input type="text"
+								class="form-control" size="20" name="kinds" placeholder="묘/견종">
 						</div>
 
 						&nbsp;&nbsp;&nbsp;
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="inputGroupSelect01">분류</label>
 						</div>
-						<select class="custom-select" id="inputGroupSelect01" style="width: 200px" name="type">
+						<select class="custom-select" id="inputGroupSelect01"
+							style="width: 200px" name="type">
 							<option selected>choice</option>
 							<option value="유기견">유기견</option>
 							<option value="개인분양">개인분양</option>
@@ -134,8 +139,9 @@
 
 					<div class="row">
 						<div class="input-group-prepend">
-							<span class="input-group-text">주소</span> 
-							<input type="text"	class="form-control" size="50" name="location"	id="sample4_roadAddress" placeholder="도로명주소">
+							<span class="input-group-text">주소</span> <input type="text"
+								class="form-control" size="50" name="location"
+								id="sample4_roadAddress" placeholder="도로명주소">
 							<button class="btn btn-outline-secondary" type="button"
 								onclick="sample4_execDaumPostcode()">주소찾기</button>
 						</div>
@@ -150,13 +156,16 @@
 								<input type="checkbox"
 									aria-label="Checkbox for following text input">
 							</div>
-							<input type="text" class="form-control" aria-label="Text input with checkbox" 
-							name="medi" size="2" value="YES">
+							<input type="text" class="form-control"
+								aria-label="Text input with checkbox" name="medi" size="2"
+								value="YES">
 							<div class="input-group-text">
-								<input type="checkbox" aria-label="Checkbox for following text input">
+								<input type="checkbox"
+									aria-label="Checkbox for following text input">
 							</div>
 							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" name="medi" size="2" value="NO">
+								aria-label="Text input with checkbox" name="medi" size="2"
+								value="NO">
 						</div>
 
 
@@ -164,14 +173,18 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">중성화</span>
 							<div class="input-group-text">
-								<input type="checkbox" aria-label="Checkbox for following text input">
+								<input type="checkbox"
+									aria-label="Checkbox for following text input">
 							</div>
-							<input type="text" class="form-control" aria-label="Text input with checkbox" name="neu" size="2"
+							<input type="text" class="form-control"
+								aria-label="Text input with checkbox" name="neu" size="2"
 								value="YES">
 							<div class="input-group-text">
-								<input type="checkbox" aria-label="Checkbox for following text input">
+								<input type="checkbox"
+									aria-label="Checkbox for following text input">
 							</div>
-							<input type="text" class="form-control" aria-label="Text input with checkbox" name="neu" size="2"
+							<input type="text" class="form-control"
+								aria-label="Text input with checkbox" name="neu" size="2"
 								value="NO">
 						</div>
 
@@ -179,14 +192,18 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">성별</span>
 							<div class="input-group-text">
-								<input type="checkbox" aria-label="Checkbox for following text input">
+								<input type="checkbox"
+									aria-label="Checkbox for following text input">
 							</div>
-							<input type="text" class="form-control" aria-label="Text input with checkbox" name="gen" size="2"
+							<input type="text" class="form-control"
+								aria-label="Text input with checkbox" name="gen" size="2"
 								value="여아">
 							<div class="input-group-text">
-								<input type="checkbox" aria-label="Checkbox for following text input">
+								<input type="checkbox"
+									aria-label="Checkbox for following text input">
 							</div>
-							<input type="text" class="form-control" aria-label="Text input with checkbox" name="gen" size="2"
+							<input type="text" class="form-control"
+								aria-label="Text input with checkbox" name="gen" size="2"
 								value="남아">
 						</div>
 					</div>
@@ -194,16 +211,17 @@
 					<br>
 					<div class="row">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="">제목</span> 
-							<input type="text"	class="form-control" name="title" size="135" placeholder="제목 입력">
+							<span class="input-group-text" id="">제목</span> <input type="text"
+								class="form-control" name="title" size="135" placeholder="제목 입력">
 						</div>
 					</div>
 
 					<br>
 					<div class="row">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="">특이사항</span> 
-							<input type="text" class="form-control" name="descrip" size="130" placeholder="특이사항 입력">
+							<span class="input-group-text" id="">특이사항</span> <input
+								type="text" class="form-control" name="descrip" size="130"
+								placeholder="특이사항 입력">
 						</div>
 					</div>
 
@@ -220,22 +238,28 @@
 						<button class="offset-md-10 btn btn-outline-secondary"
 							type="button" id="btn" style="width: 100px">next</button>
 					</div>
-
 				</div>
-				<br> <br>
+
 
 				<div class="form2">
 					<div class="row">
-						<h4 style="text-decoration: underline; background-color: #fff" class="offset-md-5" >작성자 인적사항</h4>
+						<button class="btn btn-outline-secondary" type="button" id="btn1"
+							style="width: 100px">prev</button>
 					</div>
+					<br>
+					<div class="row">
+						<span style=font-size:medium">작성자 인적사항</span>
+					</div>
+					<br>
 
 					<div class="row">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="">아이디</span> 
-							<input type="text" class="form-control" size="20" name="Tid" placeholder="이름" value="로그인한 유저 id" readonly="readonly"> 
-							&nbsp;&nbsp;&nbsp;
-							<span class="input-group-text" id="">연락처</span> 
-							<input type="text" class="form-control" size="20" name="contect" placeholder="연락처">
+							<span class="input-group-text" id="">아이디</span> <input
+								type="text" class="form-control" size="20" name="Tid"
+								placeholder="이름" value="로그인한 유저 id" readonly="readonly">
+							&nbsp;&nbsp;&nbsp; <span class="input-group-text" id="">연락처</span>
+							<input type="text" class="form-control" size="20" name="contect"
+								placeholder="연락처">
 							<button class="btn btn-outline-secondary" type="button">인증하기</button>
 						</div>
 					</div>
@@ -247,20 +271,17 @@
 							<textarea name="desc" id="summernote2"></textarea>
 						</div>
 					</div>
-					
+
 					<br>
 					<div class="row">
-						<input type="submit" class="offset-md-10 btn btn-outline-secondary" style="width: 100px" value="글등록">
-						</div>
+						<input type="submit"
+							class="offset-md-10 btn btn-outline-secondary"
+							style="width: 100px" id="wbtn" value="글등록">
 					</div>
-
-				</div>
-
-
+				</div>		
 
 			</div>
 		</div>
-
 	</form>
 
 
@@ -289,7 +310,7 @@ $(document).ready(function() {
 	$('.form2').hide();
 	
     $('#summernote1').summernote({
-    	width: 1000,
+    	width: 1045,
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
@@ -305,14 +326,20 @@ $(document).ready(function() {
     	
     });
     
-    $('#btn').click(function () {
-    	// 입력값 판정
-		$('.form2').show();
-		$('.form1').hide();
-	})
-    
-    
+    $('#btn').click(function () { 
+    		$('.form2').show(1000);
+			$('.form1').hide(1000);
+	});
+    $('#btn1').click(function () {    	
+		$('.form1').show(1000);
+		$('.form2').hide(1000);
+	});
+	
+	$("#wbtn").click(function () {
+		
+	});    
 });
+
 
 </script>
 	

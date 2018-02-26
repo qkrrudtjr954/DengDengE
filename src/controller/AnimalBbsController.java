@@ -136,10 +136,10 @@ public class AnimalBbsController extends HttpServlet {
 				
 				boolean isS = aniBbService.updateAnimalBbs(seq, new AnimalBbsDto(title, content));
 				if(isS) {
-					System.out.println("수정 성공");
+					req.setAttribute("msg", "글 수정 성공");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}else {
-					System.out.println("수정 실패");
+					req.setAttribute("msg", "글 수정 실패");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}
 		}
@@ -148,10 +148,10 @@ public class AnimalBbsController extends HttpServlet {
 				boolean isS = aniBbService.deleteBbs(seq);
 				
 				if(isS) {
-					System.out.println("삭제 성공");
+					req.setAttribute("msg", "글 삭제 성공");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}else {
-					System.out.println("삭제 실패");
+					req.setAttribute("msg", "글 삭제 실패");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}
 			}
