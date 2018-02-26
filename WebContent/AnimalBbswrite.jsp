@@ -1,135 +1,232 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AnimalBbswrite.jsp</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-</head>
-<body>
-<h1>입양하기 글작성</h1>
-<br><br><br><br>
-<a href="AnimalBbsController?command=animlist">list</a>
-<hr>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="./icon/favicon.ico">
+
+    <title>Deng Deng E list</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+	<header>
+		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav offset-md-7">
+						<c:choose>
+							<c:when test="${current_user == null }">
+							<!-- 로그인 안했을 때 -->
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=goSignUp">회원가입</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<!-- 로그인 했을 때 -->
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=signout">로그아웃</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="UserControl?command=myPage">마이 페이지</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+		</nav>
+   </header>	    
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Album example</h1>
+          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <p>
+            <a href="#" class="btn btn-success my-2">Main call to action</a>
+          </p>
+        </div>
+      </section>
+      <section>
+	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	        <ul class="nav menu justify-content-center">
+			  <li class="nav-item menu-item">
+			    <a class="nav-link active " href="#">Active</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">Link</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">Link</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">Disabled</a>
+			  </li>
+			</ul>
+  		</nav>
+      </section>
 
 <form action="AnimalBbsController" method="post">
-<input type="hidden" name="command" value="writeAf">
-<table border="1" style="margin-left: auto; margin-right: auto;">
-<col width="100"><col width="100"><col width="100"><col width="100">
-<col width="100"><col width="150"><col width="100"><col width="150">
-<col width="100"><col width="100">
-<tr align="center">
-	<td>이름</td>
-	<td>
-		<input type="text" name="name" size="20">
-	</td>
-	<td>나이</td>
-	<td>
-		<input type="number" name="age">
-	</td>
-	<td>견종</td>
-	<td>
-		<input type="text" name="kinds" size="20">
-	</td>
-	<td>분류</td>
-	<td>
-		<select name="type">
-			<option value="유기견">유기견</option>
-			<option value="개인분양">개인 분양</option>
-			<option value="etc">etc</option>
-		</select>
-	</td>
+	<input type="hidden" name="command" value="writeAf">
+      <div class="album py-5 bg-light">
+        <div class="container">
+			<div class="row">
+				<h1 align="center">입양하기 글 작성</h1>			
+          </div>
+          
+          <div class="row">
+          		<a href="AnimalBbsController?command=animlist">list</a>
+          </div>
+          
+          <div class="row">
+          	 	<div class="input-group-prepend">
+				    <span class="input-group-text" id="">이름</span>
+				    <input type="text" class="form-control" size="20" name="name" placeholder="이름">
+				</div>
+				  
+          	 	&nbsp;&nbsp;&nbsp;
+          	 	<div class="input-group-prepend">
+				    <span class="input-group-text" id="">나이</span>
+				    <input type="text" class="form-control" size="20" name="age" placeholder="나이">
+				</div>
+				
+				&nbsp;&nbsp;&nbsp;
+				<div class="input-group-prepend">
+				    <span class="input-group-text" name="kinds">묘/견종</span>
+				    <input type="text" class="form-control" size="20" name="kinds" placeholder="묘/견종">
+				</div>
+				
+				&nbsp;&nbsp;&nbsp;
+				 <div class="input-group-prepend">
+				    <label class="input-group-text" for="inputGroupSelect01">분류</label>
+				 </div>
+				 <select class="custom-select" id="inputGroupSelect01" style="width: 200px" name="type">
+					<option selected>choice</option>
+					<option value="유기견">유기견</option>
+					<option value="개인분양">개인분양</option>
+					<option value="etc">etc</option>
+				 </select>
+			</div>
+			<br>
+			
+			<div class="row">
+          	 	<div class="input-group-prepend">
+				    <span class="input-group-text">주소</span>
+				    <input type="text" class="form-control" size="50" name="location"
+				    id="sample4_roadAddress" placeholder="도로명주소">
+				    <button class="btn btn-outline-secondary" type="button" onclick="sample4_execDaumPostcode()">주소찾기</button>
+			</div>		
+          </div>
+          <br>
+          
+          <div class="row">
+			<div class="input-group-prepend">
+			<span class="input-group-text">접종여부</span>
+			    <div class="input-group-text">			    
+			      <input type="checkbox" aria-label="Checkbox for following text input">
+			    </div>
+			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="YES">
+			    <div class="input-group-text">			    
+			      <input type="checkbox" aria-label="Checkbox for following text input">
+			    </div>
+			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="NO">
+		 	</div>
+		 	
+		 	&nbsp;&nbsp;&nbsp;
+			<div class="input-group-prepend">
+			<span class="input-group-text">중성화</span>
+			    <div class="input-group-text">			    
+			      <input type="checkbox" aria-label="Checkbox for following text input">
+			    </div>
+			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="YES">
+			    <div class="input-group-text">			    
+			      <input type="checkbox" aria-label="Checkbox for following text input">
+			    </div>
+			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="NO">
+		 	</div>
+		 	  
+		 	&nbsp;&nbsp;&nbsp;
+			<div class="input-group-prepend">
+			<span class="input-group-text">성별</span>
+			    <div class="input-group-text">			    
+			      <input type="checkbox" aria-label="Checkbox for following text input">
+			    </div>
+			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="YES">
+			    <div class="input-group-text">			    
+			      <input type="checkbox" aria-label="Checkbox for following text input">
+			    </div>
+			    <input type="text" class="form-control" aria-label="Text input with checkbox" name="medi" size="2" value="NO">
+		 	</div>          
+          </div>
+          <br>
+          <div class="row">
+         	<div class="input-group-prepend">
+				    <span class="input-group-text" id="">제목</span>
+				    <input type="text" class="form-control" name="title" size="140" placeholder="제목 입력">
+				</div>           
+          </div>
+          
+          <br>
+          <div class="row">
+         	<div class="input-group-prepend">
+				    <span class="input-group-text" id="">제목</span>
+				    <input type="text" class="form-control" name="title" size="140" placeholder="제목 입력">
+				</div>           
+          </div>
+        
+        </div>
+      </div>
+ </form>    
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 	
-	<td>지역</td>
-	<td>
-		<input type="button" onclick="sample4_execDaumPostcode()" value="click">
-		<input type="text"name="location" id="sample4_roadAddress" placeholder="도로명주소">
-	</td> 
-</tr>
-
-<tr align="center">
-	<td>예방접종</td>
-	<td>
-		<input type="radio" name="medi" value="1">YES
-		<input type="radio" name="medi" value="0">NO
-	</td>
-	<td>중성화</td>
-	<td>
-		<input type="radio" name="neu" value="1">YES
-		<input type="radio" name="neu" value="0">NO
-	</td>
-	<td>성별</td>
-	<td>
-		<input type="radio" name="gen" value="1">여자
-		<input type="radio" name="gen" value="0">남자
-	</td>
-</tr>
-
-<tr align="center">
-	<td>제목</td>
-	<td colspan="10">
-		<input type="text" name="title" size="175">
-	</td>
-</tr>
-
-<tr align="center">
-	<td>특이사항</td>
-	<td colspan="10">
-		<input type="text" name="descrip" size="175">
-	</td>
-</tr>
-
-<tr>
-	<td>내용</td>
-	<td colspan="10">
-		<textarea rows="20" cols="180" name="content" id="summernote1"></textarea>
-	</td>
-</tr>
-</table>
-<br>
-
-<h4 style="text-decoration: underline;">작성자 인적사항</h4>
-<table border="1" style="margin-left: auto; margin-right: auto;">
-<col width="100"><col width="150">
-<tr>
-	<td>아이디</td>
-	<td>
-		<input type="text" name="id" value="<%="id" %>" readonly="readonly">
-	</td>
-</tr>
-
-<tr>
-	<td>연락처</td>
-	<td>
-		<input type="text" name="contact">&nbsp;&nbsp;&nbsp;<input type="submit" value="인증하기" class="btn">
-	</td>
-</tr>
-
-<tr>
-	<td>기타사항</td>
-	<td>
-		<textarea rows="20" cols="180" name="desc" id="summernote2"></textarea>
-	</td>
-</tr>
-
-<tr align="right">
-	<td colspan="11">
-		<input type="submit" value="글등록">
-	</td>
-</tr>
-</table>
-</form>
-
-
-
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-
-
-<script type="text/javascript">
+	
+	<script type="text/javascript">
+		$('.menu-item').on('mouseover', function () {
+			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
+			$(this).children('.nav-link').css('color', 'white');
+				
+		});
+		$('.menu-item').on('mouseout', function () {
+			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
+			$(this).children('.nav-link').css('color', 'white');
+		});
+	</script>
+	
+	<script type="text/javascript">
 $(document).ready(function() {
     $('#summernote1').summernote({
             height: 300,                 // set editor height
@@ -203,6 +300,5 @@ $(document).ready(function() {
         }).open();
     }
 </script>
-
-</body>
+  </body>
 </html>
