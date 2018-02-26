@@ -25,27 +25,25 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 
 
  
-<!--  검색부분
- <table border="2" style="margin-left: auto; margin-right: auto;">
- <tr>
- <td colspan="1">	
-<select name="search" style="width:70px;height: 25px" id="search">
-	<option value="an1">강아지</option>
-	<option value="an2">고양이</option>
-	<option value="an3">기타</option>
-</select>
-<select name="search1" style="width: 70px;height: 30px id=search">
-	<option value="id">작성자</option>
-	<option value="title">제목</option>
-</select>
-<input type="text" name="text" size="30" style="height: 25px" id="text">
-<button type="button" id="searchbutton" class="btn">검색</button>
-<button type="button" id="searchreset" class="btn">목록</button>
-</td>
-</tr>
-</table>
+<div id="board_search_div" align="center">
+   <form name="searchform" method="get" action="AfterBbsController">
+      <input type="hidden" name="command" value="AfterBbsSearch">
+      <table id="board_search_table">
+      <tr>
+         <td class="board_search_td">
+         <select name="Searchtype">
+         <option value="target_user_seq">글쓴이</option>
+         <option value="title">제목</option>
 
- -->
+         </select></td>
+         <td class="board_search_td"><input type="text" name="SearchWord"></td>
+         <td class="board_search_td">
+         <input type="submit" value="검색">
+         </td>
+      </tr>
+   </table>
+   </form>
+</div>
  
 
 
@@ -64,12 +62,23 @@ if(request.getParameter("nowPage") == null){
 %>
  --%>
  <%
- String msg = (String)request.getAttribute("msg1");
+ String msg1 = (String)request.getAttribute("msg1");
+ String msg2 = (String)request.getAttribute("msg2");
  
- if(msg !=null){
+ 
+ if(msg1!=null){
  %>
  <script type="text/javascript">
- 	alert("<%=msg%>");
+ 	alert("<%=msg1%>");
+ 
+ </script>
+ 
+ <%
+ }else if(msg2!=null){
+ %>
+ 
+ <script type="text/javascript">
+ 	alert("<%=msg2%>");
  
  </script>
  
@@ -78,19 +87,18 @@ if(request.getParameter("nowPage") == null){
  %>
  
  
- 
  <table border="1" align="center">
 <col width="70"><col width="500"><col width="150"><col width="100">
 
 <tr>
-<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
+<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 </tr>
 
 <%
 if(afterBbslist == null || afterBbslist.size() == 0){
 	%>
 	<tr>
-		<td colspan="4">작성된 글이 없습니다</td>
+		<td colspan="5">작성된 글이 없습니다</td>
 	</tr>	
 	<%
 }
@@ -102,16 +110,17 @@ for(int i = 0;i < afterBbslist.size(); i++){
 	<td><%=i+1 %></td>
 	<td>
 		<%-- <%=arrow(bbs.getDepth()) %> --%>
-		<%if(bbs.getDel()==1){ %>
-		<b>관리자에의해 삭제된 글입니다.</b>
-		<%}else{ %>
+		<%-- <%if(bbs.getDel()==1){ %> --%>
+		<!-- <b>관리자에의해 삭제된 글입니다.</b> -->
+		<%-- <%}else{ %> --%>
 		<a href="AfterBbsController?command=AfterBbsDetail&seq=<%=bbs.getSeq() %>">
 			<%=bbs.getTitle() %>
 		</a>
-		<%} %>
+		<%-- <%} %> --%>
 	</td>
-	<td><%=bbs.getUserSeq() %> </td>
-	<td><%=bbs.getRdate() %></td>
+	 <td><%=bbs.getUserSeq() %> </td>
+	<td><%=bbs.getRdate() %></td> 
+	<td><%=bbs.getReadcond() %></td>
 	</tr>	
 	<%
 }

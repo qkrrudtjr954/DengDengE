@@ -36,8 +36,9 @@ public class AfterBbsDao {
 	//After 게시판 화면 출력
 	public List<AfterBbsDto> getAfterlBbsList(){
 		String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL "
-				+ " FROM AFTERBBS ";
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
+				+ " FROM AFTERBBS "
+				+ " WHERE DEL=0 ";
 		
 		
 		List<AfterBbsDto> list = new ArrayList<AfterBbsDto>();
@@ -67,6 +68,7 @@ public class AfterBbsDao {
 												rs.getInt(i++),//int userSeq, 
 												rs.getString(i++),//String rdate, 
 												rs.getString(i++),//String ldate,
+												rs.getInt(i++),
 												rs.getInt(i++));
 				
 						
@@ -96,9 +98,9 @@ public class AfterBbsDao {
 	public boolean wirtelAfterBbs(AfterBbsDto dto) {
 		String sql = "INSERT INTO AFTERBBS(SEQ, TITLE, "
 				+ " PIC1, CONTENT, TARGET_USER_SEQ, REG_DATE, "
-				+ " LAST_UPDATE, DEL) "
+				+ " LAST_UPDATE, DEL ,READCOUNT) "
 				+ " VALUES(AFTERBBS_SEQ .NEXTVAL, ?, "
-				+ " ?, ?, ?, SYSDATE, SYSDATE , 0) ";
+				+ " ?, ?, ?, SYSDATE, SYSDATE , 0,0) ";
 				
 				
 		int count = 0;
@@ -147,7 +149,7 @@ public class AfterBbsDao {
 	//After list detail 
 	public AfterBbsDto detailAfterlBbs(int seq) {
 		String sql = " SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL "
+				+ " REG_DATE, LAST_UPDATE, DEL,READCOUNT "
 				+ " FROM AFTERBBS "
 				+ " WHERE SEQ=? ";
 		
@@ -178,6 +180,7 @@ public class AfterBbsDao {
 						rs.getInt(i++),//int userSeq, 
 						rs.getString(i++),//String rdate, 
 						rs.getString(i++),//String ldate,
+						rs.getInt(i++),
 						rs.getInt(i++));
 			}
 			System.out.println("5/6 S detailAfterlBbs");
@@ -192,11 +195,124 @@ public class AfterBbsDao {
 		return dto;
 		
 	}
+	//After list 수정
+	public boolean  AfrerBbsUpdate(AfterBbsDto bbs) {
+		String sql=" UPDATE AFTERBBS SET  "
+				+" TITLE=?, CONTENT=?"
+				+ " WHERE SEQ=? ";
+		System.out.println("sql: "+ sql);
+		int count = 0;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		System.out.println("1/6 S AfrerBbsUpdate");
+		try {
+			conn = DBConnection.makeConnection();			
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, bbs.getTitle());
+			psmt.setString(2, bbs.getContent());
+			psmt.setInt(3, bbs.getSeq());
+			System.out.println("2/6 S AfrerBbsUpdate");
+			count = psmt.executeUpdate();
+			System.out.println("3/6 S AfrerBbsUpdate");
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			DBClose.close(psmt, conn, null);	
+			System.out.println("4/6 S AfrerBbsUpdate");
+		}
+		System.out.println("5/6 S AfrerBbsUpdate");
+		return count>0?true:false;
+		
+	}
+	
+	// After list 조회수
+	public void readcount(int seq) {
+		
+		
+	}
+	
+	
+	
+	
+	// 수정할때 가져오기
+	public AfterBbsDto getBbs(int seq) {
+		String sql = " SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
+				+ " FROM AFTERBBS "
+				+ " WHERE SEQ=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		AfterBbsDto dto = null;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 S getBbs");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("3/6 S getBbs");
+			
+			rs = psmt.executeQuery();
+			System.out.println("4/6 S getBbs");
+			
+			while(rs.next()){
+				int i = 1;
+				dto = new AfterBbsDto(
+						rs.getInt(i++),//int seq, 
+						rs.getString(i++),//String title, 
+						rs.getString(i++),//String pic1, 
+						rs.getString(i++),//String content, 
+						rs.getInt(i++),//int userSeq, 
+						rs.getString(i++),//String rdate, 
+						rs.getString(i++),//String ldate,
+						rs.getInt(i++),
+						rs.getInt(i++));
+			}
+			System.out.println("5/6 S getBbs");
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			DBClose.close(psmt, conn, rs);			
+			System.out.println("6/6 S getBbs");
+		}
+		
+		return dto;
+		
+	}
+	
+	
+	
 	
 	
 	// After list 삭제
 	public boolean AfterdeletBbs(int seq) {
-		return false;
+	     String sql=" UPDATE AFTERBBS "
+	             + " SET DEL=1 "
+	             + " WHERE SEQ=? ";
+	       
+	       int count = 0;
+	       Connection conn=null;
+	       PreparedStatement psmt=null;
+	       
+	       try {
+	          conn = DBConnection.makeConnection();         
+	          psmt=conn.prepareStatement(sql);
+	          psmt.setInt(1, seq);         
+	          count = psmt.executeUpdate();
+	          System.out.println("3/6 delete");
+	       } catch (SQLException e) {         
+	          e.printStackTrace();
+	          System.out.println("delete fail");
+	       } finally{
+	          DBClose.close(psmt, conn, null);         
+	       }
+	             
+	       return count>0?true:false;
 		
 	}
 	
@@ -209,13 +325,103 @@ public class AfterBbsDao {
 	}
 	
 	
-	
-	
-	
+	public void readCount(int seq) {
+	      System.out.println("readcount");
+	   String sql = " UPDATE  AFTERBBS  SET  "  
+	            + " READCOUNT=READCOUNT+1 " 
+	            + " WHERE SEQ=? ";
+	   System.out.println("readcount sql : " + sql);
 
+	   Connection conn = null;
+	   PreparedStatement psmt = null;
+	   ResultSet rs = null;
+
+	   try {
+	      conn = DBConnection.makeConnection();
+	      psmt = conn.prepareStatement(sql);
+	      System.out.println("1/6 readCount");
+	      psmt.setInt(1, seq);
+	      System.out.println("2/6 readCount");
+	      psmt.executeUpdate();
+	      System.out.println("3/6 readCount");
+	   } catch (SQLException e) {
+	      e.printStackTrace();
+	      System.out.println("fail readCount");
+	   } finally {
+	      DBClose.close(psmt, conn, rs);
+	   }
+	
+	
+	
+	}
+	
+	
+	
+	//After Bbs list 검색
+	public List<AfterBbsDto> getFindAfterlist(String Searchtype, String SearchWord){
+		
+	      List<AfterBbsDto> list = new ArrayList<>();
+	      
+	      
+	      String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
+					+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
+					+ " FROM AFTERBBS "
+					+ " WHERE DEL=0 AND " + Searchtype + " LIKE '%" + SearchWord + "%'"
+		              + " ORDER BY REG_DATE DESC ";
+
+	      
+	      
+
+	   
+	      Connection conn = null;
+	      PreparedStatement psmt = null;
+	      ResultSet rs = null;
+
+	      try {
+	         conn = DBConnection.makeConnection();
+	         System.out.println("2/6 getFindAfterlist Success");
+
+	         psmt = conn.prepareStatement(sql);
+	         System.out.println("sql = " + sql);
+	         System.out.println("3/6 getFindAfterlist Success");
+	         
+	      
+	         rs = psmt.executeQuery();
+	         System.out.println("4/6 getFindAfterlist Success");
+
+	         while (rs.next()) {
+	            int i = 1;
+	            
+	      
+
+	            AfterBbsDto dto = new AfterBbsDto(rs.getInt(i++), // seq
+								            		rs.getString(i++),//String title, 
+								            		rs.getString(i++),//String pic1, 
+								            		rs.getString(i++),//String content, 
+								    				rs.getInt(i++),//int userSeq, 
+								    				rs.getString(i++),//String rdate, 
+								    				rs.getString(i++),//String ldate,
+								    				rs.getInt(i++), //del
+								    				rs.getInt(i++)); //readcount
+	            list.add(dto);
+	         }
+	         System.out.println("5/6 getFindAfterlist Success");
+
+	      } catch (SQLException e) {
+	         System.out.println("getFindAfterlist fail");
+	         System.out.println(e.getMessage());
+	         System.out.println(e.getErrorCode());
+	         System.out.println(e.getSQLState());
+
+	      } finally {
+	         DBClose.close(psmt, conn, rs);
+	      
+	      }
+
+	      return list;
 
 	
-	
+	}
 	
 	
 	

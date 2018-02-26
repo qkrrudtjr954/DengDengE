@@ -27,6 +27,7 @@ public class AfterBbsDto implements Serializable {
 	private String Rdate;
 	private String Ldate;
 	private int del;
+	private int readcond;
 	
 	
 	
@@ -56,7 +57,7 @@ public class AfterBbsDto implements Serializable {
 
 
 	public AfterBbsDto(int seq, String title, String pic1, String content, int userSeq, String rdate, String ldate,
-			int del) {
+			int del, int readcond) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -66,7 +67,11 @@ public class AfterBbsDto implements Serializable {
 		Rdate = rdate;
 		Ldate = ldate;
 		this.del = del;
+		this.readcond = readcond;
 	}
+
+
+
 
 
 
@@ -80,9 +85,15 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
+
+
+
 
 
 
@@ -96,9 +107,15 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+
+
 
 
 
@@ -112,9 +129,15 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setPic1(String pic1) {
 		this.pic1 = pic1;
 	}
+
+
+
 
 
 
@@ -128,9 +151,15 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+
+
 
 
 
@@ -144,9 +173,15 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setUserSeq(int userSeq) {
 		this.userSeq = userSeq;
 	}
+
+
+
 
 
 
@@ -160,9 +195,15 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setRdate(String rdate) {
 		Rdate = rdate;
 	}
+
+
+
 
 
 
@@ -176,9 +217,15 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setLdate(String ldate) {
 		Ldate = ldate;
 	}
+
+
+
 
 
 
@@ -192,6 +239,9 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
 	public void setDel(int del) {
 		this.del = del;
 	}
@@ -200,11 +250,48 @@ public class AfterBbsDto implements Serializable {
 
 
 
+
+
+
+	public int getReadcond() {
+		return readcond;
+	}
+
+
+
+
+
+
+
+
+	public void setReadcond(int readcond) {
+		this.readcond = readcond;
+	}
+
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "AfterBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content + ", userSeq="
-				+ userSeq + ", Rdate=" + Rdate + ", Ldate=" + Ldate + ", del=" + del + "]";
+				+ userSeq + ", Rdate=" + Rdate + ", Ldate=" + Ldate + ", del=" + del + ", readcond=" + readcond + "]";
 	}
+	
+	
+	
+
+
+
+
+
+
+
+
+	
 	
 	
 	
