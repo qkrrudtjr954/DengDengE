@@ -167,8 +167,10 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
  %>
  
  <%
+ String msg = (String)request.getAttribute("msg");
  String msg1 = (String)request.getAttribute("msg1");
  String msg2 = (String)request.getAttribute("msg2");
+ 
  
  
  if(msg1!=null){
@@ -184,6 +186,15 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
  
  <script type="text/javascript">
  	alert("<%=msg2%>");
+ 
+ </script>
+ 
+ <%
+ }else if(msg!=null){
+ %>
+ 
+ <script type="text/javascript">
+ 	alert("<%=msg%>");
  
  </script>
  
