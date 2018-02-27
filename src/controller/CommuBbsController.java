@@ -68,9 +68,9 @@ public class CommuBbsController extends HttpServlet {
 
 
 			if(isS) {
-				Cookie cookie = new Cookie("successMsg", "글이 등록 되었습니다.");
+				/*Cookie cookie = new Cookie("successMsg", "글이 등록 되었습니다.");
 				cookie.setMaxAge(5);
-				resp.addCookie(cookie);
+				resp.addCookie(cookie);*/
 				
 				resp.sendRedirect("CommuBbsController?command=list");
 			}else {
@@ -98,10 +98,10 @@ public class CommuBbsController extends HttpServlet {
 
 			
 			if(isS) {
-				Cookie cookie = new Cookie("successMsg", "글이 삭제되었습니다.");
+				/*Cookie cookie = new Cookie("successMsg", "글이 삭제되었습니다.");
 
 				cookie.setMaxAge(5);
-				resp.addCookie(cookie);
+				resp.addCookie(cookie);*/
 				
 				resp.sendRedirect("CommuBbsController?command=list");
 			}else { 
@@ -145,10 +145,10 @@ public class CommuBbsController extends HttpServlet {
 
 	         
 	         if(isS) {
-	        	 	Cookie cookie = new Cookie("successMsg", "글이 수정되었습니다.");
+	        	 	/*Cookie cookie = new Cookie("successMsg", "글이 수정되었습니다.");
 				cookie.setMaxAge(5);
 
-				resp.addCookie(cookie);
+				resp.addCookie(cookie);*/
 	            resp.sendRedirect("CommuBbsController?command=list");
 	            
 	         }else {

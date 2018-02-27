@@ -1,3 +1,5 @@
+<%@page import="dto.AnimalBbsDto"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -15,7 +17,9 @@
 
 <link rel="icon" href="./icon/favicon.ico">
 
-
+<%
+List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animlist");
+%>
 <%
 String msg = (String)request.getAttribute("msg");
 %>
@@ -108,6 +112,8 @@ if(msg != null){
 					<h1>분양 동물 보기</h1>
 				</div>
 			</div>
+		<form action="AnimalBbsController" method="post">
+		<input type="hidden" name="command" value="write">
 			<div class="row">
 				<c:forEach items="${animlist }" var="item" varStatus="i">
 					<div class="col-md-4">
@@ -124,7 +130,7 @@ if(msg != null){
 									<div class="btn-group">
 										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
 									</div>
-
+<%-- 
 									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
 									<fmt:formatDate var="temp1" value="${item.reg_date.replace('.0', '')}" pattern="yyyy-MM-dd hh:mm:ss" />
 							      	<fmt:parseDate var="reg_date"  value="${temp1}" pattern="yyyy-MM-dd hh:mm:ss"/>
@@ -147,15 +153,20 @@ if(msg != null){
 											</c:choose>
 										</c:when>
 										<c:otherwise>
-											<small class="text-muted">${ range_day } 일 전</small>
+											<small class="text-muted">${ range_day } 일 전</small> 
 										</c:otherwise>
-									</c:choose>
+									</c:choose> --%>
 								</div>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			
+			<div class="row">
+				<input type="submit" class="offset-md-10 btn btn-outline-secondary" style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
+			</div>
+			</form>
 		</div>
 	</div>
 	</main>
@@ -190,65 +201,8 @@ if(msg != null){
 		crossorigin="anonymous"></script>
 
 
-	a<script type="text/javascript">
-		function setDate() {
-			var regs = new Array();
-
-			for(var i=0; i < ${animlist.size()}; i++){
-				regs.push('${animlist.get(i).reg_date}');
-			}
-
-
-			var reg = new Date();
-			var current = new Date();
-			var rangeDay = 0;
-			var rangeHour = 0;
-
-
-			for(var j=0; j<regs.length; j++){
-				reg = new Date(regs[i]);
-				rangeDay = current.getDay() - reg.getDay();
-				rangeHour = (current.getHours() < reg.getHours()) ? ((current.getHours()+24) - reg.getHours()) : (current.getHours() - reg.getHours());
-
-				// 오늘 올린 게시물
-				if(rangeDay < 1){
-					if(rangeHour < 1){
-						// 방금 올린게시물
-						$('#range${animlist.get(j).seq}').html('방금 전');
-					} else {
-						// 몇 시간 전에 올린 게시물
-						$('#range${animlist.get(j).seq}').html(rangeHour + '시간 전');
-					}
-				} else {
-					//	몇 일 전에 올린 게시물
-					$('#range${animlist.get(j).seq}').html(rangeHour + '일 전');
-				}
-			}
-		}
-
-		$('.menu-item').on(
-				'mouseover',
-				function() {
-					$(this).css('background', 'green').css('border',
-							'1px solid green').css('border-radius', '15px');
-					$(this).children('.nav-link').css('color', 'white');
-
-<<<<<<< HEAD
-
-
-
-
-=======
-				});
-		$('.menu-item').on(
-				'mouseout',
-				function() {
-					$(this).css('background', '').css('border',
-							'1px solid white').css('border-radius', '5px');
-					$(this).children('.nav-link').css('color', 'white');
-				});
-
+	<script type="text/javascript">
 	</script>
->>>>>>> kyung
+
 </body>
 </html>
