@@ -49,12 +49,20 @@ public String toDay(){
 
 %>
 
+
+
+<c:if test="${cookie.redirectMsg.value != null }">
+	<div class="alert alert-success" role="alert">
+	  ${cookie.redirectMsg.value }
+	</div>
+</c:if>
+
 <script>
    
    
 $(document).ready(function () {
 	 $("#btnAll").click(function () {
-	        location.href="CommuBbsController?command=list";
+	        location.href="CommuBbsController?command=list#hello";
 
 	    });
 	

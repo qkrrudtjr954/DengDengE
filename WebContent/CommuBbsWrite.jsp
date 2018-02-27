@@ -52,7 +52,7 @@
 				</ul>
 			</div>
 		</nav>
-   </header>	    
+   </header>
     <main role="main">
 
       <section class="jumbotron text-center">
@@ -92,10 +92,10 @@
 					<form name="form1" action="CommuBbsController">
 					<input type="hidden" name="command" value="writeAf">
 						<h1>글쓰기</h1>
-						<hr>				
+						<hr>
 <div class="row">
-	<div class="offset-md-1"></div>	
-	<div class="col-md-2" align="right">	
+	<div class="offset-md-1"></div>
+	<div class="col-md-2" align="right">
 	<select class="custom-select" name="category">
 		<option value="0">선택하세요</option>
 		<option value="1">애견Tip</option>
@@ -108,15 +108,15 @@
 			<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요">
 		</div>
 
-		<div class="offset-md-1"></div> 
+		<div class="offset-md-1"></div>
 </div>
 <hr>
 <div class="row">
-<div class="offset-md-1"></div>	
+<div class="offset-md-1"></div>
 <div class="col-md-10">
 <textarea name="content" id="summernote" name="content" value=""></textarea>
 </div>
-<div class="offset-md-1"></div>	
+<div class="offset-md-1"></div>
 </div>
 <br>
 <div class="row">
@@ -125,8 +125,8 @@
 <button type="button" id="btnBack" class="btn btn-outline-secondary col-md-1">돌아가기</button>
 </div>
 </form>
-		
-		
+
+
 		<!-- ---------- -->
         </div>
       </div>
@@ -146,34 +146,70 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	
-	
+
+
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
-				
+
 		});
 		$('.menu-item').on('mouseout', function () {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
-	
+
 	</script>
-	
- <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>	
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 	<script type="text/javascript">
 $(document).ready(function() {
      $('#summernote').summernote({
              height: 300,                 // set editor height
              minHeight: null,             // set minimum height of editor
              maxHeight: null,             // set maximum height of editor
-             focus: true                  // set focus to editable area after initializing summernote
+             focus: true,                  // set focus to editable area after initializing summernote
+             lang: 'ko-KR',
+    			callbacks: {
+    				onImageUpload: function(files, editor, welEditable) {
+      			      sendFile(files[0], this);
+      			},
+    			},
+    			toolbar: [
+    				['style', ['bold', 'italic', 'underline', 'clear']],
+    				['font', ['strikethrough', 'superscript', 'subscript']],
+    				['fontsize', ['fontsize']],
+    				['color', ['color']],['para', ['ul', 'ol', 'paragraph']],
+    				['height', ['height']],
+    				['insert', ['picture']]
+    			]
      });
      
+     function sendFile(file, editor) {
+    		formdata = new FormData();
+    		formdata.append("userImage", file);
+
+    		$.ajax({
+			data: formdata,
+			type: "POST",
+			url: '${initParam.IMG_SERVER_PATH}/upload',
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				console.log(data);
+				var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+				alert(url);
+				$('#hello').html(url);
+				$('#summernote').summernote('editor.insertImage', url);
+				$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+            }
+		});
+    }
+
      $("#btnBack").click(function () {
 	        location.href="CommuBbsController?command=list";
 
@@ -181,7 +217,7 @@ $(document).ready(function() {
 });
 
 	</script>
-	
+
 
   </body>
 </html>
