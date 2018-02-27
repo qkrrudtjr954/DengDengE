@@ -386,81 +386,8 @@ public class AnimalBbsDao {
 						+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
 						+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
 						+ " FROM ANIMALBBS "
-						+ " WHERE DEL=0 AND LOCATION LIKE '" +searchBtn+"%'"
-		            + " ORDER BY REG_DATE DESC ";
-		   
-		      Connection conn = null;
-		      PreparedStatement psmt = null;
-		      ResultSet rs = null;
-		      
-
-		      try {
-		         conn = DBConnection.makeConnection();
-		         System.out.println("2/6 getFindBbslist Success");
-
-		         psmt = conn.prepareStatement(sql);
-		         System.out.println("sql = " + sql);
-		         System.out.println("3/6 getFindBbslist Success");
-		         
-		      
-		         rs = psmt.executeQuery();
-		         System.out.println("4/6 getFindBbslist Success");
-
-		         while (rs.next()) {
-		            int i = 1;
-
-		            AnimalBbsDto aniBbsDto = new AnimalBbsDto(); //category_name
-		            aniBbsDto.setSeq(rs.getInt("SEQ"));
-					aniBbsDto.setTitle(rs.getString("TITLE"));
-					aniBbsDto.setName(rs.getString("NAME"));
-					aniBbsDto.setAge(rs.getInt("AGE"));
-					aniBbsDto.setKinds(rs.getString("KINDS"));
-					aniBbsDto.setType(rs.getString("TYPE"));
-					aniBbsDto.setLocation(rs.getString("LOCATION"));
-					aniBbsDto.setMedicine(rs.getInt("MEDICINE"));
-					aniBbsDto.setNeutralization(rs.getInt("NEUTRALIZATION"));
-					aniBbsDto.setGender(rs.getInt("GENDER"));
-					aniBbsDto.setDescripttion(rs.getString("DESCRIPTTION"));
-					aniBbsDto.setPic1(rs.getString("PIC1"));
-					aniBbsDto.setContent(rs.getString("CONTENT"));
-					aniBbsDto.setUserSeq(rs.getInt("TARGET_USER_SEQ"));
-					aniBbsDto.setContact(rs.getString("TARGET_CONTACT"));
-					aniBbsDto.setDescription(rs.getString("TARGET_DESCRIPTION"));
-					aniBbsDto.setReg_date(rs.getString("REG_DATE"));
-					aniBbsDto.setLast_update(rs.getString("LAST_UPDATE"));
-					aniBbsDto.setDel(rs.getInt("DEL"));
-					aniBbsDto.setReadcount(rs.getInt("READCOUNT"));
-		            list.add(aniBbsDto);
-		         }
-		         System.out.println("5/6 getFindBbslist Success");
-
-		      } catch (SQLException e) {
-		         System.out.println("getFindBbslist fail");
-		         System.out.println(e.getMessage());
-		         System.out.println(e.getErrorCode());
-		         System.out.println(e.getSQLState());
-
-		      } finally {
-		         DBClose.close(psmt, conn, rs);
-		      
-		      }
-
-		      return list;
-		   }
-	   
-	// 버튼별 검색(타입)
-	   public List<AnimalBbsDto> getFindtypelist(String searchBtn){
-		   System.out.println("s");
-		      List<AnimalBbsDto> list = new ArrayList<>();
-
-		      
-				String sql = " SELECT SEQ, TITLE, NAME, AGE, "
-						+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
-						+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
-						+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-						+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-						+ " FROM ANIMALBBS "
-						+ " WHERE DEL=0 AND TYPE LIKE '" +searchBtn+"%'"
+						+ " WHERE DEL=0 AND LOCATION LIKE '" +searchBtn+"%' "
+								+ " OR DEL=0 AND TYPE LIKE '"+searchBtn+"%' "
 		            + " ORDER BY REG_DATE DESC ";
 		   
 		      Connection conn = null;

@@ -59,10 +59,6 @@ public class AnimalBbsService {
 		 public List<AnimalBbsDto> getFindBtnlist(String searchBtn){
 			 return aniBbsManager.getFindBtnlist(searchBtn);
 		 }
-		 
-		 public List<AnimalBbsDto> getFindtypelist(String searchBtn){
-			 return aniBbsManager.getFindtypelist(searchBtn);
-		 }
 		/*
 		// 페이징 처리
 		public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {

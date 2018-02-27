@@ -141,15 +141,15 @@ if(msg != null){
 			
 			<br>
 			<form action="AnimalBbsController" method="post">
-			<input type="hidden" name="command" value="btnsearch1">
+			<input type="hidden" name="command" value="btnsearch">
 				<div class="row">
-					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
 					value="유기동물">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
 					value="개인분양">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
 					value="etc">
 				</div>
 			</form>
