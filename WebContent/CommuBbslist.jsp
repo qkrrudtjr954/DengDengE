@@ -51,9 +51,15 @@ public String toDay(){
 
 
 
-<c:if test="${cookie.redirectMsg.value != null }">
+<c:if test="${cookie.successMsg.value != null }">
 	<div class="alert alert-success" role="alert">
-	  ${cookie.redirectMsg.value }
+	  ${cookie.successMsg.value }
+	</div>
+</c:if>
+
+<c:if test="${cookie.failMsg.value != null }">
+	<div class="alert alert-danger" role="alert">
+	  ${cookie.failMsg.value }
 	</div>
 </c:if>
 

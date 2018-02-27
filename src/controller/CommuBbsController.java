@@ -64,15 +64,16 @@ public class CommuBbsController extends HttpServlet {
 			 boolean isS = comService.writeCommu(new CommuBbsDto(title, content, 1, category));
 			 //유저 시퀀스 1 로 일단 설정해둠 
 			System.out.println(isS);
-			HttpSession session = req.getSession();
 			
+
 			if(isS) {
-				session.setAttribute("msg", "글이 등록되었습니다.");
-				session.setMaxInactiveInterval(5);
+				Cookie cookie = new Cookie("successMsg", "글이 등록 되었습니다.");
+				cookie.setMaxAge(5);
+				resp.addCookie(cookie);
 				
 				resp.sendRedirect("CommuBbsController?command=list");
 			}else {
-				req.setAttribute("msg", "글을 다시 입력 하십시오");
+				req.setAttribute("failMsg", "글을 다시 입력 하십시오");
 				dispatch("CommuBbsWrite.jsp", req, resp);
 			}
 			 
@@ -92,15 +93,15 @@ public class CommuBbsController extends HttpServlet {
 			
 			boolean isS = comService.delCommu(seq);
 			
-			Cookie cookie = null;
+			
 			if(isS) {
-				cookie = new Cookie("msg", "글 삭제");
+				Cookie cookie = new Cookie("successMsg", "글이 삭제되었습니다.");
 				cookie.setMaxAge(5);
 				resp.addCookie(cookie);
 				
 				resp.sendRedirect("CommuBbsController?command=list");
 			}else { 
-				req.setAttribute("msg", "글을 삭제할 수 없습니다. 다시 시도하세요.");
+				req.setAttribute("failMsg", "글을 삭제할 수 없습니다. 다시 시도하세요.");
 				dispatch("CommuBbsController?command=read&seq="+seq, req, resp);
 			}
 		}else if(command.equals("classify")) {
@@ -135,17 +136,16 @@ public class CommuBbsController extends HttpServlet {
 		       
 	         boolean isS = comService.udtCommu(comdto);
 
-	         Cookie cookie = null;
+	         
 	         if(isS) {
-	        	 	cookie = new Cookie("redirectMsg", "글수");
-
-				cookie.setMaxAge(10);
+	        	 	Cookie cookie = new Cookie("successMsg", "글이 수정되었습니다.");
+				cookie.setMaxAge(5);
 				resp.addCookie(cookie);
 	            resp.sendRedirect("CommuBbsController?command=list");
 	            
 	         }else {
 	            //JOptionPane.showMessageDialog(null, "수정실패");
-	            req.setAttribute("msg", "글을 수정할 수 없습니다. 다시 시도해주세요.");
+	            req.setAttribute("failMsg", "글을 수정할 수 없습니다. 다시 시도해주세요.");
 	            dispatch("CommuBbsController?command=read", req, resp);
 	            
 	         }   
