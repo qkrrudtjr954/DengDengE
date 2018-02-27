@@ -213,7 +213,7 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
       
 		<div class="input-group-prepend">
 			<select class="custom-select" id="inputGroupSelect01" name="Searchtype" style="width: 150px">
-			   <option selected>선택없음</option>
+			   <!-- <option selected>선택없음</option> -->
 			   <option value="target_user_seq">글쓴이</option>
 			   <option value="title">제목</option>
  			 </select>
@@ -365,7 +365,7 @@ for(int i = 0;i < afterBbslist.size(); i++){
      });
      
      
-     
+    /*  
      $("#btnsarch").click(function(){    
          //alert("클릭");
          
@@ -373,11 +373,13 @@ for(int i = 0;i < afterBbslist.size(); i++){
          if(text==null){
         	 alert("검색창이 비웠습니다");
         	 
+        	return text; 
          }
          
          
+         
           
-      });
+      }); */
      
      
      
