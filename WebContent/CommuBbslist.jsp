@@ -60,20 +60,20 @@ $(document).ready(function () {
 	
     $("#btnCatg1").click(function () {
         $("form[name=form1]")
-        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val(), method:"post"}).submit();
+        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
 
     });
     
 
     $("#btnCatg2").click(function () {
     	 $("form[name=form1]")
-         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val(), method:"post"}).submit();
+         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
     });
     
 
     $("#btnCatg3").click(function () {
     	 $("form[name=form1]")
-         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val(), method:"post"}).submit();
+         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
     });
     
     $("#btnWrite").click(function () {
@@ -155,7 +155,7 @@ $(document).ready(function () {
 				List<CommuBbsDto> bbslist = (List<CommuBbsDto>) request.getAttribute("bbslist");
 			%>
 
-
+<div id="hello">
 			<div class="row">
 				<div class="offset-md-1"></div>
 				<div class="col-md-10">
@@ -177,8 +177,8 @@ $(document).ready(function () {
 				</div>
 				<div class="offset-md-1"></div>
 			</div>
-
-			<div class="row">
+</div>
+<div class="row">
 				<div class="offset-md-1"></div>
 
 				<div class="col-md-10">
@@ -208,6 +208,8 @@ $(document).ready(function () {
 
 				<div class="offset-md-1"></div>
 			</div>
+
+			
 
 			<div class="row">
 				<div class="offset-md-1"></div>
