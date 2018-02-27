@@ -14,6 +14,18 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
+	<context-param>
+		<description>image server url</description>
+		<param-name>IMG_SERVER_PATH</param-name>
+		<param-value>http://192.168.110.87:3000</param-value>
+	</context-param>
+	
+	<context-param>
+		<description>daum map api key</description>
+		<param-name>DAUM_API_KEY</param-name>
+		<param-value>6a9f9d0784be5dac2543ae6ee19f9047</param-value>
+	</context-param>
+	
 	
 	<servlet>
 		<servlet-name>mainControl</servlet-name>
@@ -58,10 +70,20 @@
 
 	<servlet>
 		<servlet-name>CommuBbsController</servlet-name>
-		<servlet-class>control.CommuBbsController</servlet-class>
+		<servlet-class>controller.CommuBbsController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CommuBbsController</servlet-name>
 		<url-pattern>/CommuBbsController</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>FindPlaceController</servlet-name>
+		<servlet-class>controller.FindPlaceController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindPlaceController</servlet-name>
+		<url-pattern>/FindPlaceController</url-pattern>
 	</servlet-mapping>
 </web-app>

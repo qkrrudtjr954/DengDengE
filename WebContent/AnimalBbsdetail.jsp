@@ -78,7 +78,7 @@ if(aniBbsDto != null){
 
 <form action="AnimalBbscontroller" method="post">
 <h5 style="color: #00bfff"><%=aniBbsDto.getLocation() %>&nbsp;&nbsp;&nbsp;<%=aniBbsDto.getTitle() %></h5>
-<%=aniBbsDto.getType() %>&nbsp;&nbsp;&nbsp;<%=aniBbsDto.getRdate() %>&nbsp;조회수:<%=aniBbsDto.getReadcount() %>
+<%=aniBbsDto.getType() %>&nbsp;&nbsp;&nbsp;<%=aniBbsDto.getReg_date() %>&nbsp;조회수:<%=aniBbsDto.getReadcount() %>
 <table border="1" style="margin-left: auto; margin-right: auto;">
 <col width="100"><col width="150"><col width="100"><col width="150">
 <tr>

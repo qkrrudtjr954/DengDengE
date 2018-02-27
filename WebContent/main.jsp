@@ -74,8 +74,9 @@
 			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">분양소 찾기</a>
+			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
 			  </li>
+
 			</ul>
   		</nav>
       </section>

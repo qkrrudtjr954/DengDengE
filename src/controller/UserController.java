@@ -31,7 +31,7 @@ public class UserController extends HttpServlet{
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("utf-8");
-		resp.setCharacterEncoding("utf8");
+		resp.setContentType("text./html; charset=utf-8"); 
 		
 		String command = req.getParameter("command");
 

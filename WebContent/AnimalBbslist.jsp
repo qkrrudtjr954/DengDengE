@@ -19,7 +19,7 @@
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Custom styles for this template -->
 <link href="./css/main.css" rel="stylesheet">
 </head>
@@ -114,11 +114,12 @@
 									</div>
 									
 									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
-							      	<fmt:parseDate var="reg_date"  value="${item.reg_date}" pattern="yyyy-MM-dd hh:mm:ss"/>
+									<fmt:formatDate var="temp1" value="${item.reg_date.replace('.0', '')}" pattern="yyyy-MM-dd hh:mm:ss" />
+							      	<fmt:parseDate var="reg_date"  value="${temp1}" pattern="yyyy-MM-dd hh:mm:ss"/>
 							      	
 							      	<jsp:useBean id="now" class="java.util.Date" />
-									<fmt:formatDate var="temp" value="${now}" pattern="yyyy-MM-dd hh:mm:ss" />
-									<fmt:parseDate var="current_date"  value="${temp}" pattern="yyyy-MM-dd hh:mm:ss"/>
+									<fmt:formatDate var="temp2" value="${now}" pattern="yyyy-MM-dd hh:mm:ss" />
+									<fmt:parseDate var="current_date"  value="${temp2}" pattern="yyyy-MM-dd hh:mm:ss"/>
 									
 									<c:set var="range_day" value="${current_date.day - reg_date.day }"/>
 									<c:set var="range_hour" value="${current_date.hours - reg_date.hours }"/>
@@ -136,12 +137,7 @@
 										<c:otherwise>
 											<small class="text-muted">${ range_day } 일 전</small>
 										</c:otherwise>
-									
 									</c:choose>
-									
-									
-									
-									<small class="text-muted">${(range_date==0) ? current_date.hour-reg_date.hour : range_date } </small>
 								</div>
 							</div>
 						</div>
@@ -150,8 +146,9 @@
 			</div>
 		</div>
 	</div>
-
 	</main>
+	
+	
 
 	<footer class="text-muted">
 		<div class="container">
@@ -170,8 +167,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -182,7 +178,42 @@
 		crossorigin="anonymous"></script>
 
 
-	<script type="text/javascript">
+	a<script type="text/javascript">
+		function setDate() {
+			var regs = new Array();
+			
+			for(var i=0; i < ${animlist.size()}; i++){
+				regs.push('${animlist.get(i).reg_date}');
+			}
+			
+			
+			var reg = new Date();
+			var current = new Date();
+			var rangeDay = 0;
+			var rangeHour = 0;
+			
+			
+			for(var j=0; j<regs.length; j++){
+				reg = new Date(regs[i]);
+				rangeDay = current.getDay() - reg.getDay();
+				rangeHour = (current.getHours() < reg.getHours()) ? ((current.getHours()+24) - reg.getHours()) : (current.getHours() - reg.getHours());
+				
+				// 오늘 올린 게시물 
+				if(rangeDay < 1){
+					if(rangeHour < 1){
+						// 방금 올린게시물 
+						$('#range${animlist.get(j).seq}').html('방금 전');
+					} else {
+						// 몇 시간 전에 올린 게시물 
+						$('#range${animlist.get(j).seq}').html(rangeHour + '시간 전');
+					}
+				} else {
+					//	몇 일 전에 올린 게시물 
+					$('#range${animlist.get(j).seq}').html(rangeHour + '일 전');
+				}
+			}
+		}
+	
 		$('.menu-item').on(
 				'mouseover',
 				function() {
@@ -198,6 +229,7 @@
 							'1px solid white').css('border-radius', '5px');
 					$(this).children('.nav-link').css('color', 'white');
 				});
+		
 	</script>
 </body>
 </html>
