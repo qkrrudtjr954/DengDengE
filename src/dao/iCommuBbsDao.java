@@ -28,4 +28,5 @@ public interface iCommuBbsDao {
 	public List<CommuBbsDto> getCategory(int target_category);
 	
 	public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord);
+	
 }

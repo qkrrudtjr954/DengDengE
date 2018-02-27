@@ -190,42 +190,9 @@ if(msg != null){
 		crossorigin="anonymous"></script>
 
 
-	a<script type="text/javascript">
-		function setDate() {
-			var regs = new Array();
-
-			for(var i=0; i < ${animlist.size()}; i++){
-				regs.push('${animlist.get(i).reg_date}');
-			}
-
-
-			var reg = new Date();
-			var current = new Date();
-			var rangeDay = 0;
-			var rangeHour = 0;
-
-
-			for(var j=0; j<regs.length; j++){
-				reg = new Date(regs[i]);
-				rangeDay = current.getDay() - reg.getDay();
-				rangeHour = (current.getHours() < reg.getHours()) ? ((current.getHours()+24) - reg.getHours()) : (current.getHours() - reg.getHours());
-
-				// 오늘 올린 게시물
-				if(rangeDay < 1){
-					if(rangeHour < 1){
-						// 방금 올린게시물
-						$('#range${animlist.get(j).seq}').html('방금 전');
-					} else {
-						// 몇 시간 전에 올린 게시물
-						$('#range${animlist.get(j).seq}').html(rangeHour + '시간 전');
-					}
-				} else {
-					//	몇 일 전에 올린 게시물
-					$('#range${animlist.get(j).seq}').html(rangeHour + '일 전');
-				}
-			}
-		}
-
+	<script type="text/javascript">
+	
+		
 		$('.menu-item').on(
 				'mouseover',
 				function() {
@@ -233,12 +200,6 @@ if(msg != null){
 							'1px solid green').css('border-radius', '15px');
 					$(this).children('.nav-link').css('color', 'white');
 
-<<<<<<< HEAD
-
-
-
-
-=======
 				});
 		$('.menu-item').on(
 				'mouseout',
@@ -247,8 +208,7 @@ if(msg != null){
 							'1px solid white').css('border-radius', '5px');
 					$(this).children('.nav-link').css('color', 'white');
 				});
-
 	</script>
->>>>>>> kyung
+
 </body>
 </html>

@@ -61,6 +61,7 @@ public class UserController extends HttpServlet{
 //					session.setMaxInactiveInterval(30*60);	// 30분 세션 제한 
 					session.setAttribute("current_user", returnUser);
 					
+					
 					result = true;
 				}
 			}

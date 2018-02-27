@@ -19,6 +19,19 @@
 
 <title>Deng Deng E list</title>
 
+<style type="text/css">
+
+ .hit {
+      animation-name: blink;
+      animation-duration: 1.5s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+      /* 위 속성들을 한 줄로 표기하기 */
+      /* -webkit-animation: blink 1.5s ease infinite; */
+    }
+    
+</style>
+
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -105,7 +118,7 @@ $(document).ready(function () {
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
+			<a class="navbar-brand offset-md-2" href="MainControl?command=start">DengDengE</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -150,14 +163,18 @@ $(document).ready(function () {
 	<section>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<ul class="nav menu justify-content-center">
-				<li class="nav-item menu-item"><a class="nav-link active "
-					href="#">Active</a></li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Disabled</a>
-				</li>
+				<li class="nav-item menu-item">
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
+			  </li>
 			</ul>
 		</nav>
 	</section>
@@ -247,8 +264,17 @@ $(document).ready(function () {
 							<a href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
 								<%=bbs.getTitle()%>
 							</a>
+							&nbsp;<%
+							String reddate = toDate(bbs.getReg_date());
+							String today = toDay();
+							if(reddate.equals(today)){
+							%>
+		 					<span class="badge badge-pill badge-success">new</span>
+							<%
+							}
+							%>
 						</div>
-						<div class="col-md-2" style="text-align: center;"><%=bbs.getTarget_user_seq()%></div>
+						<div class="col-md-2" style="text-align: center;"><%=bbs.getUser_email() %></div>
 						<div class="col-md-1" style="text-align: center;"><%=toDate(bbs.getReg_date())%></div>
 						<div class="col-md-1" style="text-align: center;"><%=bbs.getReadcount()%></div>
 					</div>

@@ -23,7 +23,7 @@
   <body>
 	<header>
 		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
+				<a class="navbar-brand offset-md-2" href="MainControl?command=start">DengDengE</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -67,17 +67,17 @@
       <section>
 	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	        <ul class="nav menu justify-content-center">
-			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
+			 <li class="nav-item menu-item">
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
+			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
 			  </li>
 			</ul>
   		</nav>
