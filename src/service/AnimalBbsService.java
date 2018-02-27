@@ -45,12 +45,23 @@ public class AnimalBbsService {
 			return aniBbsManager.updateAnimalBbs(seq, aniBbsDto);
 		}
 		
+		// 조회수
 		public void readCount(int seq) {
 			aniBbsManager.readCount(seq);
 	      }
 		
+		// 입력하는 검색
 		 public List<AnimalBbsDto> getFindBbslist(String Searchtype, String Searchtext){
 			 return aniBbsManager.getFindBbslist(Searchtype, Searchtext);
+		 }
+		 
+		 // 버튼 검색
+		 public List<AnimalBbsDto> getFindBtnlist(String searchBtn){
+			 return aniBbsManager.getFindBtnlist(searchBtn);
+		 }
+		 
+		 public List<AnimalBbsDto> getFindtypelist(String searchBtn){
+			 return aniBbsManager.getFindtypelist(searchBtn);
 		 }
 		/*
 		// 페이징 처리
