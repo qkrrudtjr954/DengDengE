@@ -189,8 +189,10 @@ public class AnimalBbsController extends HttpServlet {
 		else if(command.equals("btnsearch")) {
 			String ssearchBtn = req.getParameter("searchBtn");
 			System.out.println("btn:"+ssearchBtn);
+			
 			String searchBtn = ssearchBtn.substring(0, 1);
 			System.out.println("btn:"+searchBtn);
+			
 			List<AnimalBbsDto> animlist = aniBbService.getFindBtnlist(searchBtn);
 			req.setAttribute("animlist", animlist);
 			

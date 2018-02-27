@@ -135,7 +135,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						</div>
 						<select class="custom-select" id="inputGroupSelect01"
 							style="width: 200px" name="type" class="type">
-							<option selected>choice</option>
 							<option value="유기견">유기동물</option>
 							<option value="개인분양">개인분양</option>
 							<option value="etc">etc</option>

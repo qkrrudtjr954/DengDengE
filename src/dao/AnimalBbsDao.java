@@ -389,8 +389,8 @@ public class AnimalBbsDao {
 						+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
 						+ " FROM ANIMALBBS A, DENGUSER B "
 						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL=0 "
-						+ " AND LOCATION LIKE '" +searchBtn+"%' "
-						+ " OR DEL=0 AND TYPE LIKE '"+searchBtn+"%' "
+						+ " AND A.LOCATION LIKE '" +searchBtn+"%' "
+						+ " OR A.DEL=0 AND A.TYPE LIKE '"+searchBtn+"%' "
 		            + " ORDER BY REG_DATE DESC ";
 		   
 		      Connection conn = null;
