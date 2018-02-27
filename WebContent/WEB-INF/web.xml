@@ -13,7 +13,13 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
+	
+	<context-param>
+		<description>image server url</description>
+		<param-name>DAUM_API_KEY</param-name>
+		<param-value>6a9f9d0784be5dac2543ae6ee19f9047</param-value>
+	</context-param>
+	
 	<context-param>
 		<description>image server url</description>
 		<param-name>IMG_SERVER_PATH</param-name>
