@@ -82,7 +82,7 @@
   		</nav>
       </section>
 	<form action="AnimalBbsController" method="post">
-		<input type="hidden" name="command" value="writeAf">
+		<input type="hidden" name="command" value="writeAf"> 
 		<div class="row">
 			<a href="AnimalBbsController?command=animlist">list</a>
 		</div>
@@ -97,7 +97,7 @@
 				</div>
 				<div>
 					<a href="AnimalBbsController?command=animlist"
-						class="offset-md-11 btn btn-outline-secondary">list</a>
+						class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>
 				</div>
 				<hr>
 
@@ -212,7 +212,7 @@
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">제목</span> <input type="text"
-								class="form-control" name="title" size="135" placeholder="제목 입력">
+								class="form-control" name="title" size="135" id="title" placeholder="제목 입력">
 						</div>
 					</div>
 
@@ -229,14 +229,14 @@
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" style="align-content: center;">내용</span>
-							<textarea name="content" id="summernote1"></textarea>
+							<textarea name="content" id="summernote1" class="content"></textarea>
 						</div>
 					</div>
 
 					<br>
 					<div class="row">
 						<button class="offset-md-10 btn btn-outline-secondary"
-							type="button" id="btn" style="width: 100px">next</button>
+							type="button" id="nextButton" style="width: 100px; background-color: #28A745; color: #fff">next</button>
 					</div>
 				</div>
 
@@ -244,7 +244,7 @@
 				<div class="form2">
 					<div class="row">
 						<button class="btn btn-outline-secondary" type="button" id="btn1"
-							style="width: 100px">prev</button>
+							style="width: 100px; background-color: #28A745; color: #fff">prev</button>
 					</div>
 					<br>
 					<div class="row">
@@ -259,8 +259,8 @@
 								placeholder="이름" value="로그인한 유저 id" readonly="readonly">
 							&nbsp;&nbsp;&nbsp; <span class="input-group-text" id="">연락처</span>
 							<input type="text" class="form-control" size="20" name="contect"
-								placeholder="연락처">
-							<button class="btn btn-outline-secondary" type="button">인증하기</button>
+								placeholder="연락처" id="contect">
+							<button class="btn btn-outline-secondary" type="button" id="certibutton">인증하기</button>
 						</div>
 					</div>
 
@@ -273,16 +273,15 @@
 					</div>
 
 					<br>
-					<div class="row">
-						<input type="submit"
-							class="offset-md-10 btn btn-outline-secondary"
-							style="width: 100px" id="wbtn" value="글등록">
+					<div class="row">						
+						<input type="submit" class=" offset-md-10 btn btn-outline-secondary" 
+						style="width: 90px; background-color: #28A745; color: #fff" id="finalButton" value="완료">
 					</div>
 				</div>		
 
 			</div>
 		</div>
-	</form>
+	</form> 
 
 
 	</main>
@@ -308,6 +307,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.form2').hide();
+	//$("#finalButton").hide();
 	
     $('#summernote1').summernote({
     	width: 1045,
@@ -326,18 +326,38 @@ $(document).ready(function() {
     	
     });
     
-    $('#btn').click(function () { 
-   		$('.form2').show(1000);
-		$('.form1').hide(1000);
+    $('#nextButton').click(function () { 
+    	var title = $("#title").val();
+		var content = $(".content").val();
+		
+		//alert("t:"+title+" c:"+content);
+		
+		if(title == null || content ==null || title === "" || content === ""){
+			alert("제목과 내용을 입력해주세요");
+			return;			
+		}else{			
+			$('.form2').show(1000);
+			$('.form1').hide(1000);
+		} 
 	});
     $('#btn1').click(function () {    	
 		$('.form1').show(1000);
 		$('.form2').hide(1000);
 	});
-	
-	$("#wbtn").click(function () {
+    
+    $("#certibutton").click(function () {
+		var contact =$("#contect").val();
 		
-	});    
+		if(contact == null || contact === ""){
+			alert("연락처를 입력해주십시오");
+			return;
+		}else{
+			alert("인증완료");
+			//$("#finalButton").show();
+		}
+	});
+	
+       
 });
 
 

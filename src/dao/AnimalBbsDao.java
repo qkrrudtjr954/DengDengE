@@ -317,6 +317,7 @@ public class AnimalBbsDao {
 		      Connection conn = null;
 		      PreparedStatement psmt = null;
 		      ResultSet rs = null;
+		      
 
 		      try {
 		         conn = DBConnection.makeConnection();
@@ -467,6 +468,8 @@ public class AnimalBbsDao {
 		return null;
 	}
 	*/
+	   
+	   
 }
 
 

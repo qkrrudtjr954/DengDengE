@@ -127,7 +127,7 @@ if(aniBbsDto != null){
 		<input type="hidden" name="command" value="updateAf">
 		<input type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
 		<div class="row">
-			<a href="AnimalBbsController?command=animlist">list</a>
+			<a href="AnimalBbsController?command=animlist" style="background-color: #28A745; color: #fff">list</a>
 		</div>
 
 		<div class="album py-5 bg-light">
@@ -146,7 +146,7 @@ if(aniBbsDto != null){
 					
 					<div class="row">
 						<a href="AnimalBbsController?command=animlist"
-					class="offset-md-11 btn btn-outline-secondary">list</a>	
+					class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>	
 					</div>
 					<hr>
 
@@ -234,7 +234,7 @@ if(aniBbsDto != null){
 
 					<br>
 					<div class="row">
-						<input type="submit" class="offset-md-10 btn btn-outline-secondary" style="width: 90px" value="수정">
+						<input type="submit" class="offset-md-10 btn btn-outline-secondary" style="width: 90px; background-color: #28A745; color: #fff" value="수정">
 					</div>
 				</div>
 			</div>

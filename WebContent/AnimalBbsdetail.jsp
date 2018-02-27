@@ -140,7 +140,7 @@ if(aniBbsDto != null){
 					</span>&nbsp;&nbsp; <span style="font-size: x-small"> 조회수 <%=aniBbsDto.getReadcount()%>
 					</span>
 					<a href="AnimalBbsController?command=animlist"
-					class="offset-md-9 btn btn-outline-secondary">list</a>	
+					class="offset-md-9 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>	
 				</div>
 				<hr>
 
@@ -276,8 +276,9 @@ if(aniBbsDto != null){
 				
 				<br>
 				<div class="row">	
-					<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" 
-					class="offset-md-9 btn btn-outline-secondary">수정</a>&nbsp;&nbsp;
+					<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-9 btn btn-outline-secondary" 
+					style="background-color: #28A745; color: #fff">수정</a>
+					&nbsp;&nbsp;
 					<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>" 
 					class="btn btn-outline-secondary">삭제</a>
 				</div>
