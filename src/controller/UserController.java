@@ -36,7 +36,9 @@ public class UserController extends HttpServlet{
 		String command = req.getParameter("command");
 
 		if(command.equals("goSignIn")) {
-
+			String returnurl = (String)req.getAttribute("returnurl");
+			req.setAttribute("returnurl", returnurl);
+			
 			dispatcher("signin.jsp", req, resp);
 
 		} else if(command.equals("goSignUp")) {

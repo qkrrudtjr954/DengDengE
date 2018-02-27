@@ -9,6 +9,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import delegator.Delegator;
 import dto.AfterBbsDto;
 import service.AfterBbsService;
 
@@ -42,7 +44,16 @@ public class AfterBbsController extends HttpServlet {
 			dispatch("AfterBbslist.jsp", req, resp);
 		//글쓰기	
 		}else if(command.equals("AfterBbswrite")) {
-			dispatch("AfterBbswrite.jsp", req, resp);
+
+			if(Delegator.checkSession(req, resp)) {
+				// 로그인이 되어있는 상태 
+				dispatch("AfterBbswrite.jsp", req, resp);				
+			} else {
+				// 로그인이 안된 상태 
+				req.setAttribute("returnurl", "AfterBbsController?command=AfterBbswrite");
+				dispatch("UserControl?command=goSignIn", req, resp);
+			}
+			
 		// 글쓰기 처리	
 		}else if(command.equals("AfterBbswriteAf")) {
 			String title = req.getParameter("title");
@@ -87,7 +98,19 @@ public class AfterBbsController extends HttpServlet {
 			AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
 			System.out.println("Combbs1 = "  + bbs1);
 			req.setAttribute("bbs1", bbs1);
-			dispatch("AfterBbsDetail.jsp", req, resp);
+			//dispatch("AfterBbsDetail.jsp", req, resp);
+			
+			
+			/*if(Delegator.checkSession(req, resp)) {
+				// 로그인이 되어있는 상태 
+				//dispatch("AfterBbsDetail.jsp", req, resp);
+				dispatch("AfterBbsController?command=AfterBbsDetail&seq="+seq , req , resp);
+			} else {
+				// 로그인이 안된 상태 
+				req.setAttribute("returnurl", "AfterBbsController?command=AfterBbsDetail");
+				dispatch("UserControl?command=goSignIn", req, resp);
+			}
+			*/
 			
 		}else if(command.equals("AfterBbsUpdate")) {  
 			String sseq = req.getParameter("seq");
@@ -134,6 +157,8 @@ public class AfterBbsController extends HttpServlet {
 			String Sseq = req.getParameter("seq");
 	         int seq = Integer.parseInt(Sseq);
 	         System.out.println("삭제 시퀀스 : " + Sseq);
+	         
+	         
 	         
 	         boolean isS = bbs.AfterdeletBbs(seq);
 	         if(isS) {
