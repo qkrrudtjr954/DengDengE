@@ -29,10 +29,10 @@ public class CommuBbsDao implements iCommuBbsDao {
 	public List<CommuBbsDto> getCommulist() {
 		List<CommuBbsDto> list = new ArrayList<>();
 
-		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.last_update as last_update, del, b.title as category_name, c.email as user_email  "
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email  "
 				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c" 
-				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0"
-				+ " ORDER BY REG_DATE DESC ";
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND a.DEL=0"
+				+ " ORDER BY a.REG_DATE DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -59,7 +59,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int target_user_seq
 						0, // int target_category
 						rs.getInt(i++), // int readcount
-						"", // String reg_date
+						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
 						rs.getInt(i++), // int del
 						rs.getString(i++),// category_name
@@ -69,7 +69,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 			System.out.println("5/6 getCommulist Success");
 
 		} catch (SQLException e) {
-			System.out.println("writeCommu fail");
+			System.out.println("getCommulist fail");
 			System.out.println(e.getMessage());
 			System.out.println(e.getErrorCode());
 			System.out.println(e.getSQLState());
@@ -85,7 +85,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 	// 글 읽거나 가져오기
 	@Override
 	public CommuBbsDto getCommu(int seq) {
-		String sql = " SELECT a.seq, a.TITLE as title, a.target_user_seq, a.target_category, "
+		String sql = " SELECT a.seq, a.TITLE as title, content, a.target_user_seq, a.target_category, "
 				+ " readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email "
 				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c "
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=?";
@@ -116,7 +116,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 				dto = new CommuBbsDto(rs.getInt(i++), //seq, 
 									rs.getString(i++), //title, 
 									"", //pic1, 
-									"", //content, 
+									rs.getString(i++), //content, 
 									rs.getInt(i++), //target_user_seq, 
 									rs.getInt(i++), //target_category, 
 									rs.getInt(i++), //readcount, 
@@ -270,10 +270,10 @@ public class CommuBbsDao implements iCommuBbsDao {
 	public List<CommuBbsDto> getCategory(int target_category) {
 		List<CommuBbsDto> list = new ArrayList<>();
 
-		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.last_update as last_update, del, b.title as category_name, a.READCOUNT, c.email as user_email  "
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date, a.last_update as last_update, del, b.title as category_name, a.READCOUNT, c.email as user_email  "
 				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c"
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0 AND a.target_category=? "
-				+ " ORDER BY REG_DATE DESC ";
+				+ " ORDER BY a.REG_DATE DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -301,7 +301,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int target_user_seq
 						0, // int target_category
 						rs.getInt(i++), // int readcount
-						"", // String reg_date
+						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
 						rs.getInt(i++), // int del
 						rs.getString(i++), // category_name
@@ -328,10 +328,10 @@ public class CommuBbsDao implements iCommuBbsDao {
 	public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord) {
 		List<CommuBbsDto> list = new ArrayList<>();
 
-		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, readcount, a.last_update as last_update, del, b.title as category_name, A.READCOUNT, c.email as user_email  "
-				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c " 
+		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email  "
+				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c" 
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0 "
-				+ " AND " + Searchtype + " LIKE '%" + SearchWord + "%'" + " ORDER BY REG_DATE DESC ";
+				+ " AND " + Searchtype + " LIKE '%" + SearchWord + "%'" + " ORDER BY a.REG_DATE DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -358,7 +358,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int target_user_seq
 						0, // int target_category
 						rs.getInt(i++), // int readcount
-						"", // String reg_date
+						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
 						rs.getInt(i++), // int del
 						rs.getString(i++), // category_name

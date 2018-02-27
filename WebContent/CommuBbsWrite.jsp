@@ -14,19 +14,26 @@
 <title>Deng Deng E list</title>
 
 <!-- Bootstrap core CSS -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
-	rel="stylesheet">
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!-- Custom styles for this template -->
 <link href="./css/main.css" rel="stylesheet">
+
+<%-- summernote --%>
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
+	rel="stylesheet">
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+	rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
+	rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -74,8 +81,8 @@
 			</p>
 		</div>
 	</section>
-	
-	
+
+
 	<section>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<ul class="nav menu justify-content-center">
@@ -104,7 +111,7 @@
 						<div class="row">
 							<div class="offset-md-1"></div>
 							<div class="col-md-2" align="right">
-								<select class="custom-select" name="category">
+								<select class="custom-select" id="category" name="category">
 									<option value="0">선택하세요</option>
 									<option value="1">애견Tip</option>
 									<option value="2">중고장터</option>
@@ -113,7 +120,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<input type="text" class="form-control" name="title"
+								<input type="text" class="form-control" name="title" id="title"
 									placeholder="제목을 입력해주세요">
 							</div>
 
@@ -130,7 +137,7 @@
 						<br>
 						<div class="row">
 							<input class="btn btn-success offset-md-5 col-md-1" type="submit"
-								value="글쓰기"> &nbsp;
+								id="btnWrite" value="글쓰기"> &nbsp;
 							<button type="button" id="btnBack"
 								class="btn btn-outline-secondary col-md-1">돌아가기</button>
 						</div>
@@ -171,6 +178,7 @@
 		crossorigin="anonymous"></script>
 
 
+
 	<script type="text/javascript">
 		$('.menu-item').on(
 				'mouseover',
@@ -189,91 +197,131 @@
 				});
 	</script>
 
+	<%-- summernote --%>
+	<script
+		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<script
+		src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+
+
+
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('#summernote')
-									.summernote(
-											{
-												height : 300, // set editor height
-												minHeight : null, // set minimum height of editor
-												maxHeight : null, // set maximum height of editor
-												focus : true, // set focus to editable area after initializing summernote
-												lang : 'ko-KR',
-												callbacks : {
-													onImageUpload : function(
-															files, editor,
-															welEditable) {
-														sendFile(files[0], this);
-													},
-												},
-												toolbar : [
-														[
-																'style',
-																[
-																		'bold',
-																		'italic',
-																		'underline',
-																		'clear' ] ],
-														[
-																'font',
-																[
-																		'strikethrough',
-																		'superscript',
-																		'subscript' ] ],
-														[ 'fontsize',
-																[ 'fontsize' ] ],
-														[ 'color', [ 'color' ] ],
-														[
-																'para',
-																[ 'ul', 'ol',
-																		'paragraph' ] ],
-														[ 'height',
-																[ 'height' ] ],
-														[ 'insert',
-																[ 'picture' ] ] ]
-											});
+	$(document).ready(function() {
+				$('#summernote').summernote({
+					height : 300, // set editor height
+					minHeight : null, // set minimum height of editor
+					maxHeight : null, // set maximum height of editor
+					focus : true, // set focus to editable area after initializing summernote
+					lang : 'ko-KR',
+					callbacks : {onImageUpload : function(
+									files, editor,welEditable) {
+									sendFile(files[0], this);
+									},
+								},toolbar : [['style',['bold',
+														'italic',
+														'underline',
+														'clear' ] ],
+											['font',['strikethrough',
+													'superscript',
+														'subscript' ] ],
+											[ 'fontsize',[ 'fontsize' ] ],
+											[ 'color', [ 'color' ] ],
+											['para',[ 'ul', 'ol','paragraph' ] ],
+											[ 'height',[ 'height' ] ],
+											[ 'insert',[ 'picture' ] ] ]
+					});
 
-							function sendFile(file, editor) {
-								formdata = new FormData();
-								formdata.append("userImage", file);
+		function sendFile(file, editor) {
+		formdata = new FormData();
+		formdata.append("userImage", file);
 
-								$
-										.ajax({
-											data : formdata,
-											type : "POST",
-											url : '${initParam.IMG_SERVER_PATH}/upload',
-											cache : false,
-											contentType : false,
-											processData : false,
-											success : function(data) {
-												console.log(data);
-												var url = '${initParam.IMG_SERVER_PATH }/image/'
+		$.ajax({
+				data : formdata,
+				type : "POST",
+				url : '${initParam.IMG_SERVER_PATH}/upload',
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(data) {
+				console.log(data);
+				var url = '${initParam.IMG_SERVER_PATH }/image/'
 														+ data.filename;
-												alert(url);
-												$('#hello').html(url);
-												$('#summernote').summernote(
-														'editor.insertImage',
-														url);
-												$('#imageDiv > ul')
-														.append(
-																'<li><img src="'+url+'" width="480" height="auto"/></li>');
+				alert(url);
+				$('#hello').html(url);
+				$('#summernote').summernote(
+							'editor.insertImage', url);
+				$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
 											}
-										});
+				});
 							}
 
-							$("#btnBack")
-									.click(
-											function() {
-												location.href = "CommuBbsController?command=list";
-
-											});
-						});
+		$("#btnBack").click(function() {
+			location.href = "CommuBbsController?command=list";
+			});
+		$("#btnWrite").click(function () {
+			var strT = document.getElementById('title');
+			var strC = document.getElementById('summernote');
+			var strS = document.getElementById('category');
+			if( strT.value == '' || strT.value == null ){
+			    alert( '제목과 내용을 전부 입력해주세요.' );
+			    return false;
+			}
+			if( strC.value == '' || strC.value == null ){
+			    alert( '제목과 내용을 전부 입력해주세요.' );
+			    return false;
+			}
+			if( strS.value == "0"){
+			    alert( '게시판을 선택해주세요.' );
+			    return false;
+			}
+			
+			
+			
+		});
+	});
 	</script>
+<!-- function check(){
 
+var str = document.getElementById('personName');
+
+ 
+
+if( str.value == '' || str.value == null ){
+    alert( '값을 입력해주세요' );
+    return false;
+}
+
+var blank_pattern = /^\s+|\s+$/g;
+if( str.value.replace( blank_pattern, '' ) == "" ){
+    alert(' 공백만 입력되었습니다 ');
+    return false;
+}
+
+ 
+
+//공백 금지
+//var blank_pattern = /^\s+|\s+$/g;(/\s/g
+var blank_pattern = /[\s]/g;
+if( blank_pattern.test( str.value) == true){
+    alert(' 공백은 사용할 수 없습니다. ');
+    return false;
+}
+
+
+var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+
+if( special_pattern.test(str.value) == true ){
+    alert('특수문자는 사용할 수 없습니다.');
+    return false;
+}
+
+alert( '최종 : ' + str.value );
+
+
+} -->
+</script>
 
 </body>
 </html>

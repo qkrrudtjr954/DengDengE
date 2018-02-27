@@ -195,16 +195,30 @@ VALUES(denguser_seq.NEXTVAL, 'aa', 'aa', SYSDATE, SYSDATE, 0);
 --02/23-------
 select*from CATEGORY;
 select*from COMMUBBS;
+select*from denguser;
+
+SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email   
+FROM COMMUBBS A, CATEGORY B,  DENGUSER c 
+WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND a.DEL=0 
+ORDER BY a.reg_date DESC ;
+
+ SELECT a.seq, a.TITLE as title, a.target_user_seq, a.target_category,  readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email  FROM COMMUBBS A, CATEGORY B, DENGUSER c  WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=1
+SELECT a.seq, a.TITLE as title, a.target_user_seq, a.target_category,  readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email  FROM COMMUBBS A, CATEGORY B, DENGUSER c  WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=1
 select target_category, a.title, target_user_seq,reg_date, del, b.title 
 from COMMUBBS a, category b
 where a.target_category = b.seq;
+
+" SELECT a.seq, a.TITLE as title, target_user_seq, readcount, a.reg_date, a.last_update as last_update, del, b.title as category_name, A.READCOUNT, c.email as user_email  "
+				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c " 
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0 "
+				+ " AND " + Searchtype + " LIKE '%" + SearchWord + "%'" + " ORDER BY a.REG_DATE DESC ";
 
 SELECT a.TITLE, b.title as category, target_user_seq, del, a.reg_date
 FROM COMMUBBS A, CATEGORY B
 WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY
 ORDER BY REG_DATE DESC;
 
-
+SELECT a.seq, a.TITLE as title, target_user_seq, readcount, a.reg_date, a.last_update as last_update, del, b.title as category_name, A.READCOUNT, c.email as user_email   FROM COMMUBBS A, CATEGORY B, DENGUSER c  WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0  AND email LIKE '%eunmin%' ORDER BY a.REG_DATE DESC 
 
 DROP TABLE denguser
 CASCADE CONSTRAINT;

@@ -180,8 +180,7 @@ $(document).ready(function () {
 	</section>
 
 	<div class="album py-5 bg-light">
-		<div class="container">
-			<!--------- 본문페이지         -------->
+		<!--------- 본문페이지         -------->
 			<%
 				List<CommuBbsDto> bbslist = (List<CommuBbsDto>) request.getAttribute("bbslist");
 			%>
@@ -221,10 +220,10 @@ $(document).ready(function () {
 						<div class="col-md-1" style="text-align: center;">
 							<b>번호</b>
 						</div>
-						<div class="col-md-5" style="text-align: center;">
+						<div class="col-md-4" style="text-align: center;">
 							<b>제목</b>
 						</div>
-						<div class="col-md-2" style="text-align: center;">
+						<div class="col-md-3" style="text-align: center;">
 							<b>작성자</b>
 						</div>
 						<div class="col-md-1" style="text-align: center;">
@@ -260,7 +259,7 @@ $(document).ready(function () {
 					<div class="row">
 						<div class="col-md-2" style="text-align: center;"><%=bbs.getCategory_name()%></div>
 						<div class="col-md-1" style="text-align: center;"><%=i + 1%></div>
-						<div class="col-md-5">
+						<div class="col-md-4">
 							<a href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
 								<%=bbs.getTitle()%>
 							</a>
@@ -274,7 +273,7 @@ $(document).ready(function () {
 							}
 							%>
 						</div>
-						<div class="col-md-2" style="text-align: center;"><%=bbs.getUser_email() %></div>
+						<div class="col-md-3" style="text-align: center;"><%=bbs.getUser_email() %></div>
 						<div class="col-md-1" style="text-align: center;"><%=toDate(bbs.getReg_date())%></div>
 						<div class="col-md-1" style="text-align: center;"><%=bbs.getReadcount()%></div>
 					</div>
@@ -297,7 +296,7 @@ $(document).ready(function () {
    		 <label class="input-group-text" for="inputGroupSelect01">검색조건</label>
  		 </div>
 	<select class="custom-select" name="Searchtype">
-			<option value="target_user_seq">글쓴이</option>
+			<option value="email">글쓴이</option>
 			<option value="A.title">제목</option>	
 	</select>
 	</div>

@@ -61,10 +61,14 @@ public class CommuBbsController extends HttpServlet {
 			System.out.println("category : " + Scategory);
 			System.out.println("title : " + title);
 			System.out.println("content : " + content);
+			
 			HttpSession session = req.getSession();
 			User userInfo = (User)session.getAttribute("current_user");
 			String writer = userInfo.getEmail();
 			int target_user_seq =userInfo.getSeq();
+			
+			//로그인 안되었을 때 알림창 띄워주기 
+			
 			
 			boolean isS = comService.writeCommu(new CommuBbsDto(title, content, target_user_seq, category));
 			 //유저 시퀀스 1 로 일단 설정해둠 
@@ -93,6 +97,7 @@ public class CommuBbsController extends HttpServlet {
 			
 			req.setAttribute("comdto", comdto);
 			dispatch("CommuBbsDetail.jsp", req, resp);
+			
 		}else if(command.equals("delete")) {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);

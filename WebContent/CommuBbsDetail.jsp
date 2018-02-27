@@ -1,3 +1,4 @@
+<%@page import="dto.User"%>
 <%@page import="dto.CommuBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
@@ -106,7 +107,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 		<div class="col-md-10">
 		<form name="form1" action="CommuBbsController" method="post">
    		<input type="hidden" name="seq" value="<%=comdto.getSeq() %>">
-						<h1>수정하기</h1>
+						<h1>커뮤니티</h1>
 						<hr>				
 <div class="row">
 	<div class="offset-md-1"></div>	
@@ -126,8 +127,8 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </div>
 
 <hr>
-<div class="row offset-md-9">
-<p><b>작성자</b>  <%=comdto.getUser_email() %> &nbsp;&nbsp;&nbsp;<b>작성일</b>  <%=toDate(comdto.getReg_date()) %>&nbsp;&nbsp;&nbsp;<b> 조회수 </b> <%=comdto.getReadcount() %>&nbsp;</p>
+<div class="row offset-md-8">
+<p><b>작성자</b>  <%=comdto.getUser_email() %> &nbsp;&nbsp;&nbsp;<b>작성일</b>  <%=toDate(comdto.getLast_update()) %>&nbsp;&nbsp;&nbsp;<b> 조회수 </b> <%=comdto.getReadcount() %>&nbsp;</p>
 </div>
 
 <div class="row">
@@ -146,10 +147,21 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <br>
 <div class="row">
 
+<%
+String sid =((User)session.getAttribute("current_user")).getEmail();
+
+if(comdto.getUser_email().equals(sid)){
+%>
 <button type="button" class="btn btn-success offset-md-5 col-md-1"  id="btnUpdate">수정하기</button>
 &nbsp;
 
 <button type="button" class="btn btn-outline-secondary col-md-1"  id="btnDelete" >삭제하기</button>
+<%
+}else{%>
+<button type="button" id="btnBack" class="btn btn-outline-secondary  offset-md-5 col-md-1">돌아가기</button>
+<%
+}
+%>
 </form>
 </div>
 
@@ -208,6 +220,12 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
             document.form1.action="CommuBbsController?command=update";
             document.form1.submit();
         });
+        
+        $("#btnBack").click(function () {
+	        location.href="CommuBbsController?command=list";
+
+	    });
+        
     });
 </script>
 	
