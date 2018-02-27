@@ -115,6 +115,45 @@ if(msg != null){
 							<img class="card-img-top" src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }" alt="./img/no-img.png">
 							<div class="card-body">
 								<p class="card-text">
+									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
+									<c:set var="reg" value="${item.reg_date}"/>
+									<%
+									String temp = (String)pageContext.getAttribute("reg");   //No exception.
+									Calendar cal = Calendar.getInstance();
+									
+									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
+									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int cur_month = cal.get(Calendar.MONTH)+1;
+									
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
+									cal.setTime(format.parse(temp));
+									
+									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
+									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int reg_month = cal.get(Calendar.MONTH)+1;
+									
+									int range_month = cur_month - reg_month;
+									int range_day = cur_day - reg_day;
+									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
+									
+									String result="";
+									if(range_month < 1){
+										if(range_day < 1){
+											if(range_hour < 1){
+												result = "방금 전";
+											}else {
+												result = range_hour+" 시간 전";
+											}
+										} else {
+											result = range_day + " 일 전";
+										}
+									} else {
+										result = range_month + " 달 전 ";
+									}
+									
+									request.setAttribute("range", result);
+									%> 
+									  
 									${item.title }
 									<br>
 								<p>
@@ -124,32 +163,7 @@ if(msg != null){
 									<div class="btn-group">
 										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
 									</div>
-
-									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
-									<fmt:formatDate var="temp1" value="${item.reg_date.replace('.0', '')}" pattern="yyyy-MM-dd hh:mm:ss" />
-							      	<fmt:parseDate var="reg_date"  value="${temp1}" pattern="yyyy-MM-dd hh:mm:ss"/>
-
-							      	<jsp:useBean id="now" class="java.util.Date" />
-									<fmt:formatDate var="temp2" value="${now}" pattern="yyyy-MM-dd hh:mm:ss" />
-									<fmt:parseDate var="current_date"  value="${temp2}" pattern="yyyy-MM-dd hh:mm:ss"/>
-
-									<c:set var="range_day" value="${current_date.day - reg_date.day }"/>
-									<c:set var="range_hour" value="${current_date.hours - reg_date.hours }"/>
-									<c:choose>
-										<c:when test="${range_day == 0 }">
-											<c:choose>
-												<c:when test="${range_hour==0 }">
-													<small class="text-muted">방금 전</small>
-												</c:when>
-												<c:otherwise>
-													<small class="text-muted">${ range_hour } 시간 전</small>
-												</c:otherwise>
-											</c:choose>
-										</c:when>
-										<c:otherwise>
-											<small class="text-muted">${ range_day } 일 전</small>
-										</c:otherwise>
-									</c:choose>
+									<small class="text-muted">${range }</small>
 								</div>
 							</div>
 						</div>
@@ -190,42 +204,7 @@ if(msg != null){
 		crossorigin="anonymous"></script>
 
 
-	a<script type="text/javascript">
-		function setDate() {
-			var regs = new Array();
-
-			for(var i=0; i < ${animlist.size()}; i++){
-				regs.push('${animlist.get(i).reg_date}');
-			}
-
-
-			var reg = new Date();
-			var current = new Date();
-			var rangeDay = 0;
-			var rangeHour = 0;
-
-
-			for(var j=0; j<regs.length; j++){
-				reg = new Date(regs[i]);
-				rangeDay = current.getDay() - reg.getDay();
-				rangeHour = (current.getHours() < reg.getHours()) ? ((current.getHours()+24) - reg.getHours()) : (current.getHours() - reg.getHours());
-
-				// 오늘 올린 게시물
-				if(rangeDay < 1){
-					if(rangeHour < 1){
-						// 방금 올린게시물
-						$('#range${animlist.get(j).seq}').html('방금 전');
-					} else {
-						// 몇 시간 전에 올린 게시물
-						$('#range${animlist.get(j).seq}').html(rangeHour + '시간 전');
-					}
-				} else {
-					//	몇 일 전에 올린 게시물
-					$('#range${animlist.get(j).seq}').html(rangeHour + '일 전');
-				}
-			}
-		}
-
+	<script type="text/javascript">
 		$('.menu-item').on(
 				'mouseover',
 				function() {
@@ -233,12 +212,6 @@ if(msg != null){
 							'1px solid green').css('border-radius', '15px');
 					$(this).children('.nav-link').css('color', 'white');
 
-<<<<<<< HEAD
-
-
-
-
-=======
 				});
 		$('.menu-item').on(
 				'mouseout',
@@ -249,6 +222,5 @@ if(msg != null){
 				});
 
 	</script>
->>>>>>> kyung
 </body>
 </html>

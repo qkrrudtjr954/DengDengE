@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,7 +10,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dto.CommuBbsDto;
 import service.CommuBbsService;
@@ -68,14 +68,14 @@ public class CommuBbsController extends HttpServlet {
 
 
 			if(isS) {
-				Cookie cookie = new Cookie("successMsg", "글이 등록 되었습니다.");
-				cookie.setMaxAge(5);
-				resp.addCookie(cookie);
+				Cookie cookie = new Cookie("successMsg", URLEncoder.encode("글이 등록되었습니다.", "utf-8"));
+				cookie.setMaxAge(15);
 				
+				
+				resp.addCookie(cookie);
 				resp.sendRedirect("CommuBbsController?command=list");
 			}else {
-				req.setAttribute("failMsg", "글을 다시 입력 하십시오");
-
+				req.setAttribute("failMsg", "401");
 				dispatch("CommuBbsWrite.jsp", req, resp);
 			}
 			 
