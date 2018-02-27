@@ -298,6 +298,9 @@ if(aniBbsDto != null){
 				}
 				%>
 				
+				<div class="row">
+					
+				</div>
 				
 				
 				
