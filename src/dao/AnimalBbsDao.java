@@ -63,8 +63,8 @@ public class AnimalBbsDao {
 				aniBbsDto.setUserSeq(rs.getInt("TARGET_USER_SEQ"));
 				aniBbsDto.setContact(rs.getString("TARGET_CONTACT"));
 				aniBbsDto.setDescription(rs.getString("TARGET_DESCRIPTION"));
-				aniBbsDto.setRdate(rs.getString("REG_DATE"));
-				aniBbsDto.setLUpdate(rs.getString("LAST_UPDATE"));
+				aniBbsDto.setReg_date(rs.getString("REG_DATE"));
+				aniBbsDto.setLast_update(rs.getString("LAST_UPDATE"));
 				aniBbsDto.setDel(rs.getInt("DEL"));
 				aniBbsDto.setReadcount(rs.getInt("READCOUNT"));
 				
@@ -317,6 +317,7 @@ public class AnimalBbsDao {
 		      Connection conn = null;
 		      PreparedStatement psmt = null;
 		      ResultSet rs = null;
+		      
 
 		      try {
 		         conn = DBConnection.makeConnection();
@@ -350,8 +351,8 @@ public class AnimalBbsDao {
 					aniBbsDto.setUserSeq(rs.getInt("TARGET_USER_SEQ"));
 					aniBbsDto.setContact(rs.getString("TARGET_CONTACT"));
 					aniBbsDto.setDescription(rs.getString("TARGET_DESCRIPTION"));
-					aniBbsDto.setRdate(rs.getString("REG_DATE"));
-					aniBbsDto.setLUpdate(rs.getString("LAST_UPDATE"));
+					aniBbsDto.setReg_date(rs.getString("REG_DATE"));
+					aniBbsDto.setLast_update(rs.getString("LAST_UPDATE"));
 					aniBbsDto.setDel(rs.getInt("DEL"));
 					aniBbsDto.setReadcount(rs.getInt("READCOUNT"));
 		            list.add(aniBbsDto);
@@ -467,6 +468,8 @@ public class AnimalBbsDao {
 		return null;
 	}
 	*/
+	   
+	   
 }
 
 

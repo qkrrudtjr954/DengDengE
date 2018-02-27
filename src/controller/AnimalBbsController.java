@@ -61,21 +61,35 @@ public class AnimalBbsController extends HttpServlet {
 			String ttype[] = req.getParameterValues("type");
 			String type = null;
 			String location = req.getParameter("location");
+			
 			String mmedicine = req.getParameter("medi");
-			int medicine = Integer.parseInt(mmedicine);
-			System.out.println("m:"+mmedicine);
+			int medicine;
+			if(mmedicine.equals("YES")) {
+				medicine = 1;
+			}else {
+				medicine = 0;
+			}System.out.println("m:"+medicine);	
+			
 			
 			String nneutralization = req.getParameter("neu");
-			int neutralization = Integer.parseInt(nneutralization);
-			System.out.println("n:"+nneutralization);
+			int neutralization;
+			if(nneutralization.equals("YES")) {
+				neutralization = 1;
+			}else {
+				neutralization = 0;
+			}System.out.println("n:"+neutralization);	
+			
 			
 			String ggender = req.getParameter("gen");
-			int gender =  Integer.parseInt(ggender);
-			System.out.println("g:"+ggender);
+			int gender;
+			if(ggender.equals("여자")) {
+				gender = 1;
+			}else {
+				gender = 0;
+			}System.out.println("g:"+gender);	
 			
 			String title = req.getParameter("title");
 			String descripttion = req.getParameter("descrip");
-			String pic1 = req.getParameter("pic");
 			String content = req.getParameter("content");
 			
 			String contect = req.getParameter("contect");
@@ -90,7 +104,7 @@ public class AnimalBbsController extends HttpServlet {
 			}
 			
 			boolean isS = aniBbService.wirteAnimalBbs(
-					new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, pic1, content, 1, contect, description));
+					new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, null, content, 1, contect, description));
 			
 			if(isS) {
 				// msg
@@ -122,10 +136,10 @@ public class AnimalBbsController extends HttpServlet {
 				
 				boolean isS = aniBbService.updateAnimalBbs(seq, new AnimalBbsDto(title, content));
 				if(isS) {
-					System.out.println("수정 성공");
+					req.setAttribute("msg", "글 수정 성공");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}else {
-					System.out.println("수정 실패");
+					req.setAttribute("msg", "글 수정 실패");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}
 		}
@@ -134,10 +148,10 @@ public class AnimalBbsController extends HttpServlet {
 				boolean isS = aniBbService.deleteBbs(seq);
 				
 				if(isS) {
-					System.out.println("삭제 성공");
+					req.setAttribute("msg", "글 삭제 성공");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}else {
-					System.out.println("삭제 실패");
+					req.setAttribute("msg", "글 삭제 실패");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
 				}
 			}

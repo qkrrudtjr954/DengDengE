@@ -61,6 +61,7 @@
 	</servlet-mapping>
 
 
+
 	<servlet>
 		<servlet-name>CommuBbsController</servlet-name>
 		<servlet-class>controller.CommuBbsController</servlet-class>
@@ -69,4 +70,5 @@
 		<servlet-name>CommuBbsController</servlet-name>
 		<url-pattern>/CommuBbsController</url-pattern>
 	</servlet-mapping>
+
 </web-app>
