@@ -138,13 +138,18 @@ alert("<%=msg%>");
  		
  		<hr>
  		
- 		
-   
- 		
- 		
- 		
- 		
         </form>
+        <form name="form1" action="AfterBbsController" method="post" >
+         <input type="hidden" name="seq" value="<%=bbs1.getSeq() %>">
+		<div class="row">
+		<button class="offset-md-9 btn btn-outline-secondary" id="btnupdete" style="background-color: #28A745; color: #fff">수정하기</button>
+		&nbsp;&nbsp;&nbsp;<button id="btndelete" class="btn btn-outline-secondary" style="background-color: #28A745; color: #fff" >삭제하기</button>
+
+		</div>
+		
+		</form>
+        
+        
         
         
         
@@ -188,5 +193,34 @@ alert("<%=msg%>");
 			$(this).children('.nav-link').css('color', 'white');
 		});
 	</script>
+	
+	<%-- button 동작 구간 --%>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$("#btnupdete").click(function(){
+	        alert("수정화면으로 이동 합니다");
+	       document.form1.action ="AfterBbsController?command=AfterBbsUpdate";
+	      document.form1.submit(); 
+	        
+	     });
+	     
+	     $("#btndelete").click(function(){    
+	        //alert("클릭");
+	         document.form1.action="AfterBbsController?command=AfterDelete";
+	         document.form1.submit();
+	     });
+	 });
+	
+	
+	
+	
+	</script>
+	
+	
+	
+	
+	
   </body>
 </html>
