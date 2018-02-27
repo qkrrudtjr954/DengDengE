@@ -66,6 +66,7 @@ public class CommuBbsController extends HttpServlet {
 			System.out.println(isS);
 			
 
+
 			if(isS) {
 				Cookie cookie = new Cookie("successMsg", "글이 등록 되었습니다.");
 				cookie.setMaxAge(5);
@@ -74,6 +75,7 @@ public class CommuBbsController extends HttpServlet {
 				resp.sendRedirect("CommuBbsController?command=list");
 			}else {
 				req.setAttribute("failMsg", "글을 다시 입력 하십시오");
+
 				dispatch("CommuBbsWrite.jsp", req, resp);
 			}
 			 
@@ -93,15 +95,19 @@ public class CommuBbsController extends HttpServlet {
 			
 			boolean isS = comService.delCommu(seq);
 			
+
 			
 			if(isS) {
 				Cookie cookie = new Cookie("successMsg", "글이 삭제되었습니다.");
+
 				cookie.setMaxAge(5);
 				resp.addCookie(cookie);
 				
 				resp.sendRedirect("CommuBbsController?command=list");
 			}else { 
+
 				req.setAttribute("failMsg", "글을 삭제할 수 없습니다. 다시 시도하세요.");
+
 				dispatch("CommuBbsController?command=read&seq="+seq, req, resp);
 			}
 		}else if(command.equals("classify")) {
@@ -136,16 +142,20 @@ public class CommuBbsController extends HttpServlet {
 		       
 	         boolean isS = comService.udtCommu(comdto);
 
+
 	         
 	         if(isS) {
 	        	 	Cookie cookie = new Cookie("successMsg", "글이 수정되었습니다.");
 				cookie.setMaxAge(5);
+
 				resp.addCookie(cookie);
 	            resp.sendRedirect("CommuBbsController?command=list");
 	            
 	         }else {
 	            //JOptionPane.showMessageDialog(null, "수정실패");
+
 	            req.setAttribute("failMsg", "글을 수정할 수 없습니다. 다시 시도해주세요.");
+
 	            dispatch("CommuBbsController?command=read", req, resp);
 	            
 	         }   
