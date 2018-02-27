@@ -20,6 +20,7 @@
 <%
 List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animlist");
 %>
+<%-- 
 <%
 String msg = (String)request.getAttribute("msg");
 %>
@@ -32,7 +33,7 @@ if(msg != null){
 	<%
 }
 %>
-
+ --%>
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -112,7 +113,67 @@ if(msg != null){
 					<h1>분양 동물 보기</h1>
 				</div>
 			</div>
-		<form action="AnimalBbsController" method="post">
+			<hr>
+			<br>
+			
+			<form action="AnimalBbsController" method="post">
+			<input type="hidden" name="command" value="search">
+				<div class="row">
+					<input type="submit" class="offset-md-2 btn btn-success" style="background-color: #28A745; color: #fff"
+							value="서울/경기">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn btn-success" style="background-color: #28A745; color: #fff"
+							value="강원도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn btn-success" style="background-color: #28A745; color: #fff"
+							value="충정도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn btn-success" style="background-color: #28A745; color: #fff"
+							value="전라도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn btn-success" style="background-color: #28A745; color: #fff"
+							value="경상도">
+				</div>
+			</form>
+			
+			<br>
+			<form action="AnimalBbsController" method="post">
+			<input type="hidden" name="command" value="search">
+				<div class="row">
+					<input type="submit" class="offset-md-2 btn btn-success" style="background-color: #28A745; color: #fff"
+							value="유기동물">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn btn-success" style="background-color: #28A745; color: #fff"
+							value="개인분양">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn btn-success" style="background-color: #28A745; color: #fff"
+							value="etc">
+				</div>
+			</form>
+			
+			<br>
+			<form action="AnimalBbsController" method="post" >
+				<input type="hidden" name="command" value="search">
+				<div class="row" style="margin:0 auto;width:900px;">
+					<div class="offset-md-2 input-group-prepend">
+						<select class="custom-select" id="inputGroupSelect01"name="Searchtype" style="width: 150px">
+							<option value="title">제목</option>
+							<option value="target_user_seq">작성자</option>
+						</select> <input type="text" class="form-control"
+							aria-label="Text input with segmented dropdown button" size="50"
+							name="SearchWord" id="text">
+					</div>
+
+					<div class="serach">
+						<input type="submit" class="btn btn-success" id="btnsarch" style="background-color: #28A745; color: #fff"
+							value="검색">
+					</div>
+				</div>
+			</form>
+			<br>
+
+
+			<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="write">
 			<div class="row">
 				<c:forEach items="${animlist }" var="item" varStatus="i">

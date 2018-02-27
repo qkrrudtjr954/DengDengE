@@ -300,6 +300,7 @@ public class AnimalBbsDao {
 	   }
 	  }
 	   
+	   // 검색
 	   public List<AnimalBbsDto> getFindBbslist(String Searchtype, String Searchtext){
 		   System.out.println("s");
 		      List<AnimalBbsDto> list = new ArrayList<>();
