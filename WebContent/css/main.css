@@ -71,3 +71,23 @@ footer p {
     height: 100%;
     width: 100%;
 }
+
+
+.map-result {
+    margin: 10px 0px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-radius: 25px;
+    border: 2px solid gray;
+}
+
+.map-result :hover {
+	background: gray;
+    margin: 10px 0px;
+    padding: 10px;
+    text-align: center;
+    color: #007bff;
+    border-radius: 25px;
+    border: 2px solid gray;
+}
