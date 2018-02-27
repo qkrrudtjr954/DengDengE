@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import dao.CommuBbsDao;
-import dao.iCommuBbsDao;
 import dto.CommuBbsDto;
 import service.CommuBbsService;
 
@@ -63,14 +63,17 @@ public class CommuBbsController extends HttpServlet {
 			
 			 boolean isS = comService.writeCommu(new CommuBbsDto(title, content, 1, category));
 			 //유저 시퀀스 1 로 일단 설정해둠 
-				System.out.println(isS);
-				if(isS) {
-					req.setAttribute("msg", "글 입력 성공!");
-					dispatch("CommuBbsController?command=list", req, resp);
-				}else {
-					req.setAttribute("msg", "글을 다시 입력 하십시오");
-					dispatch("CommuBbsWrite.jsp", req, resp);
-				}
+			System.out.println(isS);
+			
+			
+			if(isS) {
+				
+				
+				resp.sendRedirect("CommuBbsController?command=list");
+			}else {
+				req.setAttribute("msg", "글을 다시 입력 하십시오");
+				dispatch("CommuBbsWrite.jsp", req, resp);
+			}
 			 
 		}else if(command.equals("read")) {
 			String Sseq = req.getParameter("seq");
@@ -87,11 +90,16 @@ public class CommuBbsController extends HttpServlet {
 			System.out.println("삭제 시퀀스 : " + Sseq);
 			
 			boolean isS = comService.delCommu(seq);
+			
+			Cookie cookie = null;
 			if(isS) {
-				req.setAttribute("msg", "삭제했습니다");
-				dispatch("CommuBbsController?command=list", req, resp);
+				cookie = new Cookie("msg", "글 삭제");
+				cookie.setMaxAge(5);
+				resp.addCookie(cookie);
+				
+				resp.sendRedirect("CommuBbsController?command=list");
 			}else { 
-				req.setAttribute("msg", "삭제 실패");
+				req.setAttribute("msg", "글을 삭제할 수 없습니다. 다시 시도하세요.");
 				dispatch("CommuBbsController?command=read&seq="+seq, req, resp);
 			}
 		}else if(command.equals("classify")) {
@@ -124,21 +132,22 @@ public class CommuBbsController extends HttpServlet {
 		      comdto.setTitle(title);
 		      comdto.setContent(content);
 		       
-		     
-		         boolean isS = comService.udtCommu(comdto);
-		         req.setAttribute("isS", isS);
-		         		         
-		         if(isS) {
-		           
-		            req.setAttribute("msg", "수정성공");
-		            dispatch("CommuBbsController?command=list", req, resp);
-		            
-		         }else {
-		            //JOptionPane.showMessageDialog(null, "수정실패");
-		            req.setAttribute("msg", "수정실패");
-		            dispatch("CommuBbsController?command=read", req, resp);
-		            
-		         }   
+	         boolean isS = comService.udtCommu(comdto);
+
+	         Cookie cookie = null;
+	         if(isS) {
+	        	 	cookie = new Cookie("redirectMsg", "글수");
+
+				cookie.setMaxAge(10);
+				resp.addCookie(cookie);
+	            resp.sendRedirect("CommuBbsController?command=list");
+	            
+	         }else {
+	            //JOptionPane.showMessageDialog(null, "수정실패");
+	            req.setAttribute("msg", "글을 수정할 수 없습니다. 다시 시도해주세요.");
+	            dispatch("CommuBbsController?command=read", req, resp);
+	            
+	         }   
 		}else if(command.equals("search")) {
 			
 			  String Searchtype = req.getParameter("Searchtype");             //검색종류(글쓴이,제목,내용)
