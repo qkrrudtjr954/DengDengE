@@ -217,12 +217,12 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 			   <option value="target_user_seq">글쓴이</option>
 			   <option value="title">제목</option>
  			 </select>
-    		<input type="text" class="form-control" aria-label="Text input with segmented dropdown button" size="30" name="SearchWord">
+    		<input type="text" class="form-control" aria-label="Text input with segmented dropdown button" size="30" name="SearchWord" id="text">
 		</div>
 		
 		<div class="serach"text-align:center;">
-		<!-- <button type="button" class="btn btn-success" onclick="">검색</button> -->
-		<input type="submit" class="btn btn-success"  value="검색">
+		<!-- <button type="button" class="btn btn-success" onclick="" id="btnsarch">검색</button> -->
+		 <input type="submit" class="btn btn-success" id="btnsarch"  value="검색">
 		</div>
 		
          
@@ -363,13 +363,37 @@ for(int i = 0;i < afterBbslist.size(); i++){
          document.form1.action="AfterBbsController?command=AfterBbswrite";
          document.form1.submit();
      });
+     
+     
+     
+     $("#btnsarch").click(function(){    
+         //alert("클릭");
+         
+         var text = $("#text").val(); 
+         if(text==null){
+        	 alert("검색창이 비웠습니다");
+        	 
+         }
+         
+         
+          
+      });
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
  });
 	
-	
-	
-	
-	
 	</script>
+	
+
 	
 	
 	
