@@ -70,10 +70,7 @@
 		<servlet-name>CommuBbsController</servlet-name>
 		<url-pattern>/CommuBbsController</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
-
-=======
-
+	
 
 	<servlet>
 		<servlet-name>FindPlaceController</servlet-name>
@@ -83,5 +80,4 @@
 		<servlet-name>FindPlaceController</servlet-name>
 		<url-pattern>/FindPlaceController</url-pattern>
 	</servlet-mapping>
->>>>>>> kyung
 </web-app>
