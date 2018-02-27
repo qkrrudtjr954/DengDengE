@@ -169,40 +169,19 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
  
  <%
  String msg = (String)request.getAttribute("msg");
- String msg1 = (String)request.getAttribute("msg1");
+ String afterwirtemsg = (String)request.getAttribute("afterwirtemsg");
  String msg2 = (String)request.getAttribute("msg2");
  
+ %> 
  
  
- if(msg1!=null){
- %>
- <script type="text/javascript">
- 	alert("<%=msg1%>");
  
- </script>
- 
- <%
- }else if(msg2!=null){
- %>
- 
- <script type="text/javascript">
- 	alert("<%=msg2%>");
- 
- </script>
- 
- <%
- }else if(msg!=null){
- %>
- 
- <script type="text/javascript">
- 	alert("<%=msg%>");
- 
- </script>
- 
- <%
- }
- %>
- 
+ <%-- 아직 진행 안됨  진행중 --%>
+ <%-- <c:if test="${cookie.afterwirtemsg.value != null }">
+	<div class="alert alert-success" role="alert">
+	  ${cookie.successMsg.value }
+	</div>
+</c:if> --%>
  
  
  

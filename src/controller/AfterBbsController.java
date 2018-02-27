@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,11 +59,19 @@ public class AfterBbsController extends HttpServlet {
 			}*/
 			
 			boolean isS = bbs.wirtelAfterBbs(new AfterBbsDto(title, content, 1));
-			
+			Cookie cookie = null;
 			if(isS) {
 				System.out.println(isS);
-				req.setAttribute("msg1", "글작성 완료");
-				dispatch("AfterBbsController?command=AfterBbslist", req, resp);
+				/*req.setAttribute("msg1", "글작성 완료");
+				dispatch("AfterBbsController?command=AfterBbslist", req, resp);*/
+				
+				
+				/*cookie = new Cookie("afterwirtemsg", "글작성완료");
+				cookie.setMaxAge(5);
+				resp.addCookie(cookie);*/
+								
+				resp.sendRedirect("AfterBbsController?command=AfterBbslist");
+				
 			}else {
 				System.out.println(isS);
 				req.setAttribute("mag1", "글작성 실패");
