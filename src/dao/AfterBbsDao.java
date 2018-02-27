@@ -37,8 +37,8 @@ public class AfterBbsDao {
 	public List<AfterBbsDto> getAfterlBbsList(){
 		String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
 				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-				+ " FROM AFTERBBS "
-				+ " WHERE DEL=0 ";
+				+ " FROM AFTERBBS  "
+				+ " WHERE DEL=0 ORDER BY REG_DATE DESC ";
 		
 		
 		List<AfterBbsDto> list = new ArrayList<AfterBbsDto>();

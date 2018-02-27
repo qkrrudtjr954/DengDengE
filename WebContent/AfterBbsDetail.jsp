@@ -89,6 +89,8 @@
 AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
 String msg = (String)request.getAttribute("msg");
 
+System.out.println("bbs1 = "  + bbs1);
+
 
 if(msg !=null){
 

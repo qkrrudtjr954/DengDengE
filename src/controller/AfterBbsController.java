@@ -76,7 +76,7 @@ public class AfterBbsController extends HttpServlet {
 			bbs.readCount(seq);
 			System.out.println("seq + " + seq);
 			AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
-			
+			System.out.println("Combbs1 = "  + bbs1);
 			req.setAttribute("bbs1", bbs1);
 			dispatch("AfterBbsDetail.jsp", req, resp);
 			
