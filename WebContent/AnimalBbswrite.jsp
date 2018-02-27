@@ -327,8 +327,8 @@ $(document).ready(function() {
     });
     
     $('#btn').click(function () { 
-    		$('.form2').show(1000);
-			$('.form1').hide(1000);
+   		$('.form2').show(1000);
+		$('.form1').hide(1000);
 	});
     $('#btn1').click(function () {    	
 		$('.form1').show(1000);

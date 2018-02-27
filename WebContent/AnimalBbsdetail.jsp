@@ -136,7 +136,7 @@ if(aniBbsDto != null){
 
 				<div class="row">
 					<span style="font-size: x-small"> <%=aniBbsDto.getType()%>
-						&nbsp;&nbsp;&nbsp; <%=aniBbsDto.getRdate()%>
+						&nbsp;&nbsp;&nbsp; <%=aniBbsDto.getReg_date() %>
 					</span>&nbsp;&nbsp; <span style="font-size: x-small"> 조회수 <%=aniBbsDto.getReadcount()%>
 					</span>
 					<a href="AnimalBbsController?command=animlist"
