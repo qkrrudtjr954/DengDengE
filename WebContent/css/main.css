@@ -59,3 +59,15 @@ footer p {
 }
 
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+
+.list-title {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.map-container {
+	background-color: white;
+    height: 100%;
+    width: 100%;
+}

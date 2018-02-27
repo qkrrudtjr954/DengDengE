@@ -11,13 +11,13 @@
     <link rel="icon" href="./icon/favicon.ico">
 
     <title>Deng Deng E list</title>
-	
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
-    
+
   </head>
 
   <body>
@@ -34,21 +34,21 @@ if(aniBbsDto != null){
 		int  medi = aniBbsDto.getMedicine();
 		int neu = aniBbsDto.getNeutralization();
 		int gen = aniBbsDto.getGender();
-		
+
 		if(medi == 1){
-			m = "YES";			
+			m = "YES";
 		}else {
-			m = "NO";			
+			m = "NO";
 		}
-		
-		if(neu == 1){			
-			n = "YES";			
-		}else {			
-			n = "NO";			
-		}		
-		if(gen == 1){			
+
+		if(neu == 1){
+			n = "YES";
+		}else {
+			n = "NO";
+		}
+		if(gen == 1){
 			g = "여아";
-		}else {			
+		}else {
 			g = "남아";
 		}
 	}
@@ -84,7 +84,7 @@ if(aniBbsDto != null){
 				</ul>
 			</div>
 		</nav>
-   </header>	    
+   </header>
     <main role="main">
 
       <section class="jumbotron text-center">
@@ -114,7 +114,7 @@ if(aniBbsDto != null){
 			</ul>
   		</nav>
       </section>
-      
+
 	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="list">
 		<div class="album py-5 bg-light">
@@ -140,7 +140,7 @@ if(aniBbsDto != null){
 					</span>&nbsp;&nbsp; <span style="font-size: x-small"> 조회수 <%=aniBbsDto.getReadcount()%>
 					</span>
 					<a href="AnimalBbsController?command=animlist"
-					class="offset-md-9 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>	
+					class="offset-md-9 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>
 				</div>
 				<hr>
 
@@ -265,21 +265,21 @@ if(aniBbsDto != null){
 						</tbody>
 					</table>
 				</div>
-				
+
 				<br>
-				<div class="row" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid; border-bottom: 1px solid; 
+				<div class="row" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid; border-bottom: 1px solid;
 					height: 800px; margin:0 auto;width:900px;">
 					<span>
 						<%=aniBbsDto.getContent() %>
 					</span>
 				</div>
-				
+
 				<br>
-				<div class="row">	
-					<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-9 btn btn-outline-secondary" 
+				<div class="row">
+					<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-9 btn btn-outline-secondary"
 					style="background-color: #28A745; color: #fff">수정</a>
 					&nbsp;&nbsp;
-					<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>" 
+					<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
 					class="btn btn-outline-secondary">삭제</a>
 				</div>
 
@@ -304,23 +304,23 @@ if(aniBbsDto != null){
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 
-	
+
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
-				
+
 		});
 		$('.menu-item').on('mouseout', function () {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
 	</script>
-	
+
   </body>
 </html>

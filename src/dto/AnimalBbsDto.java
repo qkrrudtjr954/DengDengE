@@ -17,18 +17,18 @@ public class AnimalBbsDto implements Serializable {
 	private String descripttion;	// 특이사항
 	private String pic1;			// 사진URL
 	private String content;		// 내용
-	private int userSeq;			// 작성자 
+	private int userSeq;			// 작성자
 	private String contact;		// 연락처
 	private String description;	// 기타사항
  	private String reg_date;			// 등록날짜
 	private String last_update;		// 마지막 수정날짜
 	private int del;
 	private int readcount;
-	
+
 	public AnimalBbsDto() {
 	}
 
-	
+
 
 	public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String type, String location,
 			int medicine, int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
@@ -84,7 +84,7 @@ public class AnimalBbsDto implements Serializable {
 		this.title = title;
 		this.content = content;
 	}
-	
+
 
 	public int getSeq() {
 		return seq;
@@ -338,10 +338,23 @@ public class AnimalBbsDto implements Serializable {
 
 
 
-	
 
 
 
-	
-	
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -13,19 +13,19 @@ public class DBConnection {
 	         e.printStackTrace();
 	      }
 	   }
-	   
+
 	   public static Connection makeConnection() {
-	      
+
 	      Connection conn = null;
-	      
+
 	      try {
 	         conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr", "hr");
-	         
+
 	         System.out.println("DB Connection Success");
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      }
-	      
+
 	      return conn;
 	   }
 }
