@@ -20,20 +20,7 @@
 <%
 List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animlist");
 %>
-<%-- 
-<%
-String msg = (String)request.getAttribute("msg");
-%>
-<%
-if(msg != null){
-	%>
-		<script type="text/javascript">
-			alert("<%=msg %>");
-		</script>
-	<%
-}
-%>
- --%>
+
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -118,6 +105,7 @@ if(msg != null){
 			
 			<form action="AnimalBbsController" method="post">
 			<input type="hidden" name="command" value="btnsearch">
+			
 				<div class="row">
 					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
 					value="서울">
@@ -176,7 +164,7 @@ if(msg != null){
 			<br>
 
 
-			<form action="AnimalBbsController" method="post">
+		<form action="AnimalBbsController" method="get">
 		<input type="hidden" name="command" value="write">
 			<div class="row">
 				<c:forEach items="${animlist }" var="item" varStatus="i">
@@ -241,7 +229,8 @@ if(msg != null){
 			</div>
 			
 			<div class="row">
-				<input type="submit" class="offset-md-10 btn btn-outline-secondary" style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
+				<input type="submit" class="offset-md-11 btn btn-outline-secondary" 
+				style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
 			</div>
 			</form>
 		</div>

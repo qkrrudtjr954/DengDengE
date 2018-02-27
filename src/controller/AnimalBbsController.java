@@ -8,8 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.AnimalBbsDto;
+import dto.User;
 import service.AnimalBbsService;
 
 public class AnimalBbsController extends HttpServlet {
@@ -50,6 +52,7 @@ public class AnimalBbsController extends HttpServlet {
 		}
 		else if(command.equals("write")) {
 			// id
+			
 			dispatch("AnimalBbswrite.jsp", req, resp);
 		}
 		else if(command.equals("writeAf")) {
@@ -94,6 +97,11 @@ public class AnimalBbsController extends HttpServlet {
 			
 			String contect = req.getParameter("contect");
 			String description = req.getParameter("desc");
+			
+			HttpSession session = req.getSession();
+	         User userInfo = (User)session.getAttribute("current_user");
+	         String writer = userInfo.getEmail();
+	         int target_user_seq =userInfo.getSeq();
 	
 			
 			if(ttype != null) {
@@ -103,8 +111,17 @@ public class AnimalBbsController extends HttpServlet {
 				System.out.println("t:"+type);
 			}
 			
+	         
+	         
+	         
+	         //로그인 안되었을 때 알림창 띄워주기       
+	         
+			
 			boolean isS = aniBbService.wirteAnimalBbs(
-					new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, null, content, 1, contect, description));
+					new AnimalBbsDto(title, name, age, kinds, type, location, 
+												medicine, neutralization, gender, 
+												descripttion, null, content, 
+												target_user_seq, contect, description));
 			
 			if(isS) {
 				// msg

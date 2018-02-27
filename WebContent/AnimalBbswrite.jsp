@@ -1,3 +1,6 @@
+<%@page import="dto.User"%>
+<%@page import="dto.AnimalBbsDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -19,17 +22,20 @@
     
   </head>
 
-  <body>
+ <body>
+ <%
+List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animlist");
+%>
 	<header>
-		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavDropdown">
-					<ul class="navbar-nav offset-md-7">
-						<c:choose>
-							<c:when test="${current_user == null }">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand offset-md-1" href="#">DengDengE</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav offset-md-9">
+					<c:choose>
+						<c:when test="${current_user == null }">
 							<!-- 로그인 안했을 때 -->
 							<li class="nav-item">
 								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
@@ -40,47 +46,48 @@
 						</c:when>
 						<c:otherwise>
 							<!-- 로그인 했을 때 -->
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=signout">로그아웃</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=myPage">마이 페이지</a>
-							</li>
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=signout">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=myPage">마이 페이지</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
 		</nav>
-   </header>	    
-    <main role="main">
+	</header>
+	<main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Album example</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-success my-2">Main call to action</a>
-          </p>
-        </div>
-      </section>
-      <section>
-	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	        <ul class="nav menu justify-content-center">
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="jumbotron-heading">Album example</h1>
+			<p class="lead text-muted">Something short and leading about the
+				collection below—its contents, the creator, etc. Make it short and
+				sweet, but not too short so folks don't simply skip over it
+				entirely.</p>
+			<p>
+				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
+			</p>
+		</div>
+	</section>
+	<section>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="nav menu justify-content-center">
 			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
+			    <a class="nav-link" href="#">분양소 찾기</a>
 			  </li>
 			</ul>
-  		</nav>
-      </section>
+		</nav>
+	</section>
 	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="writeAf"> 
 		<div class="row">
@@ -139,7 +146,8 @@
 
 					<div class="row">
 						<div class="input-group-prepend">
-							<span class="input-group-text">주소</span> <input type="text"
+							<span class="input-group-text">주소</span> 
+							<input type="text"
 								class="form-control" size="50" name="location"
 								id="sample4_roadAddress" placeholder="도로명주소">
 							<button class="btn btn-outline-secondary" type="button"
@@ -153,15 +161,15 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">접종여부</span>
 							<div class="input-group-text">
-								<input type="checkbox"
-									aria-label="Checkbox for following text input" name="medi">
+								<input type="radio"
+									aria-label="radio for following text input" name="medi">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox"  size="2"
 								value="YES">
 							<div class="input-group-text">
-								<input type="checkbox"
-									aria-label="Checkbox for following text input" name="medi">
+								<input type="radio"
+									aria-label="radio for following text input" name="medi">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
@@ -173,15 +181,15 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">중성화</span>
 							<div class="input-group-text">
-								<input type="checkbox"
-									aria-label="Checkbox for following text input" name="neu">
+								<input type="radio"
+									aria-label="radio for following text input" name="neu">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox"  size="2"
 								value="YES">
 							<div class="input-group-text">
-								<input type="checkbox"
-									aria-label="Checkbox for following text input" name="neu">
+								<input type="radio"
+									aria-label="radio for following text input" name="neu">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
@@ -192,15 +200,15 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">성별</span>
 							<div class="input-group-text">
-								<input type="checkbox"
-									aria-label="Checkbox for following text input" name="gen">
+								<input type="radio"
+									aria-label="radio for following text input" name="gen">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
 								value="여아">
 							<div class="input-group-text">
-								<input type="checkbox"
-									aria-label="Checkbox for following text input" name="gen">
+								<input type="radio"
+									aria-label="radio for following text input" name="gen">
 							</div> 
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
@@ -251,13 +259,20 @@
 						<span style=font-size:medium">작성자 인적사항</span>
 					</div>
 					<br>
+					
+					<%
+						
+						String sid = ((User)session.getAttribute("current_user")).getEmail();
+					%>
 
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">아이디</span> <input
 								type="text" class="form-control" size="20" name="Tid"
-								placeholder="이름" value="로그인한 유저 id" readonly="readonly">
-							&nbsp;&nbsp;&nbsp; <span class="input-group-text" id="">연락처</span>
+								placeholder="이름" value="<%=sid %>" readonly="readonly" style="background-color: #fff">
+							&nbsp;&nbsp;&nbsp; 
+							
+							<span class="input-group-text" id="">연락처</span>
 							<input type="text" class="form-control" size="20" name="contect"
 								placeholder="연락처" id="contect">
 							<button class="btn btn-outline-secondary" type="button" id="certibutton">인증하기</button>
@@ -327,49 +342,28 @@ $(document).ready(function() {
     });
     
     $('#nextButton').click(function () { 
-    	$('.form2').show(1000);
-		$('.form1').hide(1000); 
-    	/* var name =$("#name").val();
+    	/* $('.form2').show(1000);
+		$('.form1').hide(1000);  */
+    	var name =$("#name").val();
     	var age = $("#age").val();
     	var kinds = $("#kinds").val();
     	var target = document.getElementById("inputGroupSelect01");
         var type = target.options[target.selectedIndex].value;     // 옵션 value 값
-    	var location;
+    	var location = document.getElementsByName("location");
+        var medi = $(":input:radio[name=medi]:checked").val();
+        var neu = $(":input:radio[name=neu]:checked").val();
+        var gen = $(":input:radio[name=gen]:checked").val();
         var title = $("#title").val();
 		var content = $(".content").val();
 		
-		//alert("n"+name+" a"+age+" k"+kinds+ " t"+type);
-		
 		if(name === "" || age === "" || kinds === "" || type === "" || 
-				location === "" || title === ""|| content === ""){
-			alert("선택사항과 빈칸을 입력해주십시오");
-			
-			 if( $(":checkbox[name='medi']:checked").length==2){
-				    alert("접종여부 항목을 하나씩만 체크해주세요.");
-				    
-			}else if($(":checkbox[name='neu']:checked").length==2){
-				    alert("중성화 항목을 하나씩만 체크해주세요.");
-				    
-			}else if($(":checkbox[name='gen']:checked").length==2){
-				    alert("성별 항목을 하나씩만 체크해주세요.");
-				    
-			}
-			 
-			 if( $(":checkbox[name='medi']:checked").length==0){
-				    alert("접종여부 항목을 하나이상 체크해주세요.");
-				    
-			}else if($(":checkbox[name='neu']:checked").length==0){
-				    alert("중성화 항목을 하나이상 체크해주세요.");
-				    
-			}else if($(":checkbox[name='gen']:checked").length==0){
-				    alert("성별 항목을 하나이상 체크해주세요.");
-				   
-			}
-			return;			
+				title === ""|| content === "" || medi === "" || neu === "" || gen === ""){
+			alert("선택사항과 빈칸을 입력해주십시오"); 
+			return;
 		}else{			
 			$('.form2').show(1000);
 			$('.form1').hide(1000);
-		}  */
+		} 
 	});
     $('#btn1').click(function () {    	
 		$('.form1').show(1000);
@@ -383,7 +377,7 @@ $(document).ready(function() {
 			alert("연락처를 입력해주십시오");
 			return;
 		}else{
-			alert("인증완료");
+			alert  ("인증완료");
 			//$("#finalButton").show();
 		}
 	});

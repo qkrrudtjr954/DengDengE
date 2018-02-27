@@ -22,13 +22,13 @@ public class AnimalBbsDao {
 
 	// 글목록
 	public List<AnimalBbsDto> getAnimalBbsList() {
-		String sql = " SELECT SEQ, TITLE, NAME, AGE, "
-				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
-				+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
-				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-				+ " FROM ANIMALBBS "
-				+ " WHERE DEL=0 "
+		String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE, "
+				+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
+				+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT, "
+				+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
+				+ " FROM ANIMALBBS A, DENGUSER B "
+				+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL=0 "
 				+ " ORDER BY REG_DATE DESC ";
 		System.out.println("s"+sql);
 		
@@ -143,13 +143,13 @@ public class AnimalBbsDao {
 	
 	// 입양하기 글 디테일
 	public AnimalBbsDto detailAnimalBbs(int seq) {
-		String sql = " SELECT SEQ, TITLE, NAME, AGE, "
-				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
-				+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
-				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-				+ " FROM ANIMALBBS "
-				+ " WHERE SEQ=? ";
+		String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE, "
+				+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
+				+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT, "
+				+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT,  B.EMAIL AS USER_EMAIL "
+				+ " FROM ANIMALBBS A, DENGUSER B "
+				+ " WHERE  A.TARGET_USER_SEQ = B.SEQ AND A.SEQ=? ";
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -189,7 +189,8 @@ public class AnimalBbsDao {
 										rs.getString(i++),
 										rs.getString(i++),
 										rs.getInt(i++),
-										rs.getInt(i++));
+										rs.getInt(i++),
+										rs.getString(i++));
 						
 				}
 			System.out.println("4/6 S detailAnimalBbs");
@@ -307,13 +308,14 @@ public class AnimalBbsDao {
 		      List<AnimalBbsDto> list = new ArrayList<>();
 
 		      
-				String sql = " SELECT SEQ, TITLE, NAME, AGE, "
-						+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
-						+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
-						+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-						+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-						+ " FROM ANIMALBBS "
-						+ " WHERE DEL=0 AND " + Searchtype + " LIKE '%" + Searchtext + "%'"
+				String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE, "
+						+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
+						+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT, "
+						+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
+						+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
+						+ " FROM ANIMALBBS A,  DENGUSER B "
+						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL=0 "
+						+ " AND " + Searchtype + " LIKE '%" + Searchtext + "%'"
 		            + " ORDER BY REG_DATE DESC ";
 		   
 		      Connection conn = null;
@@ -380,14 +382,15 @@ public class AnimalBbsDao {
 		      List<AnimalBbsDto> list = new ArrayList<>();
 
 		      
-				String sql = " SELECT SEQ, TITLE, NAME, AGE, "
-						+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, "
-						+ " GENDER, DESCRIPTTION, PIC1, CONTENT, "
-						+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-						+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-						+ " FROM ANIMALBBS "
-						+ " WHERE DEL=0 AND LOCATION LIKE '" +searchBtn+"%' "
-								+ " OR DEL=0 AND TYPE LIKE '"+searchBtn+"%' "
+				String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE, "
+						+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
+						+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT, "
+						+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
+						+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
+						+ " FROM ANIMALBBS A, DENGUSER B "
+						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL=0 "
+						+ " AND LOCATION LIKE '" +searchBtn+"%' "
+						+ " OR DEL=0 AND TYPE LIKE '"+searchBtn+"%' "
 		            + " ORDER BY REG_DATE DESC ";
 		   
 		      Connection conn = null;
