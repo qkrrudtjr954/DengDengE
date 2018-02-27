@@ -112,14 +112,14 @@
 						&nbsp;&nbsp;&nbsp;
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">나이</span> <input
-								type="number" class="form-control" size="20" name="age"
+								type="number" class="form-control" size="20" name="age" id="age"
 								placeholder="나이">
 						</div>
 
 						&nbsp;&nbsp;&nbsp;
 						<div class="input-group-prepend">
 							<span class="input-group-text">묘/견종</span> <input type="text"
-								class="form-control" size="20" name="kinds" placeholder="묘/견종">
+								class="form-control" size="20" name="kinds" id="kinds" placeholder="묘/견종">
 						</div>
 
 						&nbsp;&nbsp;&nbsp;
@@ -127,7 +127,7 @@
 							<label class="input-group-text" for="inputGroupSelect01">분류</label>
 						</div>
 						<select class="custom-select" id="inputGroupSelect01"
-							style="width: 200px" name="type">
+							style="width: 200px" name="type" class="type">
 							<option selected>choice</option>
 							<option value="유기견">유기견</option>
 							<option value="개인분양">개인분양</option>
@@ -154,17 +154,17 @@
 							<span class="input-group-text">접종여부</span>
 							<div class="input-group-text">
 								<input type="checkbox"
-									aria-label="Checkbox for following text input">
+									aria-label="Checkbox for following text input" name="medi">
 							</div>
 							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" name="medi" size="2"
+								aria-label="Text input with checkbox"  size="2"
 								value="YES">
 							<div class="input-group-text">
 								<input type="checkbox"
-									aria-label="Checkbox for following text input">
+									aria-label="Checkbox for following text input" name="medi">
 							</div>
 							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" name="medi" size="2"
+								aria-label="Text input with checkbox" size="2"
 								value="NO">
 						</div>
 
@@ -174,17 +174,17 @@
 							<span class="input-group-text">중성화</span>
 							<div class="input-group-text">
 								<input type="checkbox"
-									aria-label="Checkbox for following text input">
+									aria-label="Checkbox for following text input" name="neu">
 							</div>
 							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" name="neu" size="2"
+								aria-label="Text input with checkbox"  size="2"
 								value="YES">
 							<div class="input-group-text">
 								<input type="checkbox"
-									aria-label="Checkbox for following text input">
+									aria-label="Checkbox for following text input" name="neu">
 							</div>
 							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" name="neu" size="2"
+								aria-label="Text input with checkbox" size="2"
 								value="NO">
 						</div>
 
@@ -193,17 +193,17 @@
 							<span class="input-group-text">성별</span>
 							<div class="input-group-text">
 								<input type="checkbox"
-									aria-label="Checkbox for following text input">
+									aria-label="Checkbox for following text input" name="gen">
 							</div>
 							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" name="gen" size="2"
+								aria-label="Text input with checkbox" size="2"
 								value="여아">
 							<div class="input-group-text">
 								<input type="checkbox"
-									aria-label="Checkbox for following text input">
-							</div>
+									aria-label="Checkbox for following text input" name="gen">
+							</div> 
 							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" name="gen" size="2"
+								aria-label="Text input with checkbox" size="2"
 								value="남아">
 						</div>
 					</div>
@@ -327,18 +327,49 @@ $(document).ready(function() {
     });
     
     $('#nextButton').click(function () { 
-    	var title = $("#title").val();
+    	$('.form2').show(1000);
+		$('.form1').hide(1000); 
+    	/* var name =$("#name").val();
+    	var age = $("#age").val();
+    	var kinds = $("#kinds").val();
+    	var target = document.getElementById("inputGroupSelect01");
+        var type = target.options[target.selectedIndex].value;     // 옵션 value 값
+    	var location;
+        var title = $("#title").val();
 		var content = $(".content").val();
 		
-		//alert("t:"+title+" c:"+content);
+		//alert("n"+name+" a"+age+" k"+kinds+ " t"+type);
 		
-		if(title == null || content ==null || title === "" || content === ""){
-			alert("제목과 내용을 입력해주세요");
+		if(name === "" || age === "" || kinds === "" || type === "" || 
+				location === "" || title === ""|| content === ""){
+			alert("선택사항과 빈칸을 입력해주십시오");
+			
+			 if( $(":checkbox[name='medi']:checked").length==2){
+				    alert("접종여부 항목을 하나씩만 체크해주세요.");
+				    
+			}else if($(":checkbox[name='neu']:checked").length==2){
+				    alert("중성화 항목을 하나씩만 체크해주세요.");
+				    
+			}else if($(":checkbox[name='gen']:checked").length==2){
+				    alert("성별 항목을 하나씩만 체크해주세요.");
+				    
+			}
+			 
+			 if( $(":checkbox[name='medi']:checked").length==0){
+				    alert("접종여부 항목을 하나이상 체크해주세요.");
+				    
+			}else if($(":checkbox[name='neu']:checked").length==0){
+				    alert("중성화 항목을 하나이상 체크해주세요.");
+				    
+			}else if($(":checkbox[name='gen']:checked").length==0){
+				    alert("성별 항목을 하나이상 체크해주세요.");
+				   
+			}
 			return;			
 		}else{			
 			$('.form2').show(1000);
 			$('.form1').hide(1000);
-		} 
+		}  */
 	});
     $('#btn1').click(function () {    	
 		$('.form1').show(1000);
@@ -348,7 +379,7 @@ $(document).ready(function() {
     $("#certibutton").click(function () {
 		var contact =$("#contect").val();
 		
-		if(contact == null || contact === ""){
+		if(contact === ""){
 			alert("연락처를 입력해주십시오");
 			return;
 		}else{
