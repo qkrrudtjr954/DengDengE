@@ -124,7 +124,7 @@ alert("<%=msg%>");
  		<hr>
  		
  		<div class="row">
- 		<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs1.getUserSeq() %>&nbsp;&nbsp;작성날짜 :<%=bbs1.getRdate() %>&nbsp;&nbsp;
+ 		<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs1.getUser_email() %>&nbsp;&nbsp;작성날짜 :<%=bbs1.getReg_date() %>&nbsp;&nbsp;
  		조회수 : <%=bbs1.getReadcond() %></span>		
  		</div>
  		

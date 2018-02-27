@@ -1,3 +1,6 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="dto.AfterBbsDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -220,39 +223,58 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 								<p class="card-text">
 									${item.title }
 									<br>
-								<%-- <p>
-									${item.userSeq} <span style="font-size:12px;">( ${item.type } )</span>
-								</p> --%>
+								 <p>
+									${item.user_email} <span style="font-size:12px;"></span>
+								</p> 
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
 										<a href="AfterBbsController?command=AfterBbsDetail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
 									</div>
+									
+									<!— 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 —>
+									<c:set var="reg" value="${item.reg_date}"/>
+									<%
+									String temp = (String)pageContext.getAttribute("reg");   //No exception.
+									Calendar cal = Calendar.getInstance();
+									
+									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
+									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int cur_month = cal.get(Calendar.MONTH)+1;
+									
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
+									cal.setTime(format.parse(temp));
+									
+									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
+									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int reg_month = cal.get(Calendar.MONTH)+1;
+									
+									int range_month = cur_month - reg_month;
+									int range_day = cur_day - reg_day;
+									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
+									
+									String result="";
+									if(range_month < 1){
+										if(range_day < 1){
+											if(range_hour < 1){
+												result = "방금 전";
+											}else {
+												result = range_hour+" 시간 전";
+											}
+										} else {
+											result = range_day + " 일 전";
+										}
+									} else {
+										result = range_month + " 달 전 ";
+									}
+									
+									request.setAttribute("range", result);
+									%>
+									
+									
 
-									<%-- <!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
-									<fmt:formatDate var="temp1" value="${item.reg_date.replace('.0', '')}" pattern="yyyy-MM-dd hh:mm:ss" />
-							      	<fmt:parseDate var="reg_date"  value="${temp1}" pattern="yyyy-MM-dd hh:mm:ss"/>
-
-							      	<jsp:useBean id="now" class="java.util.Date" />
-									<fmt:formatDate var="temp2" value="${now}" pattern="yyyy-MM-dd hh:mm:ss" />
-									<fmt:parseDate var="current_date"  value="${temp2}" pattern="yyyy-MM-dd hh:mm:ss"/>
-
-									<c:set var="range_day" value="${current_date.day - reg_date.day }"/>
-									<c:set var="range_hour" value="${current_date.hours - reg_date.hours }"/>
-									<c:choose>
-										<c:when test="${range_day == 0 }">
-											<c:choose>
-												<c:when test="${range_hour==0 }">
-													<small class="text-muted">방금 전</small>
-												</c:when>
-												<c:otherwise>
-													<small class="text-muted">${ range_hour } 시간 전</small>
-												</c:otherwise>
-											</c:choose>
-										</c:when>
-										<c:otherwise>
-											<small class="text-muted">${ range_day } 일 전</small>
-										</c:otherwise>
-									</c:choose> --%>
+									
+									<small class="text-muted">${ range } 일 전</small>
+										
 								</div>
 							</div>
 						</div>
