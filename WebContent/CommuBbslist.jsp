@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -66,7 +67,8 @@ public String toDay(){
 
 <c:if test="${cookie.successMsg.value != null }">
 	<div class="alert alert-success" role="alert">
-	  ${cookie.successMsg.value }
+		<c:set var="successMsg" value="${cookie.successMsg.value }"/>
+		<%=URLDecoder.decode((String)pageContext.getAttribute("successMsg"), "utf-8") %>
 	</div>
 </c:if>
 

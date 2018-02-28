@@ -270,8 +270,7 @@ if(aniBbsDto != null){
 
 				<br>
 				
-				<div class="row" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid; border-bottom: 1px solid;
-					height: 800px; margin:0 auto;width:900px;">
+				<div class="row">
 					<span>
 						<%=aniBbsDto.getContent() %>
 					</span>
@@ -293,8 +292,6 @@ if(aniBbsDto != null){
 						class="btn btn-outline-secondary">삭제</a>
 					</div>
 					<%
-				}else{
-					System.out.println("f");
 				}
 				%>
 				
@@ -308,6 +305,10 @@ if(aniBbsDto != null){
 		</div>
 
 	</form>
+	
+	<div class="row">
+	
+	</div>
 
 
 	</main>
