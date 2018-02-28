@@ -292,8 +292,6 @@ if(aniBbsDto != null){
 						class="btn btn-outline-secondary">삭제</a>
 					</div>
 					<%
-				}else{
-					System.out.println("f");
 				}
 				%>
 				
