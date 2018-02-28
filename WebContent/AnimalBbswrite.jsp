@@ -1,4 +1,4 @@
-<%@page import="dto.User"%>
+﻿<%@page import="dto.User"%>
 <%@page import="dto.AnimalBbsDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -88,7 +88,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			</ul>
 		</nav>
 	</section>
-	<form action="AnimalBbsController" method="post">
+	
+	<form action="AnimalBbsController" method="post" id="form">
 		<input type="hidden" name="command" value="writeAf"> 
 		<div class="row">
 			<a href="AnimalBbsController?command=animlist">list</a>
@@ -148,7 +149,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							<span class="input-group-text">주소</span> 
 							<input type="text"
 								class="form-control" size="50" name="location"
-								id="sample4_roadAddress" placeholder="도로명주소">
+								id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly"
+								style="background-color: #fff">
 							<button class="btn btn-outline-secondary" type="button"
 								onclick="sample4_execDaumPostcode()">주소찾기</button>
 						</div>
@@ -228,7 +230,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">특이사항</span> <input
 								type="text" class="form-control" name="descrip" size="130"
-								placeholder="특이사항 입력">
+								id="descrip" placeholder="특이사항 입력">
 						</div>
 					</div>
 
@@ -242,8 +244,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 
 					<br>
 					<div class="row">
-						<button class="offset-md-10 btn btn-outline-secondary"
-							type="button" id="nextButton" style="width: 100px; background-color: #28A745; color: #fff">next</button>
+						<input type="button" class=" offset-md-10 btn btn-outline-secondary" 
+							style="width: 100px; background-color: #28A745; color: #fff" id="nextButton" value="next">
 					</div>
 				</div>
 
@@ -287,9 +289,11 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					</div>
 
 					<br>
+
 					<div class="row">		
 						<input type="hidden" name="pic1" value="" id="pic1"/>				
 						<input type="submit" class=" offset-md-10 btn btn-outline-secondary" 
+
 						style="width: 90px; background-color: #28A745; color: #fff" id="finalButton" value="완료">
 					</div>
 				</div>		
@@ -368,6 +372,7 @@ $(document).ready(function() {
 		]
     });
     
+
     function sendFile(file, editor) {
 		formdata = new FormData();
 		formdata.append("userImage", file);
@@ -397,23 +402,63 @@ $(document).ready(function() {
 	}
     
     $('#nextButton').click(function () { 
+
     	var name =$("#name").val();
     	var age = $("#age").val();
     	var kinds = $("#kinds").val();
     	var target = document.getElementById("inputGroupSelect01");
         var type = target.options[target.selectedIndex].value;     // 옵션 value 값
-    	var location = document.getElementsByName("location");
+    	var location =$("#sample4_roadAddress").val(); 
         var medi = $(":input:radio[name=medi]:checked").val();
         var neu = $(":input:radio[name=neu]:checked").val();
         var gen = $(":input:radio[name=gen]:checked").val();
         var title = $("#title").val();
+        var descrip = $("#descrip").val();
 		var content = $(".content").val();
+		alert(content);
 		
-		if(name === "" || age === "" || kinds === "" || type === "" || 
-				title === ""|| content === "" || medi === "" || neu === "" || gen === ""){
-			alert("선택사항과 빈칸을 입력해주십시오"); 
+		if(name === ""){
+			alert("이름을 입력해주십시오"); 
+			$("#name").focus();
 			return;
-		}else{			
+		}else if(age === ""){
+			alert("나이을 입력해주십시오"); 
+			$("#age").focus();
+			return;
+		}else if(kinds === ""){
+			alert("묘/견종을 입력해주십시오"); 
+			$("#kinds").focus();
+			return;
+		}else if(location === ""){
+			alert("지역을 입력해주십시오"); 
+			$("#location").focus();
+			return;
+		}else if(medi === ""){
+			alert("접종여부를 선택해주십시오"); 
+			$("#medi").focus();
+			return;
+		}else if(neu === ""){
+			alert("중성화를 선택해주십시오"); 
+			$("#neu").focus();
+			return;
+		}else if(gen === ""){
+			alert("성별을 선택해주십시오"); 
+			$("#gen").focus();
+			return;
+		}else if(title === ""){
+			alert("제목을 입력해주십시오"); 
+			$("#title").focus();
+			return;
+		}else if(descrip === ""){
+			alert("특이사항을 입력해주십시오"); 
+			$("#descrip").focus();
+			return;
+		}else if(content === ""){
+			alert("내용을 입력해주십시오"); 
+			$("#content").focus();
+			return;
+		}
+		else{			
 			$('.form2').show(1000);
 			$('.form1').hide(1000);
 		} 
@@ -431,7 +476,16 @@ $(document).ready(function() {
 			return;
 		}else{
 			alert  ("인증완료");
-			//$("#finalButton").show();
+		}
+	});
+    
+    $("#finalButton").click(function () {
+		var contact =$("#contect").val();
+		
+		if(contact === ""){
+			alert("연락처를 입력해주십시오");
+		}else{
+			$("#form").submit();
 		}
 	});
 	
