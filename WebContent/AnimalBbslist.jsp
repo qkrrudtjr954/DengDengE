@@ -221,46 +221,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									<div class="btn-group">
 										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
 									</div>
-
-
-									<!-- <!— 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 —> -->
-									<c:set var="reg" value="${item.reg_date}"/>
-									<%
-									String temp = (String)pageContext.getAttribute("reg");   //No exception.
-									Calendar cal = Calendar.getInstance();
-
-									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
-									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
-									int cur_month = cal.get(Calendar.MONTH)+1;
-
-									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
-									cal.setTime(format.parse(temp));
-
-									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
-									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
-									int reg_month = cal.get(Calendar.MONTH)+1;
-
-									int range_month = cur_month - reg_month;
-									int range_day = cur_day - reg_day;
-									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
-
-									String result="";
-									if(range_month < 1){
-										if(range_day < 1){
-											if(range_hour < 1){
-												result = "방금 전";
-											}else {
-												result = range_hour+" 시간 전";
-											}
-										} else {
-											result = range_day + " 일 전";
-										}
-									} else {
-										result = range_month + " 달 전 ";
-									}
-
-									request.setAttribute("range", result);
-									%>
 									<small class="text-muted">${range }</small>
 
 								</div>
@@ -310,20 +270,12 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 
 
 	<script type="text/javascript">
-<<<<<<< HEAD
-
-=======
->>>>>>> kyung
 		$('.menu-item').on(
 				'mouseover',
 				function() {
 					$(this).css('background', 'green').css('border',
 							'1px solid green').css('border-radius', '15px');
 					$(this).children('.nav-link').css('color', 'white');
-<<<<<<< HEAD
-=======
-
->>>>>>> kyung
 				});
 		$('.menu-item').on(
 				'mouseout',
@@ -333,9 +285,5 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					$(this).children('.nav-link').css('color', 'white');
 				});
 	</script>
-<<<<<<< HEAD
-
-=======
->>>>>>> kyung
 </body>
 </html>

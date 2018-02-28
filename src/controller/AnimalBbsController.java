@@ -81,6 +81,7 @@ public class AnimalBbsController extends HttpServlet {
 			String ttype[] = req.getParameterValues("type");
 			String type = null;
 			String location = req.getParameter("location");
+			String pic1 = req.getParameter("pic1");
 			
 			String mmedicine = req.getParameter("medi");
 			int medicine;
@@ -88,7 +89,8 @@ public class AnimalBbsController extends HttpServlet {
 				medicine = 1;
 			}else {
 				medicine = 0;
-			}System.out.println("m:"+medicine);	
+			}
+			System.out.println("m:"+medicine);	
 			
 			
 			String nneutralization = req.getParameter("neu");
@@ -97,7 +99,8 @@ public class AnimalBbsController extends HttpServlet {
 				neutralization = 1;
 			}else {
 				neutralization = 0;
-			}System.out.println("n:"+neutralization);	
+			}
+			System.out.println("n:"+neutralization);	
 			
 			
 			String ggender = req.getParameter("gen");
@@ -132,7 +135,7 @@ public class AnimalBbsController extends HttpServlet {
 			boolean isS = aniBbService.wirteAnimalBbs(
 					new AnimalBbsDto(title, name, age, kinds, type, location, 
 												medicine, neutralization, gender, 
-												descripttion, null, content, 
+												descripttion, pic1, content, 
 												target_user_seq, contect, description));
 			
 			if(isS) {

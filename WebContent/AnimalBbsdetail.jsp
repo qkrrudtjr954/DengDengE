@@ -308,6 +308,10 @@ if(aniBbsDto != null){
 		</div>
 
 	</form>
+	
+	<div class="row">
+	
+	</div>
 
 
 	</main>

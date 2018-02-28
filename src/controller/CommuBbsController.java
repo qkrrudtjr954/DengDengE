@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import delegator.Delegator;
 import dto.CommuBbsDto;
@@ -82,8 +83,6 @@ public class CommuBbsController extends HttpServlet {
 			int target_user_seq =userInfo.getSeq();
 
 			//로그인 안되었을 때 알림창 띄워주기
-
-
 			boolean isS = comService.writeCommu(new CommuBbsDto(title, content, target_user_seq, category));
 
 			System.out.println(isS);

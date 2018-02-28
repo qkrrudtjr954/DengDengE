@@ -287,7 +287,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					</div>
 
 					<br>
-					<div class="row">						
+					<div class="row">		
+						<input type="hidden" name="pic1" value="" id="pic1"/>				
 						<input type="submit" class=" offset-md-10 btn btn-outline-secondary" 
 						style="width: 90px; background-color: #28A745; color: #fff" id="finalButton" value="완료">
 					</div>
@@ -328,7 +329,21 @@ $(document).ready(function() {
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
+            focus: true,                  // set focus to editable area after initializing summernote
+            lang: 'ko-KR',
+	    		callbacks: {
+	    			onImageUpload: function(files, editor, welEditable) {
+	    			      sendFile(files[0], this); 
+	    			},	
+	    		},
+	    		toolbar: [
+	    			['style', ['bold', 'italic', 'underline', 'clear']],
+	    			['font', ['strikethrough', 'superscript', 'subscript']],
+	    			['fontsize', ['fontsize']],
+	    			['color', ['color']],['para', ['ul', 'ol', 'paragraph']], 
+	    			['height', ['height']],
+	    			['insert', ['picture']]
+	    		]
     });
     
     $('#summernote2').summernote({
@@ -336,9 +351,50 @@ $(document).ready(function() {
     	height: 300,                 // set editor height
         minHeight: null,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
-        focus: true                  // set focus to editable area after initializing summernote
-    	
+        focus: true,                  // set focus to editable area after initializing summernote
+        lang: 'ko-KR',
+		callbacks: {
+			onImageUpload: function(files, editor, welEditable) {
+			      sendFile(files[0], this); 
+			},	
+		},
+		toolbar: [
+			['style', ['bold', 'italic', 'underline', 'clear']],
+			['font', ['strikethrough', 'superscript', 'subscript']],
+			['fontsize', ['fontsize']],
+			['color', ['color']],['para', ['ul', 'ol', 'paragraph']], 
+			['height', ['height']],
+			['insert', ['picture']]
+		]
     });
+    
+    function sendFile(file, editor) {
+		formdata = new FormData();
+		formdata.append("userImage", file);
+		
+		
+		$.ajax({
+		data: formdata,
+		type: "POST", 
+		url: '${initParam.IMG_SERVER_PATH}/upload',
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(data) {
+			console.log(data);
+			var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+			
+			if($('#pic1').val() == ''){
+				$('#pic1').val(url);
+			}
+			
+			alert(url);
+			$('#hello').html(url);
+			$(editor).summernote('editor.insertImage', url);
+			$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        }
+		});
+	}
     
     $('#nextButton').click(function () { 
     	var name =$("#name").val();
@@ -383,9 +439,6 @@ $(document).ready(function() {
 });
 
 
-</script>
-	
-	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
