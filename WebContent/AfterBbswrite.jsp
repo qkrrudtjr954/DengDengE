@@ -110,6 +110,7 @@
         <textarea id="summernote" name="content" value=""  ></textarea>
         </div>
         <div class="row">
+        <input type="hidden" name="pic1" value="" id="pic1"/>	
         <input type="button" class="btn btn-success"  value="글쓰기" onclick="" id="btnwrite">
         </div>
         </form>
@@ -203,6 +204,10 @@
 		success: function(data) {
 			console.log(data);
 			var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+			if($('#pic1').val() == ''){
+				$('#pic1').val(url);
+			}
+			
 			alert(url);
 			$('#hello').html(url);
 			$('#summernote').summernote('editor.insertImage', url);

@@ -58,8 +58,8 @@ public class AfterBbsController extends HttpServlet {
 		} else if (command.equals("AfterBbswriteAf")) {
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
-			// String pic1 = req.getParameter("pic1");
-			// String suserseq = req.getParameter("userseq");
+			String pic1 = req.getParameter("pic1");
+			 //String suserseq = req.getParameter("userseq");
 			// int userseq = Integer.parseInt(suserseq);
 
 			System.out.println(title + " " + content + " ");
@@ -71,11 +71,11 @@ public class AfterBbsController extends HttpServlet {
 
 			HttpSession session = req.getSession();
 			User userInfo = (User) session.getAttribute("current_user");
-			String writer = userInfo.getEmail();
 			int target_user_seq = userInfo.getSeq();
 
-			boolean isS = bbs.wirtelAfterBbs(new AfterBbsDto(title, content, target_user_seq));
-			Cookie cookie = null;
+			AfterBbsDto test = new AfterBbsDto(title, content, target_user_seq);
+			test.setPic1(pic1);
+			boolean isS = bbs.wirtelAfterBbs(test);
 			if (isS) {
 				System.out.println(isS);
 				/*
