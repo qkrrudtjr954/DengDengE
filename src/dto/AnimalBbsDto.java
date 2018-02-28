@@ -24,13 +24,15 @@ public class AnimalBbsDto implements Serializable {
 	private String last_update; // 마지막 수정날짜
 	private int del;
 	private int readcount;
+	private String user_email;
 
 	public AnimalBbsDto() {
 	}
 
 	public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String type, String location,
 			int medicine, int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
-			String contact, String description, String rdate, String lUpdate, int del, int readcount) {
+			String contact, String description, String reg_date, String last_update, int del, int readcount,
+			String user_email) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -48,12 +50,12 @@ public class AnimalBbsDto implements Serializable {
 		this.userSeq = userSeq;
 		this.contact = contact;
 		this.description = description;
-		this.reg_date = rdate;
-		this.last_update = lUpdate;
+		this.reg_date = reg_date;
+		this.last_update = last_update;
 		this.del = del;
 		this.readcount = readcount;
+		this.user_email = user_email;
 	}
-
 	public AnimalBbsDto(String title, String name, int age, String kinds, String type, String location, int medicine,
 			int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
 			String contact, String description) {
@@ -241,6 +243,14 @@ public class AnimalBbsDto implements Serializable {
 		this.readcount = readcount;
 	}
 
+	public String getUser_email() {
+		return user_email;
+	}
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
 	@Override
 	public String toString() {
 		return "AnimalBbsDto [seq=" + seq + ", title=" + title + ", name=" + name + ", age=" + age + ", kinds=" + kinds
@@ -248,7 +258,8 @@ public class AnimalBbsDto implements Serializable {
 				+ neutralization + ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1
 				+ ", content=" + content + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
 				+ description + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
-				+ ", readcount=" + readcount + "]";
+				+ ", readcount=" + readcount + ", user_email=" + user_email + "]";
 	}
+	
 
 }

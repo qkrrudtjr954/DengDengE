@@ -1,3 +1,5 @@
+﻿<%@page import="dto.AnimalBbsDto"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -15,18 +17,8 @@
 
 <link rel="icon" href="./icon/favicon.ico">
 
-
 <%
-String msg = (String)request.getAttribute("msg");
-%>
-<%
-if(msg != null){
-	%>
-		<script type="text/javascript">
-			alert("<%=msg %>");
-		</script>
-	<%
-}
+List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animlist");
 %>
 
 <!-- Bootstrap core CSS -->
@@ -108,6 +100,72 @@ if(msg != null){
 					<h1>분양 동물 보기</h1>
 				</div>
 			</div>
+			<hr>
+			<br>
+			
+			<form action="AnimalBbsController" method="post">
+			<input type="hidden" name="command" value="btnsearch">
+			
+				<div class="row">
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="서울">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="경기도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="강원도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="충청도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="경상도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="전라도">
+				</div>
+			</form>
+			
+			<br>
+			<form action="AnimalBbsController" method="post">
+			<input type="hidden" name="command" value="btnsearch">
+				<div class="row">
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="유기동물">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="개인분양">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					value="etc">
+				</div>
+			</form>
+			
+			<br>
+			<form action="AnimalBbsController" method="post" >
+				<input type="hidden" name="command" value="search">
+				<div class="row" style="margin:0 auto;width:900px;">
+					<div class="offset-md-2 input-group-prepend">
+						<select class="custom-select" id="inputGroupSelect01"name="Searchtype" style="width: 150px">
+							<option value="title">제목</option>
+							<option value="target_user_seq">작성자</option>
+						</select> <input type="text" class="form-control"
+							aria-label="Text input with segmented dropdown button" size="50"
+							name="SearchWord" id="text">
+					</div>
+
+					<div class="serach">
+						<input type="submit" class="btn btn-success" id="btnsarch" style="background-color: #28A745; color: #fff"
+							value="검색">
+					</div>
+				</div>
+			</form>
+			<br>
+
+
+		<form action="AnimalBbsController" method="get">
+		<input type="hidden" name="command" value="write">
 			<div class="row">
 				<c:forEach items="${animlist }" var="item" varStatus="i">
 					<div class="col-md-4">
@@ -125,37 +183,59 @@ if(msg != null){
 										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
 									</div>
 
-									<%-- <!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
-									<fmt:formatDate var="temp1" value="${item.reg_date.replace('.0', '')}" pattern="yyyy-MM-dd hh:mm:ss" />
-							      	<fmt:parseDate var="reg_date"  value="${temp1}" pattern="yyyy-MM-dd hh:mm:ss"/>
+								
+									<!-- <!— 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 —> -->
+									<c:set var="reg" value="${item.reg_date}"/>
+									<%
+									String temp = (String)pageContext.getAttribute("reg");   //No exception.
+									Calendar cal = Calendar.getInstance();
+									
+									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
+									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int cur_month = cal.get(Calendar.MONTH)+1;
+									
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
+									cal.setTime(format.parse(temp));
+									
+									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
+									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int reg_month = cal.get(Calendar.MONTH)+1;
+									
+									int range_month = cur_month - reg_month;
+									int range_day = cur_day - reg_day;
+									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
+									
+									String result="";
+									if(range_month < 1){
+										if(range_day < 1){
+											if(range_hour < 1){
+												result = "방금 전";
+											}else {
+												result = range_hour+" 시간 전";
+											}
+										} else {
+											result = range_day + " 일 전";
+										}
+									} else {
+										result = range_month + " 달 전 ";
+									}
+									
+									request.setAttribute("range", result);
+									%>
+									<small class="text-muted">${range }</small>
 
-							      	<jsp:useBean id="now" class="java.util.Date" />
-									<fmt:formatDate var="temp2" value="${now}" pattern="yyyy-MM-dd hh:mm:ss" />
-									<fmt:parseDate var="current_date"  value="${temp2}" pattern="yyyy-MM-dd hh:mm:ss"/>
-
-									<c:set var="range_day" value="${current_date.day - reg_date.day }"/>
-									<c:set var="range_hour" value="${current_date.hours - reg_date.hours }"/>
-									<c:choose>
-										<c:when test="${range_day == 0 }">
-											<c:choose>
-												<c:when test="${range_hour==0 }">
-													<small class="text-muted">방금 전</small>
-												</c:when>
-												<c:otherwise>
-													<small class="text-muted">${ range_hour } 시간 전</small>
-												</c:otherwise>
-											</c:choose>
-										</c:when>
-										<c:otherwise>
-											<small class="text-muted">${ range_day } 일 전</small>
-										</c:otherwise>
-									</c:choose> --%>
 								</div>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			
+			<div class="row">
+				<input type="submit" class="offset-md-11 btn btn-outline-secondary" 
+				style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
+			</div>
+			</form>
 		</div>
 	</div>
 	</main>
@@ -191,6 +271,7 @@ if(msg != null){
 
 
 	<script type="text/javascript">
+
 		$('.menu-item').on(
 				'mouseover',
 				function() {
@@ -214,5 +295,6 @@ if(msg != null){
 				});
 
 	</script>
+
 </body>
 </html>

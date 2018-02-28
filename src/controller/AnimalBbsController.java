@@ -8,8 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import delegator.Delegator;
 import dto.AnimalBbsDto;
+import dto.User;
 import service.AnimalBbsService;
 
 public class AnimalBbsController extends HttpServlet {
@@ -38,22 +41,39 @@ public class AnimalBbsController extends HttpServlet {
 			req.setAttribute("animlist", animlist);
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}
-		else if(command.equals("detail")) {
+		else if(command.equals("detail")) {         
+	         //로그인 안되었을 때 알림창 띄워주기   
+			
 			String sseq = req.getParameter("seq");
-			int seq = Integer.parseInt(sseq);
+			int seq = Integer.parseInt (sseq);
 			System.out.println("s"+seq);
 			
-			aniBbService.readCount(seq);			
-			AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
-			req.setAttribute("aniBbsDto", aniBbsDto);
-			dispatch("AnimalBbsdetail.jsp", req, resp);
+			if(Delegator.checkSession(req, resp)) {
+				aniBbService.readCount(seq);			
+				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
+	            System.out.println("Combbs1 = "  + aniBbsDto);
+	            req.setAttribute("aniBbsDto", aniBbsDto);
+	            // 로그인이 되어있는 상태 
+	            
+	            dispatch("AnimalBbsdetail.jsp", req , resp);
+	         } else {
+	            // 로그인이 안된 상태 
+	            req.setAttribute("returnurl", "AnimalBbsController?command=detail&seq=" + seq);
+	            dispatch("UserControl?command=goSignIn", req, resp);
+	         }
 		}
-		else if(command.equals("write")) {
-			// id
-			dispatch("AnimalBbswrite.jsp", req, resp);
+		else if(command.equals("write")) {	
+			
+			if(Delegator.checkSession(req, resp)) {
+	            // 로그인이 되어있는 상태 
+	            dispatch("AnimalBbswrite.jsp", req, resp);            
+	         } else {
+	            // 로그인이 안된 상태 
+	            req.setAttribute("returnurl", "AnimalBbsController?command=write");
+	            dispatch("UserControl?command=goSignIn", req, resp);
+	         }
 		}
 		else if(command.equals("writeAf")) {
-			// 입력값
 			String name = req.getParameter("name");
 			String aage = req.getParameter("age");
 			int age = Integer.parseInt(aage);
@@ -94,6 +114,11 @@ public class AnimalBbsController extends HttpServlet {
 			
 			String contect = req.getParameter("contect");
 			String description = req.getParameter("desc");
+			
+			HttpSession session = req.getSession();
+	         User userInfo = (User)session.getAttribute("current_user");
+	         String writer = userInfo.getEmail();
+	         int target_user_seq =userInfo.getSeq();
 	
 			
 			if(ttype != null) {
@@ -101,10 +126,14 @@ public class AnimalBbsController extends HttpServlet {
 					type = ttype[i];					
 				}
 				System.out.println("t:"+type);
-			}
+			}   
+	         
 			
 			boolean isS = aniBbService.wirteAnimalBbs(
-					new AnimalBbsDto(title, name, age, kinds, type, location, medicine, neutralization, gender, descripttion, null, content, 1, contect, description));
+					new AnimalBbsDto(title, name, age, kinds, type, location, 
+												medicine, neutralization, gender, 
+												descripttion, null, content, 
+												target_user_seq, contect, description));
 			
 			if(isS) {
 				// msg
@@ -168,6 +197,18 @@ public class AnimalBbsController extends HttpServlet {
 	            
 	            //보내주기
 	            dispatch("AnimalBbslist.jsp", req, resp);
+		}
+		else if(command.equals("btnsearch")) {
+			String ssearchBtn = req.getParameter("searchBtn");
+			System.out.println("btn:"+ssearchBtn);
+			
+			String searchBtn = ssearchBtn.substring(0, 1);
+			System.out.println("btn:"+searchBtn);
+			
+			List<AnimalBbsDto> animlist = aniBbService.getFindBtnlist(searchBtn);
+			req.setAttribute("animlist", animlist);
+			
+			dispatch("AnimalBbslist.jsp", req, resp);
 		}
 			
 			

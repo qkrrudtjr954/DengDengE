@@ -1,3 +1,4 @@
+<%@page import="dto.User"%>
 <%@page import="dto.AnimalBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
@@ -54,15 +55,15 @@ if(aniBbsDto != null){
 	}
 %>
 	<header>
-		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavDropdown">
-					<ul class="navbar-nav offset-md-7">
-						<c:choose>
-							<c:when test="${current_user == null }">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand offset-md-1" href="#">DengDengE</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav offset-md-9">
+					<c:choose>
+						<c:when test="${current_user == null }">
 							<!-- 로그인 안했을 때 -->
 							<li class="nav-item">
 								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
@@ -73,47 +74,48 @@ if(aniBbsDto != null){
 						</c:when>
 						<c:otherwise>
 							<!-- 로그인 했을 때 -->
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=signout">로그아웃</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=myPage">마이 페이지</a>
-							</li>
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=signout">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="UserControl?command=myPage">마이 페이지</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
 		</nav>
-   </header>
-    <main role="main">
+	</header>
+	<main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Album example</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-success my-2">Main call to action</a>
-          </p>
-        </div>
-      </section>
-      <section>
-	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	        <ul class="nav menu justify-content-center">
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="jumbotron-heading">Album example</h1>
+			<p class="lead text-muted">Something short and leading about the
+				collection below—its contents, the creator, etc. Make it short and
+				sweet, but not too short so folks don't simply skip over it
+				entirely.</p>
+			<p>
+				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
+			</p>
+		</div>
+	</section>
+	<section>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="nav menu justify-content-center">
 			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
+			    <a class="nav-link" href="#">분양소 찾기</a>
 			  </li>
 			</ul>
-  		</nav>
-      </section>
+		</nav>
+	</section>
 
 	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="list">
@@ -267,6 +269,7 @@ if(aniBbsDto != null){
 				</div>
 
 				<br>
+				
 				<div class="row" style="border-left: 1px solid; border-right: 1px solid; border-top: 1px solid; border-bottom: 1px solid;
 					height: 800px; margin:0 auto;width:900px;">
 					<span>
@@ -274,15 +277,33 @@ if(aniBbsDto != null){
 					</span>
 				</div>
 
-				<br>
-				<div class="row">
-					<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-9 btn btn-outline-secondary"
-					style="background-color: #28A745; color: #fff">수정</a>
-					&nbsp;&nbsp;
-					<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
-					class="btn btn-outline-secondary">삭제</a>
-				</div>
 
+				<%
+					String sid = ((User)session.getAttribute("current_user")).getEmail();
+				%>
+
+				<br>
+				<%if(aniBbsDto.getUser_email().equals(sid)){
+					%>
+					<div class="row">
+						<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-9 btn btn-outline-secondary"
+						style="background-color: #28A745; color: #fff">수정</a>
+						&nbsp;&nbsp;
+						<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
+						class="btn btn-outline-secondary">삭제</a>
+					</div>
+					<%
+				}else{
+					System.out.println("f");
+				}
+				%>
+				
+				<!-- 댓글 -->
+				<div class="row">
+					
+				</div>		
+				
+				
 			</div>
 		</div>
 
@@ -309,6 +330,11 @@ if(aniBbsDto != null){
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 
+<script type="text/javascript">
+
+
+
+</script>
 
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
