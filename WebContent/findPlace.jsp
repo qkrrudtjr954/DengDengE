@@ -104,7 +104,7 @@
 							<tr>
 								<td>${i.index+1}</td>
 								<td>
-									<a href="${item.link }">${item.name }</a> <br>
+									<a href="http://${item.link }">${item.name }</a> <br>
 									<span style="color:gray;font-size:12px;">${item.desc}</span>
 								</td>
 							</tr>
