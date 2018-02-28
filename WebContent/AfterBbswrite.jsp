@@ -96,21 +96,21 @@
         	<h1 >글쓰기</h1> 	
         	</div>
         </div>
-        <form action="AfterBbsController" method="post">
+        <form action="AfterBbsController" method="post" id="myform">
         <input type="hidden" name="command" value="AfterBbswriteAf">	
      	<div class="row">
         	<div class="input-group-prepend " >
     			<span class="input-group-text" id="basic-addon1" style="width: 80px">글제목</span>
   			</div>
   		<input type="text" class="form-control" placeholder="제목을 입력해 주세요" aria-label="Username" 
-  		aria-describedby="basic-addon1" style="width: 1000px" name="title">
+  		aria-describedby="basic-addon1" style="width: 1000px" name="title" id="title">
         </div>
         <%-- 글내용 --%>
         <div class="row">
-        <textarea id="summernote" name="content" value="" ></textarea>
+        <textarea id="summernote" name="content" value=""  ></textarea>
         </div>
         <div class="row">
-        <input type="submit" class="btn btn-success"  value="글쓰기">
+        <input type="button" class="btn btn-success"  value="글쓰기" onclick="" id="btnwrite">
         </div>
         </form>
         
@@ -215,10 +215,31 @@
   
   
   <script type="text/javascript">
-  $(document).ready(function() {
+   $(document).ready(function() { 
 	  
+	   
+	   $("#btnwrite").click(function() {
+		   var title = $("#title").val();
+		   var content = $("#content").val();
+		   
+		   if(title===""||summernote===""){
+			   alert("빈칸이 있습니다 빈칸을 ");
+			   
+			   return;
+		   }else{
+			   $("#myform").submit();
+			   
+		   }
+		   
+		   
+		   
+	});
 	  
-  }
+	   
+	   
+	   
+   });
+	  
   
   
   
