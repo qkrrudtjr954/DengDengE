@@ -22,7 +22,6 @@
 
 <body>
 	<header>
-		<a href="AnimalController?command=animlist">go</a>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand offset-md-1" href="#">DengDengE</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -94,7 +93,26 @@
 					<div id="site-list" class="row"></div>
 				</div>
 				<div class="col-md-3">
-					jsoup area
+					<table class="table table-striped table-dark">
+						<tr>
+							<td colspan="3" align="center">
+								<img src="./img/daum.png" width="80px" alt="Daum"/> 
+								<span style="font-weight:bold;font-size:25px;">검색 결과</span>
+							</td>
+						</tr>
+						<c:forEach items="${jsoupList }" var="item" varStatus="i">
+							<tr>
+								<td>${i.index+1}</td>
+								<td>
+									<a href="http://${item.link }">${item.name }</a> <br>
+									<span style="color:gray;font-size:12px;">${item.desc}</span>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+						
+						
+						
 				</div>
 			</div>
 		</div>
