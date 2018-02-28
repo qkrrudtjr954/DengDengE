@@ -20,27 +20,37 @@ CREATE TABLE AFTERCOMMENT(
 */
 public class AfterCommentDto implements Serializable {
 	private int seq;
-	private int targetAfterSeq;
+	private int target_user_seq;
 	private String content;
-	private int userSeq;
-	private String Rdate;
-	private String Ldate;
+	
+	private String reg_date;
+	private String last_update;
+
+	private int ref;
 	private int step;
 	private int depth;
 	
 	public AfterCommentDto() {}
 	
 	
-	
-	public AfterCommentDto(int seq, int targetAfterSeq, String content, int userSeq, String rdate, String ldate,
+
+	public AfterCommentDto(int target_user_seq, String content) {
+		super();
+		this.target_user_seq = target_user_seq;
+		this.content = content;
+	}
+
+
+
+	public AfterCommentDto(int seq, int target_user_seq, String content, String reg_date, String last_update, int ref,
 			int step, int depth) {
 		super();
 		this.seq = seq;
-		this.targetAfterSeq = targetAfterSeq;
+		this.target_user_seq = target_user_seq;
 		this.content = content;
-		this.userSeq = userSeq;
-		Rdate = rdate;
-		Ldate = ldate;
+		this.reg_date = reg_date;
+		this.last_update = last_update;
+		this.ref = ref;
 		this.step = step;
 		this.depth = depth;
 	}
@@ -59,14 +69,14 @@ public class AfterCommentDto implements Serializable {
 
 
 
-	public int getTargetAfterSeq() {
-		return targetAfterSeq;
+	public int getTarget_user_seq() {
+		return target_user_seq;
 	}
 
 
 
-	public void setTargetAfterSeq(int targetAfterSeq) {
-		this.targetAfterSeq = targetAfterSeq;
+	public void setTarget_user_seq(int target_user_seq) {
+		this.target_user_seq = target_user_seq;
 	}
 
 
@@ -83,38 +93,38 @@ public class AfterCommentDto implements Serializable {
 
 
 
-	public int getUserSeq() {
-		return userSeq;
+	public String getReg_date() {
+		return reg_date;
 	}
 
 
 
-	public void setUserSeq(int userSeq) {
-		this.userSeq = userSeq;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 
 
 
-	public String getRdate() {
-		return Rdate;
+	public String getLast_update() {
+		return last_update;
 	}
 
 
 
-	public void setRdate(String rdate) {
-		Rdate = rdate;
+	public void setLast_update(String last_update) {
+		this.last_update = last_update;
 	}
 
 
 
-	public String getLdate() {
-		return Ldate;
+	public int getRef() {
+		return ref;
 	}
 
 
 
-	public void setLdate(String ldate) {
-		Ldate = ldate;
+	public void setRef(int ref) {
+		this.ref = ref;
 	}
 
 
@@ -145,19 +155,14 @@ public class AfterCommentDto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AfterCommentDto [seq=" + seq + ", targetAfterSeq=" + targetAfterSeq + ", content=" + content
-				+ ", userSeq=" + userSeq + ", Rdate=" + Rdate + ", Ldate=" + Ldate + ", step=" + step + ", depth="
-				+ depth + "]";
+		return "AfterCommentDto [seq=" + seq + ", target_user_seq=" + target_user_seq + ", content=" + content
+				+ ", reg_date=" + reg_date + ", last_update=" + last_update + ", ref=" + ref + ", step=" + step
+				+ ", depth=" + depth + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+	
+	
+	
+	
+	
 }
