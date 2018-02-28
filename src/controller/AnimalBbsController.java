@@ -14,6 +14,7 @@ import delegator.Delegator;
 import dto.AnimalBbsDto;
 import dto.User;
 import service.AnimalBbsService;
+import service.BookService;
 
 public class AnimalBbsController extends HttpServlet {
 
@@ -34,7 +35,7 @@ public class AnimalBbsController extends HttpServlet {
 		
 		String command = req.getParameter("command");
 		AnimalBbsService aniBbService = AnimalBbsService.getInatance();
-		
+		BookService bookService = BookService.getInstance();
 		if(command.equals("animlist")) {
 			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
 			
@@ -48,12 +49,13 @@ public class AnimalBbsController extends HttpServlet {
 			int seq = Integer.parseInt (sseq);
 			System.out.println("s"+seq);
 			
+			boolean bookS = bookService.checkBook(seq);
 			if(Delegator.checkSession(req, resp)) {
 				aniBbService.readCount(seq);			
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
 	            System.out.println("Combbs1 = "  + aniBbsDto);
 	            req.setAttribute("aniBbsDto", aniBbsDto);
-	            // 로그인이 되어있는 상태 
+	           
 	            
 	            dispatch("AnimalBbsdetail.jsp", req , resp);
 	         } else {
