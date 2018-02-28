@@ -11,13 +11,13 @@
     <link rel="icon" href="./icon/favicon.ico">
 
     <title>Deng Deng E list</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    
+   <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -120,9 +120,9 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </div>
 <br>
 <div class="row">
-<input class="btn btn-success offset-md-5 col-md-1" type="submit" value="수정하기">
+<input class="btn btn-success offset-md-4 col-md-2" type="submit" value="수정하기">
 &nbsp;
-<button type="button" id="btnBack" class="btn btn-outline-secondary col-md-1">돌아가기</button>
+<button type="button" id="btnBack" class="btn btn-outline-secondary col-md-2">돌아가기</button>
 </div>
 </form>
 		
@@ -145,11 +145,13 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+  <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+
+
 	
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {

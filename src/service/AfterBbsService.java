@@ -27,8 +27,8 @@ public class AfterBbsService {
 	}
 	
 	//bbs글쓰기
-	public boolean wirtelAfterBbs(AfterBbsDto dto) {
-		return afterBbsDao.wirtelAfterBbs(dto);		
+	public boolean wirteAfterBbs(AfterBbsDto dto) {
+		return afterBbsDao.wirteAfterBbs(dto);		
 	}
 	//디테일
 	public AfterBbsDto detailAfterlBbs(int seq) {

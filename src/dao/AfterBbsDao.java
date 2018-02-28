@@ -97,7 +97,7 @@ public class AfterBbsDao {
 	+ " FROM AFTERBBS ";
 	*/
 	//After list 글쓰기
-	public boolean wirtelAfterBbs(AfterBbsDto dto) {
+	public boolean wirteAfterBbs(AfterBbsDto dto) {
 		String sql = "INSERT INTO AFTERBBS(SEQ, TITLE, "
 				+ " PIC1, CONTENT, TARGET_USER_SEQ, REG_DATE, "
 				+ " LAST_UPDATE, DEL ,READCOUNT) "

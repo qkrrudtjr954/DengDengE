@@ -62,10 +62,11 @@ public class CommuBbsController extends HttpServlet {
 		        dispatch("UserControl?command=goSignIn", req, resp);
 			}
 
+			
+			
+			
+		}else if(command.equals("writeAf")){			
 
-
-
-		}else if(command.equals("writeAf")){
 			//String id = req.getParameter("id");
 			System.out.println("writeAf 들어옴");
 			String Scategory = req.getParameter("category");
@@ -82,7 +83,6 @@ public class CommuBbsController extends HttpServlet {
 			String writer = userInfo.getEmail();
 			int target_user_seq =userInfo.getSeq();
 
-			//로그인 안되었을 때 알림창 띄워주기
 			boolean isS = comService.writeCommu(new CommuBbsDto(title, content, target_user_seq, category));
 
 			System.out.println(isS);
@@ -107,11 +107,24 @@ public class CommuBbsController extends HttpServlet {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
 
-			comService.readCount(seq);
-			CommuBbsDto comdto = comService.getCommu(seq);
+			
+			if(Delegator.checkSession(req, resp)) {
 
-			req.setAttribute("comdto", comdto);
-			dispatch("CommuBbsDetail.jsp", req, resp);
+				
+				comService.readCount(seq);
+				CommuBbsDto comdto = comService.getCommu(seq);
+				
+				req.setAttribute("comdto", comdto);
+				dispatch("CommuBbsDetail.jsp", req, resp);
+				
+				
+			}else {
+				
+				req.setAttribute("returnurl", "CommuBbsController?command=read&seq="+seq);
+		        dispatch("UserControl?command=goSignIn", req, resp);
+			}
+			
+			
 
 		}else if(command.equals("delete")) {
 			String Sseq = req.getParameter("seq");

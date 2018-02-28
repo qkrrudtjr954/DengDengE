@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -96,21 +96,22 @@
         	<h1 >글쓰기</h1> 	
         	</div>
         </div>
-        <form action="AfterBbsController" method="post">
+        <form action="AfterBbsController" method="post" id="myform">
         <input type="hidden" name="command" value="AfterBbswriteAf">	
      	<div class="row">
         	<div class="input-group-prepend " >
     			<span class="input-group-text" id="basic-addon1" style="width: 80px">글제목</span>
   			</div>
   		<input type="text" class="form-control" placeholder="제목을 입력해 주세요" aria-label="Username" 
-  		aria-describedby="basic-addon1" style="width: 1000px" name="title">
+  		aria-describedby="basic-addon1" style="width: 1000px" name="title" id="title">
         </div>
         <%-- 글내용 --%>
         <div class="row">
-        <textarea id="summernote" name="content" value="" ></textarea>
+        <textarea id="summernote" name="content" value=""  ></textarea>
         </div>
         <div class="row">
-        <input type="submit" class="btn btn-success"  value="글쓰기">
+        <input type="hidden" name="pic1" value="" id="pic1"/>	
+        <input type="button" class="btn btn-success"  value="글쓰기" onclick="" id="btnwrite">
         </div>
         </form>
         
@@ -203,6 +204,10 @@
 		success: function(data) {
 			console.log(data);
 			var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+			if($('#pic1').val() == ''){
+				$('#pic1').val(url);
+			}
+			
 			alert(url);
 			$('#hello').html(url);
 			$('#summernote').summernote('editor.insertImage', url);
@@ -212,12 +217,47 @@
 }
          
   </script>
+  
+  
+  <script type="text/javascript">
+   $(document).ready(function() { 
+	  
+	   
+	   $("#btnwrite").click(function() {
+		   var title = $("#title").val();
+		   var content = $("#summernote").val();
+		   
+		   if(title===""){
+			   alert("제목을 입력해주세요 ");
+			   $("#title").focus();
+			   return;
+		   }else if(content===""){
+			   alert("내용을 입력해주세요 ");
+			   $("#summernote").focus();
+			   return;
+		   
+	   	  }else{
+			   $("#myform").submit();
+			   
+		   }
+		   
+		   
+		   
+	});
+	  
+	   
+	   
+	   
+   });
+	  
+  
+  
+  
+  
+  
+  </script>
 	
-	
-	
-	
-	
-	
+
 	
   </body>
 </html>

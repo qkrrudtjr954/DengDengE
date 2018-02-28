@@ -189,8 +189,8 @@ $(document).ready(function () {
 
 <div id="hello">
 			<div class="row">
-				<div class="offset-md-1"></div>
-				<div class="col-md-10">
+				<!-- <div class="offset-md-1"></div> -->
+				 <div class="offset-md-1 col-md-10 offset-md-1"> 
 					<form name="form1" action="CommuBbsController">
 						<h1>커뮤니티</h1>
 						<hr>
@@ -207,7 +207,7 @@ $(document).ready(function () {
 				
 				</form>
 				</div>
-				<div class="offset-md-1"></div>
+				<!-- <div class="offset-md-1"></div> -->
 			</div>
 </div>
 <div class="row">
@@ -290,7 +290,7 @@ $(document).ready(function () {
 </div>				
 				
 <nav class="navbar navbar-light bg-light offset-md-3">
-<form class="form-inline" name="searchform" method="get" action="CommuBbsController">
+<form class="form-inline" id="searchform" name="searchform" method="get" action="CommuBbsController">
 	<input type="hidden" name="command" value="search" />
 
 	<div class="input-group">
@@ -303,8 +303,8 @@ $(document).ready(function () {
 	</select>
 	</div>
 &nbsp;&nbsp;
- <input class="form-control mr-sm-2" type="text" name="SearchWord" placeholder="Search" aria-label="Search">
- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+ <input class="form-control mr-sm-2" type="text" id="SearchWord" name="SearchWord" placeholder="Search" aria-label="Search">
+ <button class="btn btn-outline-success my-2 my-sm-0" id="search" type="submit">Search</button>
 
 </form>
 </nav>
@@ -360,6 +360,18 @@ $(document).ready(function () {
 							'1px solid white').css('border-radius', '5px');
 					$(this).children('.nav-link').css('color', 'white');
 				});
+		
+		$("#search").click(function () {
+			var strS = document.getElementById('SearchWord');
+			if( strS.value == '' || strS.value == null ){
+			    alert( '검색어를 입력해주세요.' );
+			    $("#SearchWord").focus();
+		        return false;
+			}
+			$('#searchform').submit();
+						
+			
+		});
 	</script>
 </body>
 </html>
