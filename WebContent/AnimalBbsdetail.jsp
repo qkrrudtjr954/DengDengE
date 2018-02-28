@@ -150,7 +150,7 @@ if(aniBbsDto != null){
 					<h4 class="offset-md-5">보호동물정보</h4>
 				</div>
 
-				<div class="row">
+				<div class="row" style="margin: 0 auto; width: 900px;">
 					<table align="center" border="0" cellpadding="0" cellspacing="0"
 						class="__se_tbl"
 						style="border-width: 1px 1px 0px 0px; text-align: center; border-top-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-top-style: solid; border-right-style: solid;">
@@ -270,7 +270,7 @@ if(aniBbsDto != null){
 
 				<br>
 				
-				<div class="row">
+				<div class="row" style="margin: 0 auto; width: 1000px;">
 					<span>
 						<%=aniBbsDto.getContent() %>
 					</span>
