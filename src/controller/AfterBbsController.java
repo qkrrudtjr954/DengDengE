@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import delegator.Delegator;
 import dto.AfterBbsDto;
+import dto.AfterCommentDto;
 import dto.User;
 import service.AfterBbsService;
+import service.AfterCommentService;
 
 public class AfterBbsController extends HttpServlet {
 
@@ -89,23 +91,22 @@ public class AfterBbsController extends HttpServlet {
 			}
 			// 디테일
 		} else if (command.equals("AfterBbsDetail")) {
-
-			// dispatch("AfterBbsDetail.jsp", req, resp);
-
 			String sseq = req.getParameter("seq");
-			System.out.println("detail-sseq: " + sseq);
-
 			int seq = Integer.parseInt(sseq);
-			System.out.println("seq + " + seq);
 
 			if (Delegator.checkSession(req, resp)) {
+				// 로그인이 되어있는 상태
+
 				bbs.readCount(seq);
 
 				AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
-				System.out.println("Combbs1 = " + bbs1);
+				
+				AfterCommentService commentService = AfterCommentService.getInstance();
+				List<AfterCommentDto> comments = commentService.getAllComments(seq);
+				
+				req.setAttribute("comments", comments);
 				req.setAttribute("bbs1", bbs1);
-				// 로그인이 되어있는 상태
-				// dispatch("AfterBbsDetail.jsp", req, resp);
+				
 				dispatch("AfterBbsDetail.jsp", req, resp);
 			} else {
 				// 로그인이 안된 상태

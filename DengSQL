@@ -8,15 +8,16 @@ drop table commucomment cascade constraints;
 drop table cal cascade constraints;
 drop table category cascade constraints;
 
+
 drop sequence denguser_seq;
 drop sequence animalbbs_seq;
-drop sequence animalcomment_seq;
-drop sequence afterbbs_seq;
-drop sequence aftercomment_seq;
-drop sequence commubbs_seq;
-drop sequence commucomment_seq;
-drop sequence category_seq;
-drop sequence cal_seq;
+drop sequence ANIMALCOMMENT_SEQ;
+drop sequence AFTERBBS_SEQ;
+drop sequence AFTERCOMMENT_SEQ;
+drop sequence COMMUBBS_SEQ;
+drop sequence COMMUCOMMENT_SEQ;
+drop sequence CATEGORY_SEQ;
+drop sequence CAL_SEQ;
 
 -- user table
 create SEQUENCE denguser_seq start with 1 increment by 1;
@@ -43,7 +44,7 @@ create table animalbbs(
     neutralization number(1),
     gender number(1),
     descripttion varchar2(3000),
-    pic1 varchar2(200),
+    pic1 varchar2(500),
     content long,
     TARGET_USER_SEQ NUMBER(8),
     TARGET_CONTACT varchar2(20),
@@ -51,8 +52,10 @@ create table animalbbs(
     REG_DATE DATE,
     LAST_UPDATE DATE,
     DEL NUMBER(1),
+    READCOUNT NUMBER(8),
     FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq)
 );
+
 
 --분양글 댓글
 CREATE SEQUENCE ANIMALCOMMENT_SEQ START WITH 1 INCREMENT BY 1;
@@ -77,14 +80,16 @@ CREATE SEQUENCE AFTERBBS_SEQ START WITH 1 INCREMENT BY 1;
 create table AFTERBBS(
     seq number(8) primary key,
     title varchar2(100),
-    pic1 varchar2(200),
+    pic1 varchar2(500),
     content long,
     TARGET_USER_SEQ NUMBER(8),
     FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
     REG_DATE DATE,
     LAST_UPDATE DATE,
+    READCOUNT NUMBER(8),
     DEL NUMBER(1)
 );
+
 
 --입양 후기 댓글
 CREATE SEQUENCE AFTERCOMMENT_SEQ START WITH 1 INCREMENT BY 1;
@@ -103,6 +108,7 @@ CREATE TABLE AFTERCOMMENT(
 
 
 
+
 -- 커뮤니티 카테고리
 CREATE SEQUENCE CATEGORY_SEQ START WITH 1 INCREMENT BY 1;
 CREATE TABLE CATEGORY(
@@ -117,12 +123,13 @@ CREATE SEQUENCE COMMUBBS_SEQ START WITH 1 INCREMENT BY 1;
 CREATE TABLE COMMUBBS(
     SEQ NUMBER(8) PRIMARY KEY,
     TITLE VARCHAR2(100),
-    PIC1 VARCHAR2(200),
+    PIC1 VARCHAR2(500),
     CONTENT long,
     TARGET_USER_SEQ NUMBER(8),
     FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
     TARGET_CATEGORY NUMBER(8),
     FOREIGN KEY (TARGET_CATEGORY) REFERENCES CATEGORY(SEQ),
+    READCOUNT NUMBER(8),
     REG_DATE DATE,
     LAST_UPDATE DATE,
     DEL NUMBER(1)
@@ -144,6 +151,8 @@ CREATE TABLE COMMUCOMMENT(
 );
 
 
+
+
 -- 캘린더
 CREATE SEQUENCE CAL_SEQ START WITH 1 INCREMENT BY 1;
 CREATE TABLE CAL(
@@ -154,4 +163,3 @@ CREATE TABLE CAL(
     DEL NUMBER(1),
     RESERVE_DATE VARCHAR2(12)
 );
-

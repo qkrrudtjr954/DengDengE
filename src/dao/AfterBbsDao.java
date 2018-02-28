@@ -176,7 +176,7 @@ public class AfterBbsDao {
 			rs = psmt.executeQuery();
 			System.out.println("4/6 S detailAfterlBbs");
 			
-			while(rs.next()){
+			if(rs.next()){
 				int i = 1;
 				dto = new AfterBbsDto(
 						rs.getInt(i++),//int seq, 

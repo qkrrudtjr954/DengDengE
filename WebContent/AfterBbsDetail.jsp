@@ -85,8 +85,7 @@
 		</nav>
 	</section>
 
-	<div class="album py-5 bg-light">
-		<div class="container">
+	
 			<%
 
 AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
@@ -104,80 +103,94 @@ if(msg !=null){
 }
 %>
 
-
-			<div class="row">
-				<h1 class="offset-md-4">댕댕이 반려 동물 입양 후기</h1>
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<div class="row" style="text-align: center;">
+				<h1>댕댕이 반려 동물 입양 후기</h1>
 			</div>
 
 			<div class="row">
 				<h3 class="offset-md-5">생생한 입양 후기들</h3>
 			</div>
 
-			<form action="AfterBbsController" method="post">
-				<input type="hidden" name="command" value="AfterBbsUpdate">
-				<input type="hidden" name="seq" value="<%=bbs1.getSeq() %>">
-
-				<div class="row">
-					<h1> 글제목 : <%=bbs1.getTitle() %></h1>
-				</div>
-				<hr>
-
-				<div class="row">
-					<span class="offset-md-8" style="font-size: small">
-						작성자 :<%=bbs1.getUser_email() %>&nbsp;&nbsp;작성날짜 :<%=bbs1.getReg_date() %>&nbsp;&nbsp; 조회수 : <%=bbs1.getReadcond() %>
-					</span>
-				</div>
-
-				<div class="row">
-					<img alt="" src="">
-				</div>
-
-				<hr>
-
-				<div class="row">
-					<span><%=bbs1.getContent() %></span>
-				</div>
-
-				<hr>
-
-			</form>
-			
-			<% 
-	 		User current_user = (User)session.getAttribute("current_user");
-	 		
-	 		if(current_user.getEmail().equals(bbs1.getUser_email())){
-	 		%>
-			<form name="form1" action="AfterBbsController" method="post">
-				<input type="hidden" name="seq" value="<%=bbs1.getSeq() %>">
-				<div class="row">
-					<button class="offset-md-9 btn btn-outline-secondary" id="btnupdete" style="background-color: #28A745; color: #fff">수정하기</button>
-					&nbsp;&nbsp;&nbsp;
-					<button id="btndelete" class="btn btn-outline-secondary" style="background-color: #28A745; color: #fff">삭제하기</button>
-				</div>
-			</form>
-			<%
-	        } 
-	        %>
-		</div>
-		
-		
-		<div class="comment-area">
 			<div class="row">
-				<div class="comment-test" style="display:flex;">
-				<div class="comment-space">
-					<%-- <c:forEach begin="0" end="${post.depth }">
-						&nbsp&nbsp&nbsp&nbsp
-					</c:forEach> --%>
-				</div>
-				<div class="comment-content">
-					<p>
-						<img alt="ㄴ>" src="arrow.png" width="20px" height="20px">
-						content: ${post.content }.....seq : ${post.seq }
-					</p>
-					<input type="text" name="comment">
-					<input type="button" class="commentBtn" onclick="addComment()" value="comment">
-				</div>
+
+				<form action="AfterBbsController" method="post" style="width:100%">
+					<input type="hidden" name="command" value="AfterBbsUpdate">
+					<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
+
+					<div class="row">
+						<h1>
+							글제목 :
+							<%=bbs1.getTitle()%></h1>
+					</div>
+					<hr>
+
+					<div class="row">
+						<span class="offset-md-8" style="font-size: small"> 작성자 :<%=bbs1.getUser_email()%>&nbsp;&nbsp;작성날짜
+							:<%=bbs1.getReg_date()%>&nbsp;&nbsp; 조회수 : <%=bbs1.getReadcond()%>
+						</span>
+					</div>
+
+					<div class="row">
+						<img alt="" src="">
+					</div>
+
+					<hr>
+
+					<div class="row">
+						<span><%=bbs1.getContent()%></span>
+					</div>
+
+					<hr>
+
+				</form>
 			</div>
+
+			<div class="row">
+				<%
+					User current_user = (User) session.getAttribute("current_user");
+
+					if (current_user.getEmail().equals(bbs1.getUser_email())) {
+				%>
+
+				<form name="form1" method="post">
+					<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
+					<button id="btnupdete" class="btn btn-outline-secondary"
+						style="background-color: #28A745; color: #fff">수정하기</button>
+					<button id="btndelete" class="btn btn-outline-secondary"
+						style="background-color: #28A745; color: #fff">삭제하기</button>
+				</form>
+				<%
+					}
+				%>
+			</div>
+
+			
+				<div class="comment-area">
+					
+					<div class="row">
+						<input type="text" name="content" id="content0"> 
+						<input type="button" value="comment" onclick="addComment(${bbs1.seq}, 1, 0, 0)">
+					</div>
+					<br><br><br>
+					
+					<c:forEach begin="0" items="${comments }" var="comment" varStatus="i">
+						<div class="row">
+							<p>
+								<c:forEach begin="1" end="${comment.depth }">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</c:forEach>
+								${comment }
+							</p>
+							
+							<input type="text" name="content" id="content${i.index+1 }">
+							<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+						</div>
+						
+						<br><br><br>
+					</c:forEach>
+				
 			</div>
 		</div>
 	</div>
@@ -197,7 +210,18 @@ if(msg !=null){
 			</p>
 		</div>
 	</footer>
-
+	<script type="text/javascript">
+		function addComment(ref, step, depth, index) {
+			$.ajax({
+				url : 'AfterCommentController',
+				method : 'POST',
+				data : { command : 'addComment', ref : ref, step : step+1, depth : depth+1, content : $('#content'+index).val() },
+				success : function (data) {
+					console.log(data);
+				}
+			})
+		}
+	</script>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

@@ -167,7 +167,7 @@
 	<script>
     $(document).ready(function() {
         $('#summernote').summernote({
-        	width : 1100,
+        		width : 1100,
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
@@ -176,7 +176,7 @@
 			callbacks: {
 				onImageUpload: function(files, editor, welEditable) {
   			      sendFile(files[0], this);
-  			},
+  				},
 			},
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
@@ -186,7 +186,7 @@
 				['height', ['height']],
 				['insert', ['picture']]
 			]
-    	});
+    		});
 	});
 
     
@@ -195,67 +195,48 @@
 		formdata.append("userImage", file);
 
 		$.ajax({
-		data: formdata,
-		type: "POST",
-		url: '${initParam.IMG_SERVER_PATH}/upload',
-		cache: false,
-		contentType: false,
-		processData: false,
-		success: function(data) {
-			console.log(data);
-			var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
-			if($('#pic1').val() == ''){
-				$('#pic1').val(url);
-			}
-			
-			alert(url);
-			$('#hello').html(url);
-			$('#summernote').summernote('editor.insertImage', url);
-			$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        }
-	});
-}
+			data: formdata,
+			type: "POST",
+			url: '${initParam.IMG_SERVER_PATH}/upload',
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				console.log(data);
+				var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+				
+				if($('#pic1').val() == ''){
+					$('#pic1').val(url);
+				}
+				
+				alert(url);
+				$('#hello').html(url);
+				$(editor).summernote('editor.insertImage', url);
+				$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        }
+		});
+	}
          
-  </script>
   
-  
-  <script type="text/javascript">
-   $(document).ready(function() { 
-	  
-	   
-	   $("#btnwrite").click(function() {
-		   var title = $("#title").val();
-		   var content = $("#summernote").val();
-		   
-		   if(title===""){
-			   alert("제목을 입력해주세요 ");
-			   $("#title").focus();
-			   return;
-		   }else if(content===""){
-			   alert("내용을 입력해주세요 ");
-			   $("#summernote").focus();
-			   return;
-		   
-	   	  }else{
-			   $("#myform").submit();
-			   
-		   }
-		   
-		   
-		   
+	$("#btnwrite").click(function() {
+		var title = $("#title").val();
+		var content = $("#summernote").val();
+
+		if (title === "") {
+			alert("제목을 입력해주세요 ");
+			$("#title").focus();
+			return;
+		} else if (content === "") {
+			alert("내용을 입력해주세요 ");
+			$("#summernote").focus();
+			return;
+
+		} else {
+			$("#myform").submit();
+
+		}
 	});
-	  
-	   
-	   
-	   
-   });
-	  
-  
-  
-  
-  
-  
-  </script>
+	</script>
 	
 
 	

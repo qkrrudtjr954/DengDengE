@@ -15,7 +15,7 @@
 	</welcome-file-list>
 
 	<context-param>
-		<description>image server url</description>
+		<description>daum api key</description>
 		<param-name>DAUM_API_KEY</param-name>
 		<param-value>6a9f9d0784be5dac2543ae6ee19f9047</param-value>
 	</context-param>
@@ -64,6 +64,16 @@
 	<servlet-mapping>
 		<servlet-name>AfterBbsController</servlet-name>
 		<url-pattern>/AfterBbsController</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AfterCommentController</servlet-name>
+		<servlet-class>controller.AfterCommentController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AfterCommentController</servlet-name>
+		<url-pattern>/AfterCommentController</url-pattern>
 	</servlet-mapping>
 
 
