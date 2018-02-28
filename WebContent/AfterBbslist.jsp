@@ -1,7 +1,11 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="dto.AfterBbsDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +22,6 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
-
-    <%--list 구현 --%>
-    <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
     #container {
       width: 70%;
@@ -168,40 +169,19 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
  
  <%
  String msg = (String)request.getAttribute("msg");
- String msg1 = (String)request.getAttribute("msg1");
+ String afterwirtemsg = (String)request.getAttribute("afterwirtemsg");
  String msg2 = (String)request.getAttribute("msg2");
  
+ %> 
  
  
- if(msg1!=null){
- %>
- <script type="text/javascript">
- 	alert("<%=msg1%>");
  
- </script>
- 
- <%
- }else if(msg2!=null){
- %>
- 
- <script type="text/javascript">
- 	alert("<%=msg2%>");
- 
- </script>
- 
- <%
- }else if(msg!=null){
- %>
- 
- <script type="text/javascript">
- 	alert("<%=msg%>");
- 
- </script>
- 
- <%
- }
- %>
- 
+ <%-- 아직 진행 안됨  진행중 --%>
+ <%-- <c:if test="${cookie.afterwirtemsg.value != null }">
+	<div class="alert alert-success" role="alert">
+	  ${cookie.successMsg.value }
+	</div>
+</c:if> --%>
  
  
  
@@ -232,60 +212,74 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 
 <div class="row">
 
-<table class="table table-striped table-bordered table-hover">
+<c:forEach items="${afterBbslist }" var="item" varStatus="i">
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<img class="card-img-top" src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }" alt="./img/no-img.png">
+							<div class="card-body">
+								<p class="card-text">
+									${item.title }
+									<br>
+								 <p>
+									${item.user_email} <span style="font-size:12px;"></span>
+								</p> 
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a href="AfterBbsController?command=AfterBbsDetail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
+									</div>
+									
+									<!— 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 —>
+									<c:set var="reg" value="${item.reg_date}"/>
+									<%
+									String temp = (String)pageContext.getAttribute("reg");   //No exception.
+									Calendar cal = Calendar.getInstance();
+									
+									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
+									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int cur_month = cal.get(Calendar.MONTH)+1;
+									
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
+									cal.setTime(format.parse(temp));
+									
+									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
+									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int reg_month = cal.get(Calendar.MONTH)+1;
+									
+									int range_month = cur_month - reg_month;
+									int range_day = cur_day - reg_day;
+									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
+									
+									String result="";
+									if(range_month < 1){
+										if(range_day < 1){
+											if(range_hour < 1){
+												result = "방금 전";
+											}else {
+												result = range_hour+" 시간 전";
+											}
+										} else {
+											result = range_day + " 일 전";
+										}
+									} else {
+										result = range_month + " 달 전 ";
+									}
+									
+									request.setAttribute("range", result);
+									%>
+									
+									
 
-	<thead>
-          <tr>
-            <th width="10%">번호</th>
-            <th width="50%">제목</th>
-            <th width="10%">작성자</th>
-            <th width="20%">작성일</th>
-            <th width="10%">조회수</th>
-          </tr>
-    </thead>
-    
-    
-    <%
-if(afterBbslist == null || afterBbslist.size() == 0){
-	%>
-	<tr>
-		<td colspan="5">작성된 글이 없습니다</td>
-	</tr>	
-	<%
-}
+									
+									<small class="text-muted">${ range } 일 전</small>
+										
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 
-for(int i = 0;i < afterBbslist.size(); i++){
-	AfterBbsDto bbs = afterBbslist.get(i);
-	%>
-	<tr>
-	<td><%=i+1 %></td>
-	<td>
-		
-		<a href="AfterBbsController?command=AfterBbsDetail&seq=<%=bbs.getSeq() %>">
-			<%=bbs.getTitle() %>
-		</a>
-		<%-- 조회수 가 20개가 넘어 갔을때 hit 문구 표시 --%>
-		<%
-		int redacount = bbs.getReadcond();
-		
-		if(redacount>=20){
-		%>
-		 <span class="hit">인기!</span>
-		<%
-		}
-		%>
-		
-		
-	</td>
-	 <td><%=bbs.getUserSeq() %> </td>
-	<td><%=bbs.getRdate() %></td> 
-	<td><%=bbs.getReadcond() %></td>
-	</tr>	
-	<%
-}
-%>
 
-</table>
+
 
 </div>
 
@@ -293,13 +287,6 @@ for(int i = 0;i < afterBbslist.size(); i++){
 <div class="row">
 <button class="offset-md-10 btn btn-outline-secondary" id="btnlist" style="background-color: #28A745; color: #fff">목록으로</button>
 &nbsp;&nbsp;&nbsp;<button id="btnwrite" class="btn btn-outline-secondary" style="background-color: #28A745; color: #fff" >글쓰기</button>
-
-
-
-
-
-
-
 
 
 

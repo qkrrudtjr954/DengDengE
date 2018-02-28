@@ -35,10 +35,11 @@ public class AfterBbsDao {
 	//current_user 세션 저장
 	//After 게시판 화면 출력
 	public List<AfterBbsDto> getAfterlBbsList(){
-		String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-				+ " FROM AFTERBBS "
-				+ " WHERE DEL=0 ";
+		String sql = "SELECT A.SEQ, A.TITLE, A.PIC1, A.CONTENT, A.TARGET_USER_SEQ,  "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT,B.EMAIL AS USER_EMAIL "
+				+ " FROM AFTERBBS A, DENGUSER B  "
+				+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND DEL=0 "
+				+ " ORDER BY REG_DATE DESC ";
 		
 		
 		List<AfterBbsDto> list = new ArrayList<AfterBbsDto>();
@@ -69,7 +70,8 @@ public class AfterBbsDao {
 												rs.getString(i++),//String rdate, 
 												rs.getString(i++),//String ldate,
 												rs.getInt(i++),
-												rs.getInt(i++));
+												rs.getInt(i++),
+												rs.getString(i++));
 				
 						
 				
@@ -122,7 +124,7 @@ public class AfterBbsDao {
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getPic1());
 			psmt.setString(3, dto.getContent());
-			psmt.setInt(4, dto.getUserSeq());
+			psmt.setInt(4, dto.getTarget_user_seq());
 			
 			count = psmt.executeUpdate();
 			System.out.println("4/6 wirtelAfterBbs Success");
@@ -146,12 +148,16 @@ public class AfterBbsDao {
 			+ " FROM AFTERBBS ";*/
 	
 	
+	
+	
+	
+	
 	//After list detail 
 	public AfterBbsDto detailAfterlBbs(int seq) {
-		String sql = " SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL,READCOUNT "
-				+ " FROM AFTERBBS "
-				+ " WHERE SEQ=? ";
+		String sql = " SELECT A.SEQ, A.TITLE, A.PIC1, A.CONTENT, A.TARGET_USER_SEQ, "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL,A.READCOUNT,B.EMAIL AS USER_EMAIL "
+				+ " FROM AFTERBBS A, DENGUSER B "
+				+ " WHERE A.SEQ=? AND A.TARGET_USER_SEQ = B.SEQ ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -181,7 +187,8 @@ public class AfterBbsDao {
 						rs.getString(i++),//String rdate, 
 						rs.getString(i++),//String ldate,
 						rs.getInt(i++),
-						rs.getInt(i++));
+						rs.getInt(i++),
+						rs.getString(i++));
 			}
 			System.out.println("5/6 S detailAfterlBbs");
 			
@@ -226,21 +233,17 @@ public class AfterBbsDao {
 		
 	}
 	
-	// After list 조회수
-	public void readcount(int seq) {
-		
-		
-	}
+	
 	
 	
 	
 	
 	// 수정할때 가져오기
 	public AfterBbsDto getBbs(int seq) {
-		String sql = " SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-				+ " FROM AFTERBBS "
-				+ " WHERE SEQ=? ";
+		String sql = " SELECT A.SEQ, A.TITLE, A.PIC1, A.CONTENT, A.TARGET_USER_SEQ, "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL  "
+				+ " FROM AFTERBBS A, DENGUSER B "
+				+ " WHERE A.SEQ=? AND A.TARGET_USER_SEQ = B.SEQ ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -270,7 +273,8 @@ public class AfterBbsDao {
 						rs.getString(i++),//String rdate, 
 						rs.getString(i++),//String ldate,
 						rs.getInt(i++),
-						rs.getInt(i++));
+						rs.getInt(i++),
+						rs.getString(i++));
 			}
 			System.out.println("5/6 S getBbs");
 			
@@ -356,6 +360,12 @@ public class AfterBbsDao {
 	}
 	
 	
+	/*String sql = " SELECT A.SEQ, A.TITLE, A.PIC1, A.CONTENT, A.TARGET_USER_SEQ, "
+			+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL  "
+			+ " FROM AFTERBBS A, DENGUSER B "
+			+ " WHERE A.SEQ=? AND A.TARGET_USER_SEQ = B.SEQ ";*/
+	
+	
 	
 	//After Bbs list 검색
 	public List<AfterBbsDto> getFindAfterlist(String Searchtype, String SearchWord){
@@ -363,10 +373,10 @@ public class AfterBbsDao {
 	      List<AfterBbsDto> list = new ArrayList<>();
 	      
 	      
-	      String sql = "SELECT SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-					+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT "
-					+ " FROM AFTERBBS "
-					+ " WHERE DEL=0 AND " + Searchtype + " LIKE '%" + SearchWord + "%'"
+	      String sql = "SELECT A.SEQ, A.TITLE, A.PIC1, A.CONTENT, A.TARGET_USER_SEQ, "
+					+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT , B.EMAIL AS USER_EMAIL  "
+					+ " FROM AFTERBBS A, DENGUSER B  "
+					+ " WHERE A.DEL=0 AND " + Searchtype + " LIKE '%" + SearchWord + "%' AND A.TARGET_USER_SEQ = B.SEQ "
 		              + " ORDER BY REG_DATE DESC ";
 
 	      
@@ -402,7 +412,8 @@ public class AfterBbsDao {
 								    				rs.getString(i++),//String rdate, 
 								    				rs.getString(i++),//String ldate,
 								    				rs.getInt(i++), //del
-								    				rs.getInt(i++)); //readcount
+								    				rs.getInt(i++),//readcount
+								    				rs.getString(i++)); 
 	            list.add(dto);
 	         }
 	         System.out.println("5/6 getFindAfterlist Success");

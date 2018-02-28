@@ -23,55 +23,48 @@ public class AfterBbsDto implements Serializable {
 	private String title;
 	private String pic1;
 	private String content;
-	private int userSeq;
-	private String Rdate;
-	private String Ldate;
+	private int target_user_seq ;
+	private String reg_date; 
+	private String last_update; 
 	private int del;
 	private int readcond;
+	private String user_email;
 	
 	
 	
 	
 	
 	public AfterBbsDto() {}
-	
-	
-	
 
 
 
 
 
-	public AfterBbsDto(String title, String content, int userSeq) {
+	public AfterBbsDto(String title, String content, int target_user_seq) {
 		super();
 		this.title = title;
 		this.content = content;
-		this.userSeq = userSeq;
+		this.target_user_seq = target_user_seq;
 	}
 
 
 
 
 
-
-
-
-	public AfterBbsDto(int seq, String title, String pic1, String content, int userSeq, String rdate, String ldate,
-			int del, int readcond) {
+	public AfterBbsDto(int seq, String title, String pic1, String content, int target_user_seq, String reg_date,
+			String last_update, int del, int readcond, String user_email) {
 		super();
 		this.seq = seq;
 		this.title = title;
 		this.pic1 = pic1;
 		this.content = content;
-		this.userSeq = userSeq;
-		Rdate = rdate;
-		Ldate = ldate;
+		this.target_user_seq = target_user_seq;
+		this.reg_date = reg_date;
+		this.last_update = last_update;
 		this.del = del;
 		this.readcond = readcond;
+		this.user_email = user_email;
 	}
-
-
-
 
 
 
@@ -85,15 +78,9 @@ public class AfterBbsDto implements Serializable {
 
 
 
-
-
-
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
-
-
-
 
 
 
@@ -107,15 +94,9 @@ public class AfterBbsDto implements Serializable {
 
 
 
-
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-
-
 
 
 
@@ -129,15 +110,9 @@ public class AfterBbsDto implements Serializable {
 
 
 
-
-
-
 	public void setPic1(String pic1) {
 		this.pic1 = pic1;
 	}
-
-
-
 
 
 
@@ -151,9 +126,6 @@ public class AfterBbsDto implements Serializable {
 
 
 
-
-
-
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -162,70 +134,49 @@ public class AfterBbsDto implements Serializable {
 
 
 
-
-
-
-	public int getUserSeq() {
-		return userSeq;
+	public int getTarget_user_seq() {
+		return target_user_seq;
 	}
 
 
 
 
 
-
-
-
-	public void setUserSeq(int userSeq) {
-		this.userSeq = userSeq;
+	public void setTarget_user_seq(int target_user_seq) {
+		this.target_user_seq = target_user_seq;
 	}
 
 
 
 
 
-
-
-
-	public String getRdate() {
-		return Rdate;
+	public String getReg_date() {
+		return reg_date;
 	}
 
 
 
 
 
-
-
-
-	public void setRdate(String rdate) {
-		Rdate = rdate;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 
 
 
 
 
-
-
-
-	public String getLdate() {
-		return Ldate;
+	public String getLast_update() {
+		return last_update;
 	}
 
 
 
 
 
-
-
-
-	public void setLdate(String ldate) {
-		Ldate = ldate;
+	public void setLast_update(String last_update) {
+		this.last_update = last_update;
 	}
-
-
-
 
 
 
@@ -239,15 +190,9 @@ public class AfterBbsDto implements Serializable {
 
 
 
-
-
-
 	public void setDel(int del) {
 		this.del = del;
 	}
-
-
-
 
 
 
@@ -261,9 +206,6 @@ public class AfterBbsDto implements Serializable {
 
 
 
-
-
-
 	public void setReadcond(int readcond) {
 		this.readcond = readcond;
 	}
@@ -272,27 +214,41 @@ public class AfterBbsDto implements Serializable {
 
 
 
+	public String getUser_email() {
+		return user_email;
+	}
+
+
+
+
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
+
 
 
 
 	@Override
 	public String toString() {
-		return "AfterBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content + ", userSeq="
-				+ userSeq + ", Rdate=" + Rdate + ", Ldate=" + Ldate + ", del=" + del + ", readcond=" + readcond + "]";
+		return "AfterBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
+				+ ", target_user_seq=" + target_user_seq + ", reg_date=" + reg_date + ", last_update=" + last_update
+				+ ", del=" + del + ", readcond=" + readcond + ", user_email=" + user_email + "]";
 	}
 	
 	
 	
-
-
-
-
-
-
-
-
 	
 	
+	
+	
+	
+
+
+
+
+
 	
 	
 	

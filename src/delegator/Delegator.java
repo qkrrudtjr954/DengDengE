@@ -13,7 +13,7 @@ public class Delegator {
 		
 	}
 	
-	public Delegator getInstance() {
+	public static Delegator getInstance() {
 		if(delegator==null) {
 			delegator = new Delegator();
 		}

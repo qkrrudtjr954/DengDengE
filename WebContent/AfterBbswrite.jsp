@@ -170,16 +170,60 @@
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
+            focus: true,                  // set focus to editable area after initializing summernote
+            lang: 'ko-KR',
+			callbacks: {
+				onImageUpload: function(files, editor, welEditable) {
+  			      sendFile(files[0], this);
+  			},
+			},
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']],
+				['insert', ['picture']]
+			]
     	});
 	});
 
     
-    $(document).ready(function() {
-    	  $('#summernote').summernote();
-    	});
-    
+    function sendFile(file, editor) {
+		formdata = new FormData();
+		formdata.append("userImage", file);
 
+		$.ajax({
+		data: formdata,
+		type: "POST",
+		url: '${initParam.IMG_SERVER_PATH}/upload',
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(data) {
+			console.log(data);
+			var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+			alert(url);
+			$('#hello').html(url);
+			$('#summernote').summernote('editor.insertImage', url);
+			$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+        }
+	});
+}
+         
+  </script>
+  
+  
+  <script type="text/javascript">
+  $(document).ready(function() {
+	  
+	  
+  }
+  
+  
+  
+  
+  
   </script>
 	
 	

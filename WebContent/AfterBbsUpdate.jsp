@@ -100,7 +100,7 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
   <input type="hidden" name="seq" value="<%=bbs.getSeq() %>">
   
   <div class="row">
-	<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs.getUserSeq() %>&nbsp;&nbsp;작성날짜 :<%=bbs.getRdate() %>&nbsp;&nbsp;
+	<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs.getTarget_user_seq() %>&nbsp;&nbsp;작성날짜 :<%=bbs.getReg_date() %>&nbsp;&nbsp;
 	조회수 : <%=bbs.getReadcond() %></span>		
 </div>
 

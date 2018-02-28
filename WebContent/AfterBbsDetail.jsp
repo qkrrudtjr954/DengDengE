@@ -1,3 +1,4 @@
+<%@page import="dto.User"%>
 <%@page import="dto.AfterBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
@@ -89,6 +90,8 @@
 AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
 String msg = (String)request.getAttribute("msg");
 
+System.out.println("bbs1 = "  + bbs1);
+
 
 if(msg !=null){
 
@@ -122,7 +125,7 @@ alert("<%=msg%>");
  		<hr>
  		
  		<div class="row">
- 		<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs1.getUserSeq() %>&nbsp;&nbsp;작성날짜 :<%=bbs1.getRdate() %>&nbsp;&nbsp;
+ 		<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs1.getUser_email() %>&nbsp;&nbsp;작성날짜 :<%=bbs1.getReg_date() %>&nbsp;&nbsp;
  		조회수 : <%=bbs1.getReadcond() %></span>		
  		</div>
  		
@@ -138,6 +141,11 @@ alert("<%=msg%>");
  		
  		<hr>
  		
+ 		<% 
+ 		User current_user = (User)session.getAttribute("current_user");
+ 		
+ 		if(current_user.getEmail().equals(bbs1.getUser_email())){
+ 		%>
         </form>
         <form name="form1" action="AfterBbsController" method="post" >
          <input type="hidden" name="seq" value="<%=bbs1.getSeq() %>">
@@ -148,7 +156,9 @@ alert("<%=msg%>");
 		</div>
 		
 		</form>
-        
+        <%
+        } 
+        %>
         
         
         
