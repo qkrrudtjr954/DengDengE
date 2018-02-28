@@ -167,28 +167,60 @@ if(msg !=null){
 			</div>
 
 			
+				<div class="row">
+					<input type="text" name="content" id="content0"> 
+					<input type="button" value="comment" onclick="addComment(${bbs1.seq}, 1, 0, 0)">
+				</div>
+				<br><br>
 				<div class="comment-area">
 					
-					<div class="row">
-						<input type="text" name="content" id="content0"> 
-						<input type="button" value="comment" onclick="addComment(${bbs1.seq}, 1, 0, 0)">
+					<!-- 
+					<div class="comment-box col-md-12">
+						<div class="comment-email" style="background: blue;">
+							${comment.user_email}
+						</div>
+						<div class="comment-content" style="background: black;">
+							<div class="comment-depth" style="background: red;">
+								<c:forEach begin="0" end="${comment.depth }">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</c:forEach>
+							</div>
+							${comment.content }
+						</div>
+					</div>							
+					<div class="comment-input col-md-12" style="background: red;">
+						<input type="text" name="content" id="content${i.index+1 }">
+						<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
 					</div>
-					<br><br><br>
-					
+					 -->
 					<c:forEach begin="0" items="${comments }" var="comment" varStatus="i">
 						<div class="row">
-							<p>
-								<c:forEach begin="1" end="${comment.depth }">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								</c:forEach>
-								${comment }
-							</p>
+							<div class="comment-email col-md-2" style="background:pink;height: 50px;">
+								${comment.user_email }
+							</div>
+							<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">
+								<div class="row">
+									<div class="col-md-${comment.depth }" style="background:red; height:50px;text-align:right;">
+										ㄴ>
+									</div>
+									<div class="col comment-content">
+										${comment.content }
+									</div>
+								</div>
+							</div>
+							<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">
+								<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">
+							</div>
+							<div class="comment-date col-md-1" style="background:green;height: 50px;">
+								${comment.reg_date }
+							</div>
 							
-							<input type="text" name="content" id="content${i.index+1 }">
-							<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
+								<input type="text" name="content" id="content${i.index+1 }">
+								<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+							</div>
 						</div>
-						
-						<br><br><br>
+						<hr>
 					</c:forEach>
 				
 			</div>
@@ -210,18 +242,7 @@ if(msg !=null){
 			</p>
 		</div>
 	</footer>
-	<script type="text/javascript">
-		function addComment(ref, step, depth, index) {
-			$.ajax({
-				url : 'AfterCommentController',
-				method : 'POST',
-				data : { command : 'addComment', ref : ref, step : step+1, depth : depth+1, content : $('#content'+index).val() },
-				success : function (data) {
-					console.log(data);
-				}
-			})
-		}
-	</script>
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -254,6 +275,69 @@ if(msg !=null){
 	         document.form1.action="AfterBbsController?command=AfterDelete";
 	         document.form1.submit();
 	     });
+	     
+	     function showCommentArea(commentArea) {
+	    	 	var dom = $(commentArea).parent().parent().find('.comment-input');
+	    	 	
+	    	 	if(dom.css('display') == 'none'){
+		    	 	$(commentArea).parent().parent().find('.comment-input').css('display', 'block');	    	 		
+	    	 	} else {
+	    	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
+	    	 	}
+		}
+	     
+	     function addComment(ref, step, depth, index) {
+				$.ajax({
+					url : 'AfterCommentController',
+					method : 'POST',
+					data : { command : 'addComment', ref : ref, step : step+1, depth : depth+1, content : $('#content'+index).val() },
+					success : function (data) {
+						
+						$('.comment-area').children().remove();
+						
+						var comments = JSON.parse(data);
+						
+						for(var i=0; i < comments.length; i++){
+							
+							printCommentHtml(comments[i], i);
+							
+						}
+					}
+				})
+			}
+			
+			function printCommentHtml(comment, index) {
+				var html =
+					'<div class="row">'+
+						'<div class="comment-email col-md-2" style="background:pink;height: 50px;">'+
+							comment.user_email+
+						'</div>'+
+						'<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">'+
+							'<div class="row">'+
+								'<div class="col-md-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
+									'ㄴ>'+
+								'</div>'+
+								'<div class="col comment-content">'+
+									comment.content+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+						'<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">'+
+							'<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">'+
+						'</div>'+
+						'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
+							comment.reg_date+
+						'</div>'+
+						
+						'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
+							'<input type="text" name="content" id="conten'+index+'">'+
+							'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
+						'</div>'+
+					'</div>'+
+					'<hr>';
+					console.log(html);
+					$('.comment-area').append(html);
+			}
 	     
 	     
 	</script>

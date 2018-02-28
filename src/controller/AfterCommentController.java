@@ -57,11 +57,10 @@ public class AfterCommentController extends HttpServlet {
 				comment.setTarget_user_seq(current_user.getSeq());
 				comment.setUser_email(current_user.getEmail());
 				
-				System.out.println("addComment commnet = "+comment);
 				List<AfterCommentDto> list = service.addComment(comment);
 				
 				String json = new Gson().toJson(list);
-				System.out.println("JSON: "+json);
+				
 				resp.getWriter().write(json);
 			}
 		}

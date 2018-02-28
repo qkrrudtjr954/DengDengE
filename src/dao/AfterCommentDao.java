@@ -86,8 +86,8 @@ public class AfterCommentDao {
 		dto.setStep(rs.getInt("step"));
 		dto.setTarget_user_seq(rs.getInt("target_user_seq"));*/
 		
-		String sql = " insert into aftercomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content) " + 
-				" values (aftercomment_seq.nextval, ?, ?, ?, sysdate, ?, ? ) ";
+		String sql = " insert into aftercomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email ) " + 
+				" values (aftercomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ? ) ";
 		
 		System.out.println(">>>>> AfterCommentDao .addComment() sql : "+sql);
 		
@@ -103,6 +103,7 @@ public class AfterCommentDao {
 			psmt.setInt(3, comment.getStep());
 			psmt.setInt(4, comment.getTarget_user_seq());
 			psmt.setString(5, comment.getContent());
+			psmt.setString(6, comment.getUser_email());
 			
 			count = psmt.executeUpdate();
 		} catch (SQLException e) {
