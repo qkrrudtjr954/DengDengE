@@ -95,10 +95,12 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<div class="row">
-				<div class="list-title offset-md-4 col-md-4 offset-sm-1 col-sm-10">
-					<h1>분양 동물 보기</h1>
-				</div>
+			<div class="row" style="margin: 0 auto; width: 900px;">
+					<h1 style="text-decoration: underline;" class="offset-md-4">분양 동물 보기</h1>
+			</div>
+			<div>
+				<a href="AnimalBbsController?command=animlist"
+					class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>
 			</div>
 			<hr>
 			<br>
@@ -232,7 +234,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			</div>
 
 			<div class="row">
-				<input type="submit" class="offset-md-11 btn btn-outline-secondary"
+			<input type="submit" class="offset-md-11 btn btn-outline-secondary"
 				style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
 			</div>
 			</form>

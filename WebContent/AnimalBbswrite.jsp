@@ -415,7 +415,6 @@ $(document).ready(function() {
         var title = $("#title").val();
         var descrip = $("#descrip").val();
 		var content = $(".content").val();
-		alert(content);
 		
 		if(name === ""){
 			alert("이름을 입력해주십시오"); 
@@ -469,10 +468,11 @@ $(document).ready(function() {
 	});
     
     $("#certibutton").click(function () {
-		var contact =$("#contect").val();
+		var contact =$("#contact").val();
 		
 		if(contact === ""){
 			alert("연락처를 입력해주십시오");
+			$("#contact").focus();
 			return;
 		}else{
 			alert  ("인증완료");
@@ -480,10 +480,11 @@ $(document).ready(function() {
 	});
     
     $("#finalButton").click(function () {
-		var contact =$("#contect").val();
+		var contact =$("#contact").val();
 		
 		if(contact === ""){
 			alert("연락처를 입력해주십시오");
+			$("#contact").focus();
 		}else{
 			$("#form").submit();
 		}
