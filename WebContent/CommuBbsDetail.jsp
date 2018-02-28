@@ -152,8 +152,8 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </div>
 <hr>
 <!-- 댓글 달기/ 좋아요 -->
-<div class="offset-md-1 col-md-3">
-<button id="btnLike"><img src="./img/icon_heart.png"></button>
+<div class="offset-md-1 col-md-4">
+<button type="button" id="btnLike"><img src="./img/icon_heart.png"></button> <span id="likeCount"><%=comdto.getLike_count() %></span>
 
 </div>
 
@@ -229,9 +229,21 @@ if(comdto.getUser_email().equals(sid)){
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
+		
+		$('#btnLike').click(function ()  {
+			
+			$.ajax({
+				url:"CommuBbsController",
+				data: { command: 'like', seq: ${dto.seq}},
+				type:"post",
+				success : function (data) {
+					$('#area').append('<span>hello</span>');
+				}
+			});
+		});
 	
 	</script>
-	
+	<!-- <div id="area"></div> -->
 	  <script>
     $(document).ready(function(){
         $("#btnDelete").click(function(){

@@ -61,6 +61,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int readcount
 						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
+						0,//int like_count
 						rs.getInt(i++), // int del
 						rs.getString(i++),// category_name
 						rs.getString(i++)); //String user_email
@@ -86,7 +87,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 	@Override
 	public CommuBbsDto getCommu(int seq) {
 		String sql = " SELECT a.seq, a.TITLE as title, content, a.target_user_seq, a.target_category, "
-				+ " readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email "
+				+ " readcount, a.last_update as last_update, like_count, del, b.title as category_name, c.email as user_email "
 				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c "
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=?";
 
@@ -121,7 +122,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 									rs.getInt(i++), //target_category, 
 									rs.getInt(i++), //readcount, 
 									"", //reg_date,
-									rs.getString(i++), //last_update, 
+									rs.getString(i++), //last_update,
+									rs.getInt(i++),//int like_count
 									rs.getInt(i++), //del, 
 									rs.getString(i++), //category_name,
 									rs.getString(i++)); //user_email);
@@ -169,8 +171,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 	@Override
 	public boolean writeCommu(CommuBbsDto comdto) {
 		String sql = "INSERT INTO COMMUBBS(SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " TARGET_CATEGORY, READCOUNT, REG_DATE, LAST_UPDATE, DEL ) "
-				+ " VALUES(COMMUBBS_SEQ.NEXTVAL, ?, '', ?, ?, ?, 0, SYSDATE, SYSDATE, 0) ";
+				+ " TARGET_CATEGORY, READCOUNT, REG_DATE, LAST_UPDATE, LIKE_COUNT, DEL ) "
+				+ " VALUES(COMMUBBS_SEQ.NEXTVAL, ?, '', ?, ?, ?, 0, SYSDATE, SYSDATE, 0, 0) ";
 
 		int count = 0;
 
@@ -303,6 +305,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int readcount
 						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
+						0,//int like_count
 						rs.getInt(i++), // int del
 						rs.getString(i++), // category_name
 						rs.getString(i++)); //user_email 
@@ -360,6 +363,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int readcount
 						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
+						0,//int like_count
 						rs.getInt(i++), // int del
 						rs.getString(i++), // category_name
 						rs.getString(i++)); //user_email
@@ -379,6 +383,35 @@ public class CommuBbsDao implements iCommuBbsDao {
 		}
 
 		return list;
+	}
+	//좋아요 클릭하기
+	@Override
+	public boolean clickLike(int seq) {
+		String sql = " UPDATE  COMMUBBS  SET  " + " LIKE_COUNT=LIKE_COUNT+1 " + " WHERE SEQ=? ";
+		System.out.println("readcount sql : " + sql);
+		
+		int count = 0;
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			System.out.println("1/6 readCount");
+			psmt.setInt(1, seq);
+			System.out.println("2/6 readCount");
+			count = psmt.executeUpdate();
+			System.out.println("3/6 readCount");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("fail readCount");
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return count > 0 ? true : false;
 	}
 
 

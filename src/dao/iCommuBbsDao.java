@@ -29,4 +29,5 @@ public interface iCommuBbsDao {
 	
 	public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord);
 	
+	public boolean clickLike(int seq);
 }

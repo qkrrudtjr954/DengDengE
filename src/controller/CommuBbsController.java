@@ -212,6 +212,8 @@ public class CommuBbsController extends HttpServlet {
 				//보내주기
 				dispatch("CommuBbslist.jsp", req, resp);
 
+		}else if(command.equals("like")) {
+			
 		}
 	}
 	//보내주는 함수
