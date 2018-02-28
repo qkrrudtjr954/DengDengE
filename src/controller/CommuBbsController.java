@@ -1,4 +1,4 @@
-package controller;
+﻿package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import delegator.Delegator;
 import dto.CommuBbsDto;
+import dto.User;
 import service.CommuBbsService;
 
 public class CommuBbsController extends HttpServlet {
@@ -29,7 +31,8 @@ public class CommuBbsController extends HttpServlet {
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		CommuBbsService comService = CommuBbsService.getInstance();
-	
+		
+		//Delegator delegator = delegator.getInstance();
 		
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text./html; charset=utf-8"); 
@@ -48,7 +51,19 @@ public class CommuBbsController extends HttpServlet {
 			dispatch("CommuBbslist.jsp", req, resp);
 			
 		}else if(command.equals("write")) {
-			dispatch("CommuBbsWrite.jsp", req, resp);
+			
+			if(Delegator.checkSession(req, resp)) {
+				
+				dispatch("CommuBbsWrite.jsp", req, resp);
+			}else {
+				
+				req.setAttribute("returnurl", "CommuBbsController?command=write");
+		        dispatch("UserControl?command=goSignIn", req, resp);
+			}
+			
+			
+			
+			
 		}else if(command.equals("writeAf")){			
 			//String id = req.getParameter("id");
 			System.out.println("writeAf 들어옴");
@@ -61,13 +76,22 @@ public class CommuBbsController extends HttpServlet {
 			System.out.println("title : " + title);
 			System.out.println("content : " + content);
 			
-			 boolean isS = comService.writeCommu(new CommuBbsDto(title, content, 1, category));
-			 //유저 시퀀스 1 로 일단 설정해둠 
+			HttpSession session = req.getSession();
+			User userInfo = (User)session.getAttribute("current_user");
+			String writer = userInfo.getEmail();
+			int target_user_seq =userInfo.getSeq();
+			
+			//로그인 안되었을 때 알림창 띄워주기 
+			
+			
+			boolean isS = comService.writeCommu(new CommuBbsDto(title, content, target_user_seq, category));
+			
 			System.out.println(isS);
 			
 
 
 			if(isS) {
+
 
 			/*	Cookie cookie = new Cookie("successMsg", "글이 등록 되었습니다.");
 				cookie.setMaxAge(5);
@@ -90,6 +114,7 @@ public class CommuBbsController extends HttpServlet {
 			
 			req.setAttribute("comdto", comdto);
 			dispatch("CommuBbsDetail.jsp", req, resp);
+			
 		}else if(command.equals("delete")) {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
@@ -148,14 +173,14 @@ public class CommuBbsController extends HttpServlet {
 	         
 	         if(isS) {
 	        	 	/*Cookie cookie = new Cookie("successMsg", "글이 수정되었습니다.");
+
 				cookie.setMaxAge(5);
 
 				resp.addCookie(cookie);*/
 	            resp.sendRedirect("CommuBbsController?command=list");
 	            
 	         }else {
-	            //JOptionPane.showMessageDialog(null, "수정실패");
-
+	            
 	            req.setAttribute("failMsg", "글을 수정할 수 없습니다. 다시 시도해주세요.");
 
 	            dispatch("CommuBbsController?command=read", req, resp);

@@ -1,3 +1,4 @@
+<%@page import="dto.User"%>
 <%@page import="dto.CommuBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
@@ -35,7 +36,7 @@ public String toDate(String mdate){
   <body>
 	<header>
 		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
+				<a class="navbar-brand offset-md-2" href="MainControl?command=start">DengDengE</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -79,17 +80,17 @@ public String toDate(String mdate){
       <section>
 	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	        <ul class="nav menu justify-content-center">
-			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
+			 <li class="nav-item menu-item">
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
+			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
 			  </li>
 			</ul>
   		</nav>
@@ -106,7 +107,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 		<div class="col-md-10">
 		<form name="form1" action="CommuBbsController" method="post">
    		<input type="hidden" name="seq" value="<%=comdto.getSeq() %>">
-						<h1>수정하기</h1>
+						<h1>커뮤니티</h1>
 						<hr>				
 <div class="row">
 	<div class="offset-md-1"></div>	
@@ -126,8 +127,8 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </div>
 
 <hr>
-<div class="row offset-md-9">
-<p><b>작성자</b>  <%=comdto.getTarget_user_seq() %> &nbsp;&nbsp;&nbsp;<b>작성일</b>  <%=toDate(comdto.getReg_date()) %>&nbsp;&nbsp;&nbsp;<b> 조회수 </b> <%=comdto.getReadcount() %>&nbsp;</p>
+<div class="row offset-md-8">
+<p><b>작성자</b>  <%=comdto.getUser_email() %> &nbsp;&nbsp;&nbsp;<b>작성일</b>  <%=toDate(comdto.getLast_update()) %>&nbsp;&nbsp;&nbsp;<b> 조회수 </b> <%=comdto.getReadcount() %>&nbsp;</p>
 </div>
 
 <div class="row">
@@ -145,11 +146,28 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <hr>
 <br>
 <div class="row">
+<%-- <c:set var="email" value="${comdto.user_email }"/> --%>
+<c:if test="${current_user.email eq comdto.user_email }">
+	hello
+</c:if>
+
+
+<%
+String sid =((User)session.getAttribute("current_user")).getEmail();
+
+if(comdto.getUser_email().equals(sid)){
+%>
 
 <button type="button" class="btn btn-success offset-md-5 col-md-1"  id="btnUpdate">수정하기</button>
 &nbsp;
 
 <button type="button" class="btn btn-outline-secondary col-md-1"  id="btnDelete" >삭제하기</button>
+<%
+}else{%>
+<button type="button" id="btnBack" class="btn btn-outline-secondary  offset-md-5 col-md-1">돌아가기</button>
+<%
+}
+%>
 </form>
 </div>
 
@@ -208,6 +226,12 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
             document.form1.action="CommuBbsController?command=update";
             document.form1.submit();
         });
+        
+        $("#btnBack").click(function () {
+	        location.href="CommuBbsController?command=list";
+
+	    });
+        
     });
 </script>
 	

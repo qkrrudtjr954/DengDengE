@@ -36,13 +36,18 @@ public class CommuBbsDto implements Serializable {
 	private String last_update;		//수정 날짜 
 	private int del;				//0 게시물 있음 1 게시물 없음
 	private String category_name;
+	private String user_email;
 
 	public CommuBbsDto() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
+
+
 	public CommuBbsDto(int seq, String title, String pic1, String content, int target_user_seq, int target_category,
-			int readcount, String reg_date, String last_update, int del, String category_name) {
+			int readcount, String reg_date, String last_update, int del, String category_name, String user_email) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -55,9 +60,14 @@ public class CommuBbsDto implements Serializable {
 		this.last_update = last_update;
 		this.del = del;
 		this.category_name = category_name;
+		this.user_email = user_email;
 	}
-	
-	
+
+
+
+
+
+
 
 	public CommuBbsDto(String title, String content, int target_user_seq, int target_category) {
 		super();
@@ -67,6 +77,23 @@ public class CommuBbsDto implements Serializable {
 		this.target_category = target_category;
 	
 	}
+	
+	
+
+	public CommuBbsDto(String title, String content, int target_user_seq, int target_category, int readcount,
+			String reg_date, String category_name, String user_email) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.target_user_seq = target_user_seq;
+		this.target_category = target_category;
+		this.readcount = readcount;
+		this.reg_date = reg_date;
+		this.category_name = category_name;
+		this.user_email = user_email;
+	}
+
+
 
 	public int getSeq() {
 		return seq;
@@ -156,13 +183,35 @@ public class CommuBbsDto implements Serializable {
 		this.category_name = category_name;
 	}
 
+	
+	
+	public String getUser_email() {
+		return user_email;
+	}
+
+
+
+
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
 				+ ", target_user_seq=" + target_user_seq + ", target_category=" + target_category + ", readcount="
 				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
-				+ ", category_name=" + category_name + "]";
+				+ ", category_name=" + category_name + ", user_email=" + user_email + "]";
 	}
+
+
+
+
 
 
 	

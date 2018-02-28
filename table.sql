@@ -9,7 +9,7 @@ drop table cal cascade constraints;
 drop table category cascade constraints;
 
 -- user table
-create SEQUENCE deng_user_seq start with 1 increment by 1;
+create SEQUENCE denguser_seq start with 1 increment by 1;
 create table denguser(
     seq number(8) primary key,
     email varchar2(50) unique not null,
@@ -189,25 +189,48 @@ create table denguser(
 SELECT*FROM denguser;
 
 INSERT INTO denguser(SEQ, EMAIL, PASSWORD, REG_DATE, LAST_UPDATE, AUTH)
-VALUES(deng_user_seq.NEXTVAL, 'aa', 'aa', SYSDATE, SYSDATE, 0);
+VALUES(denguser_seq.NEXTVAL, 'aa', 'aa', SYSDATE, SYSDATE, 0);
 
 
 --02/23-------
 select*from CATEGORY;
 select*from COMMUBBS;
+select*from denguser;
+
+SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email   
+FROM COMMUBBS A, CATEGORY B,  DENGUSER c 
+WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND a.DEL=0 
+ORDER BY a.reg_date DESC ;
+
+ SELECT a.seq, a.TITLE as title, a.target_user_seq, a.target_category,  readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email  FROM COMMUBBS A, CATEGORY B, DENGUSER c  WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=1
+SELECT a.seq, a.TITLE as title, a.target_user_seq, a.target_category,  readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email  FROM COMMUBBS A, CATEGORY B, DENGUSER c  WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=1
 select target_category, a.title, target_user_seq,reg_date, del, b.title 
 from COMMUBBS a, category b
 where a.target_category = b.seq;
+
+" SELECT a.seq, a.TITLE as title, target_user_seq, readcount, a.reg_date, a.last_update as last_update, del, b.title as category_name, A.READCOUNT, c.email as user_email  "
+				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c " 
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0 "
+				+ " AND " + Searchtype + " LIKE '%" + SearchWord + "%'" + " ORDER BY a.REG_DATE DESC ";
 
 SELECT a.TITLE, b.title as category, target_user_seq, del, a.reg_date
 FROM COMMUBBS A, CATEGORY B
 WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY
 ORDER BY REG_DATE DESC;
 
-DROP TABLE CATEGORY
+SELECT a.seq, a.TITLE as title, target_user_seq, readcount, a.reg_date, a.last_update as last_update, del, b.title as category_name, A.READCOUNT, c.email as user_email   FROM COMMUBBS A, CATEGORY B, DENGUSER c  WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0  AND email LIKE '%eunmin%' ORDER BY a.REG_DATE DESC 
+
+DROP TABLE denguser
 CASCADE CONSTRAINT;
 
-DROP SEQUENCE CATEGORY_SEQ;
+DROP TABLE category
+CASCADE CONSTRAINT;
+
+DROP TABLE commubbs
+CASCADE CONSTRAINT;
+
+DROP SEQUENCE category_seq;
+DROP SEQUENCE commubbs_seq;
 
 DROP TABLE COMMUBBS
 CASCADE CONSTRAINT;
@@ -253,3 +276,34 @@ CREATE TABLE COMMUBBS(
 
 INSERT INTO COMMUBBS(SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, TARGET_CATEGORY, READCOUNT, REG_DATE, LAST_UPDATE, DEL )
 VALUES(COMMUBBS_SEQ.NEXTVAL, '제목', '이미지주소', '내용', 1, 1, 0, SYSDATE, SYSDATE, 0);
+
+
+DROP TABLE AFTERBBS
+CASCADE CONSTRAINT;
+
+DROP SEQUENCE AFTERBBS_SEQ;
+
+CREATE SEQUENCE AFTERBBS_SEQ START WITH 1 INCREMENT BY 1;
+create table AFTERBBS(
+    seq number(8) primary key,
+    title varchar2(100),
+    pic1 varchar2(200),
+    content long,
+    TARGET_USER_SEQ NUMBER(8),
+    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
+    REG_DATE DATE,
+    LAST_UPDATE DATE,
+    READCOUNT NUMBER(8),
+    DEL NUMBER(1)
+);
+
+select*from denguser;
+
+select*from COMMUBBS;
+
+SELECT a.seq, a.TITLE as title, content, target_user_seq, a.target_category,  readcount, a.reg_date as reg_date, del, b.title as category_name, c.email as user_email  FROM COMMUBBS A, CATEGORY B, DENGUSER c  WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=2;
+
+
+
+
+SELECT a.seq, a.TITLE as title, content, target_user_seq, a.target_category,  readcount, a.reg_date as reg_date, del, b.title as category_name, c.email as user_email   FROM COMMUBBS A, CATEGORY B, denguser c WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND  a.target_user_seq = c.seq and  A.SEQ=1;

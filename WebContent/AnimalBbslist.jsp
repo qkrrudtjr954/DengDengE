@@ -278,13 +278,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					$(this).css('background', 'green').css('border',
 							'1px solid green').css('border-radius', '15px');
 					$(this).children('.nav-link').css('color', 'white');
-
-
-
-
-
-
-
 				});
 		$('.menu-item').on(
 				'mouseout',
@@ -293,7 +286,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							'1px solid white').css('border-radius', '5px');
 					$(this).children('.nav-link').css('color', 'white');
 				});
-
 	</script>
 
 </body>
