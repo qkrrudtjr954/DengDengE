@@ -9,9 +9,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import delegator.Delegator;
 import dto.AfterBbsDto;
+import dto.User;
 import service.AfterBbsService;
 
 public class AfterBbsController extends HttpServlet {
@@ -69,7 +71,13 @@ public class AfterBbsController extends HttpServlet {
 				dispatch("bbswrite.jsp", req, resp);
 			}*/
 			
-			boolean isS = bbs.wirtelAfterBbs(new AfterBbsDto(title, content, 1));
+			HttpSession session = req.getSession();
+            User userInfo = (User)session.getAttribute("current_user");
+            String writer = userInfo.getEmail();
+            int target_user_seq =userInfo.getSeq();
+			
+			
+			boolean isS = bbs.wirtelAfterBbs(new AfterBbsDto(title, content, target_user_seq));
 			Cookie cookie = null;
 			if(isS) {
 				System.out.println(isS);
@@ -90,27 +98,30 @@ public class AfterBbsController extends HttpServlet {
 			}
 			//디테일
 		}else if(command.equals("AfterBbsDetail")) {
-			String sseq = req.getParameter("seq"); 
-			System.out.println("detail-sseq: "+sseq);
-			int seq = Integer.parseInt(sseq);
-			bbs.readCount(seq);
-			System.out.println("seq + " + seq);
-			AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
-			System.out.println("Combbs1 = "  + bbs1);
-			req.setAttribute("bbs1", bbs1);
+			
 			//dispatch("AfterBbsDetail.jsp", req, resp);
 			
+			String sseq = req.getParameter("seq"); 
+			System.out.println("detail-sseq: "+sseq);
 			
-			/*if(Delegator.checkSession(req, resp)) {
+			int seq = Integer.parseInt(sseq);
+			System.out.println("seq + " + seq);
+			
+			if(Delegator.checkSession(req, resp)) {
+				bbs.readCount(seq);
+				
+				AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
+				System.out.println("Combbs1 = "  + bbs1);
+				req.setAttribute("bbs1", bbs1);
 				// 로그인이 되어있는 상태 
 				//dispatch("AfterBbsDetail.jsp", req, resp);
-				dispatch("AfterBbsController?command=AfterBbsDetail&seq="+seq , req , resp);
+				dispatch("AfterBbsDetail.jsp" , req , resp);
 			} else {
 				// 로그인이 안된 상태 
-				req.setAttribute("returnurl", "AfterBbsController?command=AfterBbsDetail");
+				req.setAttribute("returnurl", "AfterBbsController?command=AfterBbsDetail&seq=" + seq);
 				dispatch("UserControl?command=goSignIn", req, resp);
 			}
-			*/
+			
 			
 		}else if(command.equals("AfterBbsUpdate")) {  
 			String sseq = req.getParameter("seq");

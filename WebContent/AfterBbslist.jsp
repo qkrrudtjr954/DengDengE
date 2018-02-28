@@ -22,9 +22,6 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
-
-    <%--list 구현 --%>
-    <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
     #container {
       width: 70%;

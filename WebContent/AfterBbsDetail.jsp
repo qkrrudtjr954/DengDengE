@@ -1,3 +1,4 @@
+<%@page import="dto.User"%>
 <%@page import="dto.AfterBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
@@ -140,6 +141,11 @@ alert("<%=msg%>");
  		
  		<hr>
  		
+ 		<% 
+ 		User current_user = (User)session.getAttribute("current_user");
+ 		
+ 		if(current_user.getEmail().equals(bbs1.getUser_email())){
+ 		%>
         </form>
         <form name="form1" action="AfterBbsController" method="post" >
          <input type="hidden" name="seq" value="<%=bbs1.getSeq() %>">
@@ -150,7 +156,9 @@ alert("<%=msg%>");
 		</div>
 		
 		</form>
-        
+        <%
+        } 
+        %>
         
         
         
