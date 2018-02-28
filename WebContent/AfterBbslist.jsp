@@ -187,13 +187,14 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
  
  
 
-<form name="searchform" method="get" action="AfterBbsController">
+<form name="searchform" method="get" action="AfterBbsController" id="myform">
       <input type="hidden" name="command" value="AfterBbsSearch">
      <div class="row">
       
 		<div class="input-group-prepend">
 			<select class="custom-select" id="inputGroupSelect01" name="Searchtype" style="width: 150px">
-			   <!-- <option selected>선택없음</option> -->
+			   <!-- <option selected value="">선택없음</option> -->
+			   <option value="no_selection">선택없음</option>
 			   <option value="target_user_seq">글쓴이</option>
 			   <option value="title">제목</option>
  			 </select>
@@ -202,7 +203,7 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 		
 		<div class="serach"text-align:center;">
 		<!-- <button type="button" class="btn btn-success" onclick="" id="btnsarch">검색</button> -->
-		 <input type="submit" class="btn btn-success" id="btnsarch"  value="검색">
+		 <input type="button" class="btn btn-success" id="btnsearch"  value="검색" >
 		</div>
 		
          
@@ -337,7 +338,7 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
 
-	$(document).ready(function(){
+	
 	$("#btnlist").click(function(){
        // alert("목록으로 돌아 갑니다");
        document.form1.action ="AfterBbsController?command=AfterBbslist";
@@ -352,21 +353,27 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
      });
      
      
-    /*  
-     $("#btnsarch").click(function(){    
+     
+     $("#btnsearch").click(function(){    
          //alert("클릭");
-         
+         var no_selection = document.getElementById("no_selection");
+         var target_user_seq = document.getElementById("target_user_seq");
+         var title = document.getElementById("title");
          var text = $("#text").val(); 
-         if(text==null){
+         if(text===""){
         	 alert("검색창이 비웠습니다");
+        	 $("#text").focus();
         	 
-        	return text; 
+        	
+         }else{
+        	 $("#myform").submit();
+        	 
+        	 
          }
          
          
-         
           
-      }); */
+      }); 
      
      
      
@@ -375,10 +382,6 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
      
      
      
-     
-     
-     
- });
 	
 	</script>
 	
