@@ -166,7 +166,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			</form>
 			<br>
 
-
 		<form action="AnimalBbsController" method="get">
 		<input type="hidden" name="command" value="write">
 			<div class="row">
