@@ -220,13 +220,18 @@
 	   
 	   $("#btnwrite").click(function() {
 		   var title = $("#title").val();
-		   var content = $("#content").val();
+		   var content = $("#summernote").val();
 		   
-		   if(title===""||summernote===""){
-			   alert("빈칸이 있습니다 빈칸을 ");
-			   
+		   if(title===""){
+			   alert("제목을 입력해주세요 ");
+			   $("#title").focus();
 			   return;
-		   }else{
+		   }else if(content===""){
+			   alert("내용을 입력해주세요 ");
+			   $("#summernote").focus();
+			   return;
+		   
+	   	  }else{
 			   $("#myform").submit();
 			   
 		   }

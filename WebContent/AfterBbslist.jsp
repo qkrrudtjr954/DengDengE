@@ -167,12 +167,12 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
  
  %>
  
- <%
+ <%-- <%
  String msg = (String)request.getAttribute("msg");
  String afterwirtemsg = (String)request.getAttribute("afterwirtemsg");
  String msg2 = (String)request.getAttribute("msg2");
  
- %> 
+ %>  --%>
  
  
  
@@ -339,14 +339,14 @@ List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>)request.getAttribute("afterB
 
 	$(document).ready(function(){
 	$("#btnlist").click(function(){
-        alert("목록으로 돌아 갑니다");
+       // alert("목록으로 돌아 갑니다");
        document.form1.action ="AfterBbsController?command=AfterBbslist";
       document.form1.submit(); 
         
      });
      
      $("#btnwrite").click(function(){    
-        alert("글쓰기 화면으로 넘어갑니다");
+        //alert("글쓰기 화면으로 넘어갑니다");
          document.form1.action="AfterBbsController?command=AfterBbswrite";
          document.form1.submit();
      });
