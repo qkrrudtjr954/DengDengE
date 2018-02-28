@@ -102,46 +102,46 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			</div>
 			<hr>
 			<br>
-			
+
 			<form action="AnimalBbsController" method="post">
 			<input type="hidden" name="command" value="btnsearch">
-			
+
 				<div class="row">
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="서울">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="경기도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="강원도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="충청도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="경상도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="전라도">
 				</div>
 			</form>
-			
+
 			<br>
 			<form action="AnimalBbsController" method="post">
 			<input type="hidden" name="command" value="btnsearch">
 				<div class="row">
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="유기동물">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="개인분양">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff" 
+					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="etc">
 				</div>
 			</form>
-			
+
 			<br>
 			<form action="AnimalBbsController" method="post" >
 				<input type="hidden" name="command" value="search">
@@ -173,38 +173,27 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							<img class="card-img-top" src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }" alt="./img/no-img.png">
 							<div class="card-body">
 								<p class="card-text">
-									${item.title }
-									<br>
-								<p>
-									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
-								</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
-									</div>
-
-								
-									<!-- <!— 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 —> -->
+									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
 									<c:set var="reg" value="${item.reg_date}"/>
 									<%
 									String temp = (String)pageContext.getAttribute("reg");   //No exception.
 									Calendar cal = Calendar.getInstance();
-									
+
 									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
 									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
 									int cur_month = cal.get(Calendar.MONTH)+1;
-									
+
 									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
 									cal.setTime(format.parse(temp));
-									
+
 									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
 									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
 									int reg_month = cal.get(Calendar.MONTH)+1;
-									
+
 									int range_month = cur_month - reg_month;
 									int range_day = cur_day - reg_day;
 									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
-									
+
 									String result="";
 									if(range_month < 1){
 										if(range_day < 1){
@@ -219,7 +208,57 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									} else {
 										result = range_month + " 달 전 ";
 									}
-									
+
+									request.setAttribute("range", result);
+									%>
+
+									${item.title }
+									<br>
+								<p>
+									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
+								</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
+									</div>
+
+
+									<!-- <!— 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 —> -->
+									<c:set var="reg" value="${item.reg_date}"/>
+									<%
+									String temp = (String)pageContext.getAttribute("reg");   //No exception.
+									Calendar cal = Calendar.getInstance();
+
+									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
+									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int cur_month = cal.get(Calendar.MONTH)+1;
+
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
+									cal.setTime(format.parse(temp));
+
+									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
+									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
+									int reg_month = cal.get(Calendar.MONTH)+1;
+
+									int range_month = cur_month - reg_month;
+									int range_day = cur_day - reg_day;
+									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
+
+									String result="";
+									if(range_month < 1){
+										if(range_day < 1){
+											if(range_hour < 1){
+												result = "방금 전";
+											}else {
+												result = range_hour+" 시간 전";
+											}
+										} else {
+											result = range_day + " 일 전";
+										}
+									} else {
+										result = range_month + " 달 전 ";
+									}
+
 									request.setAttribute("range", result);
 									%>
 									<small class="text-muted">${range }</small>
@@ -230,9 +269,9 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					</div>
 				</c:forEach>
 			</div>
-			
+
 			<div class="row">
-				<input type="submit" class="offset-md-11 btn btn-outline-secondary" 
+				<input type="submit" class="offset-md-11 btn btn-outline-secondary"
 				style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
 			</div>
 			</form>
@@ -271,13 +310,20 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 
 
 	<script type="text/javascript">
+<<<<<<< HEAD
 
+=======
+>>>>>>> kyung
 		$('.menu-item').on(
 				'mouseover',
 				function() {
 					$(this).css('background', 'green').css('border',
 							'1px solid green').css('border-radius', '15px');
 					$(this).children('.nav-link').css('color', 'white');
+<<<<<<< HEAD
+=======
+
+>>>>>>> kyung
 				});
 		$('.menu-item').on(
 				'mouseout',
@@ -287,6 +333,9 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					$(this).children('.nav-link').css('color', 'white');
 				});
 	</script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> kyung
 </body>
 </html>
