@@ -143,20 +143,21 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			</form>
 			
 			<br>
-			<form action="AnimalBbsController" method="post" >
+			<form action="AnimalBbsController" method="post" id="form">
 				<input type="hidden" name="command" value="search">
 				<div class="row" style="margin:0 auto;width:900px;">
 					<div class="offset-md-2 input-group-prepend">
 						<select class="custom-select" id="inputGroupSelect01"name="Searchtype" style="width: 150px">
 							<option value="title">제목</option>
 							<option value="target_user_seq">작성자</option>
-						</select> <input type="text" class="form-control"
+						</select> 
+						<input type="text" class="form-control"
 							aria-label="Text input with segmented dropdown button" size="50"
 							name="SearchWord" id="text">
 					</div>
 
 					<div class="serach">
-						<input type="submit" class="btn btn-success" id="btnsarch" style="background-color: #28A745; color: #fff"
+						<input type="button" class="btn btn-success" id="btnsarch" style="background-color: #28A745; color: #fff"
 							value="검색">
 					</div>
 				</div>
@@ -286,6 +287,21 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							'1px solid white').css('border-radius', '5px');
 					$(this).children('.nav-link').css('color', 'white');
 				});
+	</script>
+	
+	<script type="text/javascript">
+	$('#btnsarch').click(function () {
+		var text = $("#text").val();
+		
+		if(text ===""){
+			alert("검색할 내용을 입력해주십시오");
+			$("#text").focus();	
+		}else{
+			$("#form").submit();
+		}
+	});
+	
+	
 	</script>
 
 </body>
