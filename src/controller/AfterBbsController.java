@@ -75,18 +75,10 @@ public class AfterBbsController extends HttpServlet {
 
 			AfterBbsDto test = new AfterBbsDto(title, content, target_user_seq);
 			test.setPic1(pic1);
-			boolean isS = bbs.wirtelAfterBbs(test);
+			boolean isS = bbs.wirteAfterBbs(test);
 			if (isS) {
 				System.out.println(isS);
-				/*
-				 * req.setAttribute("msg1", "글작성 완료");
-				 * dispatch("AfterBbsController?command=AfterBbslist", req, resp);
-				 */
-
-				/*
-				 * cookie = new Cookie("afterwirtemsg", "글작성완료"); cookie.setMaxAge(5);
-				 * resp.addCookie(cookie);
-				 */
+				
 
 				resp.sendRedirect("AfterBbsController?command=AfterBbslist");
 

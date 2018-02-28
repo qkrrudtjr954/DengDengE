@@ -225,7 +225,7 @@ to {
 					<div class="input-group-prepend">
 						<select class="custom-select" id="inputGroupSelect01"
 							name="Searchtype" style="width: 150px">
-							<option value="target_user_seq">글쓴이</option>
+							<option value="email">글쓴이</option>
 							<option value="title">제목</option>
 						</select> <input type="text" class="form-control"
 							aria-label="Text input with segmented dropdown button" size="30"
