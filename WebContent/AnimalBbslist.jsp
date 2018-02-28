@@ -1,4 +1,5 @@
-﻿<%@page import="dto.AnimalBbsDto"%>
+﻿<%@page import="dto.User"%>
+<%@page import="dto.AnimalBbsDto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -20,7 +21,6 @@
 <%
 List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animlist");
 %>
-
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -165,8 +165,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				</div>
 			</form>
 			<br>
-
-		<form action="AnimalBbsController" method="get">
+	
+		<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="write">
 			<div class="row">
 				<c:forEach items="${animlist }" var="item" varStatus="i">
@@ -237,10 +237,10 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
 			</div>
 			</form>
+			
 		</div>
 	</div>
 	</main>
-
 
 
 	<footer class="text-muted">

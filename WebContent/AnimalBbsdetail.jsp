@@ -269,60 +269,74 @@ if(aniBbsDto != null){
 
 				<%
 					String id = ((User)session.getAttribute("current_user")).getEmail();
+					boolean bookS = (boolean) request.getAttribute("bookS");
 				%>
+				
 
 				<br>
-				<%if(aniBbsDto.getUser_email().equals(id)){
-					%>
-				<div class="row">
-					<button type="button" class="offset-md-5 btn btn-primary"
-						data-toggle="modal" data-target="#exampleModal"
-						data-whatever="<%=aniBbsDto.getUser_email() %>">분양예약리스트</button>
-				</div>
-				<div class="modal fade" id="exampleModal" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">New message</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form>
-									<div class="form-group">
-										<label for="recipient-name" class="col-form-label">Recipient:</label>
-										<input type="text" class="form-control" id="recipient-name">
-									</div>
-									<div class="form-group">
-										<label for="message-text" class="col-form-label">Message:</label>
-										<textarea class="form-control" id="message-text"></textarea>
-									</div>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Send
-									message</button>
-							</div>
+			<%
+				if (aniBbsDto.getUser_email().equals(id)) {
+			%>
+			<div class="row">
+				<button type="button" class="offset-md-5 btn btn-primary"
+					data-toggle="modal" data-target="#exampleModal"
+					data-whatever="<%=aniBbsDto.getUser_email()%>">분양예약리스트</button>
+			</div>
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="form-group">
+									<label for="recipient-name" class="col-form-label">Recipient:</label>
+									<input type="text" class="form-control" id="recipient-name">
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Message:</label>
+									<textarea class="form-control" id="message-text"></textarea>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Send
+								message</button>
 						</div>
 					</div>
 				</div>
+			</div>
 
-				<%
-				}else{
-					%>
+			<%
+				} else {
+			%>
 			<form action="BookController" method="post">
-			<input type="hidden" name="command" value="add">
-			<input type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
+				<input type="hidden" name="command" value="add"> <input
+					type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
 				<div class="row">
-					<button type="button" class="offset-md-5 btn btn-primary"
+				<%
+					if(bookS){
+						%>
+							<button type="button" class="offset-md-5 btn btn-primary"
+							>분양예약완료</button>
+						<%
+					}else {
+						%>
+							<button type="button" class="offset-md-5 btn btn-primary"
 						data-toggle="modal" data-target="#exampleModal"
-						data-whatever="<%=id %>">분양예약하기</button>
+						data-whatever="<%=id%>">분양예약하기</button>
+						<%						
+					}
+				%>
+					
 				</div>
 				<div class="modal fade" id="exampleModal" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalLabel"
@@ -337,17 +351,18 @@ if(aniBbsDto != null){
 								</button>
 							</div>
 							<div class="modal-body">
-								
-									<input type="hidden" name="command" value="add">
-									<input type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
-									<div class="form-group">
-										<label for="recipient-name" class="col-form-label">UserEmail:</label>
-										<input type="text" class="form-control" id="recipient-name" name="email">
-									</div>
-									<div class="form-group">
-										<label for="message-text" class="col-form-label">Message:</label>
-										<textarea class="form-control" id="message-text" name="text"></textarea>
-									</div>
+
+								<input type="hidden" name="command" value="add"> <input
+									type="hidden" name="seq" value="<%=aniBbsDto.getSeq()%>">
+								<div class="form-group">
+									<label for="recipient-name" class="col-form-label">UserEmail:</label>
+									<input type="text" class="form-control" id="recipient-name"
+										name="email">
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Message:</label>
+									<textarea class="form-control" id="message-text" name="text"></textarea>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
@@ -357,15 +372,11 @@ if(aniBbsDto != null){
 						</div>
 					</div>
 				</div>
-		</form>
-	<%
-		}
-				
-		// 예약후 버튼
-	%>
-				
-
-				<br>
+			</form>
+			<%
+				}
+			%>
+			<br>
 				
 				<div class="row" style="margin: 0 auto; width: 1000px;">
 					<span>

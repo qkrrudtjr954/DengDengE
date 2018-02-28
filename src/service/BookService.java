@@ -24,8 +24,8 @@ public class BookService {
 		return bookManager.getBookList();
 	}
 	
-	public boolean checkBook(int seq) {
-		return bookManager.checkBook(seq);
+	public boolean checkBook(String email) {
+		return bookManager.checkBook(email);
 	}
 	
 	public boolean addBook(BookDto bookDto) {

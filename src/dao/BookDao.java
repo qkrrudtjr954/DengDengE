@@ -62,12 +62,11 @@ public class BookDao {
 	}
 	
 	// 예약상태 확인
-	public boolean checkBook(int seq) {
+	public boolean checkBook(String email) {
 		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT "
 				+ " FROM BOOK A, DENGUSER B "
-				+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
-				+ " AND A.TARGET_USER_EMAIL = B.EMAIL "
-				+ " AND A.SEQ=? ";
+				+ " WHERE A.TARGET_USER_EMAIL = B.EMAIL "
+				+ " AND A.TARGET_USER_EMAIL  LIKE '" +email+ "%'";
 		System.out.println("s"+sql);
 		
 		Connection conn = null;
@@ -81,7 +80,6 @@ public class BookDao {
 			System.out.println("1/6 S checkBook");
 				
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, seq);
 			System.out.println("2/6 S checkBook");
 				
 			count = psmt.executeUpdate();

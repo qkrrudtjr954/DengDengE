@@ -49,13 +49,17 @@ public class AnimalBbsController extends HttpServlet {
 			int seq = Integer.parseInt (sseq);
 			System.out.println("s"+seq);
 			
-			boolean bookS = bookService.checkBook(seq);
+			String email = req.getParameter("email");			
+			
 			if(Delegator.checkSession(req, resp)) {
-				aniBbService.readCount(seq);			
+				aniBbService.readCount(seq);		
+				
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
-	            System.out.println("Combbs1 = "  + aniBbsDto);
+				boolean bookS = bookService.checkBook(email);
+				
+				System.out.println(bookS);
 	            req.setAttribute("aniBbsDto", aniBbsDto);
-	           
+	            req.setAttribute("bookS", bookS);
 	            
 	            dispatch("AnimalBbsdetail.jsp", req , resp);
 	         } else {

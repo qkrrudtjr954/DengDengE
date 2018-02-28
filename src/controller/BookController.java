@@ -42,7 +42,7 @@ public class BookController extends HttpServlet {
 	         String writer = userInfo.getEmail();
 	         int user_seq =userInfo.getSeq();
 	         
-			String user_email = req.getParameter("name");
+			String user_email = req.getParameter("email");
 			String content = req.getParameter("text");
 			
 			boolean isS = bookservice.addBook(new BookDto(seq, user_seq, user_email, content));
