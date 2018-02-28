@@ -157,7 +157,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					</div>
 
 					<div class="serach">
-						<input type="button" class="btn btn-success" id="btnsarch" style="background-color: #28A745; color: #fff"
+						<input type="button" class="btn btn-success" id="btnsearch" style="background-color: #28A745; color: #fff"
 							value="검색">
 					</div>
 				</div>
@@ -290,7 +290,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 	</script>
 	
 	<script type="text/javascript">
-	$('#btnsarch').click(function () {
+	$('#btnsearch').click(function () {
 		var text = $("#text").val();
 		
 		if(text ===""){
