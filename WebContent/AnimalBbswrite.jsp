@@ -230,7 +230,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">특이사항</span> <input
 								type="text" class="form-control" name="descrip" size="130"
-								placeholder="특이사항 입력">
+								id="descrip" placeholder="특이사항 입력">
 						</div>
 					</div>
 
@@ -353,7 +353,9 @@ $(document).ready(function() {
         var neu = $(":input:radio[name=neu]:checked").val();
         var gen = $(":input:radio[name=gen]:checked").val();
         var title = $("#title").val();
+        var descrip = $("#descrip").val();
 		var content = $(".content").val();
+		alert(content);
 		
 		if(name === ""){
 			alert("이름을 입력해주십시오"); 
@@ -371,7 +373,31 @@ $(document).ready(function() {
 			alert("지역을 입력해주십시오"); 
 			$("#location").focus();
 			return;
-		}	
+		}else if(medi === ""){
+			alert("접종여부를 선택해주십시오"); 
+			$("#medi").focus();
+			return;
+		}else if(neu === ""){
+			alert("중성화를 선택해주십시오"); 
+			$("#neu").focus();
+			return;
+		}else if(gen === ""){
+			alert("성별을 선택해주십시오"); 
+			$("#gen").focus();
+			return;
+		}else if(title === ""){
+			alert("제목을 입력해주십시오"); 
+			$("#title").focus();
+			return;
+		}else if(descrip === ""){
+			alert("특이사항을 입력해주십시오"); 
+			$("#descrip").focus();
+			return;
+		}else if(content === ""){
+			alert("내용을 입력해주십시오"); 
+			$("#content").focus();
+			return;
+		}
 		else{			
 			$('.form2').show(1000);
 			$('.form1').hide(1000);
@@ -390,7 +416,6 @@ $(document).ready(function() {
 			return;
 		}else{
 			alert  ("인증완료");
-			//$("#finalButton").show();
 		}
 	});
     
