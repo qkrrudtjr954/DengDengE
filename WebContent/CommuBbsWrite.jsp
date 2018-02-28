@@ -13,25 +13,11 @@
 
 <title>Deng Deng E list</title>
 
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<!-- Custom styles for this template -->
-<link href="./css/main.css" rel="stylesheet">
-
-<%-- summernote --%>
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
-	rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
-	rel="stylesheet">
+ <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./css/main.css" rel="stylesheet">
 
 
 </head>
@@ -102,8 +88,7 @@
 		<div class="container">
 			<!--------- 본문페이지         -------->
 			<div class="row">
-				<div class="offset-md-1"></div>
-				<div class="col-md-10">
+				<div class="offset-md-1 col-md-10">
 					<form name="form1" action="CommuBbsController">
 						<input type="hidden" name="command" value="writeAf">
 						<h1>글쓰기</h1>
@@ -130,16 +115,16 @@
 						<div class="row">
 							<div class="offset-md-1"></div>
 							<div class="col-md-10">
-								<textarea name="content" id="summernote" name="content" value=""></textarea>
+								<textarea name="content" id="summernote" name="content" ></textarea>
 							</div>
 							<div class="offset-md-1"></div>
 						</div>
 						<br>
 						<div class="row">
-							<input class="btn btn-success offset-md-5 col-md-1" type="submit"
+							<input class="btn btn-success offset-md-4 col-md-2" type="submit"
 								id="btnWrite" value="글쓰기"> &nbsp;
 							<button type="button" id="btnBack"
-								class="btn btn-outline-secondary col-md-1">돌아가기</button>
+								class="btn btn-outline-secondary col-md-2">돌아가기</button>
 						</div>
 					</form>
 
@@ -165,17 +150,11 @@
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 
 
 
@@ -197,14 +176,7 @@
 				});
 	</script>
 
-	<%-- summernote --%>
-	<script
-		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-	<script
-		src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-
+	
 
 
 	<script type="text/javascript">
@@ -265,15 +237,17 @@
 			var strC = document.getElementById('summernote');
 			var strS = document.getElementById('category');
 			if( strT.value == '' || strT.value == null ){
-			    alert( '제목과 내용을 전부 입력해주세요.' );
-			    return false;
-			}
-			if( strC.value == '' || strC.value == null ){
-			    alert( '제목과 내용을 전부 입력해주세요.' );
+			    alert( '제목을 입력해주세요.' );
+			    $("#title").focus();
+		        return false;
+			}else if( strC.value == '' || strC.value == null ){
+			    alert( '내용을 입력해주세요.' );
+			    $("#summernote").focus();
 			    return false;
 			}
 			if( strS.value == "0"){
 			    alert( '게시판을 선택해주세요.' );
+			    $("#category").focus();
 			    return false;
 			}
 			

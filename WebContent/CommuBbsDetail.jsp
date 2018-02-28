@@ -12,9 +12,16 @@
     <link rel="icon" href="./icon/favicon.ico">
 
     <title>Deng Deng E list</title>
+    
+    <style type="text/css">
+    #btnLike{
+     background: url(button_search.png) no-repeat;
+     border: none;
+    }
+    
+    </style>
 
-    <!-- Bootstrap core CSS -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+   <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -127,7 +134,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </div>
 
 <hr>
-<div class="row offset-md-8">
+<div class="row offset-md-6">
 <p><b>작성자</b>  <%=comdto.getUser_email() %> &nbsp;&nbsp;&nbsp;<b>작성일</b>  <%=toDate(comdto.getLast_update()) %>&nbsp;&nbsp;&nbsp;<b> 조회수 </b> <%=comdto.getReadcount() %>&nbsp;</p>
 </div>
 
@@ -144,12 +151,24 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <div class="offset-md-1"></div>	
 </div>
 <hr>
+<!-- 댓글 달기/ 좋아요 -->
+<div class="offset-md-1 col-md-3">
+<button id="btnLike"><img src="./img/icon_heart.png"></button>
+
+</div>
+
+
+
+
+
+
+
 <br>
 <div class="row">
 <%-- <c:set var="email" value="${comdto.user_email }"/> --%>
-<c:if test="${current_user.email eq comdto.user_email }">
+<%-- <c:if test="${current_user.email eq comdto.user_email }">
 	hello
-</c:if>
+</c:if> --%>
 
 
 <%
@@ -158,10 +177,10 @@ String sid =((User)session.getAttribute("current_user")).getEmail();
 if(comdto.getUser_email().equals(sid)){
 %>
 
-<button type="button" class="btn btn-success offset-md-5 col-md-1"  id="btnUpdate">수정하기</button>
+<button type="button" class="btn btn-success offset-md-4 col-md-2"  id="btnUpdate">수정하기</button>
 &nbsp;
 
-<button type="button" class="btn btn-outline-secondary col-md-1"  id="btnDelete" >삭제하기</button>
+<button type="button" class="btn btn-outline-secondary col-md-2"  id="btnDelete" >삭제하기</button>
 <%
 }else{%>
 <button type="button" id="btnBack" class="btn btn-outline-secondary  offset-md-5 col-md-1">돌아가기</button>
@@ -192,11 +211,13 @@ if(comdto.getUser_email().equals(sid)){
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+   <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+
+
 	
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
