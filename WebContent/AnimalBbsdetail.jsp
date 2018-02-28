@@ -298,10 +298,10 @@ if(aniBbsDto != null){
 				}
 				%>
 				
+				<!-- 댓글 -->
 				<div class="row">
 					
-				</div>
-				
+				</div>		
 				
 				
 			</div>

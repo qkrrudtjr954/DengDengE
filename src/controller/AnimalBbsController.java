@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import delegator.Delegator;
 import dto.AnimalBbsDto;
 import dto.User;
 import service.AnimalBbsService;
@@ -40,23 +41,39 @@ public class AnimalBbsController extends HttpServlet {
 			req.setAttribute("animlist", animlist);
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}
-		else if(command.equals("detail")) {
+		else if(command.equals("detail")) {         
+	         //로그인 안되었을 때 알림창 띄워주기   
+			
 			String sseq = req.getParameter("seq");
-			int seq = Integer.parseInt(sseq);
+			int seq = Integer.parseInt (sseq);
 			System.out.println("s"+seq);
 			
-			aniBbService.readCount(seq);			
-			AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
-			req.setAttribute("aniBbsDto", aniBbsDto);
-			dispatch("AnimalBbsdetail.jsp", req, resp);
+			if(Delegator.checkSession(req, resp)) {
+				aniBbService.readCount(seq);			
+				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
+	            System.out.println("Combbs1 = "  + aniBbsDto);
+	            req.setAttribute("aniBbsDto", aniBbsDto);
+	            // 로그인이 되어있는 상태 
+	            
+	            dispatch("AnimalBbsdetail.jsp", req , resp);
+	         } else {
+	            // 로그인이 안된 상태 
+	            req.setAttribute("returnurl", "AnimalBbsController?command=detail&seq=" + seq);
+	            dispatch("UserControl?command=goSignIn", req, resp);
+	         }
 		}
-		else if(command.equals("write")) {
-			// id
+		else if(command.equals("write")) {	
 			
-			dispatch("AnimalBbswrite.jsp", req, resp);
+			if(Delegator.checkSession(req, resp)) {
+	            // 로그인이 되어있는 상태 
+	            dispatch("AnimalBbswrite.jsp", req, resp);            
+	         } else {
+	            // 로그인이 안된 상태 
+	            req.setAttribute("returnurl", "AnimalBbsController?command=write");
+	            dispatch("UserControl?command=goSignIn", req, resp);
+	         }
 		}
 		else if(command.equals("writeAf")) {
-			// 입력값
 			String name = req.getParameter("name");
 			String aage = req.getParameter("age");
 			int age = Integer.parseInt(aage);
@@ -109,12 +126,7 @@ public class AnimalBbsController extends HttpServlet {
 					type = ttype[i];					
 				}
 				System.out.println("t:"+type);
-			}
-			
-	         
-	         
-	         
-	         //로그인 안되었을 때 알림창 띄워주기       
+			}   
 	         
 			
 			boolean isS = aniBbService.wirteAnimalBbs(
