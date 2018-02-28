@@ -341,8 +341,6 @@ $(document).ready(function() {
     });
     
     $('#nextButton').click(function () { 
-    	/* $('.form2').show(1000);
-		$('.form1').hide(1000);  */
     	var name =$("#name").val();
     	var age = $("#age").val();
     	var kinds = $("#kinds").val();
