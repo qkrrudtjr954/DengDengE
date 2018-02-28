@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import delegator.Delegator;
 import dto.CommuBbsDto;
 import dto.User;
 import service.CommuBbsService;
@@ -30,7 +31,8 @@ public class CommuBbsController extends HttpServlet {
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		CommuBbsService comService = CommuBbsService.getInstance();
-	
+		
+		//Delegator delegator = delegator.getInstance();
 		
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text./html; charset=utf-8"); 
@@ -49,7 +51,19 @@ public class CommuBbsController extends HttpServlet {
 			dispatch("CommuBbslist.jsp", req, resp);
 			
 		}else if(command.equals("write")) {
-			dispatch("CommuBbsWrite.jsp", req, resp);
+			
+			if(Delegator.checkSession(req, resp)) {
+				
+				dispatch("CommuBbsWrite.jsp", req, resp);
+			}else {
+				
+				req.setAttribute("returnurl", "CommuBbsController?command=write");
+		        dispatch("UserControl?command=goSignIn", req, resp);
+			}
+			
+			
+			
+			
 		}else if(command.equals("writeAf")){			
 			//String id = req.getParameter("id");
 			System.out.println("writeAf 들어옴");
@@ -71,7 +85,7 @@ public class CommuBbsController extends HttpServlet {
 			
 			
 			boolean isS = comService.writeCommu(new CommuBbsDto(title, content, target_user_seq, category));
-			 //유저 시퀀스 1 로 일단 설정해둠 
+			
 			System.out.println(isS);
 			
 

@@ -146,12 +146,18 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <hr>
 <br>
 <div class="row">
+<%-- <c:set var="email" value="${comdto.user_email }"/> --%>
+<c:if test="${current_user.email eq comdto.user_email }">
+	hello
+</c:if>
+
 
 <%
 String sid =((User)session.getAttribute("current_user")).getEmail();
 
 if(comdto.getUser_email().equals(sid)){
 %>
+
 <button type="button" class="btn btn-success offset-md-5 col-md-1"  id="btnUpdate">수정하기</button>
 &nbsp;
 
