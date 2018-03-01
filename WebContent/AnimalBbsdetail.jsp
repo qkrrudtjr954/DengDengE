@@ -279,20 +279,12 @@ if(aniBbsDto != null){
 			<%
 				if (aniBbsDto.getUser_email().equals(id)) {
 			%>
-			<form action="Bookcontroller" method="post">
-			<input type="hidden" name="command" value="getlist">
 				<div class="row">
-					<input type="submit" class="offset-md-5 btn btn-primary"
+					<button type="button" class="offset-md-5 btn btn-primary"
 						data-toggle="modal" data-target="#exampleModal"
-						data-whatever="<%=aniBbsDto.getUser_email()%>" value="분양예약리스트">
+						data-whatever="<%=aniBbsDto.getUser_email()%>">분양예약리스트</button>
+						
 				</div>
-			</form>
-			<%
-				List<BookDto> booklist = (List<BookDto>)request.getAttribute("booklist");
-				for(int i=0;i<booklist.size();i++){
-					System.out.println("["+i+"]="+booklist.get(i));
-				}
-			%>
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -308,10 +300,13 @@ if(aniBbsDto != null){
 							<form>
 								<div class="form-group">
 									<label for="recipient-name" class="col-form-label">예약리스트:</label>
-									<table border="">
-									<c:forEach items="${booklist }" var="item" varStatus="i">
-										
-									</c:forEach>
+									<table border="1">
+										<tr>
+											<td id="data"></td>
+											<td>
+												<input type="submit" value="예약확정">
+											</td>
+										</tr>
 									</table>
 								</div>
 								<div class="form-group">
@@ -449,6 +444,33 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 	  modal.find('.modal-title').text('분양:'+recipient)
 	  modal.find('.modal-body input').val(recipient)
 	});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$("button").click(function () {		
+		$.ajax({
+			// json방식 : 위치, 방식, data셋팅
+			// 들어가는 데이터
+			url:"BookController",		// 위치
+			type:"post",			// 방식
+			data:"command=getlist",		// data셋팅
+			// 체인방식 가능 .으로 데이터를 넣는방식
+			success:function (data, status, xhr) {
+				// data이동			
+				$("#data").html(data);
+			},
+			error:function (xhr, status, error) {				
+			
+			},
+			complete:function (xhr, status) {
+				
+			},
+		});
+	});
+})
+
+
 </script>
 
 	<script type="text/javascript">

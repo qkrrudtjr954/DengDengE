@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class BookDto implements Serializable{
 	private  int seq;
-	private int User_seq;
-	private String User_email;
+	private int user_seq;
+	private String user_email;
 	private String content;
 	
 	public BookDto() {
@@ -15,8 +15,8 @@ public class BookDto implements Serializable{
 	public BookDto(int seq, int user_seq, String user_email, String content) {
 		super();
 		this.seq = seq;
-		User_seq = user_seq;
-		User_email = user_email;
+		user_seq = user_seq;
+		user_email = user_email;
 		this.content = content;
 	}
 
@@ -29,19 +29,19 @@ public class BookDto implements Serializable{
 	}
 
 	public int getUser_seq() {
-		return User_seq;
+		return user_seq;
 	}
 
 	public void setUser_seq(int user_seq) {
-		User_seq = user_seq;
+		user_seq = user_seq;
 	}
 
 	public String getUser_email() {
-		return User_email;
+		return user_email;
 	}
 
 	public void setUser_email(String user_email) {
-		User_email = user_email;
+		user_email = user_email;
 	}
 
 	public String getContent() {
@@ -54,7 +54,7 @@ public class BookDto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BookDto [seq=" + seq + ", User_seq=" + User_seq + ", User_email=" + User_email + ", content=" + content
+		return "BookDto [seq=" + seq + ", User_seq=" + user_seq + ", User_email=" + user_email + ", content=" + content
 				+ "]";
 		}
 	

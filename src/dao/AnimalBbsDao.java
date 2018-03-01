@@ -71,9 +71,6 @@ public class AnimalBbsDao {
 				
 				list.add(aniBbsDto);
 			}
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println("["+i+"]"+list.get(i));
-			}
 			System.out.println("4/6 S getAnimalBbsList");
 		} catch (SQLException e) {
 			System.out.println("F getAnimalBbsList");

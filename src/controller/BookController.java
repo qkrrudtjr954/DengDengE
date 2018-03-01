@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import dto.BookDto;
 import dto.User;
 import service.BookService;
@@ -57,8 +59,10 @@ public class BookController extends HttpServlet {
 				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
 			}
 		}else if(command.equals("getlist")) {
+			
 			List<BookDto> booklist = bookservice.getBookList();
-			req.setAttribute("booklist", booklist);
+			String json = new Gson().toJson(booklist);
+			resp.getWriter().write(json);
 		}
 	}
 	
