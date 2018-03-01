@@ -220,6 +220,18 @@ public class CommuBbsDto implements Serializable {
 
 
 
+	@Override
+	public String toString() {
+		return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
+				+ ", target_user_seq=" + target_user_seq + ", target_category=" + target_category + ", readcount="
+				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", like_count=" + like_count
+				+ ", del=" + del + ", category_name=" + category_name + ", user_email=" + user_email + "]";
+	}
+
+
+
+
+
 
 
 

@@ -152,14 +152,14 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </div>
 <hr>
 <!-- 댓글 달기/ 좋아요 -->
-<div class="offset-md-1 col-md-4">
-<button type="button" id="btnLike"><img src="./img/icon_heart.png"></button> <span id="likeCount"><%=comdto.getLike_count() %></span>
+
+<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike"><img src="./img/icon_heart.png"></button><p><%=comdto.getLike_count() %></p>
 
 </div>
 
 
 
-
+<!-- <img src="./img/icon_heart.png"></button> -->
 
 
 
@@ -231,16 +231,25 @@ if(comdto.getUser_email().equals(sid)){
 		});
 		
 		$('#btnLike').click(function ()  {
-			
+			var pk = $(this).attr('name')
 			$.ajax({
 				url:"CommuBbsController",
-				data: { command: 'like', seq: ${dto.seq}},
+				data: { command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
 				type:"post",
 				success : function (data) {
-					$('#area').append('<span>hello</span>');
+					var dtos = JSON.parse(data);
+					var like_count = dtos.like_count;
+
+					console.log(like_count);
+					$('#likeCount').children().remove();
+					$('#likeCount').append('<p>'+dtos.like_count+'</p>');
+					location.reload();
 				}
-			});
-		});
+			})
+		});		
+
+			
+	
 	
 	</script>
 	<!-- <div id="area"></div> -->

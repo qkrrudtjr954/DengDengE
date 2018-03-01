@@ -23,6 +23,65 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		return comDao;
 	}
+	
+	
+	//좋아요 한 뒤 리스트 
+	public List<CommuBbsDto> getCommuLike(int seq) {
+		
+		List<CommuBbsDto> list = new ArrayList<>();
+		
+		String sql = " SELECT a.seq, a.TITLE as title, content, a.target_user_seq, a.target_category, "
+				+ " readcount, a.last_update as last_update, like_count, del, b.title as category_name, c.email as user_email "
+				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c "
+				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=?";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 S getCommu");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("3/6 S getCommu");
+
+			System.out.println("글읽기 sql = " + sql);
+
+			rs = psmt.executeQuery();
+			System.out.println("4/6 S getCommu");
+
+			while (rs.next()) {
+				int i = 1;
+
+				CommuBbsDto dto = new CommuBbsDto(rs.getInt(i++), // seq
+						rs.getString(i++), // title
+						"", // String pic1
+						rs.getString(i++), // String content
+						rs.getInt(i++), // int target_user_seq
+						0, // int target_category
+						rs.getInt(i++), // int readcount
+						rs.getString(i++), // String reg_date
+						rs.getString(i++), // String last_update
+						rs.getInt(i++),//int like_count
+						rs.getInt(i++), // int del
+						rs.getString(i++),// category_name
+						rs.getString(i++)); //String user_email
+				list.add(dto);
+			}
+			System.out.println("5/6 S getCommu");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+			System.out.println("6/6 S getBbs");
+		}
+
+		return list;
+	}
 
 	// 메인 리스트
 	@Override
@@ -386,12 +445,10 @@ public class CommuBbsDao implements iCommuBbsDao {
 	}
 	//좋아요 클릭하기
 	@Override
-	public boolean clickLike(int seq) {
+	public void clickLike(int seq) {
 		String sql = " UPDATE  COMMUBBS  SET  " + " LIKE_COUNT=LIKE_COUNT+1 " + " WHERE SEQ=? ";
-		System.out.println("readcount sql : " + sql);
-		
-		int count = 0;
-		
+				
+			
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -399,18 +456,68 @@ public class CommuBbsDao implements iCommuBbsDao {
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
-			System.out.println("1/6 readCount");
+			System.out.println("1/6 clickLike");
 			psmt.setInt(1, seq);
-			System.out.println("2/6 readCount");
-			count = psmt.executeUpdate();
-			System.out.println("3/6 readCount");
+			System.out.println("2/6 clickLike");
+			
+			psmt.executeUpdate();
+			System.out.println("3/6 clickLike");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("fail readCount");
+			System.out.println("fail clickLike");
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		
+		
+	}
+
+/*	CREATE TABLE LIKETABLE(
+	SEQ NUMBER(8) PRIMARY KEY, 
+	TARGET_USER_SEQ NUMBER(8),
+	FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
+	TARGET_BBS_SEQ NUMBER(8),
+	FOREIGN KEY (TARGET_BBS_SEQ) REFERENCES COMMUBBS(seq)
+	);*/
+	
+	@Override
+	public boolean Prevent_duplication(int target_bbs_seq, int target_user_seq) {
+		String sql = "INSERT INTO (SEQ, TARGET_USER_SEQ, TARGET_BBS_SEQ) "
+				+ " VALUES(LIKETABLE_SEQ.NEXTVAL, ?, ?) ";
+		
+
+		int count = 0;
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 Prevent_duplication Success");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("3/6 Prevent_duplication Success");
+
+			psmt.setInt(1, target_bbs_seq);
+			psmt.setInt(2,target_user_seq);
+			
+			System.out.println(sql);
+			count = psmt.executeUpdate();
+			System.out.println("4/6 Prevent_duplication Success");
+
+		} catch (SQLException e) {
+			System.out.println("Prevent_duplication fail");
+			System.out.println(e.getMessage());
+			System.out.println(e.getErrorCode());
+			System.out.println(e.getSQLState());
+
+			count = -1;
+
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+
 		return count > 0 ? true : false;
 	}
 

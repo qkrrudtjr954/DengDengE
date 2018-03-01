@@ -6,6 +6,8 @@ import dto.CommuBbsDto;
 
 public interface iCommuBbsDao {
 	
+	public List<CommuBbsDto> getCommuLike(int seq);
+	
 	//리스트 불러오기
 	public List<CommuBbsDto> getCommulist();
 	
@@ -29,5 +31,7 @@ public interface iCommuBbsDao {
 	
 	public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord);
 	
-	public boolean clickLike(int seq);
+	public void clickLike(int seq);
+	
+	public boolean Prevent_duplication(int target_bbs_seq, int target_user_seq);
 }

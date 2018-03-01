@@ -56,6 +56,19 @@ public class CommuBbsService {
 		public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord){
 			return manager.getFindCommulist(Searchtype, SearchWord);
 		}
+		
+		public List<CommuBbsDto> getCommuLike(int seq){
+			return manager.getCommuLike(seq);
+		}
+		
+		public List<CommuBbsDto> clickLikeAf(int seq) {
+			 manager.clickLike(seq);
+			 return manager.getCommuLike(seq);
+		}
+		
+		public boolean Prevent_duplication(int target_bbs_seq, int target_user_seq) {
+			return manager.Prevent_duplication(target_bbs_seq, target_user_seq);
+		}
 }
 
 
