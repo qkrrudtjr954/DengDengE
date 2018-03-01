@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,9 +38,10 @@ public class BookController extends HttpServlet {
 			System.out.println("cc");
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			System.out.println("s"+seq);
-				HttpSession session = req.getSession();
-	         User userInfo = (User)session.getAttribute("current_user");
-	         String writer = userInfo.getEmail();
+			
+			HttpSession session = req.getSession();
+	        User userInfo = (User)session.getAttribute("current_user");
+	        String writer = userInfo.getEmail();
 	         int user_seq =userInfo.getSeq();
 	         
 			String user_email = req.getParameter("email");
@@ -54,6 +56,9 @@ public class BookController extends HttpServlet {
 				System.out.println("F");
 				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
 			}
+		}else if(command.equals("getlist")) {
+			List<BookDto> booklist = bookservice.getBookList();
+			req.setAttribute("booklist", booklist);
 		}
 	}
 	

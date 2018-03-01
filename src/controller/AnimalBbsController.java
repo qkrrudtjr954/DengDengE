@@ -47,11 +47,12 @@ public class AnimalBbsController extends HttpServlet {
 			
 			String sseq = req.getParameter("seq");
 			int seq = Integer.parseInt (sseq);
-			System.out.println("s"+seq);
-			
-			String email = req.getParameter("email");			
+			System.out.println("s"+seq);		
 			
 			if(Delegator.checkSession(req, resp)) {
+				HttpSession session = req.getSession();
+		        User userInfo = (User)session.getAttribute("current_user");
+		        String email = userInfo.getEmail();
 				aniBbService.readCount(seq);		
 				
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
