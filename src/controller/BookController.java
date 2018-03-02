@@ -60,13 +60,10 @@ public class BookController extends HttpServlet {
 				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
 			}
 		}else if(command.equals("getlist")) {
-			HttpSession session = req.getSession();
-	        User userInfo = (User)session.getAttribute("current_user");
-	        //int user_seq =userInfo.getSeq();
+			int seq = Integer.parseInt(req.getParameter("seq"));
 	        
 			List<BookDto> booklist = bookservice.getBookList();
 			String json = new Gson().toJson(booklist);
-			System.out.println(json);
 			resp.getWriter().write(json);
 		}
 	}

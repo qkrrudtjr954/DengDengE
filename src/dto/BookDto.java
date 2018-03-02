@@ -12,7 +12,7 @@ public class BookDto implements Serializable{
 	public BookDto() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public BookDto(int seq, int user_seq, String user_email, String content) {
 		super();
 		this.seq = seq;
@@ -67,9 +67,5 @@ public class BookDto implements Serializable{
 				+ ", del=" + del + "]";
 	}
 
-	
-	
-	
-	
 	
 }

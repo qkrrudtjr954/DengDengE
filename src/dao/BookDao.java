@@ -25,7 +25,7 @@ public class BookDao {
 		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT "
 				+ " FROM BOOK A, DENGUSER B "
 				+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
-				+ " AND A.TARGET_USER_EMAIL = B.EMAIL";
+				+ " AND A.TARGET_USER_EMAIL = B.EMAIL ";
 		System.out.println("s"+sql);
 		
 		Connection conn = null;
