@@ -43,10 +43,11 @@ public class BookController extends HttpServlet {
 			
 			HttpSession session = req.getSession();
 	        User userInfo = (User)session.getAttribute("current_user");
-	        String writer = userInfo.getEmail();
+	        String user_email = userInfo.getEmail();
 	         int user_seq =userInfo.getSeq();
 	         
-			String user_email = req.getParameter("email");
+	         System.out.println("ss:"+user_seq+"email"+user_email);
+	         
 			String content = req.getParameter("text");
 			
 			boolean isS = bookservice.addBook(new BookDto(seq, user_seq, user_email, content));

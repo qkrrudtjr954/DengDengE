@@ -122,7 +122,7 @@ public class BookDao {
 			System.out.println("3/6 S addBook");
 			
 		} catch (SQLException e) {
-			System.out.println("wirteAnimalBbs fail");
+			System.out.println("addBook fail");
 	         System.out.println(e.getMessage());
 	         System.out.println(e.getErrorCode());
 	         System.out.println(e.getSQLState());
