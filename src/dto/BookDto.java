@@ -7,6 +7,7 @@ public class BookDto implements Serializable{
 	private int user_seq;
 	private String user_email;
 	private String content;
+	private int del;
 	
 	public BookDto() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +34,7 @@ public class BookDto implements Serializable{
 	}
 
 	public void setUser_seq(int user_seq) {
-		user_seq = user_seq;
+		this.user_seq = user_seq;
 	}
 
 	public String getUser_email() {
@@ -41,7 +42,7 @@ public class BookDto implements Serializable{
 	}
 
 	public void setUser_email(String user_email) {
-		user_email = user_email;
+		this.user_email = user_email;
 	}
 
 	public String getContent() {
@@ -52,11 +53,21 @@ public class BookDto implements Serializable{
 		this.content = content;
 	}
 
+	public int getDel() {
+		return del;
+	}
+
+	public void setDel(int del) {
+		this.del = del;
+	}
+
 	@Override
 	public String toString() {
-		return "BookDto [seq=" + seq + ", User_seq=" + user_seq + ", User_email=" + user_email + ", content=" + content
-				+ "]";
-		}
+		return "BookDto [seq=" + seq + ", user_seq=" + user_seq + ", user_email=" + user_email + ", content=" + content
+				+ ", del=" + del + "]";
+	}
+
+	
 	
 	
 	

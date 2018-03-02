@@ -37,7 +37,6 @@ public class BookController extends HttpServlet {
 		BookService bookservice = BookService.getInstance();
 		
 		if(command.equals("add")) {
-			System.out.println("cc");
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			System.out.println("s"+seq);
 			
@@ -46,9 +45,10 @@ public class BookController extends HttpServlet {
 	        String user_email = userInfo.getEmail();
 	         int user_seq =userInfo.getSeq();
 	         
-	         System.out.println("ss:"+user_seq+"email"+user_email);
+	         String content = req.getParameter("text");
 	         
-			String content = req.getParameter("text");
+	         System.out.println("seq:"+seq+" user_seq:"+user_seq+" email:"+user_email+""+content);         
+			
 			
 			boolean isS = bookservice.addBook(new BookDto(seq, user_seq, user_email, content));
 			

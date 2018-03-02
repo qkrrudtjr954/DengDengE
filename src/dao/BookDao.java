@@ -99,8 +99,8 @@ public class BookDao {
 	// 예약하기
 	public boolean addBook(BookDto bookDto) {
 		String sql = " INSERT INTO BOOK(SEQ, TARGET_USER_SEQ,"
-				+ " TARGET_USER_EMAIL,  CONTENT) "
-				+ " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?) ";
+				+ " TARGET_USER_EMAIL,  CONTENT, DEL) "
+				+ " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?, 0) ";
 		
 		int count = 0;
 		
@@ -113,9 +113,11 @@ public class BookDao {
 			conn = DBConnection.makeConnection();
 			System.out.println("1/6 S addBook");
 			psmt = conn.prepareStatement(sql);
+			
 			psmt.setInt(1, bookDto.getUser_seq());
 			psmt.setString(2, bookDto.getUser_email());
 			psmt.setString(3, bookDto.getContent());
+			
 			System.out.println("2/6 S addBook");
 			System.out.println(sql);
 			count = psmt.executeUpdate();
