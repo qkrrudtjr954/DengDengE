@@ -152,7 +152,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 								id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly"
 								style="background-color: #fff">
 							<button class="btn btn-outline-secondary" type="button"
-								onclick="sample4_execDaumPostcode()">주소찾기</button>
+								onclick="sample4_execDaumPostcode()" id="locationBtn">주소찾기</button>
 						</div>
 					</div>
 
@@ -163,18 +163,18 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							<span class="input-group-text">접종여부</span>
 							<div class="input-group-text">
 								<input type="radio"
-									aria-label="radio for following text input" name="medi">
+									aria-label="radio for following text input" name="medi" value="YES">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox"  size="2"
-								value="YES">
+								 value="YES">
 							<div class="input-group-text">
 								<input type="radio"
-									aria-label="radio for following text input" name="medi">
+									aria-label="radio for following text input" name="medi" value="NO">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
-								value="NO">
+								 value="NO">
 						</div>
 
 
@@ -183,18 +183,18 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							<span class="input-group-text">중성화</span>
 							<div class="input-group-text">
 								<input type="radio"
-									aria-label="radio for following text input" name="neu">
+									aria-label="radio for following text input" name="neu" value="YES">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox"  size="2"
-								value="YES">
+								 value="YES">
 							<div class="input-group-text">
 								<input type="radio"
-									aria-label="radio for following text input" name="neu">
+									aria-label="radio for following text input" name="neu" value="NO">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
-								value="NO">
+								 value="NO">
 						</div>
 
 						&nbsp;&nbsp;&nbsp;
@@ -202,14 +202,14 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							<span class="input-group-text">성별</span>
 							<div class="input-group-text">
 								<input type="radio"
-									aria-label="radio for following text input" name="gen">
+									aria-label="radio for following text input" name="gen" value="여아">
 							</div>
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
 								value="여아">
 							<div class="input-group-text">
 								<input type="radio"
-									aria-label="radio for following text input" name="gen">
+									aria-label="radio for following text input" name="gen" value="남아">
 							</div> 
 							<input type="text" class="form-control"
 								aria-label="Text input with checkbox" size="2"
@@ -430,17 +430,17 @@ $(document).ready(function() {
 			return;
 		}else if(location === ""){
 			alert("지역을 입력해주십시오"); 
-			$("#location").focus();
+			$("#locationBtn").focus();
 			return;
-		}else if(medi === ""){
+		}else if($(":radio[name=medi]:checked").length == 0){
 			alert("접종여부를 선택해주십시오"); 
 			$("#medi").focus();
 			return;
-		}else if(neu === ""){
+		}else if($(":radio[name=neu]:checked").length == 0){
 			alert("중성화를 선택해주십시오"); 
 			$("#neu").focus();
 			return;
-		}else if(gen === ""){
+		}else if($(":radio[name=gen]:checked").length == 0){
 			alert("성별을 선택해주십시오"); 
 			$("#gen").focus();
 			return;

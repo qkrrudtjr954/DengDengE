@@ -16,8 +16,8 @@ public class BookDto implements Serializable{
 	public BookDto(int seq, int user_seq, String user_email, String content) {
 		super();
 		this.seq = seq;
-		user_seq = user_seq;
-		user_email = user_email;
+		this.user_seq = user_seq;
+		this.user_email = user_email;
 		this.content = content;
 	}
 
