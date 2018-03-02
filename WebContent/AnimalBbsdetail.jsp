@@ -1,3 +1,4 @@
+<%@page import="jdk.nashorn.internal.parser.JSONParser"%>
 <%@page import="dto.BookDto"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.User"%>
@@ -300,13 +301,7 @@ if(aniBbsDto != null){
 							<form>
 								<div class="form-group">
 									<label for="recipient-name" class="col-form-label">예약리스트:</label>
-									<table border="1">
-										<tr>
-											<td id="data"></td>
-											<td>
-												<input type="submit" value="예약확정">
-											</td>
-										</tr>
+									<table border="1" id="table">
 									</table>
 								</div>
 								<div class="form-group">
@@ -413,7 +408,6 @@ if(aniBbsDto != null){
 		</div>
 
 
-
 	</main>
 
     <footer class="text-muted">
@@ -433,7 +427,7 @@ if(aniBbsDto != null){
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-
+	
 <script type="text/javascript">
 $('#exampleModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
@@ -441,36 +435,33 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 	  var modal = $(this)
-	  modal.find('.modal-title').text('분양:'+recipient)
+	  modal.find('.modal-title').text('Booking:'+recipient)
 	  modal.find('.modal-body input').val(recipient)
 	});
 </script>
 
 <script type="text/javascript">
-$(document).ready(function () {
+
 	$("button").click(function () {		
 		$.ajax({
-			// json방식 : 위치, 방식, data셋팅
-			// 들어가는 데이터
 			url:"BookController",		// 위치
 			type:"post",			// 방식
-			data:"command=getlist",		// data셋팅
-			// 체인방식 가능 .으로 데이터를 넣는방식
-			success:function (data, status, xhr) {
-				// data이동			
-				$("#data").html(data);
-			},
-			error:function (xhr, status, error) {				
+			data:"command=getlist",	// data셋팅
 			
-			},
-			complete:function (xhr, status) {
-				
-			},
+			success:function (data) {
+				var list = JSON.parse(data);
+				var str = "";
+				$.each(list, function(i,item){
+					//alert('key:' + i + ' / ' + 'value:' + item);
+					str += '<tr>';
+					str += '<td width="200">'+item.user_email+'</td>';
+					str += '<td><input type="submit" id="bookBtn" value="예약확정"/></td>';
+					str += '</tr>';
+				});
+				$("#table").append(str);
+			}
 		});
 	});
-})
-
-
 </script>
 
 	<script type="text/javascript">
