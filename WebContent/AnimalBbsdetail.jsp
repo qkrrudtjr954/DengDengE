@@ -298,14 +298,11 @@ if(aniBbsDto != null){
 							</button>
 						</div>
 						<div class="modal-body">
-							<form>
+							<form action="#" method="post">
 								<div class="form-group">
 									<label for="recipient-name" class="col-form-label">예약리스트:</label>
 									<table border="1" id="table">
 									</table>
-								</div>
-								<div class="form-group">
-									
 								</div>
 							</form>
 						</div>
