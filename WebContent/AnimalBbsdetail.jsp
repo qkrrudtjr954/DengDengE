@@ -299,7 +299,8 @@ if(aniBbsDto != null){
 						</div>
 						<div class="modal-body">
 							<form action="BookController" method="get">
-							<input type="hidden" name="command" value="bookfinal">
+							<input type="hidden" name="command" value="finalBook">
+							<!-- hidden으로 값 전송 -->
 								<div class="form-group">
 									<label for="recipient-name" class="col-form-label">예약리스트:</label>
 									<table border="1" id="table">

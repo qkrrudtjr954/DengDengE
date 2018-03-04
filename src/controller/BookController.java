@@ -65,6 +65,18 @@ public class BookController extends HttpServlet {
 			String json = new Gson().toJson(booklist);
 			resp.getWriter().write(json);
 		}
+		else if(command.equals("fianlBook")) {
+			// email
+			// seq
+			// boolean isS = bookservice.finalBook(email, seq);
+			/*if(isS) {
+				System.out.println("finalBook S");
+				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
+			}else {
+				System.out.println("finalBook F");
+				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
+			}*/
+		}
 	}
 	
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {

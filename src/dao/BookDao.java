@@ -142,8 +142,33 @@ public class BookDao {
 		return count>0?true:false;
 	}
 	
-	/*// 예약확정
+	// 예약확정
 	public boolean finalBook(String email, int listseq) {
-		return false;
-	}*/
+		String sql = " UPDATE BOOK SET "
+				+ " DEL=200 WHERE TARGET_USER_EMAIL=? "
+				+ " AND TARGET_LIST_SEQ=? ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count = 0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("1/6 S finalBook");
+			psmt =conn.prepareStatement(sql);
+			
+			psmt.setString(1, email);
+			psmt.setInt(1, listseq);
+			System.out.println("2/6 S finalBook");
+			count = psmt.executeUpdate();
+			System.out.println("3/6 S finalBook");
+		} catch (SQLException e) {
+			System.out.println("4/6 S finalBook");
+			System.out.println(e.getMessage());
+		}finally{
+			DBClose.close(psmt, conn, null);	
+			System.out.println("5/6 S finalBook");
+		}
+		return count>0?true:false;
+	}
 }

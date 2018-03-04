@@ -32,4 +32,7 @@ public class BookService {
 		return bookManager.addBook(bookDto);
 	}
 	
+	public boolean finalBook(String email, int listseq) {
+		return bookManager.finalBook(email, listseq);
+	}
 }
