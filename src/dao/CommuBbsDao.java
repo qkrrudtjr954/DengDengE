@@ -446,8 +446,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 	//좋아요 클릭하기
 	@Override
 	public void clickLike(int seq) {
-		String sql = " UPDATE  COMMUBBS  SET  " + " LIKE_COUNT=LIKE_COUNT+1 " + " WHERE SEQ=? ";
-				
+		String sql = " UPDATE  COMMUBBS  SET  " + " LIKE_COUNT=LIKE_COUNT+1" + " WHERE SEQ=? ";
+		
 			
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -455,22 +455,58 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		try {
 			conn = DBConnection.makeConnection();
+		
 			psmt = conn.prepareStatement(sql);
+			
 			System.out.println("1/6 clickLike");
 			psmt.setInt(1, seq);
 			System.out.println("2/6 clickLike");
 			
 			psmt.executeUpdate();
 			System.out.println("3/6 clickLike");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("fail clickLike");
 		} finally {
+			
 			DBClose.close(psmt, conn, rs);
 		}
 		
-		
 	}
+	
+	//좋아요 취소
+		@Override
+		public void DclickLike(int seq) {
+			String sql = " UPDATE  COMMUBBS  SET  " + " LIKE_COUNT=LIKE_COUNT-1 " + " WHERE SEQ=? ";
+			
+			
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+
+			try {
+				conn = DBConnection.makeConnection();
+			
+				psmt = conn.prepareStatement(sql);
+				
+				System.out.println("1/6 clickLike");
+				psmt.setInt(1, seq);
+				System.out.println("2/6 clickLike");
+				
+				psmt.executeUpdate();
+				System.out.println("3/6 clickLike");
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("fail clickLike");
+			} finally {
+				
+				DBClose.close(psmt, conn, rs);
+			}
+			
+			
+		}
 
 /*	CREATE TABLE LIKETABLE(
 	SEQ NUMBER(8) PRIMARY KEY, 
@@ -481,9 +517,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 	);*/
 	
 	@Override
-	public boolean Prevent_duplication(int target_bbs_seq, int target_user_seq) {
-		String sql = "INSERT INTO (SEQ, TARGET_USER_SEQ, TARGET_BBS_SEQ) "
-				+ " VALUES(LIKETABLE_SEQ.NEXTVAL, ?, ?) ";
+	public boolean Prevent_duplication(int target_user_seq, int target_bbs_seq) {
+		String sql = "select*from liketable where target_user_seq = ? and target_bbs_seq = ? ";
 		
 
 		int count = 0;
@@ -499,8 +534,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 			psmt = conn.prepareStatement(sql);
 			System.out.println("3/6 Prevent_duplication Success");
 
-			psmt.setInt(1, target_bbs_seq);
-			psmt.setInt(2,target_user_seq);
+			psmt.setInt(1, target_user_seq);	
+			psmt.setInt(2,target_bbs_seq);
 			
 			System.out.println(sql);
 			count = psmt.executeUpdate();
@@ -520,6 +555,79 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		return count > 0 ? true : false;
 	}
+	
+	public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
+		String sql = "INSERT INTO LIKETABLE (SEQ, TARGET_USER_SEQ, TARGET_BBS_SEQ) "
+				+ " VALUES(LIKE_SEQ.NEXTVAL, ?, ?) ";
+		
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
 
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 likeTB_insert Success");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("3/6 likeTB_insert Success");
+
+			psmt.setInt(1, target_user_seq);	
+			psmt.setInt(2,target_bbs_seq);
+			
+			System.out.println(sql);
+			psmt.executeUpdate();
+			System.out.println("4/6 likeTB_insert Success");
+
+		} catch (SQLException e) {
+			System.out.println("likeTB_insert fail");
+			System.out.println(e.getMessage());
+			System.out.println(e.getErrorCode());
+			System.out.println(e.getSQLState());
+			
+
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+
+
+
+	}
+	
+	public void likeTB_delete(int target_user_seq, int target_bbs_seq) {
+		String sql = " delete from liketable where target_user_seq = ? and target_bbs_seq = ? ";
+		
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBConnection.makeConnection();
+			System.out.println("2/6 likeTB_delete Success");
+
+			psmt = conn.prepareStatement(sql);
+			System.out.println("3/6 likeTB_delete Success");
+
+			psmt.setInt(1, target_user_seq);	
+			psmt.setInt(2,target_bbs_seq);
+			
+			System.out.println(sql);
+			psmt.executeUpdate();
+			System.out.println("4/6 likeTB_delete Success");
+
+		} catch (SQLException e) {
+			System.out.println("likeTB_delete fail");
+			System.out.println(e.getMessage());
+			System.out.println(e.getErrorCode());
+			System.out.println(e.getSQLState());
+
+			
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+
+		
+	}
 
 }

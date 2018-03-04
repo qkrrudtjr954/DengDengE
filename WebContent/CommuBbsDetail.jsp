@@ -153,7 +153,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <hr>
 <!-- 댓글 달기/ 좋아요 -->
 
-<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike"><img src="./img/icon_heart.png"></button><p><%=comdto.getLike_count() %></p>
+<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" ><img src="./img/icon_heart.png"></button><p><%=comdto.getLike_count() %></p>
 
 </div>
 
@@ -183,7 +183,7 @@ if(comdto.getUser_email().equals(sid)){
 <button type="button" class="btn btn-outline-secondary col-md-2"  id="btnDelete" >삭제하기</button>
 <%
 }else{%>
-<button type="button" id="btnBack" class="btn btn-outline-secondary  offset-md-5 col-md-1">돌아가기</button>
+<button type="button" id="btnBack" class="btn btn-outline-secondary  offset-md-5 col-md-2">돌아가기</button>
 <%
 }
 %>
@@ -230,8 +230,9 @@ if(comdto.getUser_email().equals(sid)){
 			$(this).children('.nav-link').css('color', 'white');
 		});
 		
+		
 		$('#btnLike').click(function ()  {
-			var pk = $(this).attr('name')
+		
 			$.ajax({
 				url:"CommuBbsController",
 				data: { command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
@@ -246,14 +247,52 @@ if(comdto.getUser_email().equals(sid)){
 					location.reload();
 				}
 			})
-		});		
+		});	 
 
-			
-	
-	
-	</script>
-	<!-- <div id="area"></div> -->
-	  <script>
+</script>
+
+<!-- <script type="text/javascript">
+var h =0;
+function func() {		
+	if(h ==0){
+		$.ajax({
+			url:"CommuBbsController",
+			data: { command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
+			type:"post",
+			success : function (data) {
+				var dtos = JSON.parse(data);
+				var like_count = dtos.like_count;
+
+				console.log(like_count);
+				$('#likeCount').children().remove();
+				$('#likeCount').append('<p>'+dtos.like_count+'</p>');
+				//location.reload();
+			}
+		})
+		h =1;
+	}
+	else if(h ==1){
+		$.ajax({
+			url:"CommuBbsController",
+			data: { command: 'like2', seq: ${comdto.seq }, userid: ${current_user.seq }},
+			type:"post",
+			success : function (data) {
+				var dtos = JSON.parse(data);
+				var like_count = dtos.like_count;
+
+				console.log(like_count);
+				$('#likeCount').children().remove();
+				$('#likeCount').append('<p>'+dtos.like_count+'</p>');
+				//location.reload();
+				//여기서 좋아요 취소 
+			}
+		})
+		h =0;
+	}
+}
+</script> -->
+
+<script>
     $(document).ready(function(){
         $("#btnDelete").click(function(){
         if(confirm("정말 삭제하시겠습니까?")==true){
