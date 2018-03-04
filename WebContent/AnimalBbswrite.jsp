@@ -274,9 +274,9 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 							&nbsp;&nbsp;&nbsp; 
 							
 							<span class="input-group-text" id="">연락처</span>
-							<input type="text" class="form-control" size="20" name="contect"
-								placeholder="연락처" id="contect">
-							<button class="btn btn-outline-secondary" type="button" id="certibutton">인증하기</button>
+							<input type="text" class="form-control" size="20" name="contact"
+								placeholder="연락처" id="contact">
+							<button class="btn btn-outline-secondary" type="button" id="contactbutton">인증하기</button>
 						</div>
 					</div>
 
@@ -467,13 +467,12 @@ $(document).ready(function() {
 		$('.form2').hide(1000);
 	});
     
-    $("#certibutton").click(function () {
+    $("#contactbutton").click(function () {
 		var contact =$("#contact").val();
 		
 		if(contact === ""){
 			alert("연락처를 입력해주십시오");
 			$("#contact").focus();
-			return;
 		}else{
 			alert  ("인증완료");
 		}
@@ -485,6 +484,7 @@ $(document).ready(function() {
 		if(contact === ""){
 			alert("연락처를 입력해주십시오");
 			$("#contact").focus();
+			return;
 		}else{
 			$("#form").submit();
 		}
