@@ -21,11 +21,11 @@ public class BookDao {
 	}
 	
 	// 예약리스트 
-	public List<BookDto> getBookList() {
+	public List<BookDto> getBookList(int listseq) {
 		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT "
-				+ " FROM BOOK A, DENGUSER B "
-				+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
-				+ " AND A.TARGET_USER_EMAIL = B.EMAIL ";
+				+ " FROM BOOK A, ANIMALBBS B "
+				+ " WHERE A.TARGET_LIST_SEQ = B.SEQ "
+				+ " AND TARGET_LIST_SEQ=?";
 		System.out.println("s"+sql);
 		
 		Connection conn = null;
@@ -38,6 +38,7 @@ public class BookDao {
 				conn = DBConnection.makeConnection();
 				System.out.println("1/6 S getBookList");
 				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, listseq);
 				System.out.println("2/6 S getBookList");
 				rs = psmt.executeQuery();
 				System.out.println("3/6 S getBookList");
@@ -62,11 +63,12 @@ public class BookDao {
 	}
 	
 	// 예약상태 확인
-	public boolean checkBook(String email) {
-		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT "
-				+ " FROM BOOK A, DENGUSER B "
-				+ " WHERE A.TARGET_USER_EMAIL = B.EMAIL "
-				+ " AND A.TARGET_USER_EMAIL  LIKE '" +email+ "%'";
+	public boolean checkBook(String email, int listseq) {
+		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT, A.TARGET_LIST_SEQ "
+				+ " FROM BOOK A, ANIMALBBS B "
+				+ " WHERE A.TARGET_LIST_SEQ = B.SEQ "
+				+ " AND A.TARGET_USER_EMAIL LIKE '"+email+"%'"
+				+ " AND A.TARGET_LIST_SEQ  LIKE '" +listseq+ "%'";
 		System.out.println("s"+sql);
 		
 		Connection conn = null;
@@ -100,8 +102,8 @@ public class BookDao {
 	public boolean addBook(BookDto bookDto) {
 		System.out.println(bookDto.toString());
 		String sql = " INSERT INTO BOOK(SEQ, TARGET_USER_SEQ,"
-				+ " TARGET_USER_EMAIL,  CONTENT, DEL) "
-				+ " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?, 0) ";
+				+ " TARGET_USER_EMAIL,  CONTENT, TARGET_LIST_SEQ, DEL) "
+				+ " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?, ?, 0) ";
 		
 		int count = 0;
 		
@@ -118,6 +120,7 @@ public class BookDao {
 			psmt.setInt(1, bookDto.getUser_seq());
 			psmt.setString(2, bookDto.getUser_email());
 			psmt.setString(3, bookDto.getContent());
+			psmt.setInt(4, bookDto.getSeq());
 			
 			System.out.println("2/6 S addBook");
 			
@@ -138,4 +141,9 @@ public class BookDao {
 		
 		return count>0?true:false;
 	}
+	
+	/*// 예약확정
+	public boolean finalBook(String email, int listseq) {
+		return false;
+	}*/
 }

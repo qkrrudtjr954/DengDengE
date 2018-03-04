@@ -20,12 +20,12 @@ public class BookService {
 		return bookService;
 	}
 	
-	public List<BookDto> getBookList() {
-		return bookManager.getBookList();
+	public List<BookDto> getBookList(int listseq) {
+		return bookManager.getBookList(listseq);
 	}
 	
-	public boolean checkBook(String email) {
-		return bookManager.checkBook(email);
+	public boolean checkBook(String email, int listseq) {
+		return bookManager.checkBook(email, listseq);
 	}
 	
 	public boolean addBook(BookDto bookDto) {

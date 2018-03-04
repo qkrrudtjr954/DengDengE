@@ -50,13 +50,15 @@ public class AnimalBbsController extends HttpServlet {
 			System.out.println("s"+seq);		
 			
 			if(Delegator.checkSession(req, resp)) {
+				
 				HttpSession session = req.getSession();
 		        User userInfo = (User)session.getAttribute("current_user");
 		        String email = userInfo.getEmail();
+		        
 				aniBbService.readCount(seq);		
 				
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
-				boolean bookS = bookService.checkBook(email);
+				boolean bookS = bookService.checkBook(email,seq);
 				
 				System.out.println(bookS);
 	            req.setAttribute("aniBbsDto", aniBbsDto);

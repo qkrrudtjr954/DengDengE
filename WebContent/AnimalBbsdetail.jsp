@@ -298,7 +298,8 @@ if(aniBbsDto != null){
 							</button>
 						</div>
 						<div class="modal-body">
-							<form action="#" method="post">
+							<form action="BookController" method="get">
+							<input type="hidden" name="command" value="bookfinal">
 								<div class="form-group">
 									<label for="recipient-name" class="col-form-label">예약리스트:</label>
 									<table border="1" id="table">
@@ -452,10 +453,10 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 					//alert('key:' + i + ' / ' + 'value:' + item);
 					str += '<tr>';
 					str += '<td width="200">'+item.user_email+'</td>';
-					str += '<td><input type="submit" id="bookBtn" value="예약확정"/></td>';
+					str += '<td><input type="submit" class="btn btn-outline-secondary "style="background-color: #28A745; color: #fff" id="bookBtn" value="예약확정"></td>';
 					str += '</tr>';
 				});
-				$("#table").append(str);
+				$("#table").html(str);
 			}
 		});
 	});

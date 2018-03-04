@@ -38,7 +38,7 @@ public class BookController extends HttpServlet {
 		
 		if(command.equals("add")) {
 			int seq = Integer.parseInt(req.getParameter("seq"));
-			System.out.println("s"+seq);
+			int listseq = seq;
 			
 			HttpSession session = req.getSession();
 	        User userInfo = (User)session.getAttribute("current_user");
@@ -47,10 +47,9 @@ public class BookController extends HttpServlet {
 	         
 	         String content = req.getParameter("text");
 	         
-	         System.out.println("seq:"+seq+" user_seq:"+user_seq+" email:"+user_email+" content:"+content);         
+	         System.out.println("seq:"+seq+" user_seq:"+user_seq+" email:"+user_email+" content:"+content+" listseq"+listseq);        			
 			
-			
-			boolean isS = bookservice.addBook(new BookDto(seq, user_seq, user_email, content));
+			boolean isS = bookservice.addBook(new BookDto(seq, user_seq, user_email, content, listseq));
 			
 			if(isS) {
 				System.out.println("S");
@@ -60,9 +59,9 @@ public class BookController extends HttpServlet {
 				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
 			}
 		}else if(command.equals("getlist")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
+			int listseq = Integer.parseInt(req.getParameter("seq"));
 	        
-			List<BookDto> booklist = bookservice.getBookList();
+			List<BookDto> booklist = bookservice.getBookList(listseq);
 			String json = new Gson().toJson(booklist);
 			resp.getWriter().write(json);
 		}
