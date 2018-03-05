@@ -215,6 +215,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									%>
 
 									${item.title }
+									${item.del }
+									<c:if test="${item.del==200 }"> 분양 완료 </c:if>
 									<br>
 								<p>
 									${item.name} <span style="font-size:12px;">( ${item.type } )</span>

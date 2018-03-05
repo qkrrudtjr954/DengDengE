@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import dto.AnimalBbsDto;
 import dto.BookDto;
 import dto.User;
+import service.AnimalBbsService;
 import service.BookService;
 
 public class BookController extends HttpServlet {
@@ -35,21 +37,26 @@ public class BookController extends HttpServlet {
 		String command = req.getParameter("command");
 		
 		BookService bookservice = BookService.getInstance();
+		AnimalBbsService aniBbService = AnimalBbsService.getInatance();
 		
 		if(command.equals("add")) {
 			int seq = Integer.parseInt(req.getParameter("seq"));
-			int listseq = seq;
+			int list_seq = seq;
 			
 			HttpSession session = req.getSession();
 	        User userInfo = (User)session.getAttribute("current_user");
 	        String user_email = userInfo.getEmail();
 	        int user_seq =userInfo.getSeq();
-	         
-	         String content = req.getParameter("text");
-	         
-	         System.out.println("seq:"+seq+" user_seq:"+user_seq+" email:"+user_email+" content:"+content+" listseq"+listseq);        			
+	        
+	        // 해당글의 이메일
 			
-			boolean isS = bookservice.addBook(new BookDto(seq, user_seq, user_email, content, listseq));
+	         
+	        String content = req.getParameter("text");
+	    	AnimalBbsDto animalDto = (AnimalBbsDto)aniBbService.detailAnimalBbs(list_seq);
+	        System.out.println("seq:"+seq+" user_seq:"+user_seq+" email:"+user_email+" content:"+content+" listseq"+list_seq);        			
+	         
+	         
+	        boolean isS = bookservice.addBook(new BookDto(seq, user_seq, user_email, content, list_seq, animalDto.getUser_email()));
 			
 			if(isS) {
 				System.out.println("S");
@@ -60,22 +67,28 @@ public class BookController extends HttpServlet {
 			}
 		}else if(command.equals("getlist")) {
 			int listseq = Integer.parseInt(req.getParameter("seq"));
-	        
+	      /*  
 			List<BookDto> booklist = bookservice.getBookList(listseq);
 			String json = new Gson().toJson(booklist);
-			resp.getWriter().write(json);
+			resp.getWriter().write(json);*/
 		}
-		else if(command.equals("fianlBook")) {
-			// email
-			// seq
-			// boolean isS = bookservice.finalBook(email, seq);
-			/*if(isS) {
+		else if(command.equals("finalBook")) {
+			String email = req.getParameter("email");
+			String seq = req.getParameter("listseq");
+			int listseq = Integer.parseInt(seq);
+			String complete_email = email;
+			
+			System.out.println(email+" "+listseq+" "+complete_email);
+			AnimalBbsDto animalDto = (AnimalBbsDto)aniBbService.detailAnimalBbs(listseq);
+			boolean bbsisS = aniBbService.bookBbs(listseq, animalDto.getUser_email());
+			boolean isS = bookservice.finalBook(email, listseq, complete_email);
+			if(isS) {
 				System.out.println("finalBook S");
-				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
+				req.setAttribute("isS", "isS");
 			}else {
 				System.out.println("finalBook F");
 				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
-			}*/
+			}	
 		}
 	}
 	

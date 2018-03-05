@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import delegator.Delegator;
 import dto.AnimalBbsDto;
+import dto.BookDto;
 import dto.User;
 import service.AnimalBbsService;
 import service.BookService;
@@ -50,12 +51,15 @@ public class AnimalBbsController extends HttpServlet {
 			System.out.println("s"+seq);		
 			
 			if(Delegator.checkSession(req, resp)) {
-				
 				HttpSession session = req.getSession();
 		        User userInfo = (User)session.getAttribute("current_user");
 		        String email = userInfo.getEmail();
 		        
 				aniBbService.readCount(seq);		
+				
+				BookService bookservice = BookService.getInstance();
+				List<BookDto> booklist = bookservice.getBookList(seq);
+				req.setAttribute("booking", booklist);
 				
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
 				boolean bookS = bookService.checkBook(email,seq);
@@ -124,12 +128,12 @@ public class AnimalBbsController extends HttpServlet {
 			String descripttion = req.getParameter("descrip");
 			String content = req.getParameter("content");
 			
-			String contect = req.getParameter("contect");
+			String contact = req.getParameter("contact");
 			String description = req.getParameter("desc");
 			
 			HttpSession session = req.getSession();
 	         User userInfo = (User)session.getAttribute("current_user");
-	         String writer = userInfo.getEmail();
+	         String complete_email = userInfo.getEmail();
 	         int target_user_seq =userInfo.getSeq();
 	
 			
@@ -143,9 +147,8 @@ public class AnimalBbsController extends HttpServlet {
 			
 			boolean isS = aniBbService.wirteAnimalBbs(
 					new AnimalBbsDto(title, name, age, kinds, type, location, 
-												medicine, neutralization, gender, 
-												descripttion, pic1, content, 
-												target_user_seq, contect, description));
+												medicine, neutralization, gender, descripttion, pic1, content, 
+												target_user_seq, contact, description, complete_email));
 			
 			if(isS) {
 				// msg

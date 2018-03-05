@@ -59,10 +59,9 @@ public class AnimalBbsService {
 		 public List<AnimalBbsDto> getFindBtnlist(String searchBtn){
 			 return aniBbsManager.getFindBtnlist(searchBtn);
 		 }
-		/*
-		// 페이징 처리
-		public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {
-			return null;
-		}
-		*/
+		
+		 // 예약 확정
+		 public boolean bookBbs(int seq, String complete_email) {
+			 return aniBbsManager.bookBbs(seq, complete_email);
+		 }
 }

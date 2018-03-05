@@ -22,7 +22,7 @@ public class BookDao {
 	
 	// 예약리스트 
 	public List<BookDto> getBookList(int listseq) {
-		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT "
+		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT, A.TARGET_LIST_SEQ, A.TARGET_COMPLETE_EMAIL, A.DEL "
 				+ " FROM BOOK A, ANIMALBBS B "
 				+ " WHERE A.TARGET_LIST_SEQ = B.SEQ "
 				+ " AND TARGET_LIST_SEQ=?";
@@ -102,8 +102,8 @@ public class BookDao {
 	public boolean addBook(BookDto bookDto) {
 		System.out.println(bookDto.toString());
 		String sql = " INSERT INTO BOOK(SEQ, TARGET_USER_SEQ,"
-				+ " TARGET_USER_EMAIL,  CONTENT, TARGET_LIST_SEQ, DEL) "
-				+ " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?, ?, 0) ";
+				+ " TARGET_USER_EMAIL,  CONTENT, TARGET_LIST_SEQ, TARGET_COMPLETE_EMAIL, DEL) "
+				+ " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?, ?, ?, 0) ";
 		
 		int count = 0;
 		
@@ -121,7 +121,7 @@ public class BookDao {
 			psmt.setString(2, bookDto.getUser_email());
 			psmt.setString(3, bookDto.getContent());
 			psmt.setInt(4, bookDto.getSeq());
-			
+			psmt.setString(5, bookDto.getUser_email());
 			System.out.println("2/6 S addBook");
 			
 			System.out.println(sql);
@@ -143,10 +143,12 @@ public class BookDao {
 	}
 	
 	// 예약확정
-	public boolean finalBook(String email, int listseq) {
+	public boolean finalBook(String email, int listseq, String complete_email) {
 		String sql = " UPDATE BOOK SET "
 				+ " DEL=200 WHERE TARGET_USER_EMAIL=? "
-				+ " AND TARGET_LIST_SEQ=? ";
+				+ " AND TARGET_LIST_SEQ=? "
+				+ " AND TARGET_COMPLETE_EMAIL=? ";
+		System.out.println("sql"+sql);
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		
@@ -158,7 +160,9 @@ public class BookDao {
 			psmt =conn.prepareStatement(sql);
 			
 			psmt.setString(1, email);
-			psmt.setInt(1, listseq);
+			psmt.setInt(2, listseq);
+			psmt.setString(3, complete_email);
+			
 			System.out.println("2/6 S finalBook");
 			count = psmt.executeUpdate();
 			System.out.println("3/6 S finalBook");
