@@ -25,7 +25,7 @@
 	<div class="container">
 		<div class="py-5 text-center">
 			<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-			<h2>회원 가입</h2>
+			<h2>내정보 수정</h2>
 			${notice }
 		</div>
 
@@ -35,21 +35,31 @@
 					<input type="hidden" name="command" value="signup">
 					<div class="mb-3">
 						<label for="email">Email</label> 
-							<span><input type="email" class="form-control success" name="email" id="email" value=""></span>
+							<span><input type="email" class="form-control success" name="email" id="email" value="${current_user.email }" readonly="readonly"></span>
 						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 						<div class="invalid-email"></div>
 
 					</div>
-
+					
 					<div class="mb-3">
+						<label for="password">Current Password</label> 
+						<input type="password" class="form-control" name="curpassword" id="curpassword" required>
+						<div class="invalid-feedback">현재비밀번호를 입력해주세요.</div>
+						<button type="button" class=" offset-md-8 btn btn-secondary" id="updateuser" onclick="">pwd확인</button>
+						
+					</div>
+					
+					
+
+					 <div class="mb-3">
 						<label for="password">Password</label> 
-						<input type="password" class="form-control" name="password1" id="password1" required>
-						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+						<input type="password" class="form-control" name="password1" id="password1" required readonly="readonly">
+						<div class="invalid-feedback">수정할 비밀번호를 입력해주세요.</div>
 					</div>
 
 					<div class="mb-3">
 						<label for="password">Password <span style="font-size: 12px;">(Confirm)</span></label> 
-						<input type="password" class="form-control" name="password2" id="password2" required>
+						<input type="password" class="form-control" name="password2" id="password2" required readonly="readonly">
 						<div class="invalid-feedback">비밀번호를 확인해주세요.</div>
 						<div class="invalid-password"></div>
 					</div>
@@ -70,8 +80,10 @@
 					</div>
 					
 					<hr class="mb-4">
+				
 					
-					<button class="btn btn-success btn-lg btn-block" type="submit">내정보 수정하기</button>
+					<!-- <button class="btn btn-success btn-lg btn-block" type="submit">내정보 수정하기</button> -->
+					<input type="submit" value="정보수정" id="submit" style="visibility: hidden;" class="btn btn-success btn-lg btn-block" >
 				</form>
 			</div>
 		</div>
@@ -180,6 +192,34 @@
 				$('.invalid-password').html('<span style="font-size:80%;color:#28a745;">비밀번호가 일치합니다.</span>');
 			}	
 		});
+		
+		
+		
+		
+		$("#updateuser").click(function() {
+			var pwd ="${current_user.password }";
+			//alert(pwd);
+			if($("#curpassword").val() == pwd ){
+				alert("수정가능");
+				$("#password1").removeAttr("readonly");
+				$("#password2").removeAttr("readonly");
+				$("#submit").removeAttr("readonly");
+			    document.getElementById("submit").style.visibility='visible';
+				
+				
+				
+			}
+			else{
+				alert("비밀번호를 다시 입력하십시요");
+				$("#curpassword").val("");
+			}
+			
+		});
+		
+		
+		
+		
+		
 	});
     </script>
 </body>
