@@ -56,6 +56,34 @@ public class CommuBbsService {
 		public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord){
 			return manager.getFindCommulist(Searchtype, SearchWord);
 		}
+		
+		public List<CommuBbsDto> getCommuLike(int seq){
+			return manager.getCommuLike(seq);
+		}
+		
+		public List<CommuBbsDto> clickLikeAf(int seq) {
+			 manager.clickLike(seq);
+			 return manager.getCommuLike(seq);
+		}
+		
+		public List<CommuBbsDto> DclickLikeAf(int seq){
+			
+			manager.DclickLike(seq);
+			return manager.getCommuLike(seq);
+		}
+		
+		public boolean Prevent_duplication(int target_user_seq, int target_bbs_seq) {
+			return manager.Prevent_duplication(target_user_seq, target_bbs_seq);
+		}
+		
+		public void likeTB_delete(int target_user_seq, int target_bbs_seq) {
+			manager.likeTB_delete(target_user_seq, target_bbs_seq);
+		}
+		
+		public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
+			manager.likeTB_insert(target_user_seq, target_bbs_seq);
+		}
+	
 }
 
 
