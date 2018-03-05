@@ -220,6 +220,9 @@ public class AnimalBbsController extends HttpServlet {
 			String searchBtn = ssearchBtn.substring(0, 1);
 			System.out.println("btn:"+searchBtn);
 			
+			if(ssearchBtn.equals("경기도")) {
+				searchBtn = ssearchBtn.substring(0, 2);
+			}
 			List<AnimalBbsDto> animlist = aniBbService.getFindBtnlist(searchBtn);
 			req.setAttribute("animlist", animlist);
 			
