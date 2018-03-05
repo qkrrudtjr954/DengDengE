@@ -292,8 +292,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 
 					<div class="row">		
 						<input type="hidden" name="pic1" value="" id="pic1"/>				
-						<input type="submit" class=" offset-md-10 btn btn-outline-secondary" 
-
+						<input type="button" class=" offset-md-10 btn btn-outline-secondary" 
 						style="width: 90px; background-color: #28A745; color: #fff" id="finalButton" value="완료">
 					</div>
 				</div>		

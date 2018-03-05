@@ -444,7 +444,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 	$("button").click(function () {		
 		$.ajax({
 			url:"BookController",		// 위치
-			type:"get",			// 방식
+			type:"post",			// 방식
 			data:"command=getlist&seq=<%=aniBbsDto.getSeq() %>",	// data셋팅
 			
 			success:function (data) {
