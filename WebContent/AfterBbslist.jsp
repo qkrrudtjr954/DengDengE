@@ -28,6 +28,10 @@
 <!-- Custom styles for this template -->
 <link href="./css/main.css" rel="stylesheet">
 <style>
+h7{
+	font-family: 나눔고딕;
+	color: #424242;
+}
 #container {
 	width: 70%;
 	margin: 0 auto; /* 가로로 중앙에 배치 */
@@ -164,30 +168,35 @@ to {
 	</section>
 	<section>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="nav menu justify-content-center">
-				<li class="nav-item menu-item"><a class="nav-link active "
-					href="#">Active</a></li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Disabled</a>
-				</li>
+	        <ul class="nav menu justify-content-center">
+			 <li class="nav-item menu-item">
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">입양 후기 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
+			  </li>
 			</ul>
-		</nav>
+  		</nav>
 	</section>
 
 	<div class="album py-5 bg-light">
 		<div class="container">
 
-			<div class="row">
-				<h1 align="center" class="offset-md-4">댕댕이 반려 동물 입양후기</h1>
+			<div class="row"> 
+				<h1>&nbsp;입양후기</h1>
 			</div>
 
 			<div class="row">
-				<h3 align="center" class="offset-md-5">생생한 입양 후기들</h3>
+				<h7>&nbsp;&nbsp;-댕댕이를 통해 가족이된 분들의 이야기입니다. </h7>
+				
 			</div>
-
+			<hr>
 
 			<%
 				List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>) request.getAttribute("afterBbslist");
@@ -213,11 +222,7 @@ to {
 	</div>
 </c:if> --%>
 
-
-
-
-
-			<form name="searchform" method="get" action="AfterBbsController"
+			<form name="searchform" class="offset-md-7" method="get" action="AfterBbsController"
 				id="myform">
 				<input type="hidden" name="command" value="AfterBbsSearch">
 				<div class="row">
@@ -241,6 +246,7 @@ to {
 
 				</div>
 			</form>
+			<br><br>
 
 
 			<div class="row">
@@ -325,16 +331,11 @@ to {
 
 
 			</div>
-
+<hr>
 			<form name="form1" action="AfterBbsController" method="post">
-				<div class="row">
-					<button class="offset-md-10 btn btn-outline-secondary" id="btnlist"
-						style="background-color: #28A745; color: #fff">목록으로</button>
-					&nbsp;&nbsp;&nbsp;
-					<button id="btnwrite" class="btn btn-outline-secondary"
-						style="background-color: #28A745; color: #fff">글쓰기</button>
-
-
+				<div class="offset-md-5">
+				
+					<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
 
 				</div>
 

@@ -242,25 +242,7 @@ public class CommuBbsController extends HttpServlet {
 			resp.getWriter().write(json);				
 	
 		
-		}/*else if(command.equals("like2")) {
-			System.out.println("like2들어옴");
-			//여기서 좋아요 취소 
-			String Sseq = req.getParameter("seq");
-			int seq = Integer.parseInt(Sseq);
-			String Suser = req.getParameter("userid");
-			int user = Integer.parseInt(Suser);
-			System.out.println("seq " + seq + " userid " + user);
-			
-			comService.likeTB_delete(user, seq);
-			List<CommuBbsDto> dto= comService.DclickLikeAf(seq);
-			String json = new Gson().toJson(dto);
-			
-			System.out.println(json);
-			resp.getWriter().write(json);
-			
-			
-			
-		}*/
+		}
 	}
 	//보내주는 함수
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

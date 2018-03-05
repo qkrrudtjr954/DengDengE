@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import delegator.Delegator;
 import dto.AnimalBbsDto;
@@ -58,11 +61,14 @@ public class AnimalBbsController extends HttpServlet {
 				aniBbService.readCount(seq);		
 				
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
+				boolean isLiked = aniBbService.Prevent_duplication(userInfo.getSeq(), seq);
 				boolean bookS = bookService.checkBook(email,seq);
 				
 				System.out.println(bookS);
 	            req.setAttribute("aniBbsDto", aniBbsDto);
 	            req.setAttribute("bookS", bookS);
+	            req.setAttribute("like_count", aniBbService.getLikeCount(seq));
+				req.setAttribute("isLiked", isLiked);
 	            
 	            dispatch("AnimalBbsdetail.jsp", req , resp);
 	         } else {
@@ -221,6 +227,43 @@ public class AnimalBbsController extends HttpServlet {
 			req.setAttribute("animlist", animlist);
 			
 			dispatch("AnimalBbslist.jsp", req, resp);
+		}
+		else if(command.equals("like")) {
+			String Sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(Sseq);
+			String Suser = req.getParameter("userid");
+			int user = Integer.parseInt(Suser);
+			System.out.println("seq " + seq + " userid " + user);
+			
+						
+			int like_count = 0; 
+			HashMap<String, Integer> status = new HashMap<>();
+			
+			boolean check = aniBbService.Prevent_duplication(user, seq);
+			
+			if( check) {		
+				// 테이블에서 해당 행을 삭제( 추가) 한다.
+				aniBbService.likeTB_delete(user, seq);
+				
+				// status, like count 를 json으로 전송한다.
+				status.put("status", 404);
+			}else {
+				// 테이블에서 해당 행을 삭제( 추가) 한다.
+				aniBbService.likeTB_insert(user, seq);
+				
+				// status, like count 를 json으로 전송한다.
+				status.put("status", 200);
+			}
+
+			// 테이블을 게시글 seq 로 count(*) 
+			like_count = aniBbService.getLikeCount(seq);
+			status.put("like_count", like_count);
+			String json = new Gson().toJson(status);
+			
+			System.out.println(json);
+			resp.getWriter().write(json);	
+			
+			
 		}
 			
 			

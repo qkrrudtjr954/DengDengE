@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import delegator.Delegator;
 import dto.AfterBbsDto;
@@ -96,6 +99,8 @@ public class AfterBbsController extends HttpServlet {
 
 			if (Delegator.checkSession(req, resp)) {
 				// 로그인이 되어있는 상태
+				HttpSession session = req.getSession();
+				User userInfo = (User) session.getAttribute("current_user");
 
 				bbs.readCount(seq);
 
@@ -103,9 +108,11 @@ public class AfterBbsController extends HttpServlet {
 				
 				AfterCommentService commentService = AfterCommentService.getInstance();
 				List<AfterCommentDto> comments = commentService.getAllComments(seq);
-				
+				boolean isLiked = bbs.Prevent_duplication(userInfo.getSeq(), seq);
 				req.setAttribute("comments", comments);
 				req.setAttribute("bbs1", bbs1);
+				req.setAttribute("like_count", bbs.getLikeCount(seq));
+				req.setAttribute("isLiked", isLiked);
 				
 				dispatch("AfterBbsDetail.jsp", req, resp);
 			} else {
@@ -181,6 +188,40 @@ public class AfterBbsController extends HttpServlet {
 			// 보내주기
 			dispatch("AfterBbslist.jsp", req, resp);
 
+		} else if(command.equals("like")) {
+			String Sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(Sseq);
+			String Suser = req.getParameter("userid");
+			int user = Integer.parseInt(Suser);
+			System.out.println("seq " + seq + " userid " + user);
+			
+						
+			int like_count = 0; 
+			HashMap<String, Integer> status = new HashMap<>();
+			
+			boolean check = bbs.Prevent_duplication(user, seq);
+			
+			if( check) {		
+				// 테이블에서 해당 행을 삭제( 추가) 한다.
+				bbs.likeTB_delete(user, seq);
+				
+				// status, like count 를 json으로 전송한다.
+				status.put("status", 404);
+			}else {
+				// 테이블에서 해당 행을 삭제( 추가) 한다.
+				bbs.likeTB_insert(user, seq);
+				
+				// status, like count 를 json으로 전송한다.
+				status.put("status", 200);
+			}
+
+			// 테이블을 게시글 seq 로 count(*) 
+			like_count = bbs.getLikeCount(seq);
+			status.put("like_count", like_count);
+			String json = new Gson().toJson(status);
+			
+			System.out.println(json);
+			resp.getWriter().write(json);	
 		}
 
 	}

@@ -61,7 +61,22 @@ public class AfterBbsService {
 	}
 	
 	
-	
+	public boolean Prevent_duplication(int target_user_seq, int target_bbs_seq) {
+		return afterBbsDao.Prevent_duplication(target_user_seq, target_bbs_seq);
+	}
+
+	public void likeTB_delete(int target_user_seq, int target_bbs_seq) {
+		afterBbsDao.likeTB_delete(target_user_seq, target_bbs_seq);
+	}
+
+	public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
+		afterBbsDao.likeTB_insert(target_user_seq, target_bbs_seq);
+	}
+
+	public int getLikeCount(int bbs_seq) {
+		return afterBbsDao.getLikeCount(bbs_seq);
+	}
+
 	
 	
 	

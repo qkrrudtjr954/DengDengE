@@ -25,63 +25,6 @@ public class CommuBbsDao implements iCommuBbsDao {
 	}
 	
 	
-	//좋아요 한 뒤 리스트 
-	public List<CommuBbsDto> getCommuLike(int seq) {
-		
-		List<CommuBbsDto> list = new ArrayList<>();
-		
-		String sql = " SELECT a.seq, a.TITLE as title, content, a.target_user_seq, a.target_category, "
-				+ " readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email "
-				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c "
-				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=?";
-
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-
-		
-		try {
-			conn = DBConnection.makeConnection();
-			System.out.println("2/6 S getCommu");
-
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, seq);
-			System.out.println("3/6 S getCommu");
-
-			System.out.println("글읽기 sql = " + sql);
-
-			rs = psmt.executeQuery();
-			System.out.println("4/6 S getCommu");
-
-			while (rs.next()) {
-				int i = 1;
-
-				CommuBbsDto dto = new CommuBbsDto(rs.getInt(i++), // seq
-						rs.getString(i++), // title
-						"", // String pic1
-						rs.getString(i++), // String content
-						rs.getInt(i++), // int target_user_seq
-						0, // int target_category
-						rs.getInt(i++), // int readcount
-						rs.getString(i++), // String reg_date
-						rs.getString(i++), // String last_update
-						rs.getInt(i++), // int del
-						rs.getString(i++),// category_name
-						rs.getString(i++)); //String user_email
-				list.add(dto);
-			}
-			System.out.println("5/6 S getCommu");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBClose.close(psmt, conn, rs);
-			System.out.println("6/6 S getBbs");
-		}
-
-		return list;
-	}
-
 	// 메인 리스트
 	@Override
 	public List<CommuBbsDto> getCommulist() {
@@ -227,8 +170,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 	@Override
 	public boolean writeCommu(CommuBbsDto comdto) {
 		String sql = "INSERT INTO COMMUBBS(SEQ, TITLE, PIC1, CONTENT, TARGET_USER_SEQ, "
-				+ " TARGET_CATEGORY, READCOUNT, REG_DATE, LAST_UPDATE, LIKE_COUNT, DEL ) "
-				+ " VALUES(COMMUBBS_SEQ.NEXTVAL, ?, '', ?, ?, ?, 0, SYSDATE, SYSDATE, 0, 0) ";
+				+ " TARGET_CATEGORY, READCOUNT, REG_DATE, LAST_UPDATE, DEL ) "
+				+ " VALUES(COMMUBBS_SEQ.NEXTVAL, ?, '', ?, ?, ?, 0, SYSDATE, SYSDATE, 0) ";
 
 		int count = 0;
 
@@ -438,70 +381,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		return list;
 	}
-	//좋아요 클릭하기
-	@Override
-	public void clickLike(int seq) {
-		String sql = " UPDATE  COMMUBBS  SET  " + " LIKE_COUNT=LIKE_COUNT+1" + " WHERE SEQ=? ";
-		
-			
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn = DBConnection.makeConnection();
-		
-			psmt = conn.prepareStatement(sql);
-			
-			System.out.println("1/6 clickLike");
-			psmt.setInt(1, seq);
-			System.out.println("2/6 clickLike");
-			
-			psmt.executeUpdate();
-			System.out.println("3/6 clickLike");
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("fail clickLike");
-		} finally {
-			
-			DBClose.close(psmt, conn, rs);
-		}
-		
-	}
 	
-	//좋아요 취소
-		@Override
-		public void DclickLike(int seq) {
-			String sql = " UPDATE  COMMUBBS  SET  " + " LIKE_COUNT=LIKE_COUNT-1 " + " WHERE SEQ=? ";
-			
-			
-			Connection conn = null;
-			PreparedStatement psmt = null;
-			ResultSet rs = null;
-
-			try {
-				conn = DBConnection.makeConnection();
-			
-				psmt = conn.prepareStatement(sql);
-				
-				System.out.println("1/6 clickLike");
-				psmt.setInt(1, seq);
-				System.out.println("2/6 clickLike");
-				
-				psmt.executeUpdate();
-				System.out.println("3/6 clickLike");
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println("fail clickLike");
-			} finally {
-				
-				DBClose.close(psmt, conn, rs);
-			}
-			
-			
-		}
 
 /*	CREATE TABLE LIKETABLE(
 	SEQ NUMBER(8) PRIMARY KEY, 
