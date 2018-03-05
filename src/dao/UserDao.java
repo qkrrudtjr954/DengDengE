@@ -112,4 +112,45 @@ public class UserDao implements iUserDao{
 		return (count > 0) ? true : false;
 	}
 	
+	public boolean UserUpdate(User Userdto) {
+		String sql = " UPDATE DENGUSER SET "
+				+ " PASSWORD=? "
+				+ " WHERE SEQ=? ";
+		
+		System.out.println("sql: "+ sql);
+		int count = 0;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		System.out.println("1/6 S UserUpdate");
+		
+		
+		try {
+			conn = DBConnection.makeConnection();			
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, Userdto.getPassword());
+			psmt.setInt(2, Userdto.getSeq());
+			System.out.println("2/6 S UserUpdate");
+			count = psmt.executeUpdate();
+			System.out.println("3/6 S UserUpdate");
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			DBClose.close(psmt, conn, null);	
+			System.out.println("4/6 S UserUpdate");
+		}
+		System.out.println("5/6 S UserUpdate");
+		return count>0?true:false;
+			
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

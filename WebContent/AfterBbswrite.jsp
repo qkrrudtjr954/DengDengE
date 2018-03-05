@@ -69,24 +69,24 @@
           </p>
         </div>
       </section>
-      <section>
-	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	        <ul class="nav menu justify-content-center">
+     <section>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="nav menu justify-content-center">
 			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
+			    <a class="nav-link" href="#">분양소 찾기</a>
 			  </li>
 			</ul>
-  		</nav>
-      </section>
+		</nav>
+	</section>
 
       <div class="album py-5 bg-light">
         <div class="container">
@@ -109,9 +109,13 @@
         <div class="row">
         <textarea id="summernote" name="content" value=""  ></textarea>
         </div>
+        <br>
         <div class="row">
         <input type="hidden" name="pic1" value="" id="pic1"/>	
-        <input type="button" class="btn btn-success"  value="글쓰기" onclick="" id="btnwrite">
+        <input type="button" class="btn btn-success offset-md-4 col-md-2"  value="글쓰기" onclick="" id="btnwrite">&nbsp;
+        <input type="button" class="btn btn-outline-secondary col-md-2 " value="돌아가기" onclick="" id="btnBack">
+        
+        
         </div>
         </form>
         
@@ -236,6 +240,11 @@
 
 		}
 	});
+	
+	$("#btnBack").click(function() {
+		location.href = "AfterBbsController?command=AfterBbslist";
+		});
+	
 	</script>
 	
 

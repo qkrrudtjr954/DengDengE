@@ -82,6 +82,8 @@ public class UserController extends HttpServlet{
 			resp.sendRedirect("main.jsp");
 
 		} else if(command.equals("myPage")) {
+			
+			dispatcher("myPage.jsp", req, resp);
 
 		} else if(command.equals("signin")) {
 

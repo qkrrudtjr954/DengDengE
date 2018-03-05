@@ -73,14 +73,18 @@
 	<section>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<ul class="nav menu justify-content-center">
-				<li class="nav-item menu-item"><a class="nav-link active "
-					href="#">Active</a></li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Disabled</a>
-				</li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="#">분양소 찾기</a>
+			  </li>
 			</ul>
 		</nav>
 	</section>
@@ -143,6 +147,11 @@ if(msg !=null){
 					</div>
 
 					<hr>
+					<div class="row">
+					<span class="offset-md-11"><a href="AfterBbsController?command=AfterBbslist"
+						class="offset-md-9 btn btn-outline-secondary"
+						style="background-color: #28A745; color: #fff">list</a></span>
+					</div>
 
 				</form>
 			</div>
