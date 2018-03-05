@@ -37,5 +37,12 @@ public class UserService{
 		return returnUser;
 	}
 	
+	
+	public boolean UserUpdate(User Userdto) {
+		return userDao.UserUpdate(Userdto);
+	}
+	
+	
+	
 	// service 는 dao를 singleton으로 호출합니다.
 }

@@ -32,6 +32,7 @@ public class UserController extends HttpServlet{
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text./html; charset=utf-8"); 
+		UserService uservice = UserService.getInstance();
 		
 		String command = req.getParameter("command");
 
@@ -82,6 +83,10 @@ public class UserController extends HttpServlet{
 			resp.sendRedirect("main.jsp");
 
 		} else if(command.equals("myPage")) {
+			HttpSession session = req.getSession();
+			User current_user = (User)session.getAttribute("current_user");
+			current_user.getSeq();
+			//User user = uservice.UserUpdate(Userdto); 
 			
 			dispatcher("myPage.jsp", req, resp);
 
