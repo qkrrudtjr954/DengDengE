@@ -144,10 +144,11 @@ public class BookDao {
 	
 	// 예약확정
 	public boolean finalBook(String email, int listseq, String complete_email) {
+		System.out.println("book:"+email+" "+listseq+" "+complete_email);
 		String sql = " UPDATE BOOK SET "
-				+ " DEL=200 WHERE TARGET_USER_EMAIL=? "
-				+ " AND TARGET_LIST_SEQ=? "
-				+ " AND TARGET_COMPLETE_EMAIL=? ";
+				+ " DEL=200, TARGET_USER_EMAIL=?, "
+				+ " TARGET_LIST_SEQ=?, "
+				+ " TARGET_COMPLETE_EMAIL=? ";
 		System.out.println("sql"+sql);
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -162,16 +163,16 @@ public class BookDao {
 			psmt.setString(1, email);
 			psmt.setInt(2, listseq);
 			psmt.setString(3, complete_email);
+		
 			
 			System.out.println("2/6 S finalBook");
 			count = psmt.executeUpdate();
 			System.out.println("3/6 S finalBook");
 		} catch (SQLException e) {
-			System.out.println("4/6 S finalBook");
 			System.out.println(e.getMessage());
 		}finally{
 			DBClose.close(psmt, conn, null);	
-			System.out.println("5/6 S finalBook");
+			System.out.println("4/6 S finalBook");
 		}
 		return count>0?true:false;
 	}

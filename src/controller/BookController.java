@@ -77,18 +77,27 @@ public class BookController extends HttpServlet {
 			String seq = req.getParameter("listseq");
 			int listseq = Integer.parseInt(seq);
 			String complete_email = email;
-			
-			System.out.println(email+" "+listseq+" "+complete_email);
 			AnimalBbsDto animalDto = (AnimalBbsDto)aniBbService.detailAnimalBbs(listseq);
-			boolean bbsisS = aniBbService.bookBbs(listseq, animalDto.getUser_email());
-			boolean isS = bookservice.finalBook(email, listseq, complete_email);
+			
+			System.out.println(email+" "+listseq+" "+complete_email+" "+animalDto.getUser_email());
+			// 예약확정자
+			boolean bbsisS = aniBbService.bookBbs(listseq, complete_email);
+			// 글작성자
+			boolean isS = bookservice.finalBook(email, listseq, animalDto.getUser_email());
+			
+			if(bbsisS) {
+				System.out.println("bookBbs S");
+			}else {
+				System.out.println("bookBbs F");
+			}
+			
 			if(isS) {
 				System.out.println("finalBook S");
-				req.setAttribute("isS", "isS");
 			}else {
 				System.out.println("finalBook F");
 				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
 			}	
+			
 		}
 	}
 	

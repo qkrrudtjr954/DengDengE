@@ -456,9 +456,10 @@ public class AnimalBbsDao {
 	   
 	// 예약확정
 		public boolean bookBbs(int seq, String complete_email) {
+			System.out.println("bbs:"+seq+" "+complete_email);
 			String sql = " UPDATE ANIMALBBS SET "
-					+ " DEL=200 WHERE SEQ=? "
-					+ " AND TARGET_COMPLETE_EMAIL=? ";
+					+ " DEL=200, TARGET_COMPLETE_EMAIL=? "
+					+ " WHERE SEQ=? ";
 			System.out.println("sql"+sql);
 			Connection conn = null;
 			PreparedStatement psmt = null;
@@ -469,8 +470,9 @@ public class AnimalBbsDao {
 				conn = DBConnection.makeConnection();
 				System.out.println("1/6 S bookBbs");
 				psmt =conn.prepareStatement(sql);
-				psmt.setInt(1, seq);
-				psmt.setString(2, complete_email);
+				psmt.setString(1, complete_email);
+				psmt.setInt(2, seq);
+				
 				
 				System.out.println("2/6 S bookBbs");
 				count = psmt.executeUpdate();

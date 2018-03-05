@@ -3,12 +3,12 @@ package dto;
 import java.io.Serializable;
 
 public class BookDto implements Serializable{
-	private  int seq;
-	private int user_seq;
-	private String user_email;
-	private String content;
-	private int list_seq;
-	private String complete_email;
+	private  int seq;	// 예약리스트 시퀀스
+	private int user_seq;		// 예약자 시퀀스
+	private String user_email;	// 예약자 이메일
+	private String content;	// 예약자 기타사항
+	private int list_seq;	// 예약한 해당글 시퀀스
+	private String complete_email;	// 해당글 작성자(예약확정)
 	private int del;
 	
 	public BookDto() {

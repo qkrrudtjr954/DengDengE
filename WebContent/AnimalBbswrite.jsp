@@ -284,7 +284,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" style="align-content: center;">기타사항</span>
-							<textarea name="desc" id="summernote2"></textarea>
+							<textarea name="desc" id="summernote2" class="description"></textarea>
 						</div>
 					</div>
 
