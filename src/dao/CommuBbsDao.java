@@ -31,7 +31,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 		List<CommuBbsDto> list = new ArrayList<>();
 		
 		String sql = " SELECT a.seq, a.TITLE as title, content, a.target_user_seq, a.target_category, "
-				+ " readcount, a.last_update as last_update, like_count, del, b.title as category_name, c.email as user_email "
+				+ " readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email "
 				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c "
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=?";
 
@@ -65,7 +65,6 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int readcount
 						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
-						rs.getInt(i++),//int like_count
 						rs.getInt(i++), // int del
 						rs.getString(i++),// category_name
 						rs.getString(i++)); //String user_email
@@ -120,7 +119,6 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int readcount
 						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
-						0,//int like_count
 						rs.getInt(i++), // int del
 						rs.getString(i++),// category_name
 						rs.getString(i++)); //String user_email
@@ -146,7 +144,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 	@Override
 	public CommuBbsDto getCommu(int seq) {
 		String sql = " SELECT a.seq, a.TITLE as title, content, a.target_user_seq, a.target_category, "
-				+ " readcount, a.last_update as last_update, like_count, del, b.title as category_name, c.email as user_email "
+				+ " readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email "
 				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c "
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=?";
 
@@ -182,7 +180,6 @@ public class CommuBbsDao implements iCommuBbsDao {
 									rs.getInt(i++), //readcount, 
 									"", //reg_date,
 									rs.getString(i++), //last_update,
-									rs.getInt(i++),//int like_count
 									rs.getInt(i++), //del, 
 									rs.getString(i++), //category_name,
 									rs.getString(i++)); //user_email);
@@ -364,7 +361,6 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int readcount
 						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
-						0,//int like_count
 						rs.getInt(i++), // int del
 						rs.getString(i++), // category_name
 						rs.getString(i++)); //user_email 
@@ -422,7 +418,6 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getInt(i++), // int readcount
 						rs.getString(i++), // String reg_date
 						rs.getString(i++), // String last_update
-						0,//int like_count
 						rs.getInt(i++), // int del
 						rs.getString(i++), // category_name
 						rs.getString(i++)); //user_email
@@ -518,7 +513,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 	
 	@Override
 	public boolean Prevent_duplication(int target_user_seq, int target_bbs_seq) {
-		String sql = "select*from liketable where target_user_seq = ? and target_bbs_seq = ? ";
+		String sql = "select*from liketable where BBS_CATEGORY = 3 AND target_user_seq = ? and target_bbs_seq = ? ";
 		
 
 		int count = 0;
@@ -557,8 +552,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 	}
 	
 	public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
-		String sql = "INSERT INTO LIKETABLE (SEQ, TARGET_USER_SEQ, TARGET_BBS_SEQ) "
-				+ " VALUES(LIKE_SEQ.NEXTVAL, ?, ?) ";
+		String sql = "INSERT INTO LIKETABLE (SEQ, BBS_CATEGORY, TARGET_USER_SEQ, TARGET_BBS_SEQ) "
+				+ " VALUES(LIKE_SEQ.NEXTVAL, 3, ?, ?) ";
 		
 		
 		Connection conn = null;
@@ -595,7 +590,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 	}
 	
 	public void likeTB_delete(int target_user_seq, int target_bbs_seq) {
-		String sql = " delete from liketable where target_user_seq = ? and target_bbs_seq = ? ";
+		String sql = " delete from liketable where BBS_CATEGORY = 3 AND target_user_seq = ? and target_bbs_seq = ? ";
 		
 		
 		Connection conn = null;
@@ -632,7 +627,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 	
 	public int getLikeCount(int bbs_seq) {
-		String sql = " select count(*) as likecount from liketable where target_bbs_seq = ? ";
+		String sql = " select count(*) as likecount from liketable where BBS_CATEGORY = 3 AND target_bbs_seq = ?  ";
 		
 		int like_count = 0;
 		

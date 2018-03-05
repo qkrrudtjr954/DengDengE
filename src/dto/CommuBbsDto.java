@@ -35,7 +35,6 @@ public class CommuBbsDto implements Serializable {
 	private int readcount; 
 	private String reg_date;		//등록 날짜 
 	private String last_update;		//수정 날짜
-	private int like_count; 		//좋아요갯수
 	private int del;				//0 게시물 있음 1 게시물 없음
 	private String category_name;
 	private String user_email;
@@ -49,7 +48,7 @@ public class CommuBbsDto implements Serializable {
 
 
 	public CommuBbsDto(int seq, String title, String pic1, String content, int target_user_seq, int target_category,
-			int readcount, String reg_date, String last_update, int like_count, int del, String category_name, String user_email) {
+			int readcount, String reg_date, String last_update, int del, String category_name, String user_email) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -60,7 +59,6 @@ public class CommuBbsDto implements Serializable {
 		this.readcount = readcount;
 		this.reg_date = reg_date;
 		this.last_update = last_update;
-		this.like_count = like_count;
 		this.del = del;
 		this.category_name = category_name;
 		this.user_email = user_email;
@@ -200,22 +198,6 @@ public class CommuBbsDto implements Serializable {
 		this.user_email = user_email;
 	}
 
-	
-
-
-
-	public int getLike_count() {
-		return like_count;
-	}
-
-
-
-
-
-	public void setLike_count(int like_count) {
-		this.like_count = like_count;
-	}
-
 
 
 
@@ -224,19 +206,11 @@ public class CommuBbsDto implements Serializable {
 	public String toString() {
 		return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
 				+ ", target_user_seq=" + target_user_seq + ", target_category=" + target_category + ", readcount="
-				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", like_count=" + like_count
-				+ ", del=" + del + ", category_name=" + category_name + ", user_email=" + user_email + "]";
+				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
+				+ ", category_name=" + category_name + ", user_email=" + user_email + "]";
 	}
 
-
-
-
-
-
-
-
-
-
+	
 
 	
 }

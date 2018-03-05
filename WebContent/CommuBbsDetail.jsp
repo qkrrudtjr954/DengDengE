@@ -17,6 +17,7 @@
     #btnLike{
      background: url(button_search.png) no-repeat;
      border: none;
+     outline: none;
     }
     
     </style>
@@ -154,7 +155,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <!-- 댓글 달기/ 좋아요 -->
 
 <div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
-	<img src="${ isLiked == true ? './img/icon_heart.png' : './img/heart.png' }" id="like_img" height="50px" width="50px"></button>
+	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
 	<span id="like_count">${like_count }</span>
 </div>
 
@@ -243,9 +244,9 @@ if(comdto.getUser_email().equals(sid)){
 					var result = JSON.parse(data);
 					
 					if(result.status == 404){
-						$('img#like_img').attr('src', './img/heart.png');
+						$('img#like_img').attr('src', './img/empty_heart.png');
 					} else {
-						$('img#like_img').attr('src', './img/icon_heart.png');
+						$('img#like_img').attr('src', './img/heart.png');
 					}
 					
 					$('span#like_count').html(result.like_count);
