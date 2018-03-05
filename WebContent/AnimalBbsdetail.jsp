@@ -1,3 +1,6 @@
+<%@page import="jdk.nashorn.internal.parser.JSONParser"%>
+<%@page import="dto.BookDto"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.User"%>
 <%@page import="dto.AnimalBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -117,14 +120,13 @@ if(aniBbsDto != null){
 		</nav>
 	</section>
 
-	<form action="AnimalBbsController" method="post">
-		<input type="hidden" name="command" value="list">
-		<div class="album py-5 bg-light">
-			<div class="container">
 
-				<div class="row" style="margin:0 auto;width:900px;">
-					<h4 style="text-decoration: underline;"
-						class="offset-md-5" >댕댕이의 보호동물</h4>
+		<div class="album py-5 bg-light">
+        <div class="container">
+
+				<div class="row" style="margin: 0 auto; width: 900px;">
+					<h4 style="text-decoration: underline;" class="offset-md-5">댕댕이의
+						보호동물</h4>
 				</div>
 
 				<br>
@@ -140,13 +142,13 @@ if(aniBbsDto != null){
 					<span style="font-size: x-small"> <%=aniBbsDto.getType()%>
 						&nbsp;&nbsp;&nbsp; <%=aniBbsDto.getReg_date() %>
 					</span>&nbsp;&nbsp; <span style="font-size: x-small"> 조회수 <%=aniBbsDto.getReadcount()%>
-					</span>
-					<a href="AnimalBbsController?command=animlist"
-					class="offset-md-9 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>
+					</span> <a href="AnimalBbsController?command=animlist"
+						class="offset-md-9 btn btn-outline-secondary"
+						style="background-color: #28A745; color: #fff">list</a>
 				</div>
 				<hr>
 
-				<div class="row" style="margin:0 auto;width:900px;">
+				<div class="row" style="margin: 0 auto; width: 900px;">
 					<h4 class="offset-md-5">보호동물정보</h4>
 				</div>
 
@@ -268,7 +270,114 @@ if(aniBbsDto != null){
 					</table>
 				</div>
 
+				<%
+					String id = ((User)session.getAttribute("current_user")).getEmail();
+					boolean bookS = (boolean) request.getAttribute("bookS");
+				%>
+				
+
 				<br>
+			<%
+				if (aniBbsDto.getUser_email().equals(id)) {
+			%>
+				<div class="row">
+					<button type="button" class="offset-md-5 btn btn-primary"
+						data-toggle="modal" data-target="#exampleModal"
+						data-whatever="<%=aniBbsDto.getUser_email()%>">분양예약리스트</button>
+						
+				</div>
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">예약리스트</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form action="BookController" method="get">
+							<input type="hidden" name="command" value="finalBook">
+							<!-- hidden으로 값 전송 -->
+								<div class="form-group">
+									<label for="recipient-name" class="col-form-label">예약리스트:</label>
+									<table border="1" id="table">
+									</table>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<%
+				} else {
+			%>
+			<form action="BookController" method="post">
+				<input type="hidden" name="command" value="add"> <input
+					type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
+				<div class="row">
+				<%
+					if(bookS){
+						%>
+							<button type="button" class="offset-md-5 btn btn-primary"
+							>분양예약완료</button>
+						<%
+					}else {
+						%>
+							<button type="button" class="offset-md-5 btn btn-primary"
+						data-toggle="modal" data-target="#exampleModal"
+						data-whatever="<%=id%>">분양예약하기</button>
+						<%						
+					}
+				%>
+					
+				</div>
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+
+								<input type="hidden" name="command" value="add"> <input
+									type="hidden" name="seq" value="<%=aniBbsDto.getSeq()%>">
+								<div class="form-group">
+									<label for="recipient-name" class="col-form-label">UserEmail:</label>
+									<input type="text" class="form-control" id="recipient-name"
+										name="email">
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Message:</label>
+									<textarea class="form-control" id="message-text" name="text"></textarea>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<input type="submit" class="btn btn-primary" value="Booking">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<%
+				}
+			%>
+			<br>
 				
 				<div class="row" style="margin: 0 auto; width: 1000px;">
 					<span>
@@ -293,22 +402,9 @@ if(aniBbsDto != null){
 					</div>
 					<%
 				}
-				%>
-				
-				<!-- 댓글 -->
-				<div class="row">
-					
-				</div>		
-				
-				
+				%>			
 			</div>
 		</div>
-
-	</form>
-	
-	<div class="row">
-	
-	</div>
 
 
 	</main>
@@ -330,11 +426,41 @@ if(aniBbsDto != null){
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+	
+<script type="text/javascript">
+$('#exampleModal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('whatever') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this)
+	  modal.find('.modal-title').text('Booking:'+recipient)
+	  modal.find('.modal-body input').val(recipient)
+	});
+</script>
 
 <script type="text/javascript">
 
-
-
+	$("button").click(function () {		
+		$.ajax({
+			url:"BookController",		// 위치
+			type:"post",			// 방식
+			data:"command=getlist&seq=<%=aniBbsDto.getSeq() %>",	// data셋팅
+			
+			success:function (data) {
+				var list = JSON.parse(data);
+				var str = "";
+				$.each(list, function(i,item){
+					//alert('key:' + i + ' / ' + 'value:' + item);
+					str += '<tr>';
+					str += '<td width="200">'+item.user_email+'</td>';
+					str += '<td><input type="submit" class="btn btn-outline-secondary "style="background-color: #28A745; color: #fff" id="bookBtn" value="예약확정"></td>';
+					str += '</tr>';
+				});
+				$("#table").html(str);
+			}
+		});
+	});
 </script>
 
 	<script type="text/javascript">
