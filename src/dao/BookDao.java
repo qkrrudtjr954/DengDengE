@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.coyote.http11.filters.VoidOutputFilter;
+//import org.apache.coyote.http11.filters.VoidOutputFilter;
 
 import db.DBClose;
 import db.DBConnection;
@@ -20,6 +20,7 @@ public class BookDao {
       DBConnection.initConnect();
    }
    
+   // 예약리스트 
    public List<BookDto> getBookList() {
       String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT "
             + " FROM BOOK A, DENGUSER B "
@@ -60,12 +61,12 @@ public class BookDao {
           return list;   
    }
    
-   public boolean checkBook(int seq) {
+   // 예약상태 확인
+   public boolean checkBook(String email) {
       String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT "
             + " FROM BOOK A, DENGUSER B "
-            + " WHERE A.TARGET_USER_SEQ = B.SEQ "
-            + " AND A.TARGET_USER_EMAIL = B.EMAIL "
-            + " AND A.SEQ=? ";
+            + " WHERE A.TARGET_USER_EMAIL = B.EMAIL "
+            + " AND A.TARGET_USER_EMAIL  LIKE '" +email+ "%'";
       System.out.println("s"+sql);
       
       Connection conn = null;
@@ -79,7 +80,6 @@ public class BookDao {
          System.out.println("1/6 S checkBook");
             
          psmt = conn.prepareStatement(sql);
-         psmt.setInt(1, seq);
          System.out.println("2/6 S checkBook");
             
          count = psmt.executeUpdate();
@@ -96,10 +96,11 @@ public class BookDao {
 
    }
    
+   // 예약하기
    public boolean addBook(BookDto bookDto) {
       String sql = " INSERT INTO BOOK(SEQ, TARGET_USER_SEQ,"
-            + " TARGET_USER_EMAIL,  CONTENT) "
-            + " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?) ";
+            + " TARGET_USER_EMAIL,  CONTENT, DEL) "
+            + " VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?, 0) ";
       
       int count = 0;
       
@@ -112,16 +113,18 @@ public class BookDao {
          conn = DBConnection.makeConnection();
          System.out.println("1/6 S addBook");
          psmt = conn.prepareStatement(sql);
+         
          psmt.setInt(1, bookDto.getUser_seq());
          psmt.setString(2, bookDto.getUser_email());
          psmt.setString(3, bookDto.getContent());
+         
          System.out.println("2/6 S addBook");
          System.out.println(sql);
          count = psmt.executeUpdate();
          System.out.println("3/6 S addBook");
          
       } catch (SQLException e) {
-         System.out.println("wirteAnimalBbs fail");
+         System.out.println("addBook fail");
             System.out.println(e.getMessage());
             System.out.println(e.getErrorCode());
             System.out.println(e.getSQLState());

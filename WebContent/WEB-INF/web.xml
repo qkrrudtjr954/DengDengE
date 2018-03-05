@@ -86,4 +86,16 @@
 		<servlet-name>FindPlaceController</servlet-name>
 		<url-pattern>/FindPlaceController</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+      <servlet-name>BookController</servlet-name>
+      <servlet-class>controller.BookController</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>BookController</servlet-name>
+      <url-pattern>/BookController</url-pattern>
+   </servlet-mapping>
+	
+	
+	
 </web-app>
