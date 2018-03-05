@@ -1,4 +1,3 @@
-<%@page import="jdk.nashorn.internal.parser.JSONParser"%>
 <%@page import="dto.BookDto"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.User"%>

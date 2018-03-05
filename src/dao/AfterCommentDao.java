@@ -107,7 +107,6 @@ public class AfterCommentDao {
 			
 			count = psmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -141,6 +140,7 @@ public class AfterCommentDao {
 				dto.setSeq(rs.getInt("seq"));
 				dto.setStep(rs.getInt("step"));
 				dto.setTarget_user_seq(rs.getInt("target_user_seq"));
+				dto.setUser_email(rs.getString("target_user_email"));
 				
 				System.out.println(dto);
 				
