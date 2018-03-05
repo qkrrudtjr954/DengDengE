@@ -112,10 +112,11 @@ public class UserDao implements iUserDao{
 		return (count > 0) ? true : false;
 	}
 	
-	public boolean UserUpdate(User Userdto) {
+	public boolean UserUpdate(String pwd, String email) {
+		System.out.println(pwd+" "+email);
 		String sql = " UPDATE DENGUSER SET "
 				+ " PASSWORD=? "
-				+ " WHERE SEQ=? ";
+				+ " WHERE EMAIL LIKE '"+email+"%'";
 		
 		System.out.println("sql: "+ sql);
 		int count = 0;
@@ -127,8 +128,7 @@ public class UserDao implements iUserDao{
 		try {
 			conn = DBConnection.makeConnection();			
 			psmt=conn.prepareStatement(sql);
-			psmt.setString(1, Userdto.getPassword());
-			psmt.setInt(2, Userdto.getSeq());
+			psmt.setString(1, pwd);
 			System.out.println("2/6 S UserUpdate");
 			count = psmt.executeUpdate();
 			System.out.println("3/6 S UserUpdate");

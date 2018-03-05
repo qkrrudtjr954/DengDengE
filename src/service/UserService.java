@@ -38,8 +38,8 @@ public class UserService{
 	}
 	
 	
-	public boolean UserUpdate(User Userdto) {
-		return userDao.UserUpdate(Userdto);
+	public boolean UserUpdate(String pwd, String email) {
+		return userDao.UserUpdate(pwd, email);
 	}
 	
 	

@@ -32,7 +32,7 @@
 		<div class="row">
 			<div class="offset-md-3 col-md-6 order-md-1">
 				<form class="needs-validation" id="signUpForm" action="UserControl" method="POST" novalidate>
-					<input type="hidden" name="command" value="signup">
+					<input type="hidden" name="command" value="myPageAf">
 					<div class="mb-3">
 						<label for="email">Email</label> 
 							<span><input type="email" class="form-control success" name="email" id="email" value="${current_user.email }" readonly="readonly"></span>
