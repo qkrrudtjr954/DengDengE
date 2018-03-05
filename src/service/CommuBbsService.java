@@ -83,6 +83,10 @@ public class CommuBbsService {
 		public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
 			manager.likeTB_insert(target_user_seq, target_bbs_seq);
 		}
+		
+		public int getLikeCount(int bbs_seq) {
+			return manager.getLikeCount(bbs_seq);
+		}
 	
 }
 

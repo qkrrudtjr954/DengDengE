@@ -630,4 +630,32 @@ public class CommuBbsDao implements iCommuBbsDao {
 		
 	}
 
+	
+	public int getLikeCount(int bbs_seq) {
+		String sql = " select count(*) as likecount from liketable where target_bbs_seq = ? ";
+		
+		int like_count = 0;
+		
+		Connection conn = DBConnection.makeConnection();
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, bbs_seq);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				like_count = rs.getInt("likecount");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return like_count;
+	}
 }

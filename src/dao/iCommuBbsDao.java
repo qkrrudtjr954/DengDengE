@@ -39,5 +39,7 @@ public interface iCommuBbsDao {
 	
 	public void likeTB_delete(int target_user_seq, int target_bbs_seq);
 
-	public void likeTB_insert(int target_user_seq, int target_bbs_seq); 
+	public void likeTB_insert(int target_user_seq, int target_bbs_seq);
+	
+	public int getLikeCount(int bbs_seq);
 }

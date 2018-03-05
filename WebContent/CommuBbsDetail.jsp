@@ -153,8 +153,9 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <hr>
 <!-- 댓글 달기/ 좋아요 -->
 
-<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" ><img src="./img/icon_heart.png"></button><p><%=comdto.getLike_count() %></p>
-
+<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
+	<img src="${ isLiked == true ? './img/icon_heart.png' : './img/heart.png' }" id="like_img" height="50px" width="50px"></button>
+	<span id="like_count">${like_count }</span>
 </div>
 
 
@@ -238,13 +239,16 @@ if(comdto.getUser_email().equals(sid)){
 				data: { command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
 				type:"post",
 				success : function (data) {
-					var dtos = JSON.parse(data);
-					var like_count = dtos.like_count;
-
-					console.log(like_count);
-					$('#likeCount').children().remove();
-					$('#likeCount').append('<p>'+dtos.like_count+'</p>');
-					location.reload();
+					
+					var result = JSON.parse(data);
+					
+					if(result.status == 404){
+						$('img#like_img').attr('src', './img/heart.png');
+					} else {
+						$('img#like_img').attr('src', './img/icon_heart.png');
+					}
+					
+					$('span#like_count').html(result.like_count);
 				}
 			})
 		});	 
