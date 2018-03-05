@@ -215,10 +215,8 @@ public class AnimalBbsController extends HttpServlet {
 		}
 		else if(command.equals("btnsearch")) {
 			String ssearchBtn = req.getParameter("searchBtn");
-			System.out.println("btn:"+ssearchBtn);
 			
 			String searchBtn = ssearchBtn.substring(0, 1);
-			System.out.println("btn:"+searchBtn);
 			
 			if(ssearchBtn.equals("경기도")) {
 				searchBtn = ssearchBtn.substring(0, 2);
@@ -232,11 +230,6 @@ public class AnimalBbsController extends HttpServlet {
 			
 			
 		}
-	
-	
-	public boolean isNull(String str) {
-		return str == null || str.trim().equals("");
-	}
 	
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
 		RequestDispatcher dispatch = req.getRequestDispatcher(urls);
