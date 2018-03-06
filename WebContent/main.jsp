@@ -113,6 +113,58 @@
 			</p>
 		</div>
 	</footer>
+	
+	<button type="button" id="adminQuestion" data-toggle="modal" data-target="#exampleModal">
+	<img alt="circle" src="./img/contact-us.png" width="110px" >
+	</button>
+	
+	
+		<!-- 모달 부분 -->
+		
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">관리자에게 메세지 보내기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="MainControl" method="post" id="myForm"> 
+	  <input type="hidden" name="command" value="sendMsg">
+      <div class="modal-body">
+    
+      <ul class="list-group list-group-flush">
+			<li class="list-group-item">문의종류<br>
+					<select class ="custom-select"width="20" name="Qtype">
+					<option value="1">분양 하기</option>
+					<option value="2">입양 하기</option>
+					<option value="3">회원정보 문의</option>
+					<option value="4">제휴 문의</option>
+					<option value="5">기타 문의</option>
+					</select></li> 
+			<li class="list-group-item">문의 제목 <br>
+			 <input class="form-control mr-sm-2" type="text" name="title" placeholder="문의 제목을 입력하세요"></li>
+			<li class="list-group-item">연락처(이메일)<br>
+			<input class="form-control mr-sm-2" type="text" name="email" placeholder="빈칸일 시 회원정보 상 이메일로 답변이 갑니다"></li>
+			<li class="list-group-item"> 문의 내용 <br>
+			<textarea class="form-control" row="3" name="content"></textarea></li>
+		</ul>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <input type="button" onclick="submitMyForm()" class="btn btn-success" value="문의하기">
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+		
+<!-- 모달 끝 -->		
+	
+		
+
+	
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -139,6 +191,25 @@
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
+		
+		function submitMyForm() {
+			var FormData = $('#myForm').serialize();
+			
+			$.ajax({
+				url : 'MainControl',
+				data : FormData,
+				method : 'GET',
+				success : function (data) {
+					if(data == "success"){
+						alert('메세지를 전송했습니다.');
+					} else {
+						alert('메세지 전송에 실패했습니다.');
+					}
+					
+					$('button[data-dismiss="modal"]').click();
+				}
+			})
+		}
 	</script>
 </body>
 </html>

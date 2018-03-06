@@ -97,11 +97,6 @@
 							<div class="offset-md-1"></div>
 							<div class="col-md-2" align="right">
 								<select class="custom-select" id="category" name="category">
-									<!-- <option value="0">선택하세요</option>
-									<option value="1">애견Tip</option>
-									<option value="2">중고장터</option>
-									<option value="3">자유게시판</option>
-									 -->
 									<c:forEach items="${categories }" var="category" varStatus="i">
 										<option value="${category.seq }">${category.title }</option>
 									</c:forEach>

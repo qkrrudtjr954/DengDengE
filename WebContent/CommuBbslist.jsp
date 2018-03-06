@@ -77,55 +77,14 @@ public String toDay(){
 								href="UserControl?command=signout">로그아웃</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="UserControl?command=myPage">마이 페이지</a></li>
-							<li class="nav-item" >
-							<button type="button" data-toggle="modal" data-target="#exampleModal" id="helloworld" data-placement="top" title="관리자에게 연락하기">
-								<img src="./img/question.png" width="25">
-							</button></li>
+							
 						</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
 		</nav>
 		
-		<!-- 모달 부분 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">관리자에게 메세지 보내기</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <ul class="list-group list-group-flush">
-			<li class="list-group-item">문의종류<br>
-					<select class ="custom-select"width="20">
-					<option>분양 하기</option>
-					<option>입양 하기</option>
-					<option>회원정보 문의</option>
-					<option>제휴 문의</option>
-					<option>기타 문의</option>
-					</select></li> 
-			<li class="list-group-item">문의 제목 <br>
-			 <input class="form-control mr-sm-2" type="text" name="title" placeholder="문의 제목을 입력하세요"></li>
-			<li class="list-group-item">연락처(이메일)<br>
-			<input class="form-control mr-sm-2" type="text" name="email" placeholder="빈칸일 시 회원정보 상 이메일로 답변이 갑니다"></li>
-			<li class="list-group-item"> 문의 내용 <br>
-			<textarea class="form-control" row="3"></textarea></li>
-		</ul>
-	  </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-success">문의하기</button>
-      </div>
-    </div>
-  </div>
-</div>
-		
-<!-- 모달 끝 -->		
-		
-		
+
 		
 		
 	</header>
@@ -171,21 +130,12 @@ public String toDay(){
 <div id="hello">
 			<div class="row">
 				<!-- <div class="offset-md-1"></div> -->
-				 <div class="offset-md-1 col-md-10 offset-md-1"> 
+				 <div class="offset-md-2 col-md-8 offset-md-2"> 
 					<form name="form1" action="CommuBbsController">
 						<h1>커뮤니티</h1>
 						<hr>
 						<button type="button" class="btn btn-success" id="btnAll">전체보기</button>
-						&nbsp;
-						<!-- <button type="button" class="btn btn-success" id="btnCatg1"
-							value="1">애견Tip</button>
-						&nbsp;
-						<button type="button" class="btn btn-success" id="btnCatg2"
-							value="2">중고장터</button>
-						&nbsp;
-						<button type="button" class="btn btn-success" id="btnCatg3"
-							value="3">자유게시판</button> -->
-							
+													
 						<c:forEach items="${categories }" var="category" varStatus="i">
 							<button type="button" class="btn btn-success" onclick=" classify(${category.seq})">${category.title }</button>
 						</c:forEach>
@@ -196,9 +146,9 @@ public String toDay(){
 			</div>
 </div>
 <div class="row">
-				<div class="offset-md-1"></div>
+				<div class="offset-md-2"></div>
 
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<hr>
 					<div class="row">
 						<div class="col-md-2" style="text-align: center;">
@@ -223,14 +173,14 @@ public String toDay(){
 					<hr>
 				</div>
 
-				<div class="offset-md-1"></div>
+				<div class="offset-md-2"></div>
 			</div>
 
 			
 
 			<div class="row">
-				<div class="offset-md-1"></div>
-				<div class="col-md-10">
+				<div class="offset-md-2"></div>
+				<div class="col-md-8">
 					<%
 						if (bbslist == null || bbslist.size() == 0) {
 					%>
@@ -268,13 +218,13 @@ public String toDay(){
 					<%
 						}
 					%>
-					<div class="offset-md-1"></div>
+					<div class="offset-md-2"></div>
 				</div>
 <div class="row offset-md-9 col-md-2">
 <button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
 </div>				
 				
-<nav class="navbar navbar-light bg-light offset-md-3">
+<nav class="navbar navbar-light bg-light offset-md-4">
 <form class="form-inline" id="searchform" name="searchform" method="get" action="CommuBbsController">
 	<input type="hidden" name="command" value="search" />
 
@@ -313,6 +263,11 @@ public String toDay(){
 			</p>
 		</div>
 	</footer>
+	
+	
+	
+	
+	
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -362,7 +317,7 @@ public String toDay(){
 		});
 	</script>
 	<script>
-		   
+		
 		   
 		/* $(document).ready(function () {
 			 $("#btnAll").click(function () {
@@ -388,6 +343,11 @@ public String toDay(){
 		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
 		    });
 		    */
+		    $("#btnAll").click(function () {
+		        location.href="CommuBbsController?command=list#hello";
+	
+		    });
+		    
 		    $("#btnWrite").click(function () {
 		   	 location.href="CommuBbsController?command=write";
 		   });
@@ -397,7 +357,7 @@ public String toDay(){
 		   }
 			    
 	
-		    
+			
 		 
 		</script>
 </body>

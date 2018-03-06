@@ -467,3 +467,26 @@ create table BOOK(
     FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(SEQ)
 );
 
+
+
+SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email   
+FROM COMMUBBS A, CATEGORY B,  DENGUSER c 
+WHERE A.TARGET_CATEGORY = B.seq AND a.target_user_seq = c.seq AND a.DEL=0 ORDER BY a.REG_DATE DESC 
+
+
+alter table category drop column status;
+alter table category add  status number(3);
+
+select * from category;
+
+update category set status=200;
+
+
+INSERT INTO CATEGORY(SEQ, TARGET_CATEGORY, TITLE, DESCRIPTION, REG_DATE, status)
+VALUES(CATEGORY_SEQ.NEXTVAL,1, '애견TIP', '애견팁이당', SYSDATE, 200);
+
+INSERT INTO CATEGORY(SEQ, TARGET_CATEGORY, TITLE, DESCRIPTION, REG_DATE, status)
+VALUES(CATEGORY_SEQ.NEXTVAL,2, '중고장터', '중고장터닷', SYSDATE, 200);
+
+INSERT INTO CATEGORY(SEQ, TARGET_CATEGORY, TITLE, DESCRIPTION, REG_DATE, status)
+VALUES(CATEGORY_SEQ.NEXTVAL,3, '자유게시판', '자유게시판이당', SYSDATE, 200);

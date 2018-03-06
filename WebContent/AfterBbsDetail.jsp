@@ -388,7 +388,7 @@ if(msg !=null){
 						'</div>'+
 
 						'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
-							'<input type="text" name="content" id="conten'+index+'">'+
+							'<input type="text" name="content" id="content'+(index+1)+'">'+
 							'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
 						'</div>'+
 					'</div>'+
