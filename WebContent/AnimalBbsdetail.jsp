@@ -507,8 +507,16 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 			type : 'post',
 			data : {listseq : <%=aniBbsDto.getSeq() %>, command : 'finalBook',    email : user_email},
 			success  : function (data) {
+				var isS = JSON.parse(data);
 				alert("예약확정완료");
 				location.href="AnimalBbsController?command=animlist";
+				/* if(isS){
+					alert("예약확정완료");
+					location.href="AnimalBbsController?command=animlist";
+				}else{
+					alert("예약확정실패");
+					location.href="AnimalBbsController?command=animlist";
+				} */
 			}
 		});		
 	};
@@ -529,7 +537,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 			
 			$.ajax({
 				url:"AnimalBbsController",
-				data: { command: 'like', seq: ${aniBbsDto.seq }, userid: ${current_user.seq }},
+				data: {command: 'like', seq: ${aniBbsDto.seq }, userid: ${current_user.seq }},
 				type:"post",
 				success : function (data) {
 					

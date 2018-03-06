@@ -307,6 +307,13 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 <script type="text/javascript">
 // 페이징
 $(document).ready(function () {
+	$.ajax({
+		url : 'AnimalController',
+		type : 'post',
+		success  : function (data) {
+			
+		}
+	});
 	
 	$("#more").click(function () {
 		$("").append();

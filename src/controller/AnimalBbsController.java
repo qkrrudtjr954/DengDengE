@@ -123,6 +123,7 @@ public class AnimalBbsController extends HttpServlet {
 			
 			
 			String ggender = req.getParameter("gen");
+			System.out.println("g:"+ggender);	
 			int gender;
 			if(ggender.equals("여자")) {
 				gender = 1;
