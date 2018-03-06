@@ -197,7 +197,7 @@
 		
 		
 		$("#updateuser").click(function() {
-			var pwd ="${current_user.password }";
+			var pwd ="${current_user.password }"; 
 			//alert(pwd);
 			if($("#curpassword").val() == pwd ){
 				alert("수정가능");
