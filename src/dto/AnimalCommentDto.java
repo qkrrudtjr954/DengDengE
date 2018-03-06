@@ -5,42 +5,44 @@ import java.io.Serializable;
 public class AnimalCommentDto implements Serializable{
 	/*-분양글 댓글
 	CREATE SEQUENCE ANIMALCOMMENT_SEQ START WITH 1 INCREMENT BY 1;
-	CREATE TABLE ANIMALCOMMENT(
-	    SEQ NUMBER(8) PRIMARY KEY,
-	    TARGET_ANIMAL_SEQ NUMBER(8),
-	    FOREIGN KEY (TARGET_ANIMAL_SEQ) REFERENCES ANIMALBBS(seq),
-	    
-	    CONTENT VARCHAR2(3000),
-	    TARGET_USER_SEQ NUMBER(8),
-	    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES DENGUSER(SEQ),
-	    
-	    REG_DATE date,
-	    DEL NUMBER(1),
-	    STEP NUMBER(5),
-	    DEPTH NUMBER(5)
+CREATE TABLE ANIMALCOMMENT(
+    SEQ NUMBER(8) PRIMARY KEY,
+    TARGET_AFTER_SEQ NUMBER(8),
+    FOREIGN KEY (TARGET_AFTER_SEQ) REFERENCES AFTERBBS(SEQ),
+    CONTENT VARCHAR2(3000),
+    TARGET_USER_SEQ NUMBER(8),
+    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES DENGUSER(SEQ),
+TARGET_USER_EMAIL VARCHAR2(50),
+    FOREIGN KEY (TARGET_USER_EMAIL) REFERENCES DENGUSER(EMAIL),
+    REG_DATE date,
+    DEL NUMBER(1),
+    STEP NUMBER(5),
+    DEPTH NUMBER(5)
 	);*/
 	
 	private int seq;
-	private int AnimalSeq;
+	private int target_user_seq;
 	private String content;
-	private int userSeq;
-	private String Rdate;
-	private int del;
+	private String user_email;
+	
+	private String reg_date;
+
+	private int ref;
 	private int step;
 	private int depth;
 	
 	public AnimalCommentDto() {
 	}
 
-	public AnimalCommentDto(int seq, int animalSeq, String content, int userSeq, String rdate, int del, int step,
-			int depth) {
+	public AnimalCommentDto(int seq, int target_user_seq, String content, String user_email, String reg_date, int ref,
+			int step, int depth) {
 		super();
 		this.seq = seq;
-		AnimalSeq = animalSeq;
+		this.target_user_seq = target_user_seq;
 		this.content = content;
-		this.userSeq = userSeq;
-		Rdate = rdate;
-		this.del = del;
+		this.user_email = user_email;
+		this.reg_date = reg_date;
+		this.ref = ref;
 		this.step = step;
 		this.depth = depth;
 	}
@@ -53,12 +55,12 @@ public class AnimalCommentDto implements Serializable{
 		this.seq = seq;
 	}
 
-	public int getAnimalSeq() {
-		return AnimalSeq;
+	public int getTarget_user_seq() {
+		return target_user_seq;
 	}
 
-	public void setAnimalSeq(int animalSeq) {
-		AnimalSeq = animalSeq;
+	public void setTarget_user_seq(int target_user_seq) {
+		this.target_user_seq = target_user_seq;
 	}
 
 	public String getContent() {
@@ -69,28 +71,28 @@ public class AnimalCommentDto implements Serializable{
 		this.content = content;
 	}
 
-	public int getUserSeq() {
-		return userSeq;
+	public String getUser_email() {
+		return user_email;
 	}
 
-	public void setUserSeq(int userSeq) {
-		this.userSeq = userSeq;
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
 	}
 
-	public String getRdate() {
-		return Rdate;
+	public String getReg_date() {
+		return reg_date;
 	}
 
-	public void setRdate(String rdate) {
-		Rdate = rdate;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 
-	public int getDel() {
-		return del;
+	public int getRef() {
+		return ref;
 	}
 
-	public void setDel(int del) {
-		this.del = del;
+	public void setRef(int ref) {
+		this.ref = ref;
 	}
 
 	public int getStep() {
@@ -111,8 +113,13 @@ public class AnimalCommentDto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "AnimalCommentDto [seq=" + seq + ", AnimalSeq=" + AnimalSeq + ", content=" + content + ", userSeq="
-				+ userSeq + ", Rdate=" + Rdate + ", del=" + del + ", step=" + step + ", depth=" + depth + "]";
+		return "AnimalCommentDto [seq=" + seq + ", target_user_seq=" + target_user_seq + ", content=" + content
+				+ ", user_email=" + user_email + ", reg_date=" + reg_date + ", ref=" + ref + ", step=" + step
+				+ ", depth=" + depth + "]";
 	}
+	
+	
+
+	
 	
 }
