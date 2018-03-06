@@ -45,12 +45,10 @@ public class BookController extends HttpServlet {
 			
 			HttpSession session = req.getSession();
 	        User userInfo = (User)session.getAttribute("current_user");
+	        
 	        String user_email = userInfo.getEmail();
 	        int user_seq =userInfo.getSeq();
 	        
-	        // 해당글의 이메일
-			
-	         
 	        String content = req.getParameter("text");
 	    	AnimalBbsDto animalDto = (AnimalBbsDto)aniBbService.detailAnimalBbs(list_seq);
 	        System.out.println("seq:"+seq+" user_seq:"+user_seq+" email:"+user_email+" content:"+content+" listseq"+list_seq);        			
@@ -74,14 +72,16 @@ public class BookController extends HttpServlet {
 		}
 		else if(command.equals("finalBook")) {
 			String email = req.getParameter("email");
-			String seq = req.getParameter("listseq");
-			int listseq = Integer.parseInt(seq);
-			String complete_email = email;
-			AnimalBbsDto animalDto = (AnimalBbsDto)aniBbService.detailAnimalBbs(listseq);
+			String sseq = req.getParameter("listseq");
 			
-			System.out.println(email+" "+listseq+" "+complete_email+" "+animalDto.getUser_email());
+			int listseq = Integer.parseInt(sseq);
+			String complete_email = email;
+			
+			AnimalBbsDto animalDto = (AnimalBbsDto)aniBbService.detailAnimalBbs(listseq);
+
 			// 예약확정자
 			boolean bbsisS = aniBbService.bookBbs(listseq, complete_email);
+			
 			// 글작성자
 			boolean isS = bookservice.finalBook(email, listseq, animalDto.getUser_email());
 			
@@ -95,7 +95,6 @@ public class BookController extends HttpServlet {
 				System.out.println("finalBook S");
 			}else {
 				System.out.println("finalBook F");
-				dispatch("AnimalBbsController?command=detail&seq="+seq, req, resp);
 			}	
 			
 		}

@@ -29,7 +29,7 @@ public class AnimalBbsDao {
 				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
 				+ " FROM ANIMALBBS A, DENGUSER B "
 				+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
-				+ " AND A.DEL=0 OR A.DEL=200"
+				+ " AND A.DEL NOT IN 1"
 				+ " ORDER BY REG_DATE DESC ";
 		System.out.println("s"+sql);
 		

@@ -39,7 +39,7 @@ public class AnimalBbsController extends HttpServlet {
 		BookService bookService = BookService.getInstance();
 		if(command.equals("animlist")) {
 			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
-			
+			System.out.println("animlist: "+animlist);
 			req.setAttribute("animlist", animlist);
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}

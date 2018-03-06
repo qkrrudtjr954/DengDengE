@@ -164,8 +164,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					</div>
 				</div>
 			</form>
-			<br>
-	
+			<br>                     
 		<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="write">
 			<div class="row">
@@ -217,16 +216,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									${item.title }
 									<c:if test="${item.del==200 }"> 
 									분양 완료 
-									<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
-									</div>
-									<small class="text-muted">${range }</small>								
-								</div>
 									</c:if>
-									<c:if test="${item.del == 0 }">
-									
-									<br>
+									<br>													
 								<p>
 									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
 								</p>
@@ -236,7 +227,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									</div>
 									<small class="text-muted">${range }</small>								
 								</div>
-								</c:if>
+								
 							</div>
 						</div>
 					</div>
