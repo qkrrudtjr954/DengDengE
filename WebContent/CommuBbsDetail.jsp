@@ -17,6 +17,7 @@
     #btnLike{
      background: url(button_search.png) no-repeat;
      border: none;
+     outline: none;
     }
     
     </style>
@@ -120,9 +121,8 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 	<div class="offset-md-1"></div>	
 	<div class="col-md-2" align="right">	
 	<div class="p-3 mb-2 bg-success text-white" style="text-align: center;">
-	<%-- <a href="CommuBbsController?command=classify&target_category=<%=comdto.getTarget_category() %>"> --%>
 	<b><%=comdto.getCategory_name() %></b>
-	<!-- </a> -->
+
 	</div>
 	</div>
 
@@ -153,22 +153,18 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <hr>
 <!-- 댓글 달기/ 좋아요 -->
 
-<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" ><img src="./img/icon_heart.png"></button><p><%=comdto.getLike_count() %></p>
-
+<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
+	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
+	<span id="like_count">${like_count }</span>
 </div>
 
 
 
-<!-- <img src="./img/icon_heart.png"></button> -->
 
 
 
 <br>
 <div class="row">
-<%-- <c:set var="email" value="${comdto.user_email }"/> --%>
-<%-- <c:if test="${current_user.email eq comdto.user_email }">
-	hello
-</c:if> --%>
 
 
 <%
@@ -238,59 +234,23 @@ if(comdto.getUser_email().equals(sid)){
 				data: { command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
 				type:"post",
 				success : function (data) {
-					var dtos = JSON.parse(data);
-					var like_count = dtos.like_count;
-
-					console.log(like_count);
-					$('#likeCount').children().remove();
-					$('#likeCount').append('<p>'+dtos.like_count+'</p>');
-					location.reload();
+					
+					var result = JSON.parse(data);
+					
+					if(result.status == 404){
+						$('img#like_img').attr('src', './img/empty_heart.png');
+					} else {
+						$('img#like_img').attr('src', './img/heart.png');
+					}
+					
+					$('span#like_count').html(result.like_count);
 				}
 			})
 		});	 
 
 </script>
 
-<!-- <script type="text/javascript">
-var h =0;
-function func() {		
-	if(h ==0){
-		$.ajax({
-			url:"CommuBbsController",
-			data: { command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
-			type:"post",
-			success : function (data) {
-				var dtos = JSON.parse(data);
-				var like_count = dtos.like_count;
 
-				console.log(like_count);
-				$('#likeCount').children().remove();
-				$('#likeCount').append('<p>'+dtos.like_count+'</p>');
-				//location.reload();
-			}
-		})
-		h =1;
-	}
-	else if(h ==1){
-		$.ajax({
-			url:"CommuBbsController",
-			data: { command: 'like2', seq: ${comdto.seq }, userid: ${current_user.seq }},
-			type:"post",
-			success : function (data) {
-				var dtos = JSON.parse(data);
-				var like_count = dtos.like_count;
-
-				console.log(like_count);
-				$('#likeCount').children().remove();
-				$('#likeCount').append('<p>'+dtos.like_count+'</p>');
-				//location.reload();
-				//여기서 좋아요 취소 
-			}
-		})
-		h =0;
-	}
-}
-</script> -->
 
 <script>
     $(document).ready(function(){

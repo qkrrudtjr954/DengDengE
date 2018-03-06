@@ -20,6 +20,14 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
+    <style type="text/css">
+    #btnLike{
+     background: url(button_search.png) no-repeat;
+     border: none;
+     outline: none;
+    }
+    
+    </style>
 
   </head>
 
@@ -297,15 +305,26 @@ if(aniBbsDto != null){
 							</button>
 						</div>
 						<div class="modal-body">
-							<form action="BookController" method="get">
-							<input type="hidden" name="command" value="finalBook">
+						<!-- from -->							
 							<!-- hidden으로 값 전송 -->
 								<div class="form-group">
 									<label for="recipient-name" class="col-form-label">예약리스트:</label>
-									<table border="1" id="table">
-									</table>
+									<!-- table 위치 -->
+									
+									<c:forEach items="${booking }" var="item" varStatus="i">
+										<table class="table">
+											<tr>
+												<td width="200" class="tdVal">${item.user_email}</td>
+												<td>
+													<button onclick="getListTest('${item.user_email}')" class="btn btn-outline-secondary "style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
+												</td>
+											<tr>
+										</table>
+									
+									</c:forEach>
+									
 								</div>
-							</form>
+
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
@@ -383,6 +402,14 @@ if(aniBbsDto != null){
 						<%=aniBbsDto.getContent() %>
 					</span>
 				</div>
+				
+<hr>				
+<!-- 댓글 달기/ 좋아요 -->
+
+<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
+	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
+	<span id="like_count">${like_count }</span>
+</div>
 
 
 				<%
@@ -403,6 +430,7 @@ if(aniBbsDto != null){
 				}
 				%>			
 			</div>
+		
 		</div>
 
 
@@ -440,26 +468,19 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 <script type="text/javascript">
 
-	$("button").click(function () {		
+	function getListTest(user_email) {
+		//alert("click");
 		$.ajax({
-			url:"BookController",		// 위치
-			type:"post",			// 방식
-			data:"command=getlist&seq=<%=aniBbsDto.getSeq() %>",	// data셋팅
-			
-			success:function (data) {
-				var list = JSON.parse(data);
-				var str = "";
-				$.each(list, function(i,item){
-					//alert('key:' + i + ' / ' + 'value:' + item);
-					str += '<tr>';
-					str += '<td width="200">'+item.user_email+'</td>';
-					str += '<td><input type="submit" class="btn btn-outline-secondary "style="background-color: #28A745; color: #fff" id="bookBtn" value="예약확정"></td>';
-					str += '</tr>';
-				});
-				$("#table").html(str);
+			url : 'BookController',
+			type : 'post',
+			data : {listseq : <%=aniBbsDto.getSeq() %>, command : 'finalBook',    email : user_email},
+			success  : function (data) {
+				alert("예약확정완료");
+				location.href="AnimalBbsController?command=animlist";
 			}
-		});
-	});
+		});		
+	};
+
 </script>
 
 	<script type="text/javascript">
@@ -472,6 +493,26 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
+		$('#btnLike').click(function ()  {
+			
+			$.ajax({
+				url:"AnimalBbsController",
+				data: { command: 'like', seq: ${aniBbsDto.seq }, userid: ${current_user.seq }},
+				type:"post",
+				success : function (data) {
+					
+					var result = JSON.parse(data);
+					
+					if(result.status == 404){
+						$('img#like_img').attr('src', './img/empty_heart.png');
+					} else {
+						$('img#like_img').attr('src', './img/heart.png');
+					}
+					
+					$('span#like_count').html(result.like_count);
+				}
+			})
+		});	 
 	</script>
 
   </body>

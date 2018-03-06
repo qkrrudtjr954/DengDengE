@@ -329,7 +329,6 @@ SELECT a.seq, a.TITLE as title, content, target_user_seq, a.target_category,  re
 	    READCOUNT NUMBER(8),
 	    REG_DATE DATE,
 	    LAST_UPDATE DATE,
-	    LIKE_COUNT NUMBER(8),
 	    DEL NUMBER(1)
 	);
 	
@@ -342,12 +341,11 @@ SELECT a.seq, a.TITLE as title, content, target_user_seq, a.target_category,  re
 	
 	CREATE SEQUENCE LIKE_SEQ START WITH 1 INCREMENT BY 1;
 	CREATE TABLE LIKETABLE(
-	SEQ NUMBER(8) PRIMARY KEY, 
+	SEQ NUMBER(8) PRIMARY KEY,   
+	BBS_CATEGORY NUMBER(8),
 	TARGET_USER_SEQ NUMBER(8),
 	FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
-	TARGET_BBS_SEQ NUMBER(8),
-	FOREIGN KEY (TARGET_BBS_SEQ) REFERENCES COMMUBBS(seq),
-	del number(8)
+	TARGET_BBS_SEQ NUMBER(8)
 	);
 	
 	
@@ -365,3 +363,61 @@ SELECT a.seq, a.TITLE as title, content, target_user_seq, a.target_category,  re
 	
 	UPDATE  COMMUBBS  SET LIKE_COUNT=LIKE_COUNT+1, del = 1 
 	WHERE SEQ=?
+	
+	
+	select count(*) as likecount from liketable where target_bbs_seq = 12;
+	commit;
+	
+	DROP TABLE AFTERBBS 
+	CASCADE CONSTRAINT;
+	
+	DROP SEQUENCE AFTERBBS_SEQ;
+	
+	
+CREATE SEQUENCE AFTERBBS_SEQ START WITH 1 INCREMENT BY 1;
+create table AFTERBBS(
+    seq number(8) primary key,
+    title varchar2(100),
+    pic1 varchar2(500),
+    content long,
+    TARGET_USER_SEQ NUMBER(8),
+    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
+    REG_DATE DATE,
+    LAST_UPDATE DATE,
+    READCOUNT NUMBER(8),
+    DEL NUMBER(1)
+
+
+);
+
+-- 분양글 table
+	DROP TABLE animalbbs 
+	CASCADE CONSTRAINT;
+	
+	DROP SEQUENCE animalbbs_seq;
+	
+create SEQUENCE animalbbs_seq start with 1 increment by 1;
+create table animalbbs(
+    seq number(8) primary key,
+    title varchar2(100),
+    name varchar2(50),
+    age number(2),
+    kinds varchar2(100),
+    type varchar2(100),
+    location varchar2(200),
+    medicine number(1),
+    neutralization number(1),
+    gender number(1),
+    descripttion varchar2(3000),
+    pic1 varchar2(200),
+    content long,
+    TARGET_USER_SEQ NUMBER(8),
+    TARGET_CONTACT varchar2(20),
+    TARGET_DESCRIPTION   varchar2(3000),
+    REG_DATE DATE,
+    LAST_UPDATE DATE,
+    DEL NUMBER(1),
+    READCOUNT NUMBER(8),
+    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq)
+);
+

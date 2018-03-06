@@ -23,6 +23,25 @@
 
 <!-- Custom styles for this template -->
 <link href="./css/main.css" rel="stylesheet">
+    <style type="text/css">
+    #btnLike{
+     background: url(button_search.png) no-repeat;
+     border: none;
+     outline: none;
+    }
+
+    </style>
+
+     <%!
+public String toDate(String mdate){
+	String s = mdate.substring(2, 4) + "/"    // yyyy
+	         + mdate.substring(5, 7) + "/"   // MM
+	         + mdate.substring(8, 10);    // dd
+	return s;
+}
+  %>
+
+
 </head>
 
 <body>
@@ -71,21 +90,26 @@
 		</div>
 	</section>
 	<section>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="nav menu justify-content-center">
-				<li class="nav-item menu-item"><a class="nav-link active "
-					href="#">Active</a></li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item menu-item"><a class="nav-link" href="#">Disabled</a>
-				</li>
+		    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	        <ul class="nav menu justify-content-center">
+			 <li class="nav-item menu-item">
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">입양 후기 보기</a>
+			  </li>
+			  <li class="nav-item menu-item">
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
+			  </li>
+			  <li class="nav-item menu-item">
+
+			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
+			  </li>
 			</ul>
-		</nav>
+  		</nav>
 	</section>
 
-	
+
 			<%
 
 AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
@@ -105,76 +129,73 @@ if(msg !=null){
 
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<div class="row" style="text-align: center;">
-				<h1>댕댕이 반려 동물 입양 후기</h1>
-			</div>
+		<!-- 본문페이지 -->
 
-			<div class="row">
-				<h3 class="offset-md-5">생생한 입양 후기들</h3>
-			</div>
+		<div class="row">
+		<div class="offset-md-1"></div>
+		<div class="col-md-10">
+		<form action="AfterBbsController" method="post">
+		<input type="hidden" name="command" value="AfterBbsUpdate">
+		<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
 
-			<div class="row">
-
-				<form action="AfterBbsController" method="post" style="width:100%">
-					<input type="hidden" name="command" value="AfterBbsUpdate">
-					<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
+						<h1>입양후기</h1>
+						<hr>
 
 					<div class="row">
-						<h1>
-							글제목 :
-							<%=bbs1.getTitle()%></h1>
-					</div>
-					<hr>
+						<div class="offset-md-1"></div>
+	<div class="col-md-2" align="right">
+	<div class="p-3 mb-2 bg-success text-white" style="text-align: center;">
+	<b>입양후기</b>
 
-					<div class="row">
-						<span class="offset-md-8" style="font-size: small"> 작성자 :<%=bbs1.getUser_email()%>&nbsp;&nbsp;작성날짜
-							:<%=bbs1.getReg_date()%>&nbsp;&nbsp; 조회수 : <%=bbs1.getReadcond()%>
-						</span>
-					</div>
+	</div>
+	</div>
 
-					<div class="row">
-						<img alt="" src="">
-					</div>
+		<div class="col-md-8">
+			<p><h4><%=bbs1.getTitle() %></h4></p>
+		</div>
 
-					<hr>
+		<div class="offset-md-1"></div>
+</div>
 
-					<div class="row">
-						<span><%=bbs1.getContent()%></span>
-					</div>
+<hr>
+<div class="row offset-md-6">
+<p><b>작성자</b>  <%=bbs1.getUser_email()%> &nbsp;&nbsp;&nbsp;<b>작성일</b>  <%=toDate(bbs1.getReg_date())%>&nbsp;&nbsp;&nbsp;<b> 조회수 </b> <%=bbs1.getReadcond()%>&nbsp;</p>
+</div>
 
-					<hr>
+<div class="row">
+<div class="offset-md-1"></div>
+<div class="col-md-10">
+<br>
+<br>
+<%=bbs1.getContent() %>
+<br>
+<br>
 
-				</form>
-			</div>
+</div>
+<div class="offset-md-1"></div>
+</div>
+<hr>
+</form>
+</div>
+<!-- 댓글 달기/ 좋아요 -->
 
-			<div class="row">
-				<%
-					User current_user = (User) session.getAttribute("current_user");
-
-					if (current_user.getEmail().equals(bbs1.getUser_email())) {
-				%>
-
-				<form name="form1" method="post">
-					<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
-					<button id="btnupdete" class="btn btn-outline-secondary"
-						style="background-color: #28A745; color: #fff">수정하기</button>
-					<button id="btndelete" class="btn btn-outline-secondary"
-						style="background-color: #28A745; color: #fff">삭제하기</button>
-				</form>
-				<%
-					}
-				%>
-			</div>
-
-			
-				<div class="row">
-					<input type="text" name="content" id="content0"> 
+<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
+	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
+	<span id="like_count">${like_count }</span>
+	&nbsp;&nbsp;&nbsp;
+	<img src = "./img/comment_1.png" height="30px" width="30px" >&nbsp;&nbsp;&nbsp;&nbsp;<span id="commentCount">0</span>
+</div>
+</div>
+<!-- 댓글 달기/ 좋아요 끝 -->
+<div class="row offset-md-3 col-md-9">
+					<input type="text" name="content" id="content0" size="50">
 					<input type="button" value="comment" onclick="addComment(${bbs1.seq}, 1, 0, 0)">
 				</div>
 				<br><br>
 				<div class="comment-area">
-					
-					<!-- 
+
+
+					<!--
 					<div class="comment-box col-md-12">
 						<div class="comment-email" style="background: blue;">
 							${comment.user_email}
@@ -187,7 +208,7 @@ if(msg !=null){
 							</div>
 							${comment.content }
 						</div>
-					</div>							
+					</div>
 					<div class="comment-input col-md-12" style="background: red;">
 						<input type="text" name="content" id="content${i.index+1 }">
 						<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
@@ -214,7 +235,7 @@ if(msg !=null){
 							<div class="comment-date col-md-1" style="background:green;height: 50px;">
 								${comment.reg_date }
 							</div>
-							
+
 							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
 								<input type="text" name="content" id="content${i.index+1 }">
 								<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
@@ -222,7 +243,23 @@ if(msg !=null){
 						</div>
 						<hr>
 					</c:forEach>
-				
+
+			</div>
+					<div class="row">
+				<%
+					User current_user = (User) session.getAttribute("current_user");
+
+					if (current_user.getEmail().equals(bbs1.getUser_email())) {
+				%>
+
+				<form name="form1" class = "offset-md-5" method="post">
+					<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
+					<button id="btnupdete" class="btn btn-success">수정하기</button>
+					<button id="btndelete" class="btn btn-outline-secondary">삭제하기</button>
+				</form>
+				<%
+					}
+				%>
 			</div>
 		</div>
 	</div>
@@ -254,58 +291,79 @@ if(msg !=null){
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
-				
+
 		});
 		$('.menu-item').on('mouseout', function () {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
-		
-		
-		// button 
+
+
+		// button
 		$("#btnupdete").click(function(){
 	        alert("수정화면으로 이동 합니다");
 	       document.form1.action ="AfterBbsController?command=AfterBbsUpdate";
-	      document.form1.submit(); 
-	        
+	      document.form1.submit();
+
 	     });
-	     
-	     $("#btndelete").click(function(){    
+
+	     $("#btndelete").click(function(){
 	        //alert("클릭");
 	         document.form1.action="AfterBbsController?command=AfterDelete";
 	         document.form1.submit();
 	     });
-	     
+
+	     $('#btnLike').click(function ()  {
+
+				$.ajax({
+					url:"AfterBbsController",
+					data: { command: 'like', seq: ${bbs1.seq }, userid: ${current_user.seq }},
+					type:"post",
+					success : function (data) {
+
+						var result = JSON.parse(data);
+
+						if(result.status == 404){
+							$('img#like_img').attr('src', './img/empty_heart.png');
+						} else {
+							$('img#like_img').attr('src', './img/heart.png');
+						}
+
+						$('span#like_count').html(result.like_count);
+					}
+				})
+			});
+
 	     function showCommentArea(commentArea) {
 	    	 	var dom = $(commentArea).parent().parent().find('.comment-input');
-	    	 	
+
 	    	 	if(dom.css('display') == 'none'){
-		    	 	$(commentArea).parent().parent().find('.comment-input').css('display', 'block');	    	 		
+		    	 	$(commentArea).parent().parent().find('.comment-input').css('display', 'block');
 	    	 	} else {
 	    	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
 	    	 	}
 		}
-	     
+
 	     function addComment(ref, step, depth, index) {
 				$.ajax({
 					url : 'AfterCommentController',
 					method : 'POST',
 					data : { command : 'addComment', ref : ref, step : step+1, depth : depth+1, content : $('#content'+index).val() },
 					success : function (data) {
-						
+
 						$('.comment-area').children().remove();
-						
+
 						var comments = JSON.parse(data);
-						
+
 						for(var i=0; i < comments.length; i++){
-							
+
 							printCommentHtml(comments[i], i);
-							
+
 						}
 					}
 				})
 			}
-			
+
 			function printCommentHtml(comment, index) {
 				var html =
 					'<div class="row">'+
@@ -328,7 +386,7 @@ if(msg !=null){
 						'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
 							comment.reg_date+
 						'</div>'+
-						
+
 						'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
 							'<input type="text" name="content" id="conten'+index+'">'+
 							'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
@@ -338,8 +396,8 @@ if(msg !=null){
 					console.log(html);
 					$('.comment-area').append(html);
 			}
-	     
-	     
+
+
 	</script>
 </body>
 </html>

@@ -28,7 +28,8 @@ public class AnimalBbsDao {
 				+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
 				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
 				+ " FROM ANIMALBBS A, DENGUSER B "
-				+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL=0 "
+				+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
+				+ " AND A.DEL NOT IN 1"
 				+ " ORDER BY REG_DATE DESC ";
 		System.out.println("s"+sql);
 		
@@ -88,11 +89,11 @@ public class AnimalBbsDao {
 				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER, "
 				+ " DESCRIPTTION, PIC1, CONTENT, "
 				+ " TARGET_USER_SEQ, TARGET_CONTACT, TARGET_DESCRIPTION, "
-				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT)  "
+				+ " REG_DATE, LAST_UPDATE, DEL, READCOUNT, TARGET_COMPLETE_EMAIL)  "
 				+ " VALUES(ANIMALBBS_SEQ.NEXTVAL, ?, ?, ?, "
 				+ " ?, ?, ?, ?, ?, ?, "
 				+ " ?, ?, ?, "
-				+ " ?, ?, ?, SYSDATE, SYSDATE, 0, 0) ";
+				+ " ?, ?, ?, SYSDATE, SYSDATE, 0, 0, ?) ";
 		int count = 0;
 		
 		Connection conn = null;
@@ -123,6 +124,7 @@ public class AnimalBbsDao {
 			psmt.setInt(13, aniBbsDto.getUserSeq());
 			psmt.setString(14, aniBbsDto.getContact());
 			psmt.setString(15, aniBbsDto.getDescription());
+			psmt.setString(16, aniBbsDto.getComplete_email());
 			System.out.println("2/6 S wirteAnimalBbs");
 			System.out.println(sql);
 			count = psmt.executeUpdate();
@@ -314,7 +316,7 @@ public class AnimalBbsDao {
 						+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
 						+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
 						+ " FROM ANIMALBBS A,  DENGUSER B "
-						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL=0 "
+						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL NOT IN 1 "
 						+ " AND " + Searchtype + " LIKE '%" + Searchtext + "%'"
 		            + " ORDER BY REG_DATE DESC ";
 		   
@@ -452,14 +454,182 @@ public class AnimalBbsDao {
 		      return list;
 		   }
 	   
-	/*
-	// 페이징 처리
-	public List<AnimalBbsDto> getAnimalBbspaging(paginBean paging) {
-		return null;
-	}
-	*/
+	// 예약확정
+		public boolean bookBbs(int seq, String complete_email) {
+			System.out.println("bbs:"+seq+" "+complete_email);
+			String sql = " UPDATE ANIMALBBS SET "
+					+ " DEL=200, TARGET_COMPLETE_EMAIL=? "
+					+ " WHERE SEQ=? ";
+			System.out.println("sql"+sql);
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			
+			int count = 0;
+			
+			try {
+				conn = DBConnection.makeConnection();
+				System.out.println("1/6 S bookBbs");
+				psmt =conn.prepareStatement(sql);
+				psmt.setString(1, complete_email);
+				psmt.setInt(2, seq);
+				
+				
+				System.out.println("2/6 S bookBbs");
+				count = psmt.executeUpdate();
+				System.out.println("3/6 S bookBbs");
+			} catch (SQLException e) {
+				System.out.println("4/6 S bookBbs");
+				System.out.println(e.getMessage());
+			}finally{
+				DBClose.close(psmt, conn, null);	
+				System.out.println("5/6 S bookBbs");
+			}
+			return count>0?true:false;
+		}
 	   
+	//좋아요 추가
+	   public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
+			String sql = "INSERT INTO LIKETABLE (SEQ, BBS_CATEGORY, TARGET_USER_SEQ, TARGET_BBS_SEQ) "
+					+ " VALUES(LIKE_SEQ.NEXTVAL, 1, ?, ?) ";
+			
+			
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+
+			try {
+				conn = DBConnection.makeConnection();
+				System.out.println("2/6 likeTB_insert Success");
+
+				psmt = conn.prepareStatement(sql);
+				System.out.println("3/6 likeTB_insert Success");
+
+				psmt.setInt(1, target_user_seq);	
+				psmt.setInt(2,target_bbs_seq);
+				
+				System.out.println(sql);
+				psmt.executeUpdate();
+				System.out.println("4/6 likeTB_insert Success");
+
+			} catch (SQLException e) {
+				System.out.println("likeTB_insert fail");
+				System.out.println(e.getMessage());
+				System.out.println(e.getErrorCode());
+				System.out.println(e.getSQLState());
+				
+
+			} finally {
+				DBClose.close(psmt, conn, rs);
+			}
+
+
+
+		}
+	//좋아요 삭제
+	   public void likeTB_delete(int target_user_seq, int target_bbs_seq) {
+			String sql = " delete from liketable where BBS_CATEGORY = 1 AND target_user_seq = ? and target_bbs_seq = ? ";
+			
+			
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+
+			try {
+				conn = DBConnection.makeConnection();
+				System.out.println("2/6 likeTB_delete Success");
+
+				psmt = conn.prepareStatement(sql);
+				System.out.println("3/6 likeTB_delete Success");
+
+				psmt.setInt(1, target_user_seq);	
+				psmt.setInt(2,target_bbs_seq);
+				
+				System.out.println(sql);
+				psmt.executeUpdate();
+				System.out.println("4/6 likeTB_delete Success");
+
+			} catch (SQLException e) {
+				System.out.println("likeTB_delete fail");
+				System.out.println(e.getMessage());
+				System.out.println(e.getErrorCode());
+				System.out.println(e.getSQLState());
+
+				
+			} finally {
+				DBClose.close(psmt, conn, rs);
+			}
+
+			
+		}
+  
+	//중복방지
+	   public boolean Prevent_duplication(int target_user_seq, int target_bbs_seq) {
+			String sql = "select*from liketable where BBS_CATEGORY = 1 AND target_user_seq = ? and target_bbs_seq = ? ";
+			
+
+			int count = 0;
+
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+
+			try {
+				conn = DBConnection.makeConnection();
+				System.out.println("2/6 Prevent_duplication Success");
+
+				psmt = conn.prepareStatement(sql);
+				System.out.println("3/6 Prevent_duplication Success");
+
+				psmt.setInt(1, target_user_seq);	
+				psmt.setInt(2,target_bbs_seq);
+				
+				System.out.println(sql);
+				count = psmt.executeUpdate();
+				System.out.println("4/6 Prevent_duplication Success");
+
+			} catch (SQLException e) {
+				System.out.println("Prevent_duplication fail");
+				System.out.println(e.getMessage());
+				System.out.println(e.getErrorCode());
+				System.out.println(e.getSQLState());
+
+				count = -1;
+
+			} finally {
+				DBClose.close(psmt, conn, rs);
+			}
+
+			return count > 0 ? true : false;
+		}
 	   
+	//좋아요 불러오기 
+		public int getLikeCount(int bbs_seq) {
+			String sql = " select count(*) as likecount from liketable where BBS_CATEGORY = 1 AND target_bbs_seq = ?  ";
+			
+			int like_count = 0;
+			
+			Connection conn = DBConnection.makeConnection();
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, bbs_seq);
+				
+				rs = psmt.executeQuery();
+				
+				if(rs.next()) {
+					like_count = rs.getInt("likecount");
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				DBClose.close(psmt, conn, rs);
+			}
+			
+			return like_count;
+		}
 }
 
 

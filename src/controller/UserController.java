@@ -32,6 +32,7 @@ public class UserController extends HttpServlet{
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text./html; charset=utf-8"); 
+		UserService uservice = UserService.getInstance();
 		
 		String command = req.getParameter("command");
 
@@ -82,8 +83,36 @@ public class UserController extends HttpServlet{
 			resp.sendRedirect("main.jsp");
 
 		} else if(command.equals("myPage")) {
+			HttpSession session = req.getSession();
+			User current_user = (User)session.getAttribute("current_user");
+			current_user.getSeq();
+			//User user = uservice.UserUpdate(Userdto); 
+			
+			dispatcher("myPage.jsp", req, resp);
 
-		} else if(command.equals("signin")) {
+		}else if(command.equals("myPageAf")) {
+				HttpSession session = req.getSession();
+	           User userInfo = (User)session.getAttribute("current_user");
+	           String email = userInfo.getEmail();
+	           String pwd = req.getParameter("password2");
+			
+			boolean isS = uservice.UserUpdate(pwd, email);
+			
+			if(isS) {
+				System.out.println("성공");
+				dispatcher("signin.jsp", req, resp);
+				
+			}else {
+				System.out.println("실패");
+				dispatcher("myPage.jsp", req, resp);
+				
+			}
+			
+			
+			
+			
+		
+		}else if(command.equals("signin")) {
 
 			String email = req.getParameter("email");
 			String password = req.getParameter("password");
