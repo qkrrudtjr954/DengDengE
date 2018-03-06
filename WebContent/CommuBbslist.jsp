@@ -145,39 +145,67 @@ public String toDay(){
 				<!-- <div class="offset-md-1"></div> -->
 			</div>
 </div>
+<br>
+
 <div class="row">
 				<div class="offset-md-2"></div>
 
 				<div class="col-md-8">
-					<hr>
-					<div class="row">
-						<div class="col-md-2" style="text-align: center;">
-							<b>카테고리</b>
-						</div>
-						<div class="col-md-1" style="text-align: center;">
-							<b>번호</b>
-						</div>
-						<div class="col-md-4" style="text-align: center;">
-							<b>제목</b>
-						</div>
-						<div class="col-md-3" style="text-align: center;">
-							<b>작성자</b>
-						</div>
-						<div class="col-md-1" style="text-align: center;">
-							<b>작성일</b>
-						</div>
-						<div class="col-md-1" style="text-align: center;">
-							<b>조회수</b>
-						</div>
-					</div>
-					<hr>
+					<table border="1" width="100%">
+					<col width="15%"><col width="5%"><col width="45%"><col width="20%"><col width="10%"><col width="5%">
+					<tr>
+						<th align="center">카테고리</th>
+						<th align="center">번호</th>
+						<th align="center">제목</th>
+						<th align="center">작성자</th>
+						<th align="center">작성일</th>
+						<th align="center">조회수</th>						
+					</tr>
+					<%
+if(bbslist == null || bbslist.size() == 0){
+	%>
+	<tr>
+		<td colspan="6">작성된 글이 없습니다</td>
+	</tr>	
+
+					<%
+						}
+						for (int i = 0; i < bbslist.size(); i++) {
+							CommuBbsDto bbs = bbslist.get(i);
+					%>
+	<tr>
+	<td><%=bbs.getCategory_name()%></td>
+	<td><%=i+1 %></td>
+	<td>
+		<a href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
+								<%=bbs.getTitle()%>
+		</a>
+		&nbsp;<%
+							String reddate = toDate(bbs.getReg_date());
+							String today = toDay();
+							if(reddate.equals(today)){
+							%>
+		 					<span class="badge badge-pill badge-success">new</span>
+							<%
+							}
+							%>
+	</td>
+	<td><%=bbs.getUser_email() %></td>
+	<td><%=toDate(bbs.getReg_date())%></td>
+	<td><%=bbs.getReadcount()%></td>
+	</tr>	
+	<%
+}
+%>
+<tr>
+					</table>
 				</div>
 
 				<div class="offset-md-2"></div>
 			</div>
 
 			
-
+<%-- 
 			<div class="row">
 				<div class="offset-md-2"></div>
 				<div class="col-md-8">
@@ -217,7 +245,7 @@ public String toDay(){
 					<hr>
 					<%
 						}
-					%>
+					%> --%>
 					<div class="offset-md-2"></div>
 				</div>
 <div class="row offset-md-9 col-md-2">

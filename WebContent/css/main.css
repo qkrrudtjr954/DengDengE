@@ -102,3 +102,10 @@ button#adminQuestion {
     background: url(contact-us.png) no-repeat;
 }
 
+table th{
+	text-align:center;
+}
+
+table td{
+	text-align:center;
+}
