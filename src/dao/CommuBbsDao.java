@@ -536,7 +536,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 				DBClose.close(psmt, conn, rs);
 			}
 
-			return like_count;
+			return list;
 		}
 
 
@@ -563,7 +563,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-		return list;
+		return like_count;
 	}
 
 }
