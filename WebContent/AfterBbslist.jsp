@@ -409,7 +409,7 @@ to {
 
 		});
 
-		$("#btnwrite").click(function() {
+		$("#btnWrite").click(function() {
 			//alert("글쓰기 화면으로 넘어갑니다");
 			document.form1.action = "AfterBbsController?command=AfterBbswrite";
 			document.form1.submit();
