@@ -65,7 +65,7 @@ public class AfterCommentDao {
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, comment.getStep());
+			psmt.setInt(1, comment.getStep()+1);
 			psmt.setInt(2, comment.getRef());
 			
 			count = psmt.executeUpdate();
@@ -98,9 +98,9 @@ public class AfterCommentDao {
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, comment.getDepth());
+			psmt.setInt(1, comment.getDepth()+1);
 			psmt.setInt(2, comment.getRef());
-			psmt.setInt(3, comment.getStep());
+			psmt.setInt(3, comment.getStep()+1);
 			psmt.setInt(4, comment.getTarget_user_seq());
 			psmt.setString(5, comment.getContent());
 			psmt.setString(6, comment.getUser_email());
