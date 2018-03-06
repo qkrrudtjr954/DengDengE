@@ -22,7 +22,6 @@ public class CommuBbsDto implements Serializable {
 	    READCOUNT NUMBER(8),
 	    REG_DATE DATE,
 	    LAST_UPDATE DATE,
-	    LIKE_COUNT NUMBER(8),
 	    DEL NUMBER(1)
 	);*/
 
@@ -47,6 +46,9 @@ public class CommuBbsDto implements Serializable {
 
 
 
+
+
+
 	public CommuBbsDto(int seq, String title, String pic1, String content, int target_user_seq, int target_category,
 			int readcount, String reg_date, String last_update, int del, String category_name, String user_email) {
 		super();
@@ -63,6 +65,9 @@ public class CommuBbsDto implements Serializable {
 		this.category_name = category_name;
 		this.user_email = user_email;
 	}
+
+
+
 
 
 
@@ -96,125 +101,282 @@ public class CommuBbsDto implements Serializable {
 
 
 
+
+
+
+
+
 	public int getSeq() {
 		return seq;
 	}
 
+
+
+
+
+
+
+
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
+
+
+
+
+
+
+
 
 	public String getTitle() {
 		return title;
 	}
 
 
-   public String getTitle() {
-      return title;
-   }
-
-   public void setTitle(String title) {
-      this.title = title;
-   }
-
-   public String getPic1() {
-      return pic1;
-   }
-
-   public void setPic1(String pic1) {
-      this.pic1 = pic1;
-   }
-
-   public String getContent() {
-      return content;
-   }
-
-   public void setContent(String content) {
-      this.content = content;
-   }
-
-   public int getTarget_user_seq() {
-      return target_user_seq;
-   }
-
-   public void setTarget_user_seq(int target_user_seq) {
-      this.target_user_seq = target_user_seq;
-   }
-
-   public int getTarget_category() {
-      return target_category;
-   }
-
-   public void setTarget_category(int target_category) {
-      this.target_category = target_category;
-   }
-
-   public int getReadcount() {
-      return readcount;
-   }
-
-   public void setReadcount(int readcount) {
-      this.readcount = readcount;
-   }
-
-   public String getReg_date() {
-      return reg_date;
-   }
-
-   public void setReg_date(String reg_date) {
-      this.reg_date = reg_date;
-   }
-
-   public String getLast_update() {
-      return last_update;
-   }
-
-   public void setLast_update(String last_update) {
-      this.last_update = last_update;
-   }
-
-   public int getDel() {
-      return del;
-   }
-
-   public void setDel(int del) {
-      this.del = del;
-   }
-
-   public String getCategory_name() {
-      return category_name;
-   }
-
-   public void setCategory_name(String category_name) {
-      this.category_name = category_name;
-   }
-
-
-
-   public String getUser_email() {
-      return user_email;
-   }
 
 
 
 
 
-   public void setUser_email(String user_email) {
-      this.user_email = user_email;
-   }
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 
 
 
 
-   @Override
-   public String toString() {
-      return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
-            + ", target_user_seq=" + target_user_seq + ", target_category=" + target_category + ", readcount="
-            + readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
-            + ", category_name=" + category_name + ", user_email=" + user_email + "]";
-   }
 
+
+
+	public String getPic1() {
+		return pic1;
+	}
+
+
+
+
+
+
+
+
+	public void setPic1(String pic1) {
+		this.pic1 = pic1;
+	}
+
+
+
+
+
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+
+
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+
+
+
+
+
+	public int getTarget_user_seq() {
+		return target_user_seq;
+	}
+
+
+
+
+
+
+
+
+	public void setTarget_user_seq(int target_user_seq) {
+		this.target_user_seq = target_user_seq;
+	}
+
+
+
+
+
+
+
+
+	public int getTarget_category() {
+		return target_category;
+	}
+
+
+
+
+
+
+
+
+	public void setTarget_category(int target_category) {
+		this.target_category = target_category;
+	}
+
+
+
+
+
+
+
+
+	public int getReadcount() {
+		return readcount;
+	}
+
+
+
+
+
+
+
+
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
+
+
+
+
+
+
+
+
+	public String getReg_date() {
+		return reg_date;
+	}
+
+
+
+
+
+
+
+
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+
+
+
+
+
+
+
+
+	public String getLast_update() {
+		return last_update;
+	}
+
+
+
+
+
+
+
+
+	public void setLast_update(String last_update) {
+		this.last_update = last_update;
+	}
+
+
+
+
+
+
+
+
+	public int getDel() {
+		return del;
+	}
+
+
+
+
+
+
+
+
+	public void setDel(int del) {
+		this.del = del;
+	}
+
+
+
+
+
+
+
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+
+
+
+
+
+
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
+
+
+
+
+
+
+
+	public String getUser_email() {
+		return user_email;
+	}
+
+
+
+
+
+
+
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
+				+ ", target_user_seq=" + target_user_seq + ", target_category=" + target_category + ", readcount="
+				+ readcount + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
+				+ ", category_name=" + category_name + ", user_email=" + user_email + "]";
+	}
 
 
 
