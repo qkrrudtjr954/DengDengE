@@ -43,7 +43,7 @@ public class FindPlaceController extends HttpServlet{
 			
 			req.setAttribute("jsoupList", list);
 			dispatch("findPlace.jsp", req, resp);
-		}
+		} 
 		
 		
 	}
