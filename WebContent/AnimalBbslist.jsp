@@ -180,46 +180,54 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
 									<c:set var="reg" value="${item.reg_date}"/>
 									<%
-									String temp = (String)pageContext.getAttribute("reg");   //No exception.
-									Calendar cal = Calendar.getInstance();
-
-									int cur_day = cal.get(Calendar.DAY_OF_MONTH);
-									int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
-									int cur_month = cal.get(Calendar.MONTH)+1;
-
-									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
-									cal.setTime(format.parse(temp));
-
-									int reg_day = cal.get(Calendar.DAY_OF_MONTH);
-									int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
-									int reg_month = cal.get(Calendar.MONTH)+1;
-
-									int range_month = cur_month - reg_month;
-									int range_day = cur_day - reg_day;
-									int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
-
-									String result="";
-									if(range_month < 1){
-										if(range_day < 1){
-											if(range_hour < 1){
-												result = "방금 전";
-											}else {
-												result = range_hour+" 시간 전";
+										String temp = (String)pageContext.getAttribute("reg");   //No exception.
+										Calendar cal = Calendar.getInstance();
+	
+										int cur_day = cal.get(Calendar.DAY_OF_MONTH);
+										int cur_hour = cal.get(Calendar.HOUR_OF_DAY);
+										int cur_month = cal.get(Calendar.MONTH)+1;
+	
+										SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm", Locale.KOREA);
+										cal.setTime(format.parse(temp));
+	
+										int reg_day = cal.get(Calendar.DAY_OF_MONTH);
+										int reg_hour = cal.get(Calendar.HOUR_OF_DAY);
+										int reg_month = cal.get(Calendar.MONTH)+1;
+	
+										int range_month = cur_month - reg_month;
+										int range_day = cur_day - reg_day;
+										int range_hour = (cur_hour < reg_hour)?(cur_hour+24-reg_hour):(cur_hour-reg_hour);
+	
+										String result="";
+										if(range_month < 1){
+											if(range_day < 1){
+												if(range_hour < 1){
+													result = "방금 전";
+												}else {
+													result = range_hour+" 시간 전";
+												}
+											} else {
+												result = range_day + " 일 전";
 											}
 										} else {
-											result = range_day + " 일 전";
+											result = range_month + " 달 전 ";
 										}
-									} else {
-										result = range_month + " 달 전 ";
-									}
-
-									request.setAttribute("range", result);
+	
+										request.setAttribute("range", result);
 									%>
 
 									${item.title }
 									<c:if test="${item.del==200 }"> 
 										<span style="background-color: #28A745; color: #fff">분양 완료</span>
 									</c:if>
+									<c:choose>
+										<c:when test="${item.gender==1 }">
+											<span class="offset-md-8"><img src="./img/girl.png" width="50" height="50"></span>
+										</c:when>
+										<c:otherwise>
+											<span class="offset-md-6"><img src="./img/boy.png" width="50" height="50"></span>
+										</c:otherwise>
+									</c:choose>
 									<br>													
 								<p>
 									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
@@ -235,10 +243,11 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						</div>
 					</div>
 				</c:forEach>
-			</div>
-
-			
+			</div>			
 			</form>
+			<div class="row">
+				<input type="button" id="more" value="more">
+			</div>
 			
 		</div>
 	</div>
@@ -262,6 +271,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -307,18 +317,22 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 <script type="text/javascript">
 // 페이징
 $(document).ready(function () {
-	$.ajax({
-		url : 'AnimalController',
-		type : 'post',
-		success  : function (data) {
-			
-		}
-	});
 	
 	$("#more").click(function () {
-		$("").append();
+		alert("click");
+		$.ajax({
+			url : 'AnimalController',
+			type : 'post',
+			data : {command : 'animlist'},
+			success  : function (data) {
+			/* 	var data = JSON.parse(da);
+				alert(data);
+				for (var i = 0; i < da.data.length; i++) {
+					$(".row").append("<option value='"+da.data[i].seq+"'>"+da.data[i].email+"</option>")
+				} */
+			}
+		});
 	});
-	
 });
 
 </script>

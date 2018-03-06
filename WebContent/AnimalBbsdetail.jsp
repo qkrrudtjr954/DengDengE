@@ -510,13 +510,10 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 				var isS = JSON.parse(data);
 				alert("예약확정완료");
 				location.href="AnimalBbsController?command=animlist";
-				/* if(isS){
-					alert("예약확정완료");
-					location.href="AnimalBbsController?command=animlist";
-				}else{
-					alert("예약확정실패");
-					location.href="AnimalBbsController?command=animlist";
-				} */
+			},  
+			error : function(request,status,error) {
+				alert("예약확정실패");
+				location.href="AnimalBbsController?command=animlist";
 			}
 		});		
 	};

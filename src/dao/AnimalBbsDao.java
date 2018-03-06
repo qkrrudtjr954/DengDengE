@@ -85,7 +85,7 @@ public class AnimalBbsDao {
 	
 	// 입양하기 글 작성
 	public boolean wirteAnimalBbs(AnimalBbsDto aniBbsDto) {
-		System.out.println("접속");
+		System.out.println("aniBbsDto:"+aniBbsDto.toString());
 		String sql = " INSERT INTO ANIMALBBS(SEQ, TITLE, NAME, AGE, "
 				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER, "
 				+ " DESCRIPTTION, PIC1, CONTENT, "

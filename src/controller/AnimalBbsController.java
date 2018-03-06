@@ -41,6 +41,7 @@ public class AnimalBbsController extends HttpServlet {
 		AnimalBbsService aniBbService = AnimalBbsService.getInatance();
 		BookService bookService = BookService.getInstance();
 		if(command.equals("animlist")) {
+			System.out.println("list");
 			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
 			System.out.println("animlist: "+animlist);
 			req.setAttribute("animlist", animlist);
@@ -125,7 +126,7 @@ public class AnimalBbsController extends HttpServlet {
 			String ggender = req.getParameter("gen");
 			System.out.println("g:"+ggender);	
 			int gender;
-			if(ggender.equals("여자")) {
+			if(ggender.equals("여아")) {
 				gender = 1;
 			}else {
 				gender = 0;
