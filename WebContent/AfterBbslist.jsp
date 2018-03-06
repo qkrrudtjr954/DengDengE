@@ -222,10 +222,19 @@ to {
 	</div>
 </c:if> --%>
 
-			<form name="searchform" class="offset-md-7" method="get" action="AfterBbsController"
+			
+				<div class="row">
+					<form name="form1" action="AfterBbsController" method="post">
+				<div class="offset-md-1">
+
+					<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
+
+				</div>
+
+			</form>
+				<form name="searchform" class="offset-md-5" method="get" action="AfterBbsController"
 				id="myform">
 				<input type="hidden" name="command" value="AfterBbsSearch">
-				<div class="row">
 
 					<div class="input-group-prepend">
 						<select class="custom-select" id="inputGroupSelect01"
@@ -235,18 +244,17 @@ to {
 						</select> <input type="text" class="form-control"
 							aria-label="Text input with segmented dropdown button" size="30"
 							name="SearchWord" id="text">
+							<input type="button" class="btn btn-success" id="btnsearch" value="검색">
 					</div>
 
-					<div class="serach"text-align:center;">
-						<!-- <button type="button" class="btn btn-success" onclick="" id="btnsarch">검색</button> -->
-						<input type="button" class="btn btn-success" id="btnsearch"
-							value="검색">
-					</div>
-
+						
+					
+				</form>
 
 				</div>
-			</form>
+			
 
+		
 			<br><br>
 
 
@@ -320,7 +328,7 @@ to {
 
 
 
-									<small class="text-muted">${ range } </small>
+									<small class="text-muted">${ range }</small>
 
 								</div>
 							</div>
@@ -332,15 +340,8 @@ to {
 
 
 			</div>
-<hr>
-			<form name="form1" action="AfterBbsController" method="post">
-				<div class="offset-md-5">
 
-					<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
-
-				</div>
-
-			</form>
+			
 
 
 
