@@ -358,7 +358,7 @@ if(aniBbsDto != null){
 					%>
 					<script type="text/javascript">
 						 //alert("200");
-						 $("button").hide();
+						$("button").hide();
 						$("#Sbtn").hide();
 						$("#Nbtn").hide();
 					</script>
