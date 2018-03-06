@@ -78,8 +78,8 @@ public String toDay(){
 							<li class="nav-item"><a class="nav-link"
 								href="UserControl?command=myPage">마이 페이지</a></li>
 							<li class="nav-item" >
-							<button type="button" data-toggle="modal" data-target="#exampleModal">
-							<img src="./img/question.png" width="25">
+							<button type="button" data-toggle="modal" data-target="#exampleModal" id="helloworld" data-placement="top" title="관리자에게 연락하기">
+								<img src="./img/question.png" width="25">
 							</button></li>
 						</c:otherwise>
 					</c:choose>
@@ -330,6 +330,9 @@ public String toDay(){
 
 
 	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#helloworld').tooltip();
+	})
 		$('.menu-item').on(
 				'mouseover',
 				function() {
