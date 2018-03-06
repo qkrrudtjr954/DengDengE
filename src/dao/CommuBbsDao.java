@@ -269,7 +269,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 	// 카테고리별 불러오기
 	@Override
-	public List<CommuBbsDto> getCategory(int target_category) {
+	public List<CommuBbsDto> getCategory(int seq) {
 		List<CommuBbsDto> list = new ArrayList<>();
 
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date, a.last_update as last_update, del, b.title as category_name, a.READCOUNT, c.email as user_email  "
@@ -287,7 +287,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 			psmt = conn.prepareStatement(sql);
 			System.out.println("sql = " + sql);
-			psmt.setInt(1, target_category);
+			psmt.setInt(1, seq);
 			System.out.println("3/6 getCategory Success");
 
 			rs = psmt.executeQuery();
@@ -529,7 +529,8 @@ public class CommuBbsDao implements iCommuBbsDao {
 				dto.setTitle(rs.getString("title"));
 
 				list.add(dto);
-			} catch (SQLException e) {
+			} 
+			}catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {

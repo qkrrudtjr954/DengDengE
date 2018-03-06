@@ -49,7 +49,9 @@ public class CommuBbsController extends HttpServlet {
 
 			CommuBbsService comService = CommuBbsService.getInstance();
 			List<CommuBbsDto> bbslist = comService.getCommulist();
+			List<CategoryDto> categories = comService.getCategories();
 			//짐 싸기
+			req.setAttribute("categories", categories);
 			req.setAttribute("bbslist", bbslist);
 
 			//보내주기
@@ -165,12 +167,13 @@ public class CommuBbsController extends HttpServlet {
 				dispatch("CommuBbsController?command=read&seq="+seq, req, resp);
 			}
 		}else if(command.equals("classify")) {
-			String Starget_category = req.getParameter("target_category");
-			int target_category = Integer.parseInt(Starget_category);
+			String sseq = req.getParameter("target_category");
+			int seq = Integer.parseInt(sseq);
 			CommuBbsService comService = CommuBbsService.getInstance();
 
-			List<CommuBbsDto> bbslist = comService.getCategory(target_category);
+			List<CommuBbsDto> bbslist = comService.getCategory(seq);List<CategoryDto> categories = comService.getCategories();
 			//짐 싸기
+			req.setAttribute("categories", categories);
 			req.setAttribute("bbslist", bbslist);
 
 			//보내주기

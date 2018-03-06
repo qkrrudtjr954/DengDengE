@@ -50,57 +50,6 @@ public String toDay(){
 } 
 
 %>
-
-
-
-<c:if test="${cookie.successMsg.value != null }">
-	<div class="alert alert-success" role="alert">
-		<c:set var="successMsg" value="${cookie.successMsg.value }"/>
-		<%=URLDecoder.decode((String)pageContext.getAttribute("successMsg"), "utf-8") %>
-	</div>
-</c:if>
-
-<c:if test="${cookie.failMsg.value != null }">
-	<div class="alert alert-danger" role="alert">
-	  ${cookie.failMsg.value }
-	</div>
-</c:if>
-
-<script>
-   
-   
-$(document).ready(function () {
-	 $("#btnAll").click(function () {
-	        location.href="CommuBbsController?command=list#hello";
-
-	    });
-	
-    $("#btnCatg1").click(function () {
-        $("form[name=form1]")
-        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
-
-    });
-    
-
-    $("#btnCatg2").click(function () {
-    	 $("form[name=form1]")
-         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
-    });
-    
-
-    $("#btnCatg3").click(function () {
-    	 $("form[name=form1]")
-         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
-    });
-    
-    $("#btnWrite").click(function () {
-   	 location.href="CommuBbsController?command=write";
-   });
-   
-    
- 
-</script>
-
 </head>
 
 <body>
@@ -228,14 +177,18 @@ $(document).ready(function () {
 						<hr>
 						<button type="button" class="btn btn-success" id="btnAll">전체보기</button>
 						&nbsp;
-						<button type="button" class="btn btn-success" id="btnCatg1"
+						<!-- <button type="button" class="btn btn-success" id="btnCatg1"
 							value="1">애견Tip</button>
 						&nbsp;
 						<button type="button" class="btn btn-success" id="btnCatg2"
 							value="2">중고장터</button>
 						&nbsp;
 						<button type="button" class="btn btn-success" id="btnCatg3"
-							value="3">자유게시판</button>
+							value="3">자유게시판</button> -->
+							
+						<c:forEach items="${categories }" var="category" varStatus="i">
+							<button type="button" class="btn btn-success" onclick=" classify(${category.seq})">${category.title }</button>
+						</c:forEach>
 				
 				</form>
 				</div>
@@ -405,5 +358,44 @@ $(document).ready(function () {
 			
 		});
 	</script>
+	<script>
+		   
+		   
+		/* $(document).ready(function () {
+			 $("#btnAll").click(function () {
+			        location.href="CommuBbsController?command=list#hello";
+		
+			    });
+			
+		    $("#btnCatg1").click(function () {
+		        $("form[name=form1]")
+		        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
+		
+		    });
+		    
+		
+		    $("#btnCatg2").click(function () {
+		    	 $("form[name=form1]")
+		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
+		    });
+		    
+		
+		    $("#btnCatg3").click(function () {
+		    	 $("form[name=form1]")
+		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
+		    });
+		    */
+		    $("#btnWrite").click(function () {
+		   	 location.href="CommuBbsController?command=write";
+		   });
+		   
+		   function classify(seq) {
+			   $("form[name=form1]").attr({action:"CommuBbsController?command=classify&target_category="+seq+"#hello", method:"post"}).submit();
+		   }
+			    
+	
+		    
+		 
+		</script>
 </body>
 </html>
