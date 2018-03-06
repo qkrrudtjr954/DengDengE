@@ -215,7 +215,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 
 									${item.title }
 									<c:if test="${item.del==200 }"> 
-									분양 완료 
+										<span style="background-color: #28A745; color: #fff">분양 완료</span>
 									</c:if>
 									<br>													
 								<p>

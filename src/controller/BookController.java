@@ -83,7 +83,7 @@ public class BookController extends HttpServlet {
 			boolean bbsisS = aniBbService.bookBbs(listseq, complete_email);
 			
 			// 글작성자
-			boolean isS = bookservice.finalBook(email, listseq, animalDto.getUser_email());
+			boolean isS = bookservice.finalBook(listseq, animalDto.getUser_email());
 			
 			if(bbsisS) {
 				System.out.println("bookBbs S");

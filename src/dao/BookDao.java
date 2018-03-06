@@ -25,7 +25,8 @@ public class BookDao {
 		String sql = " SELECT A.SEQ, A.TARGET_USER_SEQ, A.TARGET_USER_EMAIL, A.CONTENT, A.TARGET_LIST_SEQ, A.TARGET_COMPLETE_EMAIL, A.DEL "
 				+ " FROM BOOK A, ANIMALBBS B "
 				+ " WHERE A.TARGET_LIST_SEQ = B.SEQ "
-				+ " AND TARGET_LIST_SEQ=?";
+				+ " AND A.TARGET_LIST_SEQ=? "
+				+ " AND A.DEL NOT IN 1 ";
 		System.out.println("s"+sql);
 		
 		Connection conn = null;
@@ -143,10 +144,10 @@ public class BookDao {
 	}
 	
 	// 예약확정
-	public boolean finalBook(String email, int listseq, String complete_email) {
-		System.out.println("book:"+email+" "+listseq+" "+complete_email);
+	public boolean finalBook(int listseq, String complete_email) {
+		System.out.println("book:"+listseq+" "+complete_email);
 		String sql = " UPDATE BOOK SET "
-				+ " DEL=200, TARGET_USER_EMAIL=?, "
+				+ " DEL=200, "
 				+ " TARGET_LIST_SEQ=?, "
 				+ " TARGET_COMPLETE_EMAIL=? ";
 		System.out.println("sql"+sql);
@@ -160,9 +161,9 @@ public class BookDao {
 			System.out.println("1/6 S finalBook");
 			psmt =conn.prepareStatement(sql);
 			
-			psmt.setString(1, email);
-			psmt.setInt(2, listseq);
-			psmt.setString(3, complete_email);
+			
+			psmt.setInt(1, listseq);
+			psmt.setString(2, complete_email);
 		
 			
 			System.out.println("2/6 S finalBook");

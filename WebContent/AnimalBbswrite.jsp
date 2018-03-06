@@ -474,6 +474,7 @@ $(document).ready(function() {
 			$("#contact").focus();
 		}else{
 			alert  ("인증완료");
+			$(".description").focus();
 		}
 	});
     
