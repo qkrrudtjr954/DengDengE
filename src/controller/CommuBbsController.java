@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import delegator.Delegator;
+import dto.CategoryDto;
 import dto.CommuBbsDto;
 import dto.User;
 import service.CommuBbsService;
@@ -33,7 +34,6 @@ public class CommuBbsController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		CommuBbsService comService = CommuBbsService.getInstance();
 
 		//Delegator delegator = delegator.getInstance();
 
@@ -46,6 +46,7 @@ public class CommuBbsController extends HttpServlet {
 
 		if(command.equals("list")) {
 
+			CommuBbsService comService = CommuBbsService.getInstance();
 			List<CommuBbsDto> bbslist = comService.getCommulist();
 			//짐 싸기
 			req.setAttribute("bbslist", bbslist);
@@ -54,9 +55,12 @@ public class CommuBbsController extends HttpServlet {
 			dispatch("CommuBbslist.jsp", req, resp);
 
 		}else if(command.equals("write")) {
-
+			CommuBbsService comService = CommuBbsService.getInstance();
+			
 			if(Delegator.checkSession(req, resp)) {
-
+				List<CategoryDto> categories = comService.getCategories();
+				req.setAttribute("categories", categories);
+				
 				dispatch("CommuBbsWrite.jsp", req, resp);
 			}else {
 
@@ -68,9 +72,11 @@ public class CommuBbsController extends HttpServlet {
 			
 			
 		}else if(command.equals("writeAf")){			
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			//String id = req.getParameter("id");
 			System.out.println("writeAf 들어옴");
+			
 			String Scategory = req.getParameter("category");
 			int category = Integer.parseInt(Scategory);
 			String title = req.getParameter("title");
@@ -82,12 +88,12 @@ public class CommuBbsController extends HttpServlet {
 
 			HttpSession session = req.getSession();
 			User userInfo = (User)session.getAttribute("current_user");
-			String writer = userInfo.getEmail();
-			int target_user_seq =userInfo.getSeq();
+			int target_user_seq = userInfo.getSeq();
+			
+			CommuBbsDto dto = new CommuBbsDto(title, content, target_user_seq, category);
+			boolean isS = comService.writeCommu(dto);
 
-			boolean isS = comService.writeCommu(new CommuBbsDto(title, content, target_user_seq, category));
-
-			System.out.println(isS);
+			System.out.println("CommuDto : "+dto);
 
 
 
@@ -112,7 +118,8 @@ public class CommuBbsController extends HttpServlet {
 			
 			if(Delegator.checkSession(req, resp)) {
 
-				
+				CommuBbsService comService = CommuBbsService.getInstance();
+
 				comService.readCount(seq);
 				CommuBbsDto comdto = comService.getCommu(seq);
 				
@@ -132,6 +139,7 @@ public class CommuBbsController extends HttpServlet {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
 			System.out.println("삭제 시퀀스 : " + Sseq);
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			boolean isS = comService.delCommu(seq);
 
@@ -153,6 +161,7 @@ public class CommuBbsController extends HttpServlet {
 		}else if(command.equals("classify")) {
 			String Starget_category = req.getParameter("target_category");
 			int target_category = Integer.parseInt(Starget_category);
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			List<CommuBbsDto> bbslist = comService.getCategory(target_category);
 			//짐 싸기
@@ -164,6 +173,7 @@ public class CommuBbsController extends HttpServlet {
 		}else if(command.equals("update")) {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			CommuBbsDto comdto = comService.getCommu(seq);
 
@@ -179,6 +189,7 @@ public class CommuBbsController extends HttpServlet {
 		      comdto.setSeq(Integer.parseInt(seq));
 		      comdto.setTitle(title);
 		      comdto.setContent(content);
+				CommuBbsService comService = CommuBbsService.getInstance();
 
 	         boolean isS = comService.udtCommu(comdto);
 
@@ -192,6 +203,7 @@ public class CommuBbsController extends HttpServlet {
 
 
 			  System.out.println(" search " + Searchtype +" word "+SearchWord);
+				CommuBbsService comService = CommuBbsService.getInstance();
 
 			  List<CommuBbsDto> bbslist = comService.getFindCommulist(Searchtype, SearchWord);
 				//짐 싸기
@@ -207,7 +219,8 @@ public class CommuBbsController extends HttpServlet {
 			int user = Integer.parseInt(Suser);
 			System.out.println("seq " + seq + " userid " + user);
 			
-						
+			CommuBbsService comService = CommuBbsService.getInstance();
+
 			boolean check = comService.Prevent_duplication(user, seq);
 			if( check) {		
 				System.out.println("이미 좋아요 누름");

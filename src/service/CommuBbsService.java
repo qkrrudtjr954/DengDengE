@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.iCommuBbsDao;
 import dao.CommuBbsDao;
+import dto.CategoryDto;
 import dto.CommuBbsDto;
 
 public class CommuBbsService {
@@ -82,6 +83,9 @@ public class CommuBbsService {
 		
 		public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
 			manager.likeTB_insert(target_user_seq, target_bbs_seq);
+		}
+		public List<CategoryDto> getCategories() {
+			return manager.getCategories();
 		}
 	
 }

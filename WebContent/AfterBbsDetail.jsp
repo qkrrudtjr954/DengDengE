@@ -309,15 +309,15 @@ if(msg !=null){
 			function printCommentHtml(comment, index) {
 				var html =
 					'<div class="row">'+
-						'<div class="comment-email col-md-2" style="background:pink;height: 50px;">'+
+						'<div class="comment-email col-md-2 col-xs-6" style="background:pink;height: 50px;">'+
 							comment.user_email+
 						'</div>'+
-						'<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">'+
+						'<div class="comment-box col-md-8 col-xs-12" style="background:lightblue;height: 50px;">'+
 							'<div class="row">'+
-								'<div class="col-md-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
+								'<div class="col-md-'+comment.depth+' col-xs-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
 									'ㄴ>'+
 								'</div>'+
-								'<div class="col comment-content">'+
+								'<div class="col col-xs-12 comment-content">'+
 									comment.content+
 								'</div>'+
 							'</div>'+

@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import dto.CategoryDto;
 import dto.CommuBbsDto;
 
 public interface iCommuBbsDao {
@@ -39,5 +40,7 @@ public interface iCommuBbsDao {
 	
 	public void likeTB_delete(int target_user_seq, int target_bbs_seq);
 
-	public void likeTB_insert(int target_user_seq, int target_bbs_seq); 
+	public void likeTB_insert(int target_user_seq, int target_bbs_seq);
+
+	public List<CategoryDto> getCategories(); 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
+import dto.CategoryDto;
 import dto.CommuBbsDto;
 
 public class CommuBbsDao implements iCommuBbsDao {
@@ -628,6 +629,38 @@ public class CommuBbsDao implements iCommuBbsDao {
 		}
 
 		
+	}
+
+	@Override
+	public List<CategoryDto> getCategories() {
+		String sql = " select * from category where status = 200 ";
+		
+		Connection conn = DBConnection.makeConnection();
+		
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<CategoryDto> list = new ArrayList<>();
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CategoryDto dto = new CategoryDto();
+				dto.setDescription(rs.getString("description"));
+				dto.setReg_date(rs.getString("reg_date"));
+				dto.setSeq(rs.getInt("seq"));
+				dto.setTitle(rs.getString("title"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
 	}
 
 }
