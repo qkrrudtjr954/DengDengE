@@ -147,9 +147,8 @@ public class BookDao {
 	public boolean finalBook(int listseq, String complete_email) {
 		System.out.println("book:"+listseq+" "+complete_email);
 		String sql = " UPDATE BOOK SET "
-				+ " DEL=200, "
-				+ " TARGET_LIST_SEQ=?, "
-				+ " TARGET_COMPLETE_EMAIL=? ";
+				+ " DEL=200, TARGET_COMPLETE_EMAIL=? "
+				+ " WHERE TARGET_LIST_SEQ=?, ";
 		System.out.println("sql"+sql);
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -161,9 +160,9 @@ public class BookDao {
 			System.out.println("1/6 S finalBook");
 			psmt =conn.prepareStatement(sql);
 			
+			psmt.setString(1, complete_email);
+			psmt.setInt(2, listseq);
 			
-			psmt.setInt(1, listseq);
-			psmt.setString(2, complete_email);
 		
 			
 			System.out.println("2/6 S finalBook");

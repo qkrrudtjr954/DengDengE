@@ -162,11 +162,14 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						<input type="button" class="btn btn-success" id="btnsearch" style="background-color: #28A745; color: #fff"
 							value="검색">
 					</div>
+					<div>
+						<a href="AnimalBbsController?command=write" class="offset-md-10 btn btn-outline-secondary"
+						style="width: 90px; background-color: #28A745; color: #fff">글쓰기</a>
+					</div>
 				</div>
-			</form>
-			<br>                     
+			</form>                    
+			<br>
 		<form action="AnimalBbsController" method="post">
-		<input type="hidden" name="command" value="write">
 			<div class="row">
 				<c:forEach items="${animlist }" var="item" varStatus="i">
 					<div class="col-md-4">
@@ -234,10 +237,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				</c:forEach>
 			</div>
 
-			<div class="row">
-			<input type="submit" class="offset-md-11 btn btn-outline-secondary"
-				style="width: 90px; background-color: #28A745; color: #fff" value="글쓰기">
-			</div>
+			
 			</form>
 			
 		</div>
@@ -301,10 +301,20 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 		}else{
 			$("#form").submit();
 		}
+	});	
+	</script>
+	
+<script type="text/javascript">
+// 페이징
+$(document).ready(function () {
+	
+	$("#more").click(function () {
+		$("").append();
 	});
 	
-	
-	</script>
+});
+
+</script>
 
 
 </body>

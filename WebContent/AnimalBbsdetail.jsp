@@ -312,7 +312,6 @@ if(aniBbsDto != null){
 											<c:choose>
 												<c:when test="${aniBbsDto.del == 200 }">
 													<c:forEach items="${booking }" var="item" varStatus="i">
-													${booking }
 															<tr>
 																<td width="200" class="tdVal">${item.user_email}</td>
 																<td>
@@ -495,6 +494,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 	  var modal = $(this)
 	  modal.find('.modal-title').text('Booking:'+recipient)
 	  modal.find('.modal-body input').val(recipient)
+	  $("#message-text").focus();
 	});
 </script>
 
@@ -543,7 +543,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 					
 					$('span#like_count').html(result.like_count);
 				}
-			})
+			});
 		});
 		
 	</script>

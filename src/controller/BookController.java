@@ -77,6 +77,8 @@ public class BookController extends HttpServlet {
 			int listseq = Integer.parseInt(sseq);
 			String complete_email = email;
 			
+			
+			
 			AnimalBbsDto animalDto = (AnimalBbsDto)aniBbService.detailAnimalBbs(listseq);
 
 			// 예약확정자
