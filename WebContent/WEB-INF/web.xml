@@ -55,6 +55,18 @@
 		<servlet-name>AnimalBbsController</servlet-name>
 		<url-pattern>/AnimalBbsController</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AnimalCommentController</servlet-name>
+		<servlet-class>controller.AnimalCommentController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AnimalCommentController</servlet-name>
+		<url-pattern>/AnimalCommentController</url-pattern>
+	</servlet-mapping>
+	
+	
+	
 
 	<servlet>
 		<servlet-name>AfterBbsController</servlet-name>
