@@ -19,10 +19,15 @@ public class DBConnection {
 		Connection conn = null;
 
 		try {
+<<<<<<< HEAD
 
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr", "hr");
 
 			//conn = DriverManager.getConnection("jdbc:oracle:thin:@myoracle.czzpf0jkqsrj.ap-northeast-2.rds.amazonaws.com:1521:oracle", "root", "Rudtjr1216!");
+=======
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr", "hr");
+			
+>>>>>>> like
 
 			System.out.println("DB Connection Success");
 		} catch (SQLException e) {

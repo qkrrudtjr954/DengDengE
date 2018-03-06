@@ -20,18 +20,6 @@
 
 <title>Deng Deng E list</title>
 
-<style type="text/css">
-
- .hit {
-      animation-name: blink;
-      animation-duration: 1.5s;
-      animation-timing-function: ease;
-      animation-iteration-count: infinite;
-      /* 위 속성들을 한 줄로 표기하기 */
-      /* -webkit-animation: blink 1.5s ease infinite; */
-    }
-    
-</style>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -109,9 +97,7 @@ $(document).ready(function () {
    	 location.href="CommuBbsController?command=write";
    });
    
-
-});
-   
+    
  
 </script>
 
@@ -142,11 +128,57 @@ $(document).ready(function () {
 								href="UserControl?command=signout">로그아웃</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="UserControl?command=myPage">마이 페이지</a></li>
+							<li class="nav-item" >
+							<button type="button" data-toggle="modal" data-target="#exampleModal">
+							<img src="./img/question.png" width="25">
+							</button></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
 		</nav>
+		
+		<!-- 모달 부분 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">관리자에게 메세지 보내기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <ul class="list-group list-group-flush">
+			<li class="list-group-item">문의종류<br>
+					<select class ="custom-select"width="20">
+					<option>분양 하기</option>
+					<option>입양 하기</option>
+					<option>회원정보 문의</option>
+					<option>제휴 문의</option>
+					<option>기타 문의</option>
+					</select></li> 
+			<li class="list-group-item">문의 제목 <br>
+			 <input class="form-control mr-sm-2" type="text" name="title" placeholder="문의 제목을 입력하세요"></li>
+			<li class="list-group-item">연락처(이메일)<br>
+			<input class="form-control mr-sm-2" type="text" name="email" placeholder="빈칸일 시 회원정보 상 이메일로 답변이 갑니다"></li>
+			<li class="list-group-item"> 문의 내용 <br>
+			<textarea class="form-control" row="3"></textarea></li>
+		</ul>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-success">문의하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+		
+<!-- 모달 끝 -->		
+		
+		
+		
+		
 	</header>
 	<main role="main">
 

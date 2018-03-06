@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -109,14 +110,19 @@ public class CommuBbsController extends HttpServlet {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
 
+			HttpSession session = req.getSession();
+			
+			User current_user = (User)session.getAttribute("current_user"); 
 			
 			if(Delegator.checkSession(req, resp)) {
 
 				
 				comService.readCount(seq);
 				CommuBbsDto comdto = comService.getCommu(seq);
-				
+				boolean isLiked = comService.Prevent_duplication(current_user.getSeq(), seq);
 				req.setAttribute("comdto", comdto);
+				req.setAttribute("like_count", comService.getLikeCount(seq));
+				req.setAttribute("isLiked", isLiked);
 				dispatch("CommuBbsDetail.jsp", req, resp);
 				
 				
@@ -208,45 +214,35 @@ public class CommuBbsController extends HttpServlet {
 			System.out.println("seq " + seq + " userid " + user);
 			
 						
+			int like_count = 0; 
+			HashMap<String, Integer> status = new HashMap<>();
+			
 			boolean check = comService.Prevent_duplication(user, seq);
+			
 			if( check) {		
-				System.out.println("이미 좋아요 누름");
+				// 테이블에서 해당 행을 삭제( 추가) 한다.
 				comService.likeTB_delete(user, seq);
-				List<CommuBbsDto> dto= comService.DclickLikeAf(seq);
-				String json = new Gson().toJson(dto);
 				
-				System.out.println(json);
-				resp.getWriter().write(json);
-			
+				// status, like count 를 json으로 전송한다.
+				status.put("status", 404);
 			}else {
-				List<CommuBbsDto> dto= comService.clickLikeAf(seq);
+				// 테이블에서 해당 행을 삭제( 추가) 한다.
 				comService.likeTB_insert(user, seq);
-				String json = new Gson().toJson(dto);
 				
-				System.out.println(json);
-				resp.getWriter().write(json);
+				// status, like count 를 json으로 전송한다.
+				status.put("status", 200);
 			}
-	
-		
-		}/*else if(command.equals("like2")) {
-			System.out.println("like2들어옴");
-			//여기서 좋아요 취소 
-			String Sseq = req.getParameter("seq");
-			int seq = Integer.parseInt(Sseq);
-			String Suser = req.getParameter("userid");
-			int user = Integer.parseInt(Suser);
-			System.out.println("seq " + seq + " userid " + user);
-			
-			comService.likeTB_delete(user, seq);
-			List<CommuBbsDto> dto= comService.DclickLikeAf(seq);
-			String json = new Gson().toJson(dto);
+
+			// 테이블을 게시글 seq 로 count(*) 
+			like_count = comService.getLikeCount(seq);
+			status.put("like_count", like_count);
+			String json = new Gson().toJson(status);
 			
 			System.out.println(json);
-			resp.getWriter().write(json);
-			
-			
-			
-		}*/
+			resp.getWriter().write(json);				
+	
+		
+		}
 	}
 	//보내주는 함수
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

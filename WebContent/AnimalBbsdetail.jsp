@@ -21,6 +21,14 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
+    <style type="text/css">
+    #btnLike{
+     background: url(button_search.png) no-repeat;
+     border: none;
+     outline: none;
+    }
+    
+    </style>
 
   </head>
 
@@ -395,6 +403,14 @@ if(aniBbsDto != null){
 						<%=aniBbsDto.getContent() %>
 					</span>
 				</div>
+				
+<hr>				
+<!-- 댓글 달기/ 좋아요 -->
+
+<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
+	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
+	<span id="like_count">${like_count }</span>
+</div>
 
 
 				<%
@@ -415,6 +431,7 @@ if(aniBbsDto != null){
 				}
 				%>			
 			</div>
+		
 		</div>
 
 
@@ -477,6 +494,26 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
+		$('#btnLike').click(function ()  {
+			
+			$.ajax({
+				url:"AnimalBbsController",
+				data: { command: 'like', seq: ${aniBbsDto.seq }, userid: ${current_user.seq }},
+				type:"post",
+				success : function (data) {
+					
+					var result = JSON.parse(data);
+					
+					if(result.status == 404){
+						$('img#like_img').attr('src', './img/empty_heart.png');
+					} else {
+						$('img#like_img').attr('src', './img/heart.png');
+					}
+					
+					$('span#like_count').html(result.like_count);
+				}
+			})
+		});	 
 	</script>
 
   </body>
