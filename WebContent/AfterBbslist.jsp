@@ -278,7 +278,7 @@ to {
 											class="btn btn-sm btn-outline-secondary">View</a>
 									</div>
 
-									<!— 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 —>
+									 <!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스  -->
 									<c:set var="reg" value="${item.reg_date}" />
 									<%
 										String temp = (String) pageContext.getAttribute("reg"); //No exception.
@@ -320,7 +320,7 @@ to {
 
 
 
-									<small class="text-muted">${ range } 일 전</small>
+									<small class="text-muted">${ range } </small>
 
 								</div>
 							</div>
