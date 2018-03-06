@@ -218,14 +218,14 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 
 									${item.title }
 									<c:if test="${item.del==200 }"> 
-										<span style="background-color: #28A745; color: #fff">분양 완료</span>
+										<span class="badge badge-pill badge-success">분양 완료</span>
 									</c:if>
 									<c:choose>
 										<c:when test="${item.gender==1 }">
-											<span class="offset-md-8"><img src="./img/girl.png" width="50" height="50"></span>
+											<span class="offset-md-8"><img src="./img/male.png" width="50" height="50"></span>
 										</c:when>
 										<c:otherwise>
-											<span class="offset-md-6"><img src="./img/boy.png" width="50" height="50"></span>
+											<span class="offset-md-6"><img src="./img/female.png" width="50" height="50"></span>
 										</c:otherwise>
 									</c:choose>
 									<br>													
