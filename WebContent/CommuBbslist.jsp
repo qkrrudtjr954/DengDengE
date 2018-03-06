@@ -22,6 +22,9 @@
 
 
 <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="./css/dashboard.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -50,57 +53,6 @@ public String toDay(){
 } 
 
 %>
-
-
-
-<c:if test="${cookie.successMsg.value != null }">
-	<div class="alert alert-success" role="alert">
-		<c:set var="successMsg" value="${cookie.successMsg.value }"/>
-		<%=URLDecoder.decode((String)pageContext.getAttribute("successMsg"), "utf-8") %>
-	</div>
-</c:if>
-
-<c:if test="${cookie.failMsg.value != null }">
-	<div class="alert alert-danger" role="alert">
-	  ${cookie.failMsg.value }
-	</div>
-</c:if>
-
-<script>
-   
-   
-$(document).ready(function () {
-	 $("#btnAll").click(function () {
-	        location.href="CommuBbsController?command=list#hello";
-
-	    });
-	
-    $("#btnCatg1").click(function () {
-        $("form[name=form1]")
-        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
-
-    });
-    
-
-    $("#btnCatg2").click(function () {
-    	 $("form[name=form1]")
-         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
-    });
-    
-
-    $("#btnCatg3").click(function () {
-    	 $("form[name=form1]")
-         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
-    });
-    
-    $("#btnWrite").click(function () {
-   	 location.href="CommuBbsController?command=write";
-   });
-   
-    
- 
-</script>
-
 </head>
 
 <body>
@@ -128,55 +80,14 @@ $(document).ready(function () {
 								href="UserControl?command=signout">로그아웃</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="UserControl?command=myPage">마이 페이지</a></li>
-							<li class="nav-item" >
-							<button type="button" data-toggle="modal" data-target="#exampleModal">
-							<img src="./img/question.png" width="25">
-							</button></li>
+							
 						</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
 		</nav>
 		
-		<!-- 모달 부분 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">관리자에게 메세지 보내기</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <ul class="list-group list-group-flush">
-			<li class="list-group-item">문의종류<br>
-					<select class ="custom-select"width="20">
-					<option>분양 하기</option>
-					<option>입양 하기</option>
-					<option>회원정보 문의</option>
-					<option>제휴 문의</option>
-					<option>기타 문의</option>
-					</select></li> 
-			<li class="list-group-item">문의 제목 <br>
-			 <input class="form-control mr-sm-2" type="text" name="title" placeholder="문의 제목을 입력하세요"></li>
-			<li class="list-group-item">연락처(이메일)<br>
-			<input class="form-control mr-sm-2" type="text" name="email" placeholder="빈칸일 시 회원정보 상 이메일로 답변이 갑니다"></li>
-			<li class="list-group-item"> 문의 내용 <br>
-			<textarea class="form-control" row="3"></textarea></li>
-		</ul>
-	  </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-success">문의하기</button>
-      </div>
-    </div>
-  </div>
-</div>
-		
-<!-- 모달 끝 -->		
-		
-		
+
 		
 		
 	</header>
@@ -222,62 +133,97 @@ $(document).ready(function () {
 <div id="hello">
 			<div class="row">
 				<!-- <div class="offset-md-1"></div> -->
-				 <div class="offset-md-1 col-md-10 offset-md-1"> 
+				 <div class="offset-md-2 col-md-8 offset-md-2"> 
 					<form name="form1" action="CommuBbsController">
 						<h1>커뮤니티</h1>
 						<hr>
 						<button type="button" class="btn btn-success" id="btnAll">전체보기</button>
-						&nbsp;
-						<button type="button" class="btn btn-success" id="btnCatg1"
-							value="1">애견Tip</button>
-						&nbsp;
-						<button type="button" class="btn btn-success" id="btnCatg2"
-							value="2">중고장터</button>
-						&nbsp;
-						<button type="button" class="btn btn-success" id="btnCatg3"
-							value="3">자유게시판</button>
+													
+						<c:forEach items="${categories }" var="category" varStatus="i">
+							<button type="button" class="btn btn-success" onclick=" classify(${category.seq})">${category.title }</button>
+						</c:forEach>
 				
 				</form>
 				</div>
 				<!-- <div class="offset-md-1"></div> -->
 			</div>
 </div>
-<div class="row">
-				<div class="offset-md-1"></div>
-
-				<div class="col-md-10">
-					<hr>
-					<div class="row">
-						<div class="col-md-2" style="text-align: center;">
-							<b>카테고리</b>
-						</div>
-						<div class="col-md-1" style="text-align: center;">
-							<b>번호</b>
-						</div>
-						<div class="col-md-4" style="text-align: center;">
-							<b>제목</b>
-						</div>
-						<div class="col-md-3" style="text-align: center;">
-							<b>작성자</b>
-						</div>
-						<div class="col-md-1" style="text-align: center;">
-							<b>작성일</b>
-						</div>
-						<div class="col-md-1" style="text-align: center;">
-							<b>조회수</b>
-						</div>
+<br>
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+				<h1 class="h2">Animal List</h1>
+				<div class="btn-toolbar mb-2 mb-md-0">
+					<div class="btn-group mr-2">
+						<button class="btn btn-sm btn-outline-secondary">Share</button>
+						<button class="btn btn-sm btn-outline-secondary">Export</button>
 					</div>
-					<hr>
+					<button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+						<span data-feather="calendar"></span> This week
+					</button>
+				</div>
+			</div>
+
+<div class="row">
+				<div class="offset-md-2"></div>
+
+				<div class="col-md-8">
+					<table class="table table-striped table-sm" width="100%" id="myTable">
+					<col width="15%"><col width="5%"><col width="43%"><col width="20%"><col width="10%"><col width="7%">
+					<tr>
+						<th align="center">카테고리</th>
+						<th align="center">번호</th>
+						<th align="center">제목</th>
+						<th align="center">작성자</th>
+						<th align="center">작성일</th>
+						<th align="center">조회수</th>						
+					</tr>
+					<%
+if(bbslist == null || bbslist.size() == 0){
+	%>
+	<tr>
+		<td colspan="6">작성된 글이 없습니다</td>
+	</tr>	
+
+					<%
+						}
+						for (int i = 0; i < bbslist.size(); i++) {
+							CommuBbsDto bbs = bbslist.get(i);
+					%>
+	<tr>
+	<td><%=bbs.getCategory_name()%></td>
+	<td><%=i+1 %></td>
+	<td>
+		<a href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
+								<%=bbs.getTitle()%>
+		</a>
+		&nbsp;<%
+							String reddate = toDate(bbs.getReg_date());
+							String today = toDay();
+							if(reddate.equals(today)){
+							%>
+		 					<span class="badge badge-pill badge-success">new</span>
+							<%
+							}
+							%>
+	</td>
+	<td><%=bbs.getUser_email() %></td>
+	<td><%=toDate(bbs.getReg_date())%></td>
+	<td><%=bbs.getReadcount()%></td>
+	</tr>	
+	<%
+}
+%>
+<tr>
+					</table>
 				</div>
 
-				<div class="offset-md-1"></div>
+				<div class="offset-md-2"></div>
 			</div>
 
 			
-
+<%-- 
 			<div class="row">
-				<div class="offset-md-1"></div>
-				<div class="col-md-10">
+				<div class="offset-md-2"></div>
+				<div class="col-md-8">
 					<%
 						if (bbslist == null || bbslist.size() == 0) {
 					%>
@@ -314,14 +260,14 @@ $(document).ready(function () {
 					<hr>
 					<%
 						}
-					%>
-					<div class="offset-md-1"></div>
+					%> --%>
+					<div class="offset-md-2"></div>
 				</div>
 <div class="row offset-md-9 col-md-2">
 <button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
 </div>				
 				
-<nav class="navbar navbar-light bg-light offset-md-3">
+<nav class="navbar navbar-light bg-light offset-md-4">
 <form class="form-inline" id="searchform" name="searchform" method="get" action="CommuBbsController">
 	<input type="hidden" name="command" value="search" />
 
@@ -360,6 +306,11 @@ $(document).ready(function () {
 			</p>
 		</div>
 	</footer>
+	
+	
+	
+	
+	
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -377,6 +328,9 @@ $(document).ready(function () {
 
 
 	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#helloworld').tooltip();
+	})
 		$('.menu-item').on(
 				'mouseover',
 				function() {
@@ -405,5 +359,70 @@ $(document).ready(function () {
 			
 		});
 	</script>
+	<script>
+		
+		   
+		/* $(document).ready(function () {
+			 $("#btnAll").click(function () {
+			        location.href="CommuBbsController?command=list#hello";
+		
+			    });
+			
+		    $("#btnCatg1").click(function () {
+		        $("form[name=form1]")
+		        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
+		
+		    });
+		    
+		
+		    $("#btnCatg2").click(function () {
+		    	 $("form[name=form1]")
+		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
+		    });
+		    
+		
+		    $("#btnCatg3").click(function () {
+		    	 $("form[name=form1]")
+		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
+		    });
+		    */
+		    $("#btnAll").click(function () {
+		        location.href="CommuBbsController?command=list#hello";
+	
+		    });
+		    
+		    $("#btnWrite").click(function () {
+		   	 location.href="CommuBbsController?command=write";
+		   });
+		   
+		   function classify(seq) {
+			   $("form[name=form1]").attr({action:"CommuBbsController?command=classify&target_category="+seq+"#hello", method:"post"}).submit();
+		   }
+			    
+	
+			
+		 
+		</script>
+		
+			 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+	<script>
+      feather.replace()
+    </script>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable').DataTable( {
+	            "order": [[ 3, "desc" ]]
+	        } );
+	    } );
+    </script>
+</body>
 </body>
 </html>
