@@ -587,7 +587,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   	 	} else {
   	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
   	 	}
-	}
+	};
 
    function addComment(ref, step, depth, index) {
 			$.ajax({
@@ -608,7 +608,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 				}
 
 			})
-		}
+		};
 
 		function printCommentHtml(comment, index) {
 			var html =
@@ -642,7 +642,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 				console.log(html);
 				$('.comment-area').append(html);
 		};
-      
+    
       
    </script>
 
