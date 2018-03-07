@@ -105,24 +105,9 @@ if(aniBbsDto != null){
           </p>
         </div>
       </section>
-      <section>
-	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	        <ul class="nav menu justify-content-center">
-			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
-			  </li>
-			</ul>
-  		</nav>
-      </section>
+      
+      <%@include file="./layout/menubar.jsp" %>
+      
 	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="updateAf">
 		<input type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
