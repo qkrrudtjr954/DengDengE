@@ -448,11 +448,11 @@ if(aniBbsDto != null){
 				<%if(aniBbsDto.getUser_email().equals(sid)){
 					%>
 					<div class="row">
-						<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-9 btn btn-outline-secondary"
-						style="background-color: #28A745; color: #fff">수정</a>
+						<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-5 btn btn-outline-secondary"
+						style="background-color: #28A745; color: #fff">수정하기</a>
 						&nbsp;&nbsp;
 						<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
-						class="btn btn-outline-secondary">삭제</a>
+						class="btn btn-outline-secondary">삭제하기</a>
 					</div>
 					<%
 				}
