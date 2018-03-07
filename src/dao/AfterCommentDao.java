@@ -157,8 +157,8 @@ public class AfterCommentDao {
 		return list;
 	}
 
-	public int getCommentsLength(int ref) {
-		String sql = " select count(*) as num from aftercomment where target_after_seq = ? and del = 0 ";
+	public int getCommentsLength(int seq) {
+		String sql = " select count(*) as num from aftercomment where target_after_seq = ?";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -169,7 +169,7 @@ public class AfterCommentDao {
 		try {
 			conn = DBConnection.makeConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, ref);
+			psmt.setInt(1, seq);
 			
 			rs = psmt.executeQuery();
 			
