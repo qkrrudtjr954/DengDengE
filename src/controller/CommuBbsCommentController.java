@@ -23,21 +23,21 @@ public class CommuBbsCommentController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess(req, resp);
+		this.doProcess(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doProcess(req, resp);
+		this.doProcess(req, resp);
 	}
 	
-	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {                                                                                                                                                                                                                                                                                                                 
 		
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		String command = req.getParameter("command");
-		
+		System.out.println(command);
 		
 		if(command.equals("addComment")) {
 			CommuBbsCommentService service = CommuBbsCommentService.getInstance();
