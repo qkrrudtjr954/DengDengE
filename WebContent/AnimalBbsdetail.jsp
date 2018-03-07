@@ -63,6 +63,18 @@ if(aniBbsDto != null){
          g = "남아";
       }
    }
+
+
+
+%>
+<%!
+	public String toDate(String mdate){
+	String s = mdate.substring(2, 4) + "/"    // yyyy
+	         + mdate.substring(5, 7) + "/"   // MM
+	         + mdate.substring(8, 10);    // dd
+	return s;
+	}
+
 %>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -114,30 +126,50 @@ if(aniBbsDto != null){
 		<div class="album py-5 bg-light">
         <div class="container">
 
-            <div class="row" style="margin: 0 auto; width: 900px;">
-               <h4 style="text-decoration: underline;" class="offset-md-5">댕댕이의
-                  보호동물</h4>
+            <div class="row">
+               <h1>댕댕이의  보호동물</h1>
             </div>
+             <hr>
 
             <br>
+            
             <div class="row">
-               <div>
-                  <span style="font-size: medium"> <%=aniBbsDto.getLocation()%>&nbsp;&nbsp;
-                     <%=aniBbsDto.getTitle()%>
-                  </span>
-               </div>
-            </div>
-
-            <div class="row">
-               <span style="font-size: x-small"> <%=aniBbsDto.getType()%>
+            	<div class="col-md-2" align="right">
+					<div class="p-3 mb-2 bg-success text-white"
+									style="text-align: center;">
+									<b><%=aniBbsDto.getType()%></b>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<p><h4><%=aniBbsDto.getTitle() %></h4></p>
+				</div>
+			
+            	
+             <%--   <span style="font-size: x-small"> <%=aniBbsDto.getType()%>
                   &nbsp;&nbsp;&nbsp; <%=aniBbsDto.getReg_date() %>
                </span>&nbsp;&nbsp; <span style="font-size: x-small"> 조회수 <%=aniBbsDto.getReadcount()%>
-               </span> <a href="AnimalBbsController?command=animlist"
+               </span>  <a href="AnimalBbsController?command=animlist"
                   class="offset-md-9 btn btn-outline-secondary"
-                  style="background-color: #28A745; color: #fff">list</a>
+                  style="background-color: #28A745; color: #fff">list</a>  --%>
             </div>
             <hr>
-
+            <div class="row">
+            		  <div class="col-md-7">
+            		  <b>-<%=aniBbsDto.getLocation() %></b>
+            		  
+            		  </div>
+            		  <div class="col-md-5">
+							<p>
+								<b>작성자</b>
+								<%=aniBbsDto.getUser_email()%>
+								&nbsp;&nbsp;&nbsp;<b>작성일</b>
+								<%=toDate(aniBbsDto.getReg_date())%>&nbsp;&nbsp;&nbsp;<b> 조회수 </b>
+								<%=aniBbsDto.getReadcount()%>&nbsp;
+							</p>
+						</div>
+			</div>
+			<br>
+			<br>
             <div class="row" style="margin: 0 auto; width: 900px;">
                <h4 class="offset-md-5">보호동물정보</h4>
             </div>
@@ -414,7 +446,8 @@ if(aniBbsDto != null){
                   <%=aniBbsDto.getContent() %>
                </span>
             </div>
-            
+ <br>
+<br>          
 <hr>            
 <!-- 댓글 달기/ 좋아요 -->
 
@@ -456,7 +489,7 @@ if(aniBbsDto != null){
 
 							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
 								<input type="text" name="content" id="content${i.index+1 }">
-								<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+								<input type="button" value="comment" onclick="addComment(${comment.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
 							</div>
 						</div>
 						<hr>
@@ -627,7 +660,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 							'</div>'+
 						'</div>'+
 					'</div>'+
-					'<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">'+
+					'<div class="comment-email col-md-1" style="background:lightyellow; height: 50px;">'+
 						'<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">'+
 					'</div>'+
 					'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
@@ -636,7 +669,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 					'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
 						'<input type="text" name="content" id="content'+index+'">'+
-						'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
+						'<input type="button" value="comment" onclick="addComment(${comment.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
 					'</div>'+
 				'</div>'+
 				'<hr>';
