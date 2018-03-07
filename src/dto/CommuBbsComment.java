@@ -4,25 +4,30 @@ import java.io.Serializable;
 
 public class CommuBbsComment implements Serializable {
 	
-/*	CREATE TABLE COMMUCOMMENT(
-		    SEQ NUMBER(8) PRIMARY KEY,
-		    TARGET_COMMU_SEQ NUMBER(8),
-		    FOREIGN KEY (TARGET_COMMU_SEQ) REFERENCES COMMUBBS(SEQ),
-		    CONTENT VARCHAR2(3000),
-		    TARGET_USER_SEQ NUMBER(8),
-		    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
-		    REG_DATE date,
-		    DEL NUMBER(1),
-		    STEP NUMBER(5),
-		    DEPTH NUMBER(5)
+/*	CREATE SEQUENCE COMMUCOMMENT_SEQ START WITH 1 INCREMENT BY 1;
+CREATE TABLE COMMUCOMMENT(
+    SEQ NUMBER(8) PRIMARY KEY,
+    TARGET_AFTER_SEQ NUMBER(8),
+    FOREIGN KEY (TARGET_AFTER_SEQ) REFERENCES AFTERBBS(SEQ),
+    CONTENT VARCHAR2(3000),
+    TARGET_USER_SEQ NUMBER(8),
+    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES DENGUSER(SEQ),
+TARGET_USER_EMAIL VARCHAR2(50),
+    FOREIGN KEY (TARGET_USER_EMAIL) REFERENCES DENGUSER(EMAIL),
+    REG_DATE date,
+    DEL NUMBER(1),
+    STEP NUMBER(5),
+    DEPTH NUMBER(5)
 		);*/
 	
 	private int seq;
-	private int target_commu_seq;
-	private String content;
 	private int target_user_seq;
+	private String content;
+	private String user_email;
+	
 	private String reg_date;
-	private int del;
+
+	private int ref;
 	private int step;
 	private int depth;
 	
@@ -30,15 +35,15 @@ public class CommuBbsComment implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommuBbsComment(int seq, int target_commu_seq, String content, int target_user_seq, String reg_date, int del,
+	public CommuBbsComment(int seq, int target_user_seq, String content, String user_email, String reg_date, int ref,
 			int step, int depth) {
 		super();
 		this.seq = seq;
-		this.target_commu_seq = target_commu_seq;
-		this.content = content;
 		this.target_user_seq = target_user_seq;
+		this.content = content;
+		this.user_email = user_email;
 		this.reg_date = reg_date;
-		this.del = del;
+		this.ref = ref;
 		this.step = step;
 		this.depth = depth;
 	}
@@ -51,12 +56,12 @@ public class CommuBbsComment implements Serializable {
 		this.seq = seq;
 	}
 
-	public int getTarget_commu_seq() {
-		return target_commu_seq;
+	public int getTarget_user_seq() {
+		return target_user_seq;
 	}
 
-	public void setTarget_commu_seq(int target_commu_seq) {
-		this.target_commu_seq = target_commu_seq;
+	public void setTarget_user_seq(int target_user_seq) {
+		this.target_user_seq = target_user_seq;
 	}
 
 	public String getContent() {
@@ -67,12 +72,12 @@ public class CommuBbsComment implements Serializable {
 		this.content = content;
 	}
 
-	public int getTarget_user_seq() {
-		return target_user_seq;
+	public String getUser_email() {
+		return user_email;
 	}
 
-	public void setTarget_user_seq(int target_user_seq) {
-		this.target_user_seq = target_user_seq;
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
 	}
 
 	public String getReg_date() {
@@ -83,12 +88,12 @@ public class CommuBbsComment implements Serializable {
 		this.reg_date = reg_date;
 	}
 
-	public int getDel() {
-		return del;
+	public int getRef() {
+		return ref;
 	}
 
-	public void setDel(int del) {
-		this.del = del;
+	public void setRef(int ref) {
+		this.ref = ref;
 	}
 
 	public int getStep() {
@@ -109,10 +114,15 @@ public class CommuBbsComment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommuBbsComment [seq=" + seq + ", target_commu_seq=" + target_commu_seq + ", content=" + content
-				+ ", target_user_seq=" + target_user_seq + ", reg_date=" + reg_date + ", del=" + del + ", step=" + step
+		return "CommuBbsComment [seq=" + seq + ", target_user_seq=" + target_user_seq + ", content=" + content
+				+ ", user_email=" + user_email + ", reg_date=" + reg_date + ", ref=" + ref + ", step=" + step
 				+ ", depth=" + depth + "]";
 	}
+	
+	
+	
+
+	
 	
 	
 	

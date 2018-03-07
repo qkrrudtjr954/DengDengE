@@ -302,7 +302,7 @@ if(msg !=null){
 
 					$('span#like_count').html(result.like_count);
 				}
-			})
+			});
 		});
 
 	     function showCommentArea(commentArea) {

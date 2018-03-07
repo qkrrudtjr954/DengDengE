@@ -15,9 +15,11 @@ import com.google.gson.Gson;
 
 import delegator.Delegator;
 import dto.AnimalBbsDto;
+import dto.AnimalCommentDto;
 import dto.BookDto;
 import dto.User;
 import service.AnimalBbsService;
+import service.AnimalCommentService;
 import service.BookService;
 
 public class AnimalBbsController extends HttpServlet {
@@ -63,8 +65,10 @@ public class AnimalBbsController extends HttpServlet {
 				BookService bookservice = BookService.getInstance();
 				List<BookDto> booklist = bookservice.getBookList(seq);
 				req.setAttribute("booking", booklist);
-				
+				AnimalCommentService commentService = AnimalCommentService.getInstance();
+				List<AnimalCommentDto> comments =commentService.getAllComments(seq); 
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
+				
 				boolean isLiked = aniBbService.Prevent_duplication(userInfo.getSeq(), seq);
 				boolean bookS = bookService.checkBook(email,seq);
 				
@@ -73,6 +77,8 @@ public class AnimalBbsController extends HttpServlet {
 	            req.setAttribute("bookS", bookS);
 	            req.setAttribute("like_count", aniBbService.getLikeCount(seq));
 				req.setAttribute("isLiked", isLiked);
+				req.setAttribute("comments", comments);
+				
 	            
 	            dispatch("AnimalBbsdetail.jsp", req , resp);
 	         } else {
