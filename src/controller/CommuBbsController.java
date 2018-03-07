@@ -17,8 +17,10 @@ import com.google.gson.Gson;
 
 import delegator.Delegator;
 import dto.CategoryDto;
+import dto.CommuBbsComment;
 import dto.CommuBbsDto;
 import dto.User;
+import service.CommuBbsCommentService;
 import service.CommuBbsService;
 
 public class CommuBbsController extends HttpServlet {
@@ -125,10 +127,12 @@ public class CommuBbsController extends HttpServlet {
 			if(Delegator.checkSession(req, resp)) {
 
 				CommuBbsService comService = CommuBbsService.getInstance();
-
+				CommuBbsCommentService commentService = CommuBbsCommentService.getInstance();
+				List<CommuBbsComment> comments = commentService.getAllComments(seq);
 				comService.readCount(seq);
 				CommuBbsDto comdto = comService.getCommu(seq);
 				boolean isLiked = comService.Prevent_duplication(current_user.getSeq(), seq);
+				req.setAttribute("comments", comments);
 				req.setAttribute("comdto", comdto);
 				req.setAttribute("like_count", comService.getLikeCount(seq));
 				req.setAttribute("isLiked", isLiked);

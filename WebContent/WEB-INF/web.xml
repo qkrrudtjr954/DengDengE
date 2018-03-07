@@ -106,6 +106,19 @@
 		<servlet-name>CommuBbsController</servlet-name>
 		<url-pattern>/CommuBbsController</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CommuBbsCommentController</servlet-name>
+		<servlet-class>controller.CommuBbsCommentController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommuBbsCommentController</servlet-name>
+		<url-pattern>/CommuBbsCommentController</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
 
 
 	<servlet>

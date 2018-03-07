@@ -456,7 +456,7 @@ if(aniBbsDto != null){
 
 							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
 								<input type="text" name="content" id="content${i.index+1 }">
-								<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+								<input type="button" value="comment" onclick="addComment(${aniBbsDto.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
 							</div>
 						</div>
 						<hr>
@@ -636,7 +636,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 					'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
 						'<input type="text" name="content" id="content'+index+'">'+
-						'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
+						'<input type="button" value="comment" onclick="addComment(${aniBbsDto.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
 					'</div>'+
 				'</div>'+
 				'<hr>';
