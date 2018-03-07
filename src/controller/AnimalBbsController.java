@@ -43,9 +43,7 @@ public class AnimalBbsController extends HttpServlet {
 		AnimalBbsService aniBbService = AnimalBbsService.getInatance();
 		BookService bookService = BookService.getInstance();
 		if(command.equals("animlist")) {
-			System.out.println("list");
 			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
-			System.out.println("animlist: "+animlist);
 			req.setAttribute("animlist", animlist);
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}
@@ -53,8 +51,7 @@ public class AnimalBbsController extends HttpServlet {
 	         //로그인 안되었을 때 알림창 띄워주기   
 			
 			String sseq = req.getParameter("seq");
-			int seq = Integer.parseInt (sseq);
-			System.out.println("s"+seq);		
+			int seq = Integer.parseInt (sseq);		
 			
 			if(Delegator.checkSession(req, resp)) {
 				HttpSession session = req.getSession();
@@ -116,7 +113,7 @@ public class AnimalBbsController extends HttpServlet {
 			}else {
 				medicine = 0;
 			}
-			System.out.println("m:"+medicine);	
+
 			
 			
 			String nneutralization = req.getParameter("neu");
@@ -126,7 +123,7 @@ public class AnimalBbsController extends HttpServlet {
 			}else {
 				neutralization = 0;
 			}
-			System.out.println("n:"+neutralization);	
+
 			
 			
 			String ggender = req.getParameter("gen");
@@ -136,7 +133,7 @@ public class AnimalBbsController extends HttpServlet {
 				gender = 1;
 			}else {
 				gender = 0;
-			}System.out.println("g:"+gender);	
+			}
 			
 			String title = req.getParameter("title");
 			String descripttion = req.getParameter("descrip");
@@ -155,7 +152,7 @@ public class AnimalBbsController extends HttpServlet {
 				for (int i = 0; i < ttype.length; i++) {
 					type = ttype[i];					
 				}
-				System.out.println("t:"+type);
+
 			}   
 	         
 			
@@ -166,12 +163,12 @@ public class AnimalBbsController extends HttpServlet {
 			
 			if(isS) {
 				// msg
-				System.out.println(isS);
+				
 				req.setAttribute("msg", "글 작성 완료");
 				dispatch("AnimalBbsController?command=animlist", req, resp);
 			}else {
 				// msg
-				System.out.println(isS);
+				
 				req.setAttribute("msg", "글 작성 실패");
 				dispatch("AnimalBbslist.jsp", req, resp);
 			}
@@ -272,7 +269,6 @@ public class AnimalBbsController extends HttpServlet {
 			status.put("like_count", like_count);
 			String json = new Gson().toJson(status);
 			
-			System.out.println(json);
 			resp.getWriter().write(json);	
 			
 			
