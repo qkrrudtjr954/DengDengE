@@ -28,9 +28,9 @@ public class SendMsgDao {
 	
 	
 	
-	public boolean sendToMaster(int userseq, String category, String title, String email, String content) {
-		String sql = " INSERT INTO SENDMASTER "
-				+ "	VALUES (SENDMASTER_SEQ.NEXTVAL, ?, ?, ?, ?, ? , 0) ";
+	public boolean sendToMaster(SendMaster sendMaster) {
+		String sql = " INSERT INTO SENDMASTER( SEQ, TARGET_USER_SEQ, CATEGORY, TITLE, EMAIL, CONTENT, COMPLETE, REG_DATE ) "
+				+ "	VALUES (SENDMASTER_SEQ.NEXTVAL, ?, ?, ?, ?, ?, 0, SYSDATE) ";
 		int count = 0;
 		
 		Connection conn = null;
@@ -44,11 +44,11 @@ public class SendMsgDao {
 			psmt = conn.prepareStatement(sql);
 			System.out.println("3/6 sendToMaster Success");
 			
-			psmt.setInt(1, userseq);
-			psmt.setString(2, category);
-			psmt.setString(3, title);
-			psmt.setString(4, email);
-			psmt.setString(5, content);
+			psmt.setInt(1, sendMaster.getTarget_user_seq());
+			psmt.setString(2, sendMaster.getCategory());
+			psmt.setString(3, sendMaster.getTitle());
+			psmt.setString(4, sendMaster.getEmail());
+			psmt.setString(5, sendMaster.getContent());
 
 			System.out.println(sql);
 			count = psmt.executeUpdate();

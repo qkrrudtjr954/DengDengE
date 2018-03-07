@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.CategoryDto;
+import dto.SendMaster;
 import dto.User;
 import service.SendMasterService;
 
@@ -71,6 +72,7 @@ public class MainController extends HttpServlet{
 			}
 			HttpSession session = req.getSession();
 			User userInfo = (User)session.getAttribute("current_user");
+			
 			int target_user_seq = userInfo.getSeq();
 			
 			if(email.equals("")) {
@@ -78,8 +80,16 @@ public class MainController extends HttpServlet{
 			}
 			
 			System.out.println(Q_type + " " + title + " " + email + " " + content);
-	
-			boolean isS = sendService.sendToMaster(target_user_seq, Q_type, title, email, content);
+			
+			
+			SendMaster sendMaster = new SendMaster();
+			sendMaster.setCategory(Q_type);
+			sendMaster.setContent(content);
+			sendMaster.setEmail(email);
+			sendMaster.setTarget_user_seq(target_user_seq);
+			sendMaster.setTitle(title);
+			
+			boolean isS = sendService.sendToMaster(sendMaster);
 			
 			if(isS) {
 				System.out.println("메세지 전송 성공");
@@ -89,6 +99,7 @@ public class MainController extends HttpServlet{
 				System.out.println("메세지 전송 실패");
 				resp.getWriter().write("fail");
 			}
+		
 			
 		}
 	}

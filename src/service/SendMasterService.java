@@ -1,6 +1,7 @@
 package service;
 
 import dao.SendMsgDao;
+import dto.SendMaster;
 
 public class SendMasterService {
 	
@@ -19,8 +20,8 @@ public class SendMasterService {
 		return sendService;
 	}
 	
-	public boolean sendToMaster(int userseq, String category, String title, String email, String content) {
-		return manager.sendToMaster(userseq, category, title, email, content);
+	public boolean sendToMaster(SendMaster sendMaster) {
+		return manager.sendToMaster(sendMaster);
 	}
 
 }

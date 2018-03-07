@@ -21,6 +21,7 @@ public class SendMaster implements Serializable {
 	String title;
 	String email;
 	String content;
+	String answer;
 	int complete;
 	
 	public SendMaster() {
@@ -82,6 +83,23 @@ public class SendMaster implements Serializable {
 	public void setComplete(int complete) {
 		this.complete = complete;
 	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	@Override
+	public String toString() {
+		return "SendMaster [seq=" + seq + ", target_user_seq=" + target_user_seq + ", category=" + category + ", title="
+				+ title + ", email=" + email + ", content=" + content + ", answer=" + answer + ", complete=" + complete
+				+ "]";
+	}
+	
+	
 
 
 
