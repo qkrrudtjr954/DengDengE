@@ -263,7 +263,6 @@ if(aniBbsDto != null){
             <%
                String id = ((User)session.getAttribute("current_user")).getEmail();
                boolean bookS = (boolean) request.getAttribute("bookS");
-               System.out.println(aniBbsDto.getComplete_email());
             %>
             
             <br>
@@ -299,7 +298,10 @@ if(aniBbsDto != null){
                                                 <!-- 예약확정 -->
                                                    <c:choose>
                                                       <c:when test="${item.user_email eq  aniBbsDto.complete_email}">                                                         
-                                                         <button class="btn btn-outline-primary"style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
+                                                         <button class="btn btn-outline-primary"style="background-color: #28A745; color: #fff" id="bookBtn">분양확정</button>
+                                                         <script type="text/javascript">
+                                                         	alert("분양이 완료된 글입니다");
+                                                         </script>
                                                       </c:when>
                                                       <c:otherwise>
                                                          <button class="btn btn-outline-secondary disabled" style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
@@ -346,7 +348,7 @@ if(aniBbsDto != null){
             <%
          }      
             else{
-               System.out.println(aniBbsDto.getDel());
+               
                %>
                   <form action="BookController" method="post">
                <input type="hidden" name="command" value="add"> <input
