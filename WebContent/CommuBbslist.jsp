@@ -15,8 +15,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="icon" href="./icon/favicon.ico">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 <title>Deng Deng E list</title>
 
@@ -26,30 +25,32 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+<link
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
+
+
 
 <!-- Custom styles for this template -->
 <link href="./css/main.css" rel="stylesheet">
 
-<%!
-public String toDate(String mdate){
-	String s = mdate.substring(2, 4) + "/"    // yyyy
-	         + mdate.substring(5, 7) + "/"   // MM
-	         + mdate.substring(8, 10);    // dd
-	return s;
-}
+<%!public String toDate(String mdate) {
+		String s = mdate.substring(2, 4) + "/" // yyyy
+				+ mdate.substring(5, 7) + "/" // MM
+				+ mdate.substring(8, 10); // dd
+		return s;
+	}
 
-public String toDay(){
-	Date today = new Date();
-	System.out.println(today);
-	
-	SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");
-	
-	String todate =(String)date.format(today);
-	
-	return todate;
-} 
+	public String toDay() {
+		Date today = new Date();
+		System.out.println(today);
 
-%>
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");
+
+		String todate = (String) date.format(today);
+
+		return todate;
+	}%>
 </head>
 
 <body>
@@ -77,16 +78,16 @@ public String toDay(){
 								href="UserControl?command=signout">로그아웃</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="UserControl?command=myPage">마이 페이지</a></li>
-							
+
 						</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
 		</nav>
-		
 
-		
-		
+
+
+
 	</header>
 	<main role="main">
 
@@ -102,94 +103,120 @@ public String toDay(){
 			</p>
 		</div>
 	</section>
-	
-	<%@include file="./layout/menubar.jsp" %>
+	<section>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="nav menu justify-content-center">
+				<li class="nav-item menu-item"><a class="nav-link"
+					href="AnimalBbsController?command=animlist">분양 동물 보기</a></li>
+				<li class="nav-item menu-item"><a class="nav-link"
+					href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a></li>
+				<li class="nav-item menu-item"><a class="nav-link"
+					href="CommuBbsController?command=list">커뮤니티</a></li>
+				<li class="nav-item menu-item"><a class="nav-link"
+					href="FindPlaceController?command=findPlace">분양소 찾기</a></li>
+			</ul>
+		</nav>
+	</section>
 
 	<div class="album py-5 bg-light">
 		<!--------- 본문페이지         -------->
-			<%
-				List<CommuBbsDto> bbslist = (List<CommuBbsDto>) request.getAttribute("bbslist");
-			%>
+		<%
+			List<CommuBbsDto> bbslist = (List<CommuBbsDto>) request.getAttribute("bbslist");
+		%>
 
-<div id="hello">
+		<div id="hello">
 			<div class="row">
 				<!-- <div class="offset-md-1"></div> -->
-				 <div class="offset-md-2 col-md-8 offset-md-2"> 
+				<div class="offset-md-2 col-md-8 offset-md-2">
 					<form name="form1" action="CommuBbsController">
 						<h1>커뮤니티</h1>
 						<hr>
 						<button type="button" class="btn btn-success" id="btnAll">전체보기</button>
-													
+
 						<c:forEach items="${categories }" var="category" varStatus="i">
-							<button type="button" class="btn btn-success" onclick=" classify(${category.seq})">${category.title }</button>
+							<button type="button" class="btn btn-success"
+								onclick=" classify(${category.seq})">${category.title }</button>
 						</c:forEach>
-				
-				</form>
+
+					</form>
 				</div>
 				<!-- <div class="offset-md-1"></div> -->
 			</div>
-</div>
-<br>
+		</div>
+		<br>
 
-<div class="row">
-				<div class="offset-md-2"></div>
+		<div class="row">
+			<div class="offset-md-2"></div>
 
-				<div class="col-md-8">
-					<table border="1" width="100%">
-					<col width="15%"><col width="5%"><col width="45%"><col width="20%"><col width="10%"><col width="5%">
-					<tr>
-						<th align="center">카테고리</th>
-						<th align="center">번호</th>
-						<th align="center">제목</th>
-						<th align="center">작성자</th>
-						<th align="center">작성일</th>
-						<th align="center">조회수</th>						
-					</tr>
-					<%
-if(bbslist == null || bbslist.size() == 0){
-	%>
-	<tr>
-		<td colspan="6">작성된 글이 없습니다</td>
-	</tr>	
-
-					<%
+			<div class="col-md-8">
+				<table class="table table-striped table-sm" id="myTable">
+						<col width="7%">
+						<col width="13%">
+						<col width="43%">
+						<col width="20%">
+						<col width="10%">
+						<col width="7%">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>카테고리</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<%
+						if (bbslist == null || bbslist.size() == 0) {
+						%>
+						<tr>
+							<td colspan="6">작성된 글이 없습니다</td>
+						</tr>
+	
+						<%
 						}
+						
 						for (int i = 0; i < bbslist.size(); i++) {
 							CommuBbsDto bbs = bbslist.get(i);
-					%>
-	<tr>
-	<td><%=bbs.getCategory_name()%></td>
-	<td><%=i+1 %></td>
-	<td>
-		<a href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
-								<%=bbs.getTitle()%>
-		</a>
-		&nbsp;<%
-							String reddate = toDate(bbs.getReg_date());
-							String today = toDay();
-							if(reddate.equals(today)){
-							%>
-		 					<span class="badge badge-pill badge-success">new</span>
-							<%
+						%>
+						
+						<tr>
+							<td><%=i + 1%></td>
+							<td><%=bbs.getCategory_name()%></td>
+							<td id="td_title">
+								<a href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
+									&nbsp;&nbsp;<%=bbs.getTitle()%>
+								</a> &nbsp;
+								<%
+								 String reddate = toDate(bbs.getReg_date());
+								 String today = toDay();
+								 
+								 if (reddate.equals(today)) {
+								 %> 
+								 <span class="badge badge-pill badge-success">new</span> 
+								 <%
+								 }
+								 %>
+							</td>
+							<td><%=bbs.getUser_email()%></td>
+							<td><%=toDate(bbs.getReg_date())%></td>
+							<td><%=bbs.getReadcount()%></td>
+						</tr>
+					
+						<%
 							}
-							%>
-	</td>
-	<td><%=bbs.getUser_email() %></td>
-	<td><%=toDate(bbs.getReg_date())%></td>
-	<td><%=bbs.getReadcount()%></td>
-	</tr>	
-	<%
-}
-%>
-<tr>
-					</table>
-				</div>
-
-				<div class="offset-md-2"></div>
+						%>
+					</tbody>
+				</table>
 			</div>
 
-			
-<%-- 
+			<div class="offset-md-2"></div>
+		</div>
+
+
+		<%-- 
 			<div class="row">
 				<div class="offset-md-2"></div>
 				<div class="col-md-8">
@@ -230,36 +257,36 @@ if(bbslist == null || bbslist.size() == 0){
 					<%
 						}
 					%> --%>
-					<div class="offset-md-2"></div>
-				</div>
-<div class="row offset-md-9 col-md-2">
-<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
-</div>				
-				
-<nav class="navbar navbar-light bg-light offset-md-4">
-<form class="form-inline" id="searchform" name="searchform" method="get" action="CommuBbsController">
-	<input type="hidden" name="command" value="search" />
-
-	<div class="input-group">
-  		<div class="input-group-prepend">
-   		 <label class="input-group-text" for="inputGroupSelect01">검색조건</label>
- 		 </div>
-	<select class="custom-select" name="Searchtype">
-			<option value="email">글쓴이</option>
-			<option value="A.title">제목</option>	
-	</select>
+		<div class="offset-md-2"></div>
 	</div>
-&nbsp;&nbsp;
- <input class="form-control mr-sm-2" type="text" id="SearchWord" name="SearchWord" placeholder="Search" aria-label="Search">
- <button class="btn btn-outline-success my-2 my-sm-0" id="search" type="submit">Search</button>
+	<div class="row offset-md-9 col-md-2">
+		<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
+	</div>
 
-</form>
-</nav>
+	<nav class="navbar navbar-light bg-light offset-md-4">
+		<form class="form-inline" id="searchform" name="searchform"
+			method="get" action="CommuBbsController">
+			<input type="hidden" name="command" value="search" />
 
-
-				<!-- 	-------------------------- -->
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="inputGroupSelect01">검색조건</label>
+				</div>
+				<select class="custom-select" name="Searchtype">
+					<option value="email">글쓴이</option>
+					<option value="A.title">제목</option>
+				</select>
 			</div>
-		</div>
+			&nbsp;&nbsp; <input class="form-control mr-sm-2" type="text"
+				id="SearchWord" name="SearchWord" placeholder="Search"
+				aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" id="search"
+				type="submit">Search</button>
+
+		</form>
+	</nav>
+
+
 	</main>
 
 	<footer class="text-muted">
@@ -275,25 +302,26 @@ if(bbslist == null || bbslist.size() == 0){
 			</p>
 		</div>
 	</footer>
-	
-	
-	
-	
-	
+
+
+
+
+
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+	<script>
+      feather.replace()
+    </script>
 
 
 	<script type="text/javascript">
@@ -372,5 +400,13 @@ if(bbslist == null || bbslist.size() == 0){
 			
 		 
 		</script>
+	<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable').DataTable( {
+	            "order": [[ 0, "asc" ]]
+	        } );
+	    } );
+    </script>
+</body>
 </body>
 </html>
