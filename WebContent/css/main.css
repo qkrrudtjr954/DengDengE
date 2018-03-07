@@ -109,3 +109,6 @@ table th{
 table td{
 	text-align:center;
 }
+#td_title{
+	text-align:left;
+}

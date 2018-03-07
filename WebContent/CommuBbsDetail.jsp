@@ -137,9 +137,11 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <hr>
 <!-- 댓글 달기/ 좋아요 -->
 
-<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
+<div class="col-md-4" id="likeArea"><button type="button" id="btnLike" >
 	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
-	<span id="like_count">${like_count }</span>
+	<span id="like_count">${like_count }</span>&nbsp;&nbsp;&nbsp; 
+	<img src="./img/comment_1.png" height="30px" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;
+	<span id="commentCount">0</span>
 </div>
 
 
