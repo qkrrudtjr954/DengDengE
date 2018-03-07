@@ -73,8 +73,8 @@ public class CommuBbsCommentDao {
 	}
 	
 	public boolean addComment(CommuBbsComment comment) {
-		String sql = " insert into commucomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email ) " + 
-				" values (aftercomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ? ) ";
+		String sql = " insert into commucomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
+				" values (commucomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, 0 ) ";
 		
 		
 		System.out.println(">>>>> CommuBbsComment .addComment() sql : "+sql);
@@ -103,7 +103,7 @@ public class CommuBbsCommentDao {
 	}
 	
 	public List<CommuBbsComment> getAllComments(int ref){
-		String sql = " select * from commucomment where target_after_seq = ? order by step asc";
+		String sql = " select * from commucomment where target_after_seq = ? and del = 0 order by step asc";
 		
 		
 		System.out.println(">>>>> CommuBbsComment .getAllComments() sql : "+sql);
@@ -179,8 +179,65 @@ public class CommuBbsCommentDao {
 		return length;
 		
 		
-		
 	}
+	
+	public boolean deleteComment(int seq) {
+		/*System.out.println("delcomment" +seq);*/
+		String sql = " update commucomment set del = 1 where seq = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = -1;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			
+			count = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return (count > 0) ? true: false;
+	}
+	
+	public int getTargetUserSeq(int seq) {
+		String sql = "select target_user_seq from commucomment where seq = ? ";
+		
+		System.out.println(">>>>> CommuBbsComment .getTargetUserSeq() sql : "+sql);
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		int target_user_seq = 0;
+		
+		try {
+			conn = DBConnection.makeConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				target_user_seq = rs.getInt("target_user_seq");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return target_user_seq;
+	}
+	
+	
+	
+	
+	
 	
 	
 

@@ -81,7 +81,7 @@ public class AnimalCommentDao {
 	public boolean addComment(AnimalCommentDto comment) {
 		
 		String sql = " insert into animalcomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
-				" values (aftercomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, 0 ) ";
+				" values (animalcomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, 0 ) ";
 		
 		System.out.println(">>>>> AnimalCommentDto .addComment() sql : "+sql);
 		

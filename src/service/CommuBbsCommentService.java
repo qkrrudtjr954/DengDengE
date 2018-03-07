@@ -54,6 +54,28 @@ public class CommuBbsCommentService {
 		return list;
 	}
 	
+	public List<CommuBbsComment> deleteComment(int seq, int ref) {
+		// TODO Auto-generated method stub
+		
+		boolean result = commBbsCommentDao.deleteComment(seq);
+		
+		List<CommuBbsComment> list = new ArrayList<>();
+		if (result) {
+			list = commBbsCommentDao.getAllComments(ref);
+		}
+
+		return list;
+	}
+	
+	public boolean beforeDeleteCheck(int seq, int current_user_seq) {
+		int target_user_seq = commBbsCommentDao.getTargetUserSeq(seq);
+		return (target_user_seq == current_user_seq)?true:false;
+	}
+	
+	
+	
+	
+	
 	
 
 	
