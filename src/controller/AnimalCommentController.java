@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import delegator.Delegator;
-
+import dto.AfterCommentDto;
 import dto.AnimalCommentDto;
 import dto.User;
-
+import service.AfterCommentService;
 import service.AnimalCommentService;
 
 public class AnimalCommentController extends HttpServlet {
@@ -63,6 +63,33 @@ public class AnimalCommentController extends HttpServlet {
 				
 				resp.getWriter().write(json);
 			}
+		}else if(command.equals("deleteComment")) {
+			if(Delegator.checkSession(req, resp)) {
+				HttpSession session = req.getSession();
+				User current_user = (User)session.getAttribute("current_user");
+				
+				AnimalCommentService service = AnimalCommentService.getInstance();
+				
+				String sseq = req.getParameter("seq");
+				int seq = Integer.parseInt(sseq);	
+				
+				boolean check = service.beforeDeleteCheck(seq, current_user.getSeq());
+				
+				String json = "";
+				
+				if(check) {
+					String sref = req.getParameter("ref");
+					int ref = Integer.parseInt(sref);
+					
+					List<AnimalCommentDto> list = service.deleteComment(seq, ref);
+					
+					json = new Gson().toJson(list);					
+				} else {
+					json = "false";
+				}
+				
+				resp.getWriter().write(json);
+			} 
 		}
 		
 	}

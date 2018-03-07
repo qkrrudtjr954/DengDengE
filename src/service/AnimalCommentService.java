@@ -57,5 +57,27 @@ public class AnimalCommentService {
 	}
 	
 	
+	public List<AnimalCommentDto> deleteComment(int seq, int ref) {
+		// TODO Auto-generated method stub
+		
+		boolean result = aniComManagaer.deleteComment(seq);
+		
+		List<AnimalCommentDto> list = new ArrayList<>();
+		if (result) {
+			list = aniComManagaer.getAllComments(ref);
+		}
+
+		return list;
+	}
+
+	public boolean beforeDeleteCheck(int seq, int current_user_seq) {
+		int target_user_seq = aniComManagaer.getTargetUserSeq(seq);
+		return (target_user_seq == current_user_seq)?true:false;
+	}
+	
+	
+	
+	
+	
 	
 }
