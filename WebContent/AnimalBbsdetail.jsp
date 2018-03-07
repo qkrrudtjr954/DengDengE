@@ -277,7 +277,6 @@ if(aniBbsDto != null){
 				<%
 					String id = ((User)session.getAttribute("current_user")).getEmail();
 					boolean bookS = (boolean) request.getAttribute("bookS");
-					System.out.println(aniBbsDto.getComplete_email());
 				%>
 				
 				<br>
