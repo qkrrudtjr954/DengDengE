@@ -177,7 +177,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 								 value="NO">
 						</div>
 						<div class="input-group-prepend">
-							<span class="offset-md-2 input-group-text">성별</span>
+							<span class="offset-md-1 input-group-text">성별</span>
 							<div class="input-group-text">
 								<input type="radio"
 									aria-label="radio for following text input" name="gen" value="여아">
@@ -199,7 +199,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">제목</span> <input type="text"
-								class="form-control" name="title" size="135" id="title" placeholder="제목 입력">
+								class="form-control" name="title" size="137" id="title" placeholder="제목 입력">
 						</div>
 					</div>
 
@@ -207,7 +207,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">특이사항</span> <input
-								type="text" class="form-control" name="descrip" size="130"
+								type="text" class="form-control" name="descrip" size="132"
 								id="descrip" placeholder="특이사항 입력">
 						</div>
 					</div>

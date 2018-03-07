@@ -237,11 +237,8 @@ public class AnimalBbsController extends HttpServlet {
 			
 			String ssearchBtn1 = req.getParameter("searchBtn1");
 			
-			String searchBtn1 = ssearchBtn1.substring(0, 1);
+			String searchBtn1 = ssearchBtn1.substring(0, 2);
 			
-			if(ssearchBtn1.equals("경기도")) {
-				searchBtn1 = ssearchBtn1.substring(0, 2);
-			}
 			
 			List<AnimalBbsDto> animlist = aniBbService.getFindBtnlistlocal(searchBtn1);
 			req.setAttribute("animlist", animlist);
