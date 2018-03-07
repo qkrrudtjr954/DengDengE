@@ -33,7 +33,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email  "
 				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c"
-				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND a.DEL=0"
+				+ " WHERE A.TARGET_CATEGORY = B.SEQ AND a.target_user_seq = c.seq AND a.DEL=0"
 				+ " ORDER BY a.REG_DATE DESC ";
 
 		Connection conn = null;
@@ -90,7 +90,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 		String sql = " SELECT a.seq, a.TITLE as title, content, a.target_user_seq, a.target_category, "
 				+ " readcount, a.last_update as last_update, del, b.title as category_name, c.email as user_email "
 				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c "
-				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND A.SEQ=?";
+				+ " WHERE A.TARGET_CATEGORY = B.SEQ AND a.target_user_seq = c.seq AND A.SEQ=?";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -274,7 +274,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date, a.last_update as last_update, del, b.title as category_name, a.READCOUNT, c.email as user_email  "
 				+ " FROM COMMUBBS A, CATEGORY B, DENGUSER c"
-				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0 AND a.target_category=? "
+				+ " WHERE A.TARGET_CATEGORY = B.SEQ AND a.target_user_seq = c.seq AND DEL=0 AND a.target_category=? "
 				+ " ORDER BY a.REG_DATE DESC ";
 
 		Connection conn = null;
@@ -332,7 +332,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email  "
 				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c"
-				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0 "
+				+ " WHERE A.TARGET_CATEGORY = B.SEQ AND a.target_user_seq = c.seq AND DEL=0 "
 				+ " AND " + Searchtype + " LIKE '%" + SearchWord + "%'" + " ORDER BY a.REG_DATE DESC ";
 
 		Connection conn = null;
