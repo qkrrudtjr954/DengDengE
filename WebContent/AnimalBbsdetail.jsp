@@ -289,9 +289,7 @@ if(aniBbsDto != null){
                System.out.println(aniBbsDto.getDel());
          %>
             <div class="row">
-               <button type="button" class="offset-md-5 btn btn-primary"
-                  data-toggle="modal" data-target="#exampleModal"
-                  data-whatever="<%=aniBbsDto.getUser_email()%>">분양예약리스트</button>
+               <button type="button" class="offset-md-5 btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="<%=aniBbsDto.getUser_email()%>">분양예약리스트</button>
                   
             </div>
          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -439,8 +437,49 @@ if(aniBbsDto != null){
 
 <div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
    <img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
-   <span id="like_count">${like_count }</span>
+   <span id="like_count">${like_count }</span>&nbsp;&nbsp;&nbsp;
+    <img src="./img/comment_1.png" height="30px" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;
+	<span id="commentCount">0</span>
 </div>
+
+
+<!-- 댓글 달기/ 좋아요 끝 -->
+			<div class="row offset-md-3 col-md-9">
+				<input type="text" name="content" id="content0" size="50"> <input type="button" value="comment" onclick="addComment(${aniBbsDto.seq}, 0, 0, 0)">
+			</div>
+			<br><br>
+				<div class="comment-area">
+					<c:forEach begin="0" items="${comments }" var="comment" varStatus="i">
+						<div class="row">
+							<div class="comment-email col-md-2" style="background:pink;height: 50px;">
+								${comment.user_email }
+							</div>
+							<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">
+								<div class="row">
+									<div class="col-md-${comment.depth }" style="background:red; height:50px;text-align:right;">
+										ㄴ>
+									</div>
+									<div class="col comment-content">
+										${comment.content }
+									</div>
+								</div>
+							</div>
+							<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">
+								<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">
+							</div>
+							<div class="comment-date col-md-1" style="background:green;height: 50px;">
+								${comment.reg_date }
+							</div>
+
+							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
+								<input type="text" name="content" id="content${i.index+1 }">
+								<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+							</div>
+						</div>
+						<hr>
+					</c:forEach>
+
+			</div>
 
 
             <%
@@ -545,6 +584,71 @@ $('#exampleModal').on('show.bs.modal', function (event) {
             }
          });
       });
+      
+      
+      function showCommentArea(commentArea) {
+  	 	var dom = $(commentArea).parent().parent().find('.comment-input');
+
+  	 	if(dom.css('display') == 'none'){
+	    	 	$(commentArea).parent().parent().find('.comment-input').css('display', 'block');
+  	 	} else {
+  	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
+  	 	}
+	}
+
+   function addComment(ref, step, depth, index) {
+			$.ajax({
+				url : 'AnimalCommentController',
+				method : 'POST',
+				data : { command : 'addComment', ref : ref, step : step, depth : depth, content : $('#content'+index).val() },
+				success : function (data) {
+
+					$('.comment-area').children().remove();
+
+					var comments = JSON.parse(data);
+
+					for(var i= 0; i < comments.length; i++){
+
+						printCommentHtml(comments[i], (i+1));
+
+					}
+				}
+			})
+		}
+
+		function printCommentHtml(comment, index) {
+			var html =
+				'<div class="row">'+
+					'<div class="comment-email col-md-2 col-xs-6" style="background:pink;height: 50px;">'+
+						comment.user_email+
+					'</div>'+
+					'<div class="comment-box col-md-8 col-xs-12" style="background:lightblue;height: 50px;">'+
+						'<div class="row">'+
+							'<div class="col-md-'+comment.depth+' col-xs-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
+								'ㄴ>'+
+							'</div>'+
+							'<div class="col col-xs-12 comment-content">'+
+								comment.content+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">'+
+						'<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">'+
+					'</div>'+
+					'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
+						comment.reg_date+
+					'</div>'+
+
+					'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
+						'<input type="text" name="content" id="content'+index+'">'+
+						'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
+					'</div>'+
+				'</div>'+
+				'<hr>';
+				console.log(html);
+				$('.comment-area').append(html);
+		}
+      
       
    </script>
 

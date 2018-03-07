@@ -41,17 +41,19 @@ public class AnimalCommentService {
 		boolean result = aniComManagaer.addComment(comment);
 		
 		System.out.println("Add comment result: "+result);
+		
 		List<AnimalCommentDto> list = new ArrayList<>();
 		
 		System.out.println("comment : "+comment);
 		
 		// get comment list
-				if(result) {
-					
-				list = aniComManagaer.getAllComments(comment.getRef());
-				}
-				return list;
-		
+		if (result) {
+
+			list = aniComManagaer.getAllComments(comment.getRef());
+		}
+		System.out.println("servise list : "+list);
+		return list;
+
 	}
 	
 	
