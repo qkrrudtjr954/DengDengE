@@ -39,7 +39,7 @@ public class AnimalCommentDao {
 			if(rs.next()) {
 				dto.setContent(rs.getString("content"));
 				dto.setDepth(rs.getInt("depth"));
-				dto.setRef(rs.getInt("target_after_seq"));
+				dto.setRef(rs.getInt("target_animal_seq"));
 				dto.setReg_date(rs.getString("reg_date"));
 				dto.setSeq(rs.getInt("seq"));
 				dto.setStep(rs.getInt("step"));
@@ -56,7 +56,7 @@ public class AnimalCommentDao {
 	}
 	
 	public void updateStep(AnimalCommentDto comment) {
-		String sql = " update animalcomment set step = step+1 where step >= ? and target_after_seq = ? ";
+		String sql = " update animalcomment set step = step+1 where step >= ? and target_animal_seq = ? ";
 		
 		System.out.println(">>>>> AnimalCommentDto .updateStep() sql : "+sql);
 		
@@ -80,7 +80,7 @@ public class AnimalCommentDao {
 	
 	public boolean addComment(AnimalCommentDto comment) {
 		
-		String sql = " insert into animalcomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
+		String sql = " insert into animalcomment(seq, depth, target_animal_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
 				" values (animalcomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, 0 ) ";
 		
 		System.out.println(">>>>> AnimalCommentDto .addComment() sql : "+sql);
@@ -111,7 +111,7 @@ public class AnimalCommentDao {
 	}
 	
 	public List<AnimalCommentDto> getAllComments(int ref){
-		String sql = " select * from animalcomment where target_after_seq = ? and del = 0 order by step asc";
+		String sql = " select * from animalcomment where target_animal_seq = ? and del = 0 order by step asc";
 		
 		System.out.println(">>>>> AnimalCommentDto .getAllComments() sql : "+sql);
 		
@@ -133,7 +133,7 @@ public class AnimalCommentDao {
 				AnimalCommentDto dto = new AnimalCommentDto();
 				dto.setContent(rs.getString("content"));
 				dto.setDepth(rs.getInt("depth"));
-				dto.setRef(rs.getInt("target_after_seq"));
+				dto.setRef(rs.getInt("target_animal_seq"));
 				dto.setReg_date(rs.getString("reg_date"));
 				dto.setSeq(rs.getInt("seq"));
 				dto.setStep(rs.getInt("step"));
@@ -157,7 +157,7 @@ public class AnimalCommentDao {
 	}
 	
 	public int getCommentsLength(int ref) {
-		String sql = " select count(*) as num from animalcomment where target_after_seq = ? and del = 0 ";
+		String sql = " select count(*) as num from animalcomment where target_animal_seq = ? and del = 0 ";
 		
 		
 		Connection conn = null;

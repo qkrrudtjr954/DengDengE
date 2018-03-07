@@ -9,7 +9,6 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
-import dto.AfterCommentDto;
 import dto.CommuBbsComment;
 
 public class CommuBbsCommentDao {
@@ -33,7 +32,7 @@ public class CommuBbsCommentDao {
 			if(rs.next()) {
 				dto.setContent(rs.getString("content"));
 				dto.setDepth(rs.getInt("depth"));
-				dto.setRef(rs.getInt("target_after_seq"));
+				dto.setRef(rs.getInt("target_commu_seq"));
 				dto.setReg_date(rs.getString("reg_date"));
 				dto.setSeq(rs.getInt("seq"));
 				dto.setStep(rs.getInt("step"));
@@ -50,7 +49,7 @@ public class CommuBbsCommentDao {
 	}
 	
 	public void updateStep(CommuBbsComment comment) {
-		String sql = " update commucomment set step = step+1 where step >= ? and target_after_seq = ? ";
+		String sql = " update commucomment set step = step+1 where step >= ? and target_commu_seq = ? ";
 		
 		System.out.println(">>>>> CommuBbsComment .updateStep() sql : "+sql);
 		
@@ -73,7 +72,7 @@ public class CommuBbsCommentDao {
 	}
 	
 	public boolean addComment(CommuBbsComment comment) {
-		String sql = " insert into commucomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
+		String sql = " insert into commucomment(seq, depth, target_commu_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
 				" values (commucomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, 0 ) ";
 		
 		
@@ -103,7 +102,7 @@ public class CommuBbsCommentDao {
 	}
 	
 	public List<CommuBbsComment> getAllComments(int ref){
-		String sql = " select * from commucomment where target_after_seq = ? and del = 0 order by step asc";
+		String sql = " select * from commucomment where target_commu_seq = ? and del = 0 order by step asc";
 		
 		
 		System.out.println(">>>>> CommuBbsComment .getAllComments() sql : "+sql);
@@ -125,7 +124,7 @@ public class CommuBbsCommentDao {
 				CommuBbsComment dto = new CommuBbsComment();
 				dto.setContent(rs.getString("content"));
 				dto.setDepth(rs.getInt("depth"));
-				dto.setRef(rs.getInt("target_after_seq"));
+				dto.setRef(rs.getInt("target_commu_seq"));
 				dto.setReg_date(rs.getString("reg_date"));
 				dto.setSeq(rs.getInt("seq"));
 				dto.setStep(rs.getInt("step"));
@@ -150,7 +149,7 @@ public class CommuBbsCommentDao {
 	}
 	
 	public int getCommentsLength(int ref) {
-		String sql = " select count(*) as num from commucomment where target_after_seq = ? and del = 0 ";
+		String sql = " select count(*) as num from commucomment where target_commu_seq = ? and del = 0 ";
 		
 		
 		Connection conn = null;
