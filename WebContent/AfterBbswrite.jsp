@@ -19,10 +19,10 @@
     <%-- summernote --%>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet"> 
-    
-    
-    
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+
+
+
   </head>
 
   <body>
@@ -57,7 +57,7 @@
 				</ul>
 			</div>
 		</nav>
-   </header>	    
+   </header>
     <main role="main">
 
       <section class="jumbotron text-center">
@@ -69,62 +69,49 @@
           </p>
         </div>
       </section>
-      <section>
-	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	        <ul class="nav menu justify-content-center">
-			 <li class="nav-item menu-item">
-			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">입양 후기 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
-			  </li>
-			</ul>
-  		</nav>
-      </section>
+      <%@include file="./layout/menubar.jsp" %>
 
       <div class="album py-5 bg-light">
         <div class="container">
         	<div class="row">
-        	
+
         	<div class="row">
-        	<h1 >글쓰기</h1> 	
+        	<h1 >글쓰기</h1>
         	</div>
         </div>
         <form action="AfterBbsController" method="post" id="myform">
-        <input type="hidden" name="command" value="AfterBbswriteAf">	
+        <input type="hidden" name="command" value="AfterBbswriteAf">
      	<div class="row">
         	<div class="input-group-prepend " >
     			<span class="input-group-text" id="basic-addon1" style="width: 80px">글제목</span>
   			</div>
-  		<input type="text" class="form-control" placeholder="제목을 입력해 주세요" aria-label="Username" 
+  		<input type="text" class="form-control" placeholder="제목을 입력해 주세요" aria-label="Username"
   		aria-describedby="basic-addon1" style="width: 1000px" name="title" id="title">
         </div>
         <%-- 글내용 --%>
         <div class="row">
         <textarea id="summernote" name="content" value=""  ></textarea>
         </div>
+        <br>
         <div class="row">
-        <input type="hidden" name="pic1" value="" id="pic1"/>	
-        <input type="button" class="btn btn-success"  value="글쓰기" onclick="" id="btnwrite">
+        <input type="hidden" name="pic1" value="" id="pic1"/>
+        <input type="button" class="btn btn-success offset-md-4 col-md-2"  value="글쓰기" onclick="" id="btnwrite">&nbsp;
+        <input type="button" class="btn btn-outline-secondary col-md-2 " value="돌아가기" onclick="" id="btnBack">
+
+
         </div>
         </form>
-        
-        
-        	
-        	
+
+
+
+
        	</div>
-        
-        
-        
-			
+
+
+
+
         </div>
-     
+
 
     </main>
 
@@ -141,29 +128,29 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	
-	
+
+
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
-				
+
 		});
 		$('.menu-item').on('mouseout', function () {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
 	</script>
-	
+
 	<%-- summernote --%>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-	
-	
+
+
 	<script>
     $(document).ready(function() {
         $('#summernote').summernote({
@@ -189,7 +176,7 @@
     		});
 	});
 
-    
+
     function sendFile(file, editor) {
 		formdata = new FormData();
 		formdata.append("userImage", file);
@@ -204,11 +191,11 @@
 			success: function(data) {
 				console.log(data);
 				var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
-				
+
 				if($('#pic1').val() == ''){
 					$('#pic1').val(url);
 				}
-				
+
 				alert(url);
 				$('#hello').html(url);
 				$(editor).summernote('editor.insertImage', url);
@@ -216,8 +203,8 @@
 	        }
 		});
 	}
-         
-  
+
+
 	$("#btnwrite").click(function() {
 		var title = $("#title").val();
 		var content = $("#summernote").val();
@@ -236,9 +223,14 @@
 
 		}
 	});
-	</script>
-	
 
-	
+	$("#btnBack").click(function() {
+		location.href = "AfterBbsController?command=AfterBbslist";
+		});
+
+	</script>
+
+
+
   </body>
 </html>

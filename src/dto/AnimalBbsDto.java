@@ -24,7 +24,9 @@ public class AnimalBbsDto implements Serializable {
    private String last_update; // 마지막 수정날짜
    private int del;
    private int readcount;
+   private String complete_email;		// 예약확정자 이메일
    private String user_email;
+   
 
    public AnimalBbsDto() {
    }
@@ -58,7 +60,7 @@ public class AnimalBbsDto implements Serializable {
    }
    public AnimalBbsDto(String title, String name, int age, String kinds, String type, String location, int medicine,
          int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
-         String contact, String description) {
+         String contact, String description, String complete_email) {
       super();
       this.title = title;
       this.name = name;
@@ -75,6 +77,7 @@ public class AnimalBbsDto implements Serializable {
       this.userSeq = userSeq;
       this.contact = contact;
       this.description = description;
+      this.complete_email = complete_email;
    }
 
    public AnimalBbsDto(String title, String content) {
@@ -251,15 +254,24 @@ public class AnimalBbsDto implements Serializable {
       this.user_email = user_email;
    }
 
-   @Override
-   public String toString() {
-      return "AnimalBbsDto [seq=" + seq + ", title=" + title + ", name=" + name + ", age=" + age + ", kinds=" + kinds
-            + ", type=" + type + ", location=" + location + ", medicine=" + medicine + ", neutralization="
-            + neutralization + ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1
-            + ", content=" + content + ", userSeq=" + userSeq + ", contact=" + contact + ", description="
-            + description + ", reg_date=" + reg_date + ", last_update=" + last_update + ", del=" + del
-            + ", readcount=" + readcount + ", user_email=" + user_email + "]";
-   }
+public String getComplete_email() {
+	return complete_email;
+}
+
+public void setComplete_email(String complete_email) {
+	this.complete_email = complete_email;
+}
+
+@Override
+public String toString() {
+	return "AnimalBbsDto [seq=" + seq + ", title=" + title + ", name=" + name + ", age=" + age + ", kinds=" + kinds
+			+ ", type=" + type + ", location=" + location + ", medicine=" + medicine + ", neutralization="
+			+ neutralization + ", gender=" + gender + ", descripttion=" + descripttion + ", pic1=" + pic1 + ", content="
+			+ content + ", userSeq=" + userSeq + ", contact=" + contact + ", description=" + description + ", reg_date="
+			+ reg_date + ", last_update=" + last_update + ", del=" + del + ", readcount=" + readcount
+			+ ", complete_email=" + complete_email + ", user_email=" + user_email + "]";
+}
+
    
 
 }

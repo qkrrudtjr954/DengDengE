@@ -10,6 +10,7 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
+import dto.CategoryDto;
 import dto.CommuBbsDto;
 
 public class CommuBbsDao implements iCommuBbsDao {
@@ -23,15 +24,15 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		return comDao;
 	}
-	
-	
+
+
 	// 메인 리스트
 	@Override
 	public List<CommuBbsDto> getCommulist() {
 		List<CommuBbsDto> list = new ArrayList<>();
 
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email  "
-				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c" 
+				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c"
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND a.DEL=0"
 				+ " ORDER BY a.REG_DATE DESC ";
 
@@ -112,18 +113,18 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 			while (rs.next()) {
 				int i = 1;
-				
-				
-				dto = new CommuBbsDto(rs.getInt(i++), //seq, 
-									rs.getString(i++), //title, 
-									"", //pic1, 
-									rs.getString(i++), //content, 
-									rs.getInt(i++), //target_user_seq, 
-									rs.getInt(i++), //target_category, 
-									rs.getInt(i++), //readcount, 
+
+
+				dto = new CommuBbsDto(rs.getInt(i++), //seq,
+									rs.getString(i++), //title,
+									"", //pic1,
+									rs.getString(i++), //content,
+									rs.getInt(i++), //target_user_seq,
+									rs.getInt(i++), //target_category,
+									rs.getInt(i++), //readcount,
 									"", //reg_date,
 									rs.getString(i++), //last_update,
-									rs.getInt(i++), //del, 
+									rs.getInt(i++), //del,
 									rs.getString(i++), //category_name,
 									rs.getString(i++)); //user_email);
 						}
@@ -268,7 +269,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 	// 카테고리별 불러오기
 	@Override
-	public List<CommuBbsDto> getCategory(int target_category) {
+	public List<CommuBbsDto> getCategory(int seq) {
 		List<CommuBbsDto> list = new ArrayList<>();
 
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date, a.last_update as last_update, del, b.title as category_name, a.READCOUNT, c.email as user_email  "
@@ -286,7 +287,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 			psmt = conn.prepareStatement(sql);
 			System.out.println("sql = " + sql);
-			psmt.setInt(1, target_category);
+			psmt.setInt(1, seq);
 			System.out.println("3/6 getCategory Success");
 
 			rs = psmt.executeQuery();
@@ -306,7 +307,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 						rs.getString(i++), // String last_update
 						rs.getInt(i++), // int del
 						rs.getString(i++), // category_name
-						rs.getString(i++)); //user_email 
+						rs.getString(i++)); //user_email
 				list.add(dto);
 			}
 			System.out.println("5/6 getCategory Success");
@@ -330,7 +331,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 		List<CommuBbsDto> list = new ArrayList<>();
 
 		String sql = " SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email  "
-				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c" 
+				+ " FROM COMMUBBS A, CATEGORY B,  DENGUSER c"
 				+ " WHERE A.TARGET_CATEGORY = B.TARGET_CATEGORY AND a.target_user_seq = c.seq AND DEL=0 "
 				+ " AND " + Searchtype + " LIKE '%" + SearchWord + "%'" + " ORDER BY a.REG_DATE DESC ";
 
@@ -381,20 +382,20 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		return list;
 	}
-	
+
 
 /*	CREATE TABLE LIKETABLE(
-	SEQ NUMBER(8) PRIMARY KEY, 
+	SEQ NUMBER(8) PRIMARY KEY,
 	TARGET_USER_SEQ NUMBER(8),
 	FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq),
 	TARGET_BBS_SEQ NUMBER(8),
 	FOREIGN KEY (TARGET_BBS_SEQ) REFERENCES COMMUBBS(seq)
 	);*/
-	
+
 	@Override
 	public boolean Prevent_duplication(int target_user_seq, int target_bbs_seq) {
 		String sql = "select*from liketable where BBS_CATEGORY = 3 AND target_user_seq = ? and target_bbs_seq = ? ";
-		
+
 
 		int count = 0;
 
@@ -409,9 +410,9 @@ public class CommuBbsDao implements iCommuBbsDao {
 			psmt = conn.prepareStatement(sql);
 			System.out.println("3/6 Prevent_duplication Success");
 
-			psmt.setInt(1, target_user_seq);	
+			psmt.setInt(1, target_user_seq);
 			psmt.setInt(2,target_bbs_seq);
-			
+
 			System.out.println(sql);
 			count = psmt.executeUpdate();
 			System.out.println("4/6 Prevent_duplication Success");
@@ -430,12 +431,12 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 		return count > 0 ? true : false;
 	}
-	
+
 	public void likeTB_insert(int target_user_seq, int target_bbs_seq) {
 		String sql = "INSERT INTO LIKETABLE (SEQ, BBS_CATEGORY, TARGET_USER_SEQ, TARGET_BBS_SEQ) "
 				+ " VALUES(LIKE_SEQ.NEXTVAL, 3, ?, ?) ";
-		
-		
+
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -447,9 +448,9 @@ public class CommuBbsDao implements iCommuBbsDao {
 			psmt = conn.prepareStatement(sql);
 			System.out.println("3/6 likeTB_insert Success");
 
-			psmt.setInt(1, target_user_seq);	
+			psmt.setInt(1, target_user_seq);
 			psmt.setInt(2,target_bbs_seq);
-			
+
 			System.out.println(sql);
 			psmt.executeUpdate();
 			System.out.println("4/6 likeTB_insert Success");
@@ -459,7 +460,7 @@ public class CommuBbsDao implements iCommuBbsDao {
 			System.out.println(e.getMessage());
 			System.out.println(e.getErrorCode());
 			System.out.println(e.getSQLState());
-			
+
 
 		} finally {
 			DBClose.close(psmt, conn, rs);
@@ -468,11 +469,11 @@ public class CommuBbsDao implements iCommuBbsDao {
 
 
 	}
-	
+
 	public void likeTB_delete(int target_user_seq, int target_bbs_seq) {
 		String sql = " delete from liketable where BBS_CATEGORY = 3 AND target_user_seq = ? and target_bbs_seq = ? ";
-		
-		
+
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -484,9 +485,9 @@ public class CommuBbsDao implements iCommuBbsDao {
 			psmt = conn.prepareStatement(sql);
 			System.out.println("3/6 likeTB_delete Success");
 
-			psmt.setInt(1, target_user_seq);	
+			psmt.setInt(1, target_user_seq);
 			psmt.setInt(2,target_bbs_seq);
-			
+
 			System.out.println(sql);
 			psmt.executeUpdate();
 			System.out.println("4/6 likeTB_delete Success");
@@ -497,40 +498,73 @@ public class CommuBbsDao implements iCommuBbsDao {
 			System.out.println(e.getErrorCode());
 			System.out.println(e.getSQLState());
 
-			
+
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 
-		
+
 	}
 
-	
+
+	@Override
+	public List<CategoryDto> getCategories() {
+		String sql = " select * from category where status = 200 ";
+
+		Connection conn = DBConnection.makeConnection();
+
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		List<CategoryDto> list = new ArrayList<>();
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+
+			while(rs.next()) {
+				CategoryDto dto = new CategoryDto();
+				dto.setDescription(rs.getString("description"));
+				dto.setReg_date(rs.getString("reg_date"));
+				dto.setSeq(rs.getInt("seq"));
+				dto.setTitle(rs.getString("title"));
+
+				list.add(dto);
+			} 
+			}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				DBClose.close(psmt, conn, rs);
+			}
+
+			return list;
+		}
+
+
 	public int getLikeCount(int bbs_seq) {
 		String sql = " select count(*) as likecount from liketable where BBS_CATEGORY = 3 AND target_bbs_seq = ?  ";
-		
+
 		int like_count = 0;
-		
+
 		Connection conn = DBConnection.makeConnection();
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, bbs_seq);
-			
+
 			rs = psmt.executeQuery();
-			
+
 			if(rs.next()) {
 				like_count = rs.getInt("likecount");
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-		
 		return like_count;
 	}
+
 }

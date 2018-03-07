@@ -22,18 +22,17 @@ public class CommuBbsDto implements Serializable {
 	    READCOUNT NUMBER(8),
 	    REG_DATE DATE,
 	    LAST_UPDATE DATE,
-	    LIKE_COUNT NUMBER(8),
 	    DEL NUMBER(1)
 	);*/
-	
+
 	private int seq;
 	private String title;
 	private String pic1;
 	private String content;
 	private int target_user_seq;	//글쓴이 아이디 시퀀스
 	private int target_category;
-	private int readcount; 
-	private String reg_date;		//등록 날짜 
+	private int readcount;
+	private String reg_date;		//등록 날짜
 	private String last_update;		//수정 날짜
 	private int del;				//0 게시물 있음 1 게시물 없음
 	private String category_name;
@@ -43,7 +42,10 @@ public class CommuBbsDto implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
+
+
+
 
 
 
@@ -70,16 +72,19 @@ public class CommuBbsDto implements Serializable {
 
 
 
+
+
+
 	public CommuBbsDto(String title, String content, int target_user_seq, int target_category) {
 		super();
 		this.title = title;
 		this.content = content;
 		this.target_user_seq = target_user_seq;
 		this.target_category = target_category;
-	
+
 	}
-	
-	
+
+
 
 	public CommuBbsDto(String title, String content, int target_user_seq, int target_category, int readcount,
 			String reg_date, String category_name, String user_email) {
@@ -96,99 +101,259 @@ public class CommuBbsDto implements Serializable {
 
 
 
+
+
+
+
+
 	public int getSeq() {
 		return seq;
 	}
+
+
+
+
+
+
+
 
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
 
+
+
+
+
+
+
+
 	public String getTitle() {
 		return title;
 	}
+
+
+
+
+
+
+
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+
+
+
+
+
+
+
 	public String getPic1() {
 		return pic1;
 	}
+
+
+
+
+
+
+
 
 	public void setPic1(String pic1) {
 		this.pic1 = pic1;
 	}
 
+
+
+
+
+
+
+
 	public String getContent() {
 		return content;
 	}
+
+
+
+
+
+
+
 
 	public void setContent(String content) {
 		this.content = content;
 	}
 
+
+
+
+
+
+
+
 	public int getTarget_user_seq() {
 		return target_user_seq;
 	}
+
+
+
+
+
+
+
 
 	public void setTarget_user_seq(int target_user_seq) {
 		this.target_user_seq = target_user_seq;
 	}
 
+
+
+
+
+
+
+
 	public int getTarget_category() {
 		return target_category;
 	}
+
+
+
+
+
+
+
 
 	public void setTarget_category(int target_category) {
 		this.target_category = target_category;
 	}
 
+
+
+
+
+
+
+
 	public int getReadcount() {
 		return readcount;
 	}
+
+
+
+
+
+
+
 
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
 
+
+
+
+
+
+
+
 	public String getReg_date() {
 		return reg_date;
 	}
+
+
+
+
+
+
+
 
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 
+
+
+
+
+
+
+
 	public String getLast_update() {
 		return last_update;
 	}
+
+
+
+
+
+
+
 
 	public void setLast_update(String last_update) {
 		this.last_update = last_update;
 	}
 
+
+
+
+
+
+
+
 	public int getDel() {
 		return del;
 	}
+
+
+
+
+
+
+
 
 	public void setDel(int del) {
 		this.del = del;
 	}
 
+
+
+
+
+
+
+
 	public String getCategory_name() {
 		return category_name;
 	}
+
+
+
+
+
+
+
 
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
 	}
 
-	
-	
+
+
+
+
+
+
+
 	public String getUser_email() {
 		return user_email;
 	}
+
+
+
 
 
 
@@ -202,6 +367,9 @@ public class CommuBbsDto implements Serializable {
 
 
 
+
+
+
 	@Override
 	public String toString() {
 		return "CommuBbsDto [seq=" + seq + ", title=" + title + ", pic1=" + pic1 + ", content=" + content
@@ -210,7 +378,6 @@ public class CommuBbsDto implements Serializable {
 				+ ", category_name=" + category_name + ", user_email=" + user_email + "]";
 	}
 
-	
 
-	
+
 }

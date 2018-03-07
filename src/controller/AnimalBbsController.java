@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import delegator.Delegator;
 import dto.AnimalBbsDto;
+import dto.BookDto;
 import dto.User;
 import service.AnimalBbsService;
 import service.BookService;
@@ -41,7 +42,7 @@ public class AnimalBbsController extends HttpServlet {
 		BookService bookService = BookService.getInstance();
 		if(command.equals("animlist")) {
 			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
-			
+			System.out.println("animlist: "+animlist);
 			req.setAttribute("animlist", animlist);
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}
@@ -53,12 +54,15 @@ public class AnimalBbsController extends HttpServlet {
 			System.out.println("s"+seq);		
 			
 			if(Delegator.checkSession(req, resp)) {
-				
 				HttpSession session = req.getSession();
 		        User userInfo = (User)session.getAttribute("current_user");
 		        String email = userInfo.getEmail();
 		        
 				aniBbService.readCount(seq);		
+				
+				BookService bookservice = BookService.getInstance();
+				List<BookDto> booklist = bookservice.getBookList(seq);
+				req.setAttribute("booking", booklist);
 				
 				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
 				boolean isLiked = aniBbService.Prevent_duplication(userInfo.getSeq(), seq);
@@ -130,12 +134,12 @@ public class AnimalBbsController extends HttpServlet {
 			String descripttion = req.getParameter("descrip");
 			String content = req.getParameter("content");
 			
-			String contect = req.getParameter("contect");
+			String contact = req.getParameter("contact");
 			String description = req.getParameter("desc");
 			
 			HttpSession session = req.getSession();
 	         User userInfo = (User)session.getAttribute("current_user");
-	         String writer = userInfo.getEmail();
+	         String complete_email = userInfo.getEmail();
 	         int target_user_seq =userInfo.getSeq();
 	
 			
@@ -149,9 +153,8 @@ public class AnimalBbsController extends HttpServlet {
 			
 			boolean isS = aniBbService.wirteAnimalBbs(
 					new AnimalBbsDto(title, name, age, kinds, type, location, 
-												medicine, neutralization, gender, 
-												descripttion, pic1, content, 
-												target_user_seq, contect, description));
+												medicine, neutralization, gender, descripttion, pic1, content, 
+												target_user_seq, contact, description, complete_email));
 			
 			if(isS) {
 				// msg
@@ -218,11 +221,12 @@ public class AnimalBbsController extends HttpServlet {
 		}
 		else if(command.equals("btnsearch")) {
 			String ssearchBtn = req.getParameter("searchBtn");
-			System.out.println("btn:"+ssearchBtn);
 			
 			String searchBtn = ssearchBtn.substring(0, 1);
-			System.out.println("btn:"+searchBtn);
 			
+			if(ssearchBtn.equals("경기도")) {
+				searchBtn = ssearchBtn.substring(0, 2);
+			}
 			List<AnimalBbsDto> animlist = aniBbService.getFindBtnlist(searchBtn);
 			req.setAttribute("animlist", animlist);
 			
@@ -269,11 +273,6 @@ public class AnimalBbsController extends HttpServlet {
 			
 			
 		}
-	
-	
-	public boolean isNull(String str) {
-		return str == null || str.trim().equals("");
-	}
 	
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
 		RequestDispatcher dispatch = req.getRequestDispatcher(urls);

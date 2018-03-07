@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import delegator.Delegator;
+import dto.CategoryDto;
 import dto.CommuBbsDto;
 import dto.User;
 import service.CommuBbsService;
@@ -34,7 +35,6 @@ public class CommuBbsController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		CommuBbsService comService = CommuBbsService.getInstance();
 
 		//Delegator delegator = delegator.getInstance();
 
@@ -47,16 +47,22 @@ public class CommuBbsController extends HttpServlet {
 
 		if(command.equals("list")) {
 
+			CommuBbsService comService = CommuBbsService.getInstance();
 			List<CommuBbsDto> bbslist = comService.getCommulist();
+			List<CategoryDto> categories = comService.getCategories();
 			//짐 싸기
+			req.setAttribute("categories", categories);
 			req.setAttribute("bbslist", bbslist);
 
 			//보내주기
 			dispatch("CommuBbslist.jsp", req, resp);
 
 		}else if(command.equals("write")) {
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			if(Delegator.checkSession(req, resp)) {
+				List<CategoryDto> categories = comService.getCategories();
+				req.setAttribute("categories", categories);
 
 				dispatch("CommuBbsWrite.jsp", req, resp);
 			}else {
@@ -65,13 +71,15 @@ public class CommuBbsController extends HttpServlet {
 		        dispatch("UserControl?command=goSignIn", req, resp);
 			}
 
-			
-			
-			
-		}else if(command.equals("writeAf")){			
+
+
+
+		}else if(command.equals("writeAf")){
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			//String id = req.getParameter("id");
 			System.out.println("writeAf 들어옴");
+
 			String Scategory = req.getParameter("category");
 			int category = Integer.parseInt(Scategory);
 			String title = req.getParameter("title");
@@ -83,12 +91,12 @@ public class CommuBbsController extends HttpServlet {
 
 			HttpSession session = req.getSession();
 			User userInfo = (User)session.getAttribute("current_user");
-			String writer = userInfo.getEmail();
-			int target_user_seq =userInfo.getSeq();
+			int target_user_seq = userInfo.getSeq();
 
-			boolean isS = comService.writeCommu(new CommuBbsDto(title, content, target_user_seq, category));
+			CommuBbsDto dto = new CommuBbsDto(title, content, target_user_seq, category);
+			boolean isS = comService.writeCommu(dto);
 
-			System.out.println(isS);
+			System.out.println("CommuDto : "+dto);
 
 
 
@@ -111,12 +119,13 @@ public class CommuBbsController extends HttpServlet {
 			int seq = Integer.parseInt(Sseq);
 
 			HttpSession session = req.getSession();
-			
-			User current_user = (User)session.getAttribute("current_user"); 
-			
+
+			User current_user = (User)session.getAttribute("current_user");
+
 			if(Delegator.checkSession(req, resp)) {
 
-				
+				CommuBbsService comService = CommuBbsService.getInstance();
+
 				comService.readCount(seq);
 				CommuBbsDto comdto = comService.getCommu(seq);
 				boolean isLiked = comService.Prevent_duplication(current_user.getSeq(), seq);
@@ -124,20 +133,21 @@ public class CommuBbsController extends HttpServlet {
 				req.setAttribute("like_count", comService.getLikeCount(seq));
 				req.setAttribute("isLiked", isLiked);
 				dispatch("CommuBbsDetail.jsp", req, resp);
-				
-				
+
+
 			}else {
-				
+
 				req.setAttribute("returnurl", "CommuBbsController?command=read&seq="+seq);
 		        dispatch("UserControl?command=goSignIn", req, resp);
 			}
-			
-			
+
+
 
 		}else if(command.equals("delete")) {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
 			System.out.println("삭제 시퀀스 : " + Sseq);
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			boolean isS = comService.delCommu(seq);
 
@@ -157,11 +167,13 @@ public class CommuBbsController extends HttpServlet {
 				dispatch("CommuBbsController?command=read&seq="+seq, req, resp);
 			}
 		}else if(command.equals("classify")) {
-			String Starget_category = req.getParameter("target_category");
-			int target_category = Integer.parseInt(Starget_category);
+			String sseq = req.getParameter("target_category");
+			int seq = Integer.parseInt(sseq);
+			CommuBbsService comService = CommuBbsService.getInstance();
 
-			List<CommuBbsDto> bbslist = comService.getCategory(target_category);
+			List<CommuBbsDto> bbslist = comService.getCategory(seq);List<CategoryDto> categories = comService.getCategories();
 			//짐 싸기
+			req.setAttribute("categories", categories);
 			req.setAttribute("bbslist", bbslist);
 
 			//보내주기
@@ -170,6 +182,7 @@ public class CommuBbsController extends HttpServlet {
 		}else if(command.equals("update")) {
 			String Sseq = req.getParameter("seq");
 			int seq = Integer.parseInt(Sseq);
+			CommuBbsService comService = CommuBbsService.getInstance();
 
 			CommuBbsDto comdto = comService.getCommu(seq);
 
@@ -185,12 +198,13 @@ public class CommuBbsController extends HttpServlet {
 		      comdto.setSeq(Integer.parseInt(seq));
 		      comdto.setTitle(title);
 		      comdto.setContent(content);
+				CommuBbsService comService = CommuBbsService.getInstance();
 
 	         boolean isS = comService.udtCommu(comdto);
 
 
 
-	          
+
 		}else if(command.equals("search")) {
 
 			  String Searchtype = req.getParameter("Searchtype");             //검색종류(글쓴이,제목,내용)
@@ -198,6 +212,7 @@ public class CommuBbsController extends HttpServlet {
 
 
 			  System.out.println(" search " + Searchtype +" word "+SearchWord);
+				CommuBbsService comService = CommuBbsService.getInstance();
 
 			  List<CommuBbsDto> bbslist = comService.getFindCommulist(Searchtype, SearchWord);
 				//짐 싸기
@@ -212,36 +227,39 @@ public class CommuBbsController extends HttpServlet {
 			String Suser = req.getParameter("userid");
 			int user = Integer.parseInt(Suser);
 			System.out.println("seq " + seq + " userid " + user);
-			
-						
-			int like_count = 0; 
+
+
+			CommuBbsService comService = CommuBbsService.getInstance();
+
+			int like_count = 0;
 			HashMap<String, Integer> status = new HashMap<>();
-			
+
+
 			boolean check = comService.Prevent_duplication(user, seq);
-			
-			if( check) {		
+
+			if( check) {
 				// 테이블에서 해당 행을 삭제( 추가) 한다.
 				comService.likeTB_delete(user, seq);
-				
+
 				// status, like count 를 json으로 전송한다.
 				status.put("status", 404);
 			}else {
 				// 테이블에서 해당 행을 삭제( 추가) 한다.
 				comService.likeTB_insert(user, seq);
-				
+
 				// status, like count 를 json으로 전송한다.
 				status.put("status", 200);
 			}
 
-			// 테이블을 게시글 seq 로 count(*) 
+			// 테이블을 게시글 seq 로 count(*)
 			like_count = comService.getLikeCount(seq);
 			status.put("like_count", like_count);
 			String json = new Gson().toJson(status);
-			
+
 			System.out.println(json);
-			resp.getWriter().write(json);				
-	
-		
+			resp.getWriter().write(json);
+
+
 		}
 	}
 	//보내주는 함수

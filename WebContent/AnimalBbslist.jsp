@@ -73,24 +73,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			</p>
 		</div>
 	</section>
-	<section>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="nav menu justify-content-center">
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">분양소 찾기</a>
-			  </li>
-			</ul>
-		</nav>
-	</section>
+	<%@include file="./layout/menubar.jsp" %>
 
 
 	<div class="album py-5 bg-light">
@@ -164,8 +147,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					</div>
 				</div>
 			</form>
-			<br>
-	
+			<br>                     
 		<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="write">
 			<div class="row">
@@ -215,7 +197,10 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									%>
 
 									${item.title }
-									<br>
+									<c:if test="${item.del==200 }"> 
+									분양 완료 
+									</c:if>
+									<br>													
 								<p>
 									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
 								</p>
@@ -223,9 +208,9 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									<div class="btn-group">
 										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
 									</div>
-									<small class="text-muted">${range }</small>
-
+									<small class="text-muted">${range }</small>								
 								</div>
+								
 							</div>
 						</div>
 					</div>

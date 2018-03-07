@@ -1,4 +1,3 @@
-<%@page import="jdk.nashorn.internal.parser.JSONParser"%>
 <%@page import="dto.BookDto"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.User"%>
@@ -109,24 +108,7 @@ if(aniBbsDto != null){
 			</p>
 		</div>
 	</section>
-	<section>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="nav menu justify-content-center">
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">분양소 찾기</a>
-			  </li>
-			</ul>
-		</nav>
-	</section>
+	<%@include file="./layout/menubar.jsp" %>
 
 
 		<div class="album py-5 bg-light">
@@ -306,15 +288,26 @@ if(aniBbsDto != null){
 							</button>
 						</div>
 						<div class="modal-body">
-							<form action="BookController" method="get">
-							<input type="hidden" name="command" value="finalBook">
+						<!-- from -->							
 							<!-- hidden으로 값 전송 -->
 								<div class="form-group">
 									<label for="recipient-name" class="col-form-label">예약리스트:</label>
-									<table border="1" id="table">
-									</table>
+									<!-- table 위치 -->
+									
+									<c:forEach items="${booking }" var="item" varStatus="i">
+										<table class="table">
+											<tr>
+												<td width="200" class="tdVal">${item.user_email}</td>
+												<td>
+													<button onclick="getListTest('${item.user_email}')" class="btn btn-outline-secondary "style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
+												</td>
+											<tr>
+										</table>
+									
+									</c:forEach>
+									
 								</div>
-							</form>
+
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
@@ -458,26 +451,19 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 <script type="text/javascript">
 
-	$("button").click(function () {		
+	function getListTest(user_email) {
+		//alert("click");
 		$.ajax({
-			url:"BookController",		// 위치
-			type:"post",			// 방식
-			data:"command=getlist&seq=<%=aniBbsDto.getSeq() %>",	// data셋팅
-			
-			success:function (data) {
-				var list = JSON.parse(data);
-				var str = "";
-				$.each(list, function(i,item){
-					//alert('key:' + i + ' / ' + 'value:' + item);
-					str += '<tr>';
-					str += '<td width="200">'+item.user_email+'</td>';
-					str += '<td><input type="submit" class="btn btn-outline-secondary "style="background-color: #28A745; color: #fff" id="bookBtn" value="예약확정"></td>';
-					str += '</tr>';
-				});
-				$("#table").html(str);
+			url : 'BookController',
+			type : 'post',
+			data : {listseq : <%=aniBbsDto.getSeq() %>, command : 'finalBook',    email : user_email},
+			success  : function (data) {
+				alert("예약확정완료");
+				location.href="AnimalBbsController?command=animlist";
 			}
-		});
-	});
+		});		
+	};
+
 </script>
 
 	<script type="text/javascript">

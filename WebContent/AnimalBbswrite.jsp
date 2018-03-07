@@ -70,24 +70,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			</p>
 		</div>
 	</section>
-	<section>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="nav menu justify-content-center">
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">분양소 찾기</a>
-			  </li>
-			</ul>
-		</nav>
-	</section>
+	<%@include file="./layout/menubar.jsp" %>
 	
 	<form action="AnimalBbsController" method="post" id="form">
 		<input type="hidden" name="command" value="writeAf"> 
@@ -284,7 +267,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" style="align-content: center;">기타사항</span>
-							<textarea name="desc" id="summernote2"></textarea>
+							<textarea name="desc" id="summernote2" class="description"></textarea>
 						</div>
 					</div>
 

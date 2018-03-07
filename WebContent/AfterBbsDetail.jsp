@@ -1,4 +1,4 @@
-<%@page import="dto.User"%>
+﻿<%@page import="dto.User"%>
 <%@page import="dto.AfterBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -29,9 +29,9 @@
      border: none;
      outline: none;
     }
-    
+
     </style>
-    
+
      <%!
 public String toDate(String mdate){
 	String s = mdate.substring(2, 4) + "/"    // yyyy
@@ -40,8 +40,8 @@ public String toDate(String mdate){
 	return s;
 }
   %>
-  
-  
+
+
 </head>
 
 <body>
@@ -89,26 +89,9 @@ public String toDate(String mdate){
 			</p>
 		</div>
 	</section>
-	<section>
-		    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	        <ul class="nav menu justify-content-center">
-			 <li class="nav-item menu-item">
-			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">입양 후기 보기</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
-			  </li>
-			  <li class="nav-item menu-item">
-			  	<a class="nav-link" href="FindPlaceController?command=findPlace">분양소 찾기</a>
-			  </li>
-			</ul>
-  		</nav>
-	</section>
+	<%@include file="./layout/menubar.jsp" %>
 
-	
+
 			<%
 
 AfterBbsDto bbs1 = (AfterBbsDto)request.getAttribute("bbs1");
@@ -129,90 +112,79 @@ if(msg !=null){
 	<div class="album py-5 bg-light">
 		<div class="container">
 		<!-- 본문페이지 -->
-		
-		<div class="row">
-		<div class="offset-md-1"></div>
-		<div class="col-md-10">
-		<form action="AfterBbsController" method="post">
-		<input type="hidden" name="command" value="AfterBbsUpdate">
-		<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
-   	
+
+			<div class="row">
+				<div class="offset-md-1"></div>
+				<div class="col-md-10">
+					<form action="AfterBbsController" method="post">
+						<input type="hidden" name="command" value="AfterBbsUpdate">
+						<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
+
 						<h1>입양후기</h1>
-						<hr>	
-	
-					<div class="row">
-						<div class="offset-md-1"></div>	
-	<div class="col-md-2" align="right">	
-	<div class="p-3 mb-2 bg-success text-white" style="text-align: center;">
-	<b>입양후기</b>
+						<hr>
 
-	</div>
-	</div>
+						<div class="row">
+							<div class="offset-md-1"></div>
+							<div class="col-md-2" align="right">
+								<div class="p-3 mb-2 bg-success text-white"
+									style="text-align: center;">
+									<b>입양후기</b>
 
-		<div class="col-md-8">
-			<p><h4><%=bbs1.getTitle() %></h4></p>
-		</div>
-
-		<div class="offset-md-1"></div> 
-</div>
-
-<hr>
-<div class="row offset-md-6">
-<p><b>작성자</b>  <%=bbs1.getUser_email()%> &nbsp;&nbsp;&nbsp;<b>작성일</b>  <%=toDate(bbs1.getReg_date())%>&nbsp;&nbsp;&nbsp;<b> 조회수 </b> <%=bbs1.getReadcond()%>&nbsp;</p>
-</div>
-
-<div class="row">
-<div class="offset-md-1"></div>	
-<div class="col-md-10">
-<br>
-<br>
-<%=bbs1.getContent() %>
-<br>
-<br>
-
-</div>
-<div class="offset-md-1"></div>	
-</div>
-<hr>
-</form>
-</div>			
-<!-- 댓글 달기/ 좋아요 -->
-
-<div class="offset-md-1 col-md-4" id="likeArea"><button type="button" id="btnLike" >
-	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
-	<span id="like_count">${like_count }</span>
-	&nbsp;&nbsp;&nbsp;
-	<img src = "./img/comment_1.png" height="30px" width="30px" >&nbsp;&nbsp;&nbsp;&nbsp;<span id="commentCount">0</span>
-</div>
-</div>
-<!-- 댓글 달기/ 좋아요 끝 -->
-<div class="row offset-md-3 col-md-9">
-					<input type="text" name="content" id="content0" size="50"> 
-					<input type="button" value="comment" onclick="addComment(${bbs1.seq}, 1, 0, 0)">
-				</div> 
-				<br><br>
-				<div class="comment-area">
-	
-					
-					<!-- 
-					<div class="comment-box col-md-12">
-						<div class="comment-email" style="background: blue;">
-							${comment.user_email}
-						</div>
-						<div class="comment-content" style="background: black;">
-							<div class="comment-depth" style="background: red;">
-								<c:forEach begin="0" end="${comment.depth }">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								</c:forEach>
+								</div>
 							</div>
-							${comment.content }
+
+							<div class="col-md-8">
+								<p>
+								<h4><%=bbs1.getTitle() %></h4>
+								</p>
+							</div>
+
+							<div class="offset-md-1"></div>
 						</div>
-					</div>							
-					<div class="comment-input col-md-12" style="background: red;">
-						<input type="text" name="content" id="content${i.index+1 }">
-						<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
-					</div>
-					 -->
+
+						<hr>
+						<div class="row offset-md-6">
+							<p>
+								<b>작성자</b>
+								<%=bbs1.getUser_email()%>
+								&nbsp;&nbsp;&nbsp;<b>작성일</b>
+								<%=toDate(bbs1.getReg_date())%>&nbsp;&nbsp;&nbsp;<b> 조회수 </b>
+								<%=bbs1.getReadcond()%>&nbsp;
+							</p>
+						</div>
+
+						<div class="row">
+							<div class="offset-md-1"></div>
+							<div class="col-md-10">
+								<br> <br>
+								<%=bbs1.getContent()%>
+								<br> <br>
+
+							</div>
+							<div class="offset-md-1"></div>
+						</div>
+						<hr>
+					</form>
+				</div>
+				<!-- 댓글 달기/ 좋아요 -->
+
+				<div class="offset-md-1 col-md-4" id="likeArea">
+					<button type="button" id="btnLike">
+						<img
+							src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }"
+							id="like_img" height="50px" width="50px">
+					</button>
+					<span id="like_count">${like_count }</span> &nbsp;&nbsp;&nbsp; 
+					<img src="./img/comment_1.png" height="30px" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="commentCount">0</span>
+				</div>
+			</div>
+			<!-- 댓글 달기/ 좋아요 끝 -->
+			<div class="row offset-md-3 col-md-9">
+				<input type="text" name="content" id="content0" size="50"> <input type="button" value="comment" onclick="addComment(${bbs1.seq}, 0, 0, 0)">
+			</div>
+			<br><br>
+				<div class="comment-area">
 					<c:forEach begin="0" items="${comments }" var="comment" varStatus="i">
 						<div class="row">
 							<div class="comment-email col-md-2" style="background:pink;height: 50px;">
@@ -234,7 +206,7 @@ if(msg !=null){
 							<div class="comment-date col-md-1" style="background:green;height: 50px;">
 								${comment.reg_date }
 							</div>
-							
+
 							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
 								<input type="text" name="content" id="content${i.index+1 }">
 								<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
@@ -242,7 +214,7 @@ if(msg !=null){
 						</div>
 						<hr>
 					</c:forEach>
-				
+
 			</div>
 					<div class="row">
 				<%
@@ -290,91 +262,91 @@ if(msg !=null){
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
-				
+
 		});
 		$('.menu-item').on('mouseout', function () {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
-		
-		
-		// button 
+
+
+		// button
 		$("#btnupdete").click(function(){
 	        alert("수정화면으로 이동 합니다");
 	       document.form1.action ="AfterBbsController?command=AfterBbsUpdate";
-	      document.form1.submit(); 
-	        
+	      document.form1.submit();
+
 	     });
-	     
-	     $("#btndelete").click(function(){    
+
+	     $("#btndelete").click(function(){
 	        //alert("클릭");
 	         document.form1.action="AfterBbsController?command=AfterDelete";
 	         document.form1.submit();
 	     });
-	     
+
 	     $('#btnLike').click(function ()  {
-				
-				$.ajax({
-					url:"AfterBbsController",
-					data: { command: 'like', seq: ${bbs1.seq }, userid: ${current_user.seq }},
-					type:"post",
-					success : function (data) {
-						
-						var result = JSON.parse(data);
-						
-						if(result.status == 404){
-							$('img#like_img').attr('src', './img/empty_heart.png');
-						} else {
-							$('img#like_img').attr('src', './img/heart.png');
-						}
-						
-						$('span#like_count').html(result.like_count);
+
+			$.ajax({
+				url:"AfterBbsController",
+				data: { command: 'like', seq: ${bbs1.seq }, userid: ${current_user.seq }},
+				type:"post",
+				success : function (data) {
+
+					var result = JSON.parse(data);
+
+					if(result.status == 404){
+						$('img#like_img').attr('src', './img/empty_heart.png');
+					} else {
+						$('img#like_img').attr('src', './img/heart.png');
 					}
-				})
-			});	 
-	     
+
+					$('span#like_count').html(result.like_count);
+				}
+			})
+		});
+
 	     function showCommentArea(commentArea) {
 	    	 	var dom = $(commentArea).parent().parent().find('.comment-input');
-	    	 	
+
 	    	 	if(dom.css('display') == 'none'){
-		    	 	$(commentArea).parent().parent().find('.comment-input').css('display', 'block');	    	 		
+		    	 	$(commentArea).parent().parent().find('.comment-input').css('display', 'block');
 	    	 	} else {
 	    	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
 	    	 	}
 		}
-	     
+
 	     function addComment(ref, step, depth, index) {
 				$.ajax({
 					url : 'AfterCommentController',
 					method : 'POST',
-					data : { command : 'addComment', ref : ref, step : step+1, depth : depth+1, content : $('#content'+index).val() },
+					data : { command : 'addComment', ref : ref, step : step, depth : depth, content : $('#content'+index).val() },
 					success : function (data) {
-						
+
 						$('.comment-area').children().remove();
-						
+
 						var comments = JSON.parse(data);
-						
-						for(var i=0; i < comments.length; i++){
-							
-							printCommentHtml(comments[i], i);
-							
+
+						for(var i= 0; i < comments.length; i++){
+
+							printCommentHtml(comments[i], (i+1));
+
 						}
 					}
 				})
 			}
-			
+
 			function printCommentHtml(comment, index) {
 				var html =
 					'<div class="row">'+
-						'<div class="comment-email col-md-2" style="background:pink;height: 50px;">'+
+						'<div class="comment-email col-md-2 col-xs-6" style="background:pink;height: 50px;">'+
 							comment.user_email+
 						'</div>'+
-						'<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">'+
+						'<div class="comment-box col-md-8 col-xs-12" style="background:lightblue;height: 50px;">'+
 							'<div class="row">'+
-								'<div class="col-md-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
+								'<div class="col-md-'+comment.depth+' col-xs-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
 									'ㄴ>'+
 								'</div>'+
-								'<div class="col comment-content">'+
+								'<div class="col col-xs-12 comment-content">'+
 									comment.content+
 								'</div>'+
 							'</div>'+
@@ -385,9 +357,9 @@ if(msg !=null){
 						'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
 							comment.reg_date+
 						'</div>'+
-						
+
 						'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
-							'<input type="text" name="content" id="conten'+index+'">'+
+							'<input type="text" name="content" id="content'+index+'">'+
 							'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
 						'</div>'+
 					'</div>'+
@@ -395,8 +367,8 @@ if(msg !=null){
 					console.log(html);
 					$('.comment-area').append(html);
 			}
-	     
-	     
+
+
 	</script>
 </body>
 </html>

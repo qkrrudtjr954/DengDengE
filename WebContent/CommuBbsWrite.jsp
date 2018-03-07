@@ -69,20 +69,7 @@
 	</section>
 
 
-	<section>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="nav menu justify-content-center">
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="AnimalBbsController?command=animlist">분양 동물 보기</a></li>
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a></li>
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="CommuBbsController?command=list">커뮤니티</a></li>
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="FindPlaceController?command=findPlace">분양소 찾기</a></li>
-			</ul>
-		</nav>
-	</section>
+	<%@include file="./layout/menubar.jsp" %>
 
 	<div class="album py-5 bg-light">
 		<div class="container">
@@ -97,10 +84,9 @@
 							<div class="offset-md-1"></div>
 							<div class="col-md-2" align="right">
 								<select class="custom-select" id="category" name="category">
-									<option value="0">선택하세요</option>
-									<option value="1">애견Tip</option>
-									<option value="2">중고장터</option>
-									<option value="3">자유게시판</option>
+									<c:forEach items="${categories }" var="category" varStatus="i">
+										<option value="${category.seq }">${category.title }</option>
+									</c:forEach>
 								</select>
 							</div>
 
@@ -218,15 +204,12 @@
 				processData : false,
 				success : function(data) {
 				console.log(data);
-				var url = '${initParam.IMG_SERVER_PATH }/image/'
-														+ data.filename;
-				alert(url);
-				$('#hello').html(url);
-				$('#summernote').summernote(
-							'editor.insertImage', url);
-				$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-											}
-				});
+				var url = '${initParam.IMG_SERVER_PATH }/image/'+ data.filename;
+					$('#hello').html(url);
+					$('#summernote').summernote('editor.insertImage', url);
+					$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+				}
+		});
 							}
 
 		$("#btnBack").click(function() {
@@ -250,9 +233,6 @@
 			    $("#category").focus();
 			    return false;
 			}
-			
-			
-			
 		});
 	});
 	</script>

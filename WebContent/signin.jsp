@@ -42,7 +42,12 @@
 
 		<input class="btn btn-lg btn-primary btn-block" type="button" value="로그인">
 		<a href="UserControl?command=goSignUp">댕댕이가 처음이십니까?</a> 
+		<br>
+		<a href="MainControl?command=start">메인화면으로 가기</a> 
 		<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+		
+		
+		
 	</form>
 
 

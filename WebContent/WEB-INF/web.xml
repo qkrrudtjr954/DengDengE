@@ -14,6 +14,13 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
+	<jsp-config>
+	  <jsp-property-group>
+	    <url-pattern>*.jsp</url-pattern>
+	    <page-encoding>UTF-8</page-encoding>
+	  </jsp-property-group>
+	</jsp-config>
+
 	<context-param>
 		<description>daum api key</description>
 		<param-name>DAUM_API_KEY</param-name>
@@ -34,6 +41,7 @@
 		<servlet-name>mainControl</servlet-name>
 		<url-pattern>/MainControl</url-pattern>
 	</servlet-mapping>
+
 
 
 	<!-- UserController url mapping -->
@@ -65,7 +73,7 @@
 		<servlet-name>AfterBbsController</servlet-name>
 		<url-pattern>/AfterBbsController</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>AfterCommentController</servlet-name>
 		<servlet-class>controller.AfterCommentController</servlet-class>
@@ -96,14 +104,24 @@
 		<servlet-name>FindPlaceController</servlet-name>
 		<url-pattern>/FindPlaceController</url-pattern>
 	</servlet-mapping>
-	
-	
-		<servlet>
+
+
+	<servlet>
 		<servlet-name>BookController</servlet-name>
 		<servlet-class>controller.BookController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BookController</servlet-name>
 		<url-pattern>/BookController</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>CalendarController</servlet-name>
+		<servlet-class>controller.CalendarController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CalendarController</servlet-name>
+		<url-pattern>/CalendarController</url-pattern>
 	</servlet-mapping>
 </web-app>

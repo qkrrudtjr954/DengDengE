@@ -361,6 +361,36 @@ SELECT a.seq, a.TITLE as title, content, target_user_seq, a.target_category,  re
 	
 	select*from liketable;
 	
+	
+drop table animalbbs
+	CASCADE CONSTRAINT;
+	DROP SEQUENCE animalbbs_seq;
+	
+create SEQUENCE animalbbs_seq start with 1 increment by 1;
+create table animalbbs(
+    seq number(8) primary key,
+    title varchar2(100),
+    name varchar2(50),
+    age number(2),
+    kinds varchar2(100),
+    type varchar2(100),
+    location varchar2(200),
+    medicine number(1),
+    neutralization number(1),
+    gender number(1),
+    descripttion varchar2(3000),
+    pic1 varchar2(200),
+    content long,
+    TARGET_USER_SEQ NUMBER(8),
+    TARGET_CONTACT varchar2(20),
+    TARGET_DESCRIPTION   varchar2(3000),
+    REG_DATE DATE,
+    LAST_UPDATE DATE,
+    DEL NUMBER(1),
+    READCOUNT NUMBER(8),
+    TARGET_COMPLETE_EMAIL VARCHAR2(100),
+    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq)
+);
 	UPDATE  COMMUBBS  SET LIKE_COUNT=LIKE_COUNT+1, del = 1 
 	WHERE SEQ=?
 	
@@ -421,3 +451,42 @@ create table animalbbs(
     FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(seq)
 );
 
+
+
+
+
+create SEQUENCE BOOK_SEQ start with 1 increment by 1;
+create table BOOK(
+    SEQ NUMBER(8) primary key,
+    TARGET_USER_SEQ NUMBER(8),
+    TARGET_USER_EMAIL VARCHAR2(100),
+    CONTENT LONG,
+    TARGET_LIST_SEQ NUMBER(8),
+    TARGET_COMPLETE_EMAIL VARCHAR2(100),
+    DEL NUMBER(30),
+    FOREIGN KEY (TARGET_USER_SEQ) REFERENCES denguser(SEQ)
+);
+
+
+
+SELECT a.seq, a.TITLE as title, target_user_seq, READCOUNT, a.reg_date as reg_date, a.last_update as last_update, a.del, b.title as category_name, c.email as user_email   
+FROM COMMUBBS A, CATEGORY B,  DENGUSER c 
+WHERE A.TARGET_CATEGORY = B.seq AND a.target_user_seq = c.seq AND a.DEL=0 ORDER BY a.REG_DATE DESC 
+
+
+alter table category drop column status;
+alter table category add  status number(3);
+
+select * from category;
+
+update category set status=200;
+
+
+INSERT INTO CATEGORY(SEQ, TARGET_CATEGORY, TITLE, DESCRIPTION, REG_DATE, status)
+VALUES(CATEGORY_SEQ.NEXTVAL,1, '애견TIP', '애견팁이당', SYSDATE, 200);
+
+INSERT INTO CATEGORY(SEQ, TARGET_CATEGORY, TITLE, DESCRIPTION, REG_DATE, status)
+VALUES(CATEGORY_SEQ.NEXTVAL,2, '중고장터', '중고장터닷', SYSDATE, 200);
+
+INSERT INTO CATEGORY(SEQ, TARGET_CATEGORY, TITLE, DESCRIPTION, REG_DATE, status)
+VALUES(CATEGORY_SEQ.NEXTVAL,3, '자유게시판', '자유게시판이당', SYSDATE, 200);
