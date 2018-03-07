@@ -226,8 +226,9 @@ if(msg !=null){
 							</div>
 							
 							<div class="comment-email col-md-1" style="height: 50px;">
-								<button onclick="deleteComment(${comment.seq}, ${comment.ref })">X</button>
 								<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="delBtn"onclick="deleteComment(${comment.seq}, ${comment.ref })"><font size="2em" color="#696969"><u>삭제</u></font></button>
 							</div>
 							
 
@@ -384,9 +385,10 @@ if(msg !=null){
 							'<font size="2em" color="#696969">'+dateTest(comment.reg_date)+'</font>'+
 						'</div>'+
 						'<div class="comment-email col-md-1" style="height: 50px;">'+
-						'<button onclick="deleteComment('+comment.seq+', '+comment.ref+')">X</button>'+
 							'<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">'+
-						'</div>'+
+							'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+							'<button id="delBtn" onclick="deleteComment('+comment.seq+', '+comment.ref+')"><font size="2em" color="#696969"><u>삭제</u></font></button>'+
+							'</div>'+
 						'<div class="comment-input col-md-12" style="display:none;margin-top:10px;">'+
 							'<input type="text" name="content" class="form-control col" id="content'+index+'" size="80">'+
 							'<input type="button" value="comment" class="btn btn-outline-success col"  onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+

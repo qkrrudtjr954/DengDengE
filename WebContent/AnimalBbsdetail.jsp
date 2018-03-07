@@ -4,6 +4,7 @@
 <%@page import="dto.AnimalBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -491,7 +492,8 @@ if(aniBbsDto != null){
 							
 							<div class="comment-email col-md-1" style="height: 50px;">
 								<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">
-								<button onclick="deleteComment(${comment.seq}, ${comment.ref })">X</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="delBtn"onclick="deleteComment(${comment.seq}, ${comment.ref })"><font size="2em" color="#696969"><u>삭제</u></font></button>
 							</div>
 							
 
@@ -673,8 +675,9 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 					'</div>'+
 					'<div class="comment-email col-md-1" style="height: 50px;">'+
 						'<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">'+
-						'<button onclick="deleteComment('+comment.seq+', '+comment.ref+')">X</button>'+
-					'</div>'+
+						'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+						'<button id="delBtn" onclick="deleteComment('+comment.seq+', '+comment.ref+')"><font size="2em" color="#696969"><u>삭제</u></font></button>'+
+						'</div>'+
 					'<div class="comment-input col-md-12" style="display:none;margin-top:10px;">'+
 						'<input type="text" name="content" class="form-control col" id="content'+index+'" size="80">'+
 						'<input type="button" value="comment" class="btn btn-outline-success col"  onclick="addComment(${aniBbsDto.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+

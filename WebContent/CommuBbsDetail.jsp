@@ -2,6 +2,7 @@
 <%@page import="dto.CommuBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,26 +96,23 @@ public String toDate(String mdate){
 CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 %>
 	<div class="row">
-		<div class="offset-md-1"></div>
-		<div class="col-md-10">
+		
+		
 		<form name="form1" action="CommuBbsController" method="post">
    		<input type="hidden" name="seq" value="<%=comdto.getSeq() %>">
-						<h1>커뮤니티</h1>
-						<hr>				
+						<h1>커뮤니티</h1>								
+		
+	</div>
+	<hr>	
 <div class="row">
-	<div class="offset-md-1"></div>	
-	<div class="col-md-2" align="right">	
+	<div class="offset-md-1 col-md-2" align="right">	
 	<div class="p-3 mb-2 bg-success text-white" style="text-align: center;">
 	<b><%=comdto.getCategory_name() %></b>
-
 	</div>
 	</div>
-
-		<div class="col-md-8">
+	<div class="col-md-8">
 			<p><h4><%=comdto.getTitle() %></h4></p>
-		</div>
-
-		<div class="offset-md-1"></div> 
+	</div> 
 </div>
 
 <hr>
@@ -123,61 +121,76 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 </div>
 
 <div class="row">
-<div class="offset-md-1"></div>	
-<div class="col-md-10">
-<br>
-<br>
-<%=comdto.getContent() %>
-<br>
-<br>
-
-</div>
-<div class="offset-md-1"></div>	
+	<div class="offset-md-1"></div>	
+	<div class="col-md-10">
+		<br>
+		<br>
+		<%=comdto.getContent() %>
+		<br>
+		<br>
+	</div>
+	<div class="offset-md-1"></div>	
 </div>
 <hr>
 <!-- 댓글 달기/ 좋아요 -->
 
-<div class="col-md-4" id="likeArea"><button type="button" id="btnLike" >
-	<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px"></button>
+<div class="col-md-4" id="likeArea">
+	<button type="button" id="btnLike" >
+		<img src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }" id="like_img" height="50px" width="50px">
+	</button>
 	<span id="like_count">${like_count }</span>&nbsp;&nbsp;&nbsp; 
 	<img src="./img/comment_1.png" height="30px" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;
-	<span id="commentCount">0</span>
+	<span id="commentCount">${comments.size() }</span>
 </div>
-
-
-
 <!-- 댓글 달기/ 좋아요 끝 -->
-			<div class="row offset-md-3 col-md-9">
-				<input type="text" name="content" id="content0" size="50"> <input type="button" value="comment" onclick="addComment(${comdto.seq}, 0, 0, 0)">
+<div class="row">
+			<div class="offset-md-1 col-md-8">
+				<input type="text" class="form-control" name="content" id="content0" size="90" placeholder="댓글을 입력해주세요"> 
+			</div>
+			<div class="col-md-2">
+				<input type="button" class="btn btn-outline-success" value="comment" onclick="addComment(${comdto.seq}, 0, 0, 0)">
+			</div>
 			</div>
 			<br><br>
 				<div class="comment-area">
 					<c:forEach begin="0" items="${comments }" var="comment" varStatus="i">
 						<div class="row">
-							<div class="comment-email col-md-2" style="background:pink;height: 50px;">
+							<div class="comment-email col-md-2" style="height: 50px;">
+							<img src="./img/user.png" width="30">&nbsp;
 								${comment.user_email }
 							</div>
-							<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">
+							<div class="comment-box col" style="height: 50px;">
 								<div class="row">
-									<div class="col-md-${comment.depth }" style="background:red; height:50px;text-align:right;">
-										ㄴ>
+									<div class="col-md-${comment.depth }" style="height:50px;text-align:right;">
+								<c:choose>
+								    <c:when test="${comment.depth ==1}">
+								    </c:when>	
+								    <c:otherwise>
+								      	<img src="./img/arrow.png" width="24">
+								    </c:otherwise>
+								</c:choose>
 									</div>
 									<div class="col comment-content">
 										${comment.content }
 									</div>
 								</div>
 							</div>
-							<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">
-								<button onclick="deleteComment(${comment.seq}, ${comment.ref })">X</button>
-								<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">
+							<div class="comment-date col-md-1" style="height: 50px;">
+								<fmt:parseDate value="${comment.reg_date }" pattern="yyyy-MM-dd HH:mm:ss.S" var="tempRegDate"/>
+								<fmt:formatDate value="${tempRegDate }" pattern="yyyy/MM/dd" var="regDate"/>
+								<font size="2em" color="#696969">${regDate }</font>
 							</div>
-							<div class="comment-date col-md-1" style="background:green;height: 50px;">
-								${comment.reg_date }
+							
+							<div class="comment-email col-md-1" style="height: 50px;">
+								<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="delBtn"onclick="deleteComment(${comment.seq}, ${comment.ref })"><font size="2em" color="#696969"><u>삭제</u></font></button>
 							</div>
+							
 
-							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
-								<input type="text" name="content" id="content${i.index+1 }">
-								<input type="button" value="comment" onclick="addComment(${comdto.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+							<div class="comment-input col-md-12" style="display:none;margin-top:10px;">
+								<input type="text"  name="content" class="form-control col" id="content${i.index+1 }" size="80">
+								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comdto.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
 							</div>
 						</div>
 						<hr>
@@ -297,12 +310,16 @@ if(comdto.getUser_email().equals(sid)){
 
 					var comments = JSON.parse(data);
 
+					$('#commentCount').html(comments.length);
 					for(var i= 0; i < comments.length; i++){
 
 						printCommentHtml(comments[i], (i+1));
 
 					}
-				}
+					$('#content0').val("");
+
+					}
+				
 			})
 		}
 		
@@ -310,37 +327,51 @@ if(comdto.getUser_email().equals(sid)){
 		function printCommentHtml(comment, index) {
 			var html =
 				'<div class="row">'+
-					'<div class="comment-email col-md-2 col-xs-6" style="background:pink;height: 50px;">'+
+				'<div class="comment-email col-md-2" style="height: 50px;">'+
+					'<img src="./img/user.png" width="30">&nbsp;'+
 						comment.user_email+
-					'</div>'+
-					'<div class="comment-box col-md-8 col-xs-12" style="background:lightblue;height: 50px;">'+
-						'<div class="row">'+
-							'<div class="col-md-'+comment.depth+' col-xs-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
-								'ㄴ>'+
-							'</div>'+
-							'<div class="col col-xs-12 comment-content">'+
-								comment.content+
-							'</div>'+
+				'</div>'+
+				'<div class="comment-box col" style="height: 50px;">'+
+					'<div class="row">'+
+						'<div class="col-md-'+comment.depth+'" style=" height:50px;text-align:right;">'+
+							depthTest(comment.depth)+
+						'</div>'+
+						'<div class="col comment-content">'+
+							comment.content+
 						'</div>'+
 					'</div>'+
-					'<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">'+
-						'<button onclick="deleteComment('+comment.seq+', '+comment.ref+')">X</button>'+
-						'<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">'+
-					'</div>'+
-					'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
-						comment.reg_date+
-					'</div>'+
-
-					'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
-						'<input type="text" name="content" id="content'+index+'">'+
-						'<input type="button" value="comment" onclick="addComment(${comdto.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
-					'</div>'+
 				'</div>'+
-				'<hr>';
-
-				$('.comment-area').append(html);
+				'<div class="comment-date col-md-1" style="height: 50px;">'+
+					'<font size="2em" color="#696969">'+dateTest(comment.reg_date)+'</font>'+
+				'</div>'+
+				'<div class="comment-email col-md-1" style="height: 50px;">'+
+					'<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">'+
+					'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+					'<button id="delBtn" onclick="deleteComment('+comment.seq+', '+comment.ref+')"><font size="2em" color="#696969"><u>삭제</u></font></button>'+
+					'</div>'+
+				'<div class="comment-input col-md-12" style="display:none;margin-top:10px;">'+
+					'<input type="text" name="content" class="form-control col" id="content'+index+'" size="80">'+
+					'<input type="button" value="comment" class="btn btn-outline-success col"  onclick="addComment(${comdto.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
+				'</div>'+
+			'</div>'+
+			'<hr>';
+			console.log(html);
+			$('.comment-area').append(html);
+		}
+		function depthTest(depth) {
+			if(depth == 1) return '&nbsp;';
+			else return '<img src="./img/arrow.png" width="24">';
 		}
 		
+		function dateTest(date) {
+			var date = new Date(date);
+			
+
+			var result =date.getFullYear()+'/'+
+	        ((date.getMonth()+1)<10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1))+'/'+
+	        (date.getDate()<10 ? '0'+date.getDate() : date.getDate() ) ;
+			return result;
+		}
 		function deleteComment(seq, ref) {
 			$.ajax({
 				url : 'CommuCommentController',
