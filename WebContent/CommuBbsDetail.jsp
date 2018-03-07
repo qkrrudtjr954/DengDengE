@@ -185,7 +185,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 
 			</div>
 
-${comments }
+<%-- ${comments } --%>
 
 
 
