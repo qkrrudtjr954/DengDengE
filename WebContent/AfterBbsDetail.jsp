@@ -126,7 +126,7 @@ if(msg !=null){
 
 			<div class="row">
 				
-				<div class="col-md-11">
+				<div class="col-md-12">
 					<form action="AfterBbsController" method="post">
 						<input type="hidden" name="command" value="AfterBbsUpdate">
 						<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
@@ -135,26 +135,21 @@ if(msg !=null){
 						<hr>
 
 						<div class="row">
-							<div class="offset-md-1"></div>
-							<div class="col-md-2" align="right">
+							<div class="offset-md-1 col-md-2" align="right">
 								<div class="p-3 mb-2 bg-success text-white"
 									style="text-align: center;">
 									<b>입양후기</b>
-
 								</div>
 							</div>
-
 							<div class="col-md-9">
 								<p>
 								<h4><%=bbs1.getTitle() %></h4>
 								</p>
 							</div>
-
-							<div class="offset-md-1"></div>
 						</div>
 
 						<hr>
-						<div class="row offset-md-6">
+						<div class="row offset-md-7">
 							<p>
 								<b>작성자</b>
 								<%=bbs1.getUser_email()%>
@@ -177,9 +172,10 @@ if(msg !=null){
 					</form>
 					<hr>
 				</div>
+				
 				<!-- 댓글 달기/ 좋아요 -->
 
-				<div class="offset-md-1 col-md-4" id="likeArea">
+				<div class="col-md-4" id="likeArea">
 					<button type="button" id="btnLike">
 						<img
 							src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }"
@@ -363,7 +359,7 @@ if(msg !=null){
 							printCommentHtml(comments[i], (i+1));
 
 						}
-						$('#content0').val("");
+						$('#content0').value("");
 					}
 				})
 			}
