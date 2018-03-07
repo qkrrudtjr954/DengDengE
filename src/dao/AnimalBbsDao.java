@@ -386,7 +386,6 @@ public class AnimalBbsDao {
 	   public List<AnimalBbsDto> getFindBtnlist(String searchBtn){
 		   System.out.println("s");
 		      List<AnimalBbsDto> list = new ArrayList<>();
-
 		      
 				String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE, "
 						+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
@@ -394,9 +393,9 @@ public class AnimalBbsDao {
 						+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
 						+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
 						+ " FROM ANIMALBBS A, DENGUSER B "
-						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL NOT IN 1 "
-						+ " AND A.LOCATION LIKE '" +searchBtn+"%' "
-						+ " OR A.DEL NOT IN 1 AND A.TYPE LIKE '"+searchBtn+"%' "
+						+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
+						+ " AND A.DEL NOT IN 1 AND A.TYPE LIKE '" +searchBtn+"%' "
+						+ " OR A.DEL NOT IN 1 AND A.LOCATION LIKE '"+searchBtn+"%' "
 		            + " ORDER BY REG_DATE DESC ";
 		   
 		      Connection conn = null;
