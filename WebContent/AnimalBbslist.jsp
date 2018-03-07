@@ -241,9 +241,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				</c:forEach>
 			</div>			
 			</form>
-			<div class="row">
-				<input type="button" id="more" value="more">
-			</div>
+			
 			
 		</div>
 	</div>
