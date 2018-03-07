@@ -14,31 +14,33 @@ import com.google.gson.Gson;
 
 import delegator.Delegator;
 import dto.AfterCommentDto;
-import dto.AnimalCommentDto;
+import dto.CommuBbsComment;
 import dto.User;
 import service.AfterCommentService;
-import service.AnimalCommentService;
+import service.CommuBbsCommentService;
 
-public class AnimalCommentController extends HttpServlet {
+public class CommuBbsCommentController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.doProcess(req, resp);
+		doProcess(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.doProcess(req, resp);
+		doProcess(req, resp);
 	}
-
-	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+	
+	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		String command = req.getParameter("command");
 		
+		
 		if(command.equals("addComment")) {
-			AnimalCommentService service = AnimalCommentService.getInstance();
+			CommuBbsCommentService service = CommuBbsCommentService.getInstance();
 			
 			if(Delegator.checkSession(req, resp)) {
 				HttpSession session = req.getSession();
@@ -49,7 +51,7 @@ public class AnimalCommentController extends HttpServlet {
 				int depth = Integer.parseInt(req.getParameter("depth"));
 				String content = (String)req.getParameter("content");
 				
-				AnimalCommentDto comment = new AnimalCommentDto();
+				CommuBbsComment comment = new CommuBbsComment();
 				comment.setContent(content);
 				comment.setDepth(depth);
 				comment.setRef(ref);;
@@ -57,46 +59,60 @@ public class AnimalCommentController extends HttpServlet {
 				comment.setTarget_user_seq(current_user.getSeq());
 				comment.setUser_email(current_user.getEmail());
 				
-				List<AnimalCommentDto> list = service.addComment(comment);
+				List<CommuBbsComment> list = service.addComment(comment);
 				
 				String json = new Gson().toJson(list);
 				
 				resp.getWriter().write(json);
 			}
 		}else if(command.equals("deleteComment")) {
+			// System.out.println("del");
 			if(Delegator.checkSession(req, resp)) {
 				HttpSession session = req.getSession();
 				User current_user = (User)session.getAttribute("current_user");
 				
-				AnimalCommentService service = AnimalCommentService.getInstance();
+				CommuBbsCommentService service = CommuBbsCommentService.getInstance();
 				
 				String sseq = req.getParameter("seq");
-				int seq = Integer.parseInt(sseq);	
-				
+				int seq = Integer.parseInt(sseq);
+				System.out.println("seq: " +seq);
 				boolean check = service.beforeDeleteCheck(seq, current_user.getSeq());
-				
+				System.out.println("check: "+check);
 				String json = "";
 				
 				if(check) {
 					String sref = req.getParameter("ref");
 					int ref = Integer.parseInt(sref);
 					
-					List<AnimalCommentDto> list = service.deleteComment(seq, ref);
+					
+					List<CommuBbsComment> list = service.deleteComment(seq, ref);
 					
 					json = new Gson().toJson(list);					
 				} else {
 					json = "false";
 				}
-				
+
 				resp.getWriter().write(json);
+
 			} 
 		}
 		
+		
+		
+		
+		
+		
 	}
-	
 	
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
 		RequestDispatcher dispatch = req.getRequestDispatcher(urls);
 		dispatch.forward(req, resp);
 	}
+	
+	
+	
+	
+	
+	
+
 }

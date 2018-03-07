@@ -62,7 +62,34 @@ public class AfterCommentController extends HttpServlet {
 				String json = new Gson().toJson(list);
 				
 				resp.getWriter().write(json);
-			}
+			} 
+		} else if(command.equals("deleteComment")) {
+			if(Delegator.checkSession(req, resp)) {
+				HttpSession session = req.getSession();
+				User current_user = (User)session.getAttribute("current_user");
+				
+				AfterCommentService service = AfterCommentService.getInstance();
+				
+				String sseq = req.getParameter("seq");
+				int seq = Integer.parseInt(sseq);	
+				
+				boolean check = service.beforeDeleteCheck(seq, current_user.getSeq());
+				
+				String json = "";
+				
+				if(check) {
+					String sref = req.getParameter("ref");
+					int ref = Integer.parseInt(sref);
+					
+					List<AfterCommentDto> list = service.deleteComment(seq, ref);
+					
+					json = new Gson().toJson(list);					
+				} else {
+					json = "false";
+				}
+				
+				resp.getWriter().write(json);
+			} 
 		}
 		
 	}

@@ -10,23 +10,18 @@ import java.util.List;
 import db.DBClose;
 import db.DBConnection;
 import dto.AfterCommentDto;
+import dto.CommuBbsComment;
 
-public class AfterCommentDao {
+public class CommuBbsCommentDao {
 	
-	//After 답글
-	
-	public boolean AfterAnswer(int seq , AfterCommentDto bbs) {
-		return false;
-	}
-
-	public AfterCommentDto getComment(int preseq) {
-		String sql = " select * from aftercomment where seq = ?";
-		
+	public CommuBbsComment getComment(int preseq) {
+		String sql = " select * from commucomment where seq = ?";
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		AfterCommentDto dto = new AfterCommentDto();
+		CommuBbsComment dto = new CommuBbsComment();
+		
 		
 		try {
 			conn = DBConnection.makeConnection();
@@ -51,12 +46,13 @@ public class AfterCommentDao {
 		}
 		
 		return dto;
-	}
-
-	public void updateStep(AfterCommentDto comment) {
-		String sql = " update aftercomment set step = step+1 where step >= ? and target_after_seq = ? ";
 		
-		System.out.println(">>>>> AfterCommentDao .updateStep() sql : "+sql);
+	}
+	
+	public void updateStep(CommuBbsComment comment) {
+		String sql = " update commucomment set step = step+1 where step >= ? and target_after_seq = ? ";
+		
+		System.out.println(">>>>> CommuBbsComment .updateStep() sql : "+sql);
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -73,23 +69,15 @@ public class AfterCommentDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
-
-	public boolean addComment(AfterCommentDto comment) {
-		/*
-		dto.setContent(rs.getString("content"));
-		dto.setDepth(rs.getInt("depth"));
-		dto.setLast_update(rs.getString("last_update"));
-		dto.setRef(rs.getInt("ref"));
-		dto.setReg_date(rs.getString("reg_date"));
-		dto.setSeq(rs.getInt("seq"));
-		dto.setStep(rs.getInt("step"));
-		dto.setTarget_user_seq(rs.getInt("target_user_seq"));*/
+	
+	public boolean addComment(CommuBbsComment comment) {
+		String sql = " insert into commucomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
+				" values (commucomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, 0 ) ";
 		
-		String sql = " insert into aftercomment(seq, depth, target_after_seq, step, reg_date, target_user_seq, content, target_user_email, del ) " + 
-				" values (aftercomment_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, 0 ) ";
 		
-		System.out.println(">>>>> AfterCommentDao .addComment() sql : "+sql);
+		System.out.println(">>>>> CommuBbsComment .addComment() sql : "+sql);
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -111,18 +99,20 @@ public class AfterCommentDao {
 		}
 		
 		return (count > 0) ? true: false;
-	}
-
-	public List<AfterCommentDto> getAllComments(int ref) {
-		String sql = " select * from aftercomment where target_after_seq = ? and del = 0 order by step asc";
 		
-		System.out.println(">>>>> AfterCommentDao .getAllComments() sql : "+sql);
+	}
+	
+	public List<CommuBbsComment> getAllComments(int ref){
+		String sql = " select * from commucomment where target_after_seq = ? and del = 0 order by step asc";
+		
+		
+		System.out.println(">>>>> CommuBbsComment .getAllComments() sql : "+sql);
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		List<AfterCommentDto> list = new ArrayList<>();
+		List<CommuBbsComment> list = new ArrayList<>();
 		
 		try {
 			conn = DBConnection.makeConnection();
@@ -132,7 +122,7 @@ public class AfterCommentDao {
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
-				AfterCommentDto dto = new AfterCommentDto();
+				CommuBbsComment dto = new CommuBbsComment();
 				dto.setContent(rs.getString("content"));
 				dto.setDepth(rs.getInt("depth"));
 				dto.setRef(rs.getInt("target_after_seq"));
@@ -155,16 +145,20 @@ public class AfterCommentDao {
 		}
 		
 		return list;
+		
+		
 	}
-
+	
 	public int getCommentsLength(int ref) {
-		String sql = " select count(*) as num from aftercomment where target_after_seq = ? and del = 0 ";
+		String sql = " select count(*) as num from commucomment where target_after_seq = ? and del = 0 ";
+		
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
 		int length = 0;
+		
 		
 		try {
 			conn = DBConnection.makeConnection();
@@ -183,10 +177,13 @@ public class AfterCommentDao {
 		}
 		
 		return length;
+		
+		
 	}
-
+	
 	public boolean deleteComment(int seq) {
-		String sql = " update aftercomment set del = 1 where seq = ? ";
+		/*System.out.println("delcomment" +seq);*/
+		String sql = " update commucomment set del = 1 where seq = ? ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -204,11 +201,12 @@ public class AfterCommentDao {
 		
 		return (count > 0) ? true: false;
 	}
-
+	
 	public int getTargetUserSeq(int seq) {
-		String sql = "select target_user_seq from aftercomment where seq = ? ";
+		String sql = "select target_user_seq from commucomment where seq = ? ";
 		
-
+		System.out.println(">>>>> CommuBbsComment .getTargetUserSeq() sql : "+sql);
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -235,6 +233,9 @@ public class AfterCommentDao {
 		
 		return target_user_seq;
 	}
+	
+	
+	
 	
 	
 	

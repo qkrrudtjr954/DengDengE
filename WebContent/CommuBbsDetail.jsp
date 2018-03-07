@@ -146,6 +146,47 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 
 
 
+<!-- 댓글 달기/ 좋아요 끝 -->
+			<div class="row offset-md-3 col-md-9">
+				<input type="text" name="content" id="content0" size="50"> <input type="button" value="comment" onclick="addComment(${comdto.seq}, 0, 0, 0)">
+			</div>
+			<br><br>
+				<div class="comment-area">
+					<c:forEach begin="0" items="${comments }" var="comment" varStatus="i">
+						<div class="row">
+							<div class="comment-email col-md-2" style="background:pink;height: 50px;">
+								${comment.user_email }
+							</div>
+							<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">
+								<div class="row">
+									<div class="col-md-${comment.depth }" style="background:red; height:50px;text-align:right;">
+										ㄴ>
+									</div>
+									<div class="col comment-content">
+										${comment.content }
+									</div>
+								</div>
+							</div>
+							<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">
+								<button onclick="deleteComment(${comment.seq}, ${comment.ref })">X</button>
+								<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">
+							</div>
+							<div class="comment-date col-md-1" style="background:green;height: 50px;">
+								${comment.reg_date }
+							</div>
+
+							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
+								<input type="text" name="content" id="content${i.index+1 }">
+								<input type="button" value="comment" onclick="addComment(${comdto.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+							</div>
+						</div>
+						<hr>
+					</c:forEach>
+
+			</div>
+
+${comments }
+
 
 
 
@@ -217,7 +258,7 @@ if(comdto.getUser_email().equals(sid)){
 		
 			$.ajax({
 				url:"CommuBbsController",
-				data: { command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
+				data: {command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
 				type:"post",
 				success : function (data) {
 					
@@ -232,7 +273,104 @@ if(comdto.getUser_email().equals(sid)){
 					$('span#like_count').html(result.like_count);
 				}
 			})
-		});	 
+		});
+		
+		function showCommentArea(commentArea) {
+    	 	var dom = $(commentArea).parent().parent().find('.comment-input');
+
+    	 	if(dom.css('display') == 'none'){
+	    	 	$(commentArea).parent().parent().find('.comment-input').css('display', 'block');
+    	 	} else {
+    	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
+    	 	}
+	}
+		
+		
+		function addComment(ref, step, depth, index) {
+			$.ajax({
+				url : 'CommuCommentController',
+				method : 'POST',
+				data : { command : 'addComment', ref : ref, step : step, depth : depth, content : $('#content'+index).val() },
+				success : function (data) {
+
+					$('.comment-area').children().remove();
+
+					var comments = JSON.parse(data);
+
+					for(var i= 0; i < comments.length; i++){
+
+						printCommentHtml(comments[i], (i+1));
+
+					}
+				}
+			})
+		}
+		
+		
+		function printCommentHtml(comment, index) {
+			var html =
+				'<div class="row">'+
+					'<div class="comment-email col-md-2 col-xs-6" style="background:pink;height: 50px;">'+
+						comment.user_email+
+					'</div>'+
+					'<div class="comment-box col-md-8 col-xs-12" style="background:lightblue;height: 50px;">'+
+						'<div class="row">'+
+							'<div class="col-md-'+comment.depth+' col-xs-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
+								'ㄴ>'+
+							'</div>'+
+							'<div class="col col-xs-12 comment-content">'+
+								comment.content+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">'+
+						'<button onclick="deleteComment('+comment.seq+', '+comment.ref+')">X</button>'+
+						'<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">'+
+					'</div>'+
+					'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
+						comment.reg_date+
+					'</div>'+
+
+					'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
+						'<input type="text" name="content" id="content'+index+'">'+
+						'<input type="button" value="comment" onclick="addComment(${comdto.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
+					'</div>'+
+				'</div>'+
+				'<hr>';
+
+				$('.comment-area').append(html);
+		}
+		
+		function deleteComment(seq, ref) {
+			$.ajax({
+				url : 'CommuCommentController',
+				method : 'POST',
+				data : { command:'deleteComment', seq : seq, ref : ref},
+				success : function (data) {
+					if(data == "false"){
+						alert('본인만 삭제가 가능합니다.');
+					} else {
+						
+						$('.comment-area').children().remove();
+
+						var comments = JSON.parse(data);
+
+						for(var i= 0; i < comments.length; i++){
+
+							printCommentHtml(comments[i], (i+1));
+
+						}
+					}
+				}
+			})
+		}
+		
+		
+		
+		
+		
+		
+		
 
 </script>
 
