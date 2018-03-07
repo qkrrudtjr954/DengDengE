@@ -131,8 +131,9 @@
 					<form name="form1" action="CommuBbsController">
 						<h1>커뮤니티</h1>
 						<hr>
-						<button type="button" class="btn btn-success" id="btnAll">전체보기</button>
-
+						<a href="CommuBbsController?command=list#hello" class="btn btn-outline-secondary"
+							style="width: 90px; background-color: #28A745; color: #fff">전체보기</a>
+							
 						<c:forEach items="${categories }" var="category" varStatus="i">
 							<button type="button" class="btn btn-success"
 								onclick=" classify(${category.seq})">${category.title }</button>
@@ -383,10 +384,10 @@
 		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
 		    });
 		    */
-		    $("#btnAll").click(function () {
+		    /* $("#btnAll").click(function () {
 		        location.href="CommuBbsController?command=list#hello";
 	
-		    });
+		    }); */
 		    
 		    $("#btnWrite").click(function () {
 		   	 location.href="CommuBbsController?command=write";
