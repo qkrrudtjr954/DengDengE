@@ -26,7 +26,7 @@ public class AnimalBbsDao {
 				+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
 				+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT, "
 				+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
-				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, A.TARGET_COMPLETE_EMAIL, B.EMAIL AS USER_EMAIL "
 				+ " FROM ANIMALBBS A, DENGUSER B "
 				+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
 				+ " AND A.DEL NOT IN 1"
@@ -69,6 +69,7 @@ public class AnimalBbsDao {
 				aniBbsDto.setLast_update(rs.getString("LAST_UPDATE"));
 				aniBbsDto.setDel(rs.getInt("DEL"));
 				aniBbsDto.setReadcount(rs.getInt("READCOUNT"));
+				aniBbsDto.setComplete_email("TARGET_COMPLETE_EMAIL");
 				
 				list.add(aniBbsDto);
 			}
@@ -84,7 +85,7 @@ public class AnimalBbsDao {
 	
 	// 입양하기 글 작성
 	public boolean wirteAnimalBbs(AnimalBbsDto aniBbsDto) {
-		System.out.println("접속");
+		System.out.println("aniBbsDto:"+aniBbsDto.toString());
 		String sql = " INSERT INTO ANIMALBBS(SEQ, TITLE, NAME, AGE, "
 				+ " KINDS, TYPE, LOCATION, MEDICINE, NEUTRALIZATION, GENDER, "
 				+ " DESCRIPTTION, PIC1, CONTENT, "
@@ -149,7 +150,7 @@ public class AnimalBbsDao {
 				+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
 				+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT, "
 				+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
-				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT,  B.EMAIL AS USER_EMAIL "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, A.TARGET_COMPLETE_EMAIL, B.EMAIL AS USER_EMAIL "
 				+ " FROM ANIMALBBS A, DENGUSER B "
 				+ " WHERE  A.TARGET_USER_SEQ = B.SEQ AND A.SEQ=? ";
 		Connection conn = null;
@@ -172,27 +173,30 @@ public class AnimalBbsDao {
 			while(rs.next()){
 				int i = 1;
 				dto = new AnimalBbsDto(
-										rs.getInt(i++), 
-										rs.getString(i++), 
-										rs.getString(i++), 
-										rs.getInt(i++), 
-										rs.getString(i++), 
-										rs.getString(i++),
-										rs.getString(i++), 
-										rs.getInt(i++), 
-										rs.getInt(i++), 
-										rs.getInt(i++), 
-										rs.getString(i++), 
-										rs.getString(i++), 
-										rs.getString(i++), 
-										rs.getInt(i++),  
-										rs.getString(i++),
-										rs.getString(i++),
-										rs.getString(i++),
-										rs.getString(i++),
-										rs.getInt(i++),
-										rs.getInt(i++),
-										rs.getString(i++));
+						rs.getInt(i++), 
+						rs.getString(i++), 
+						rs.getString(i++), 
+						rs.getInt(i++), 
+						rs.getString(i++), 
+						rs.getString(i++),
+						rs.getString(i++), 
+						rs.getInt(i++), 
+						rs.getInt(i++), 
+						rs.getInt(i++), 
+						rs.getString(i++), 
+						rs.getString(i++), 
+						rs.getString(i++), 
+						rs.getInt(i++),  
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getInt(i++),
+						rs.getInt(i++),
+						rs.getString(i++),
+						rs.getString(i++)	
+						);
+						
 						
 				}
 			System.out.println("4/6 S detailAnimalBbs");
@@ -390,7 +394,7 @@ public class AnimalBbsDao {
 						+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
 						+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, B.EMAIL AS USER_EMAIL "
 						+ " FROM ANIMALBBS A, DENGUSER B "
-						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL=0 "
+						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL NOT IN 1 "
 						+ " AND A.LOCATION LIKE '" +searchBtn+"%' "
 						+ " OR A.DEL=0 AND A.TYPE LIKE '"+searchBtn+"%' "
 		            + " ORDER BY REG_DATE DESC ";

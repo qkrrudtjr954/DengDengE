@@ -462,29 +462,31 @@ if(aniBbsDto != null){
 						<hr>
 					</c:forEach>
 
+
 			</div>
 
 
-            <%
-               String sid = ((User)session.getAttribute("current_user")).getEmail();
-            %>
+				<%
+					String sid = ((User)session.getAttribute("current_user")).getEmail();
+				%>
 
-            <br>
-            <%if(aniBbsDto.getUser_email().equals(sid)){
-               %>
-               <div class="row">
-                  <a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-9 btn btn-outline-secondary"
-                  style="background-color: #28A745; color: #fff">수정</a>
-                  &nbsp;&nbsp;
-                  <a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
-                  class="btn btn-outline-secondary">삭제</a>
-               </div>
-               <%
-            }
-            %>         
-         </div>
-      
-      </div>
+				<br>
+				<%if(aniBbsDto.getUser_email().equals(sid)){
+					%>
+					<div class="row">
+						<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-5 btn btn-outline-secondary"
+						style="background-color: #28A745; color: #fff">수정하기</a>
+						&nbsp;&nbsp;
+						<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
+						class="btn btn-outline-secondary">삭제하기</a>
+					</div>
+					<%
+				}
+				%>			
+			</div>
+		
+		</div>
+
 
 
    </main>
@@ -509,31 +511,40 @@ if(aniBbsDto != null){
    
 <script type="text/javascript">
 $('#exampleModal').on('show.bs.modal', function (event) {
-     var button = $(event.relatedTarget) // Button that triggered the modal
-     var recipient = button.data('whatever') // Extract info from data-* attributes
-     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-     var modal = $(this)
-     modal.find('.modal-title').text('Booking:'+recipient)
-     modal.find('.modal-body input').val(recipient)
-     $("#message-text").focus();
-   });
+
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('whatever') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this)
+	  modal.find('.modal-title').text('Booking:'+recipient)
+	  modal.find('.modal-body input').val(recipient)
+	  $("#message-text").focus();
+	});
+
 </script>
 
 <script type="text/javascript">
 
-   function getListTest(user_email) {
-      //alert("click");
-      $.ajax({
-         url : 'BookController',
-         type : 'post',
-         data : {listseq : <%=aniBbsDto.getSeq() %>, command : 'finalBook',    email : user_email},
-         success  : function (data) {
-            alert("예약확정완료");
-            location.href="AnimalBbsController?command=animlist";
-         }
-      });      
-   };
+
+	function getListTest(user_email) {
+		//alert("click");
+		$.ajax({
+			url : 'BookController',
+			type : 'post',
+			data : {listseq : <%=aniBbsDto.getSeq() %>, command : 'finalBook',    email : user_email},
+			success  : function (data) {
+				var isS = JSON.parse(data);
+				alert("예약확정완료");
+				location.href="AnimalBbsController?command=animlist";
+			},  
+			error : function(request,status,error) {
+				alert("예약확정실패");
+				location.href="AnimalBbsController?command=animlist";
+			}
+		});		
+	};
+
 
 </script>
 
@@ -596,6 +607,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 					}
 				}
+
 			})
 		}
 
@@ -634,6 +646,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
       
       
    </script>
+
 
   </body>
 </html>

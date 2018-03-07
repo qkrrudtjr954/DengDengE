@@ -34,7 +34,7 @@ public class AnimalBbsDto implements Serializable {
    public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String type, String location,
          int medicine, int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
          String contact, String description, String reg_date, String last_update, int del, int readcount,
-         String user_email) {
+         String complete_email, String user_email) {
       super();
       this.seq = seq;
       this.title = title;
@@ -56,6 +56,7 @@ public class AnimalBbsDto implements Serializable {
       this.last_update = last_update;
       this.del = del;
       this.readcount = readcount;
+      this.complete_email = complete_email;
       this.user_email = user_email;
    }
    public AnimalBbsDto(String title, String name, int age, String kinds, String type, String location, int medicine,
@@ -80,7 +81,8 @@ public class AnimalBbsDto implements Serializable {
       this.complete_email = complete_email;
    }
 
-   public AnimalBbsDto(String title, String content) {
+
+public AnimalBbsDto(String title, String content) {
       super();
       this.title = title;
       this.content = content;

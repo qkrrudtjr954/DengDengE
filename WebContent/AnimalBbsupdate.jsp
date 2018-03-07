@@ -1,4 +1,4 @@
-<%@page import="dto.AnimalBbsDto"%>
+﻿<%@page import="dto.AnimalBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -96,6 +96,7 @@ if(aniBbsDto != null){
    </header>	    
     <main role="main">
 
+
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Album example</h1>
@@ -108,31 +109,26 @@ if(aniBbsDto != null){
       
       <%@include file="./layout/menubar.jsp" %>
       
+
 	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="updateAf">
 		<input type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
-		<div class="row">
-			<a href="AnimalBbsController?command=animlist" style="background-color: #28A745; color: #fff">list</a>
-		</div>
+	
 
 		<div class="album py-5 bg-light">
 			<div class="container">
 				<div class="form1">
 				
-					<div class="row" style="margin:0 auto;width:900px;">
-						<h4 style="text-decoration: underline;" class="offset-md-5">입양하기 글 수정</h4>
+					<div class="row">
+						<h1>입양하기 글 수정</h1>
 					</div>
 					
-					<div class="row" style="margin: 0 auto; width: 900px">
-						<span style="font-size: small" class="offset-md-5">
+					<div class="row">
+						<span style="font-size: small" >
 							*제목과 내용이 수정가능합니다
 						</span>
 					</div>
 					
-					<div class="row">
-						<a href="AnimalBbsController?command=animlist"
-					class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>	
-					</div>
 					<hr>
 
 					<div class="row">
