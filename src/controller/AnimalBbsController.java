@@ -42,6 +42,7 @@ public class AnimalBbsController extends HttpServlet {
 		String command = req.getParameter("command");
 		AnimalBbsService aniBbService = AnimalBbsService.getInatance();
 		BookService bookService = BookService.getInstance();
+		
 		if(command.equals("animlist")) {
 			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
 			req.setAttribute("animlist", animlist);
