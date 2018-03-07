@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -43,11 +44,13 @@ public class AfterCommentController extends HttpServlet {
 			if(Delegator.checkSession(req, resp)) {
 				HttpSession session = req.getSession();
 				User current_user = (User)session.getAttribute("current_user");
-				
+			
 				int ref = Integer.parseInt(req.getParameter("ref"));
 				int step = Integer.parseInt(req.getParameter("step"));
 				int depth = Integer.parseInt(req.getParameter("depth"));
 				String content = (String)req.getParameter("content");
+				
+				
 				
 				AfterCommentDto comment = new AfterCommentDto();
 				comment.setContent(content);

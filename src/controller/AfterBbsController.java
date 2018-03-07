@@ -107,11 +107,13 @@ public class AfterBbsController extends HttpServlet {
 				AfterBbsDto bbs1 = bbs.detailAfterlBbs(seq);
 				
 				AfterCommentService commentService = AfterCommentService.getInstance();
+
 				List<AfterCommentDto> comments = commentService.getAllComments(seq);
 				boolean isLiked = bbs.Prevent_duplication(userInfo.getSeq(), seq);
 				req.setAttribute("comments", comments);
 				req.setAttribute("bbs1", bbs1);
 				req.setAttribute("like_count", bbs.getLikeCount(seq));
+		
 				req.setAttribute("isLiked", isLiked);
 				
 				dispatch("AfterBbsDetail.jsp", req, resp);

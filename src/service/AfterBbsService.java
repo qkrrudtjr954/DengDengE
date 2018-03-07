@@ -77,7 +77,7 @@ public class AfterBbsService {
 		return afterBbsDao.getLikeCount(bbs_seq);
 	}
 
-	
+
 	
 	
 	
