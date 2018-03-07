@@ -131,9 +131,9 @@ if(aniBbsDto != null){
 		<div class="album py-5 bg-light">
         <div class="container">
 
-				<div class="row" style="margin: 0 auto; width: 900px;">
-					<h4 style="text-decoration: underline;" class="offset-md-5">댕댕이의
-						보호동물</h4>
+				<div class="row">
+					<h1>댕댕이의
+						보호동물</h1>
 				</div>
 
 				<br>
@@ -149,9 +149,6 @@ if(aniBbsDto != null){
 					<span style="font-size: x-small"> <%=aniBbsDto.getType()%>
 						&nbsp;&nbsp;&nbsp; <%=aniBbsDto.getReg_date() %>
 					</span>&nbsp;&nbsp; <span style="font-size: x-small"> 조회수 <%=aniBbsDto.getReadcount()%>
-					</span> <a href="AnimalBbsController?command=animlist"
-						class="offset-md-9 btn btn-outline-secondary"
-						style="background-color: #28A745; color: #fff">list</a>
 				</div>
 				<hr>
 

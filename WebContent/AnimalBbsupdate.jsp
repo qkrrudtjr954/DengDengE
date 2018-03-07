@@ -96,58 +96,55 @@ if(aniBbsDto != null){
    </header>	    
     <main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Album example</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-success my-2">Main call to action</a>
-          </p>
-        </div>
-      </section>
-      <section>
-	      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	        <ul class="nav menu justify-content-center">
+     <section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="jumbotron-heading">Album example</h1>
+			<p class="lead text-muted">Something short and leading about the
+				collection below—its contents, the creator, etc. Make it short and
+				sweet, but not too short so folks don't simply skip over it
+				entirely.</p>
+			<p>
+				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
+			</p>
+		</div>
+	</section>
+	<section>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="nav menu justify-content-center">
 			  <li class="nav-item menu-item">
-			    <a class="nav-link active " href="#">Active</a>
+			    <a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Link</a>
+			    <a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
 			  </li>
 			  <li class="nav-item menu-item">
-			    <a class="nav-link" href="#">Disabled</a>
+			    <a class="nav-link" href="#">분양소 찾기</a>
 			  </li>
 			</ul>
-  		</nav>
-      </section>
+		</nav>
+	</section>
 	<form action="AnimalBbsController" method="post">
 		<input type="hidden" name="command" value="updateAf">
 		<input type="hidden" name="seq" value="<%=aniBbsDto.getSeq() %>">
-		<div class="row">
-			<a href="AnimalBbsController?command=animlist" style="background-color: #28A745; color: #fff">list</a>
-		</div>
+	
 
 		<div class="album py-5 bg-light">
 			<div class="container">
 				<div class="form1">
 				
-					<div class="row" style="margin:0 auto;width:900px;">
-						<h4 style="text-decoration: underline;" class="offset-md-5">입양하기 글 수정</h4>
+					<div class="row">
+						<h1>입양하기 글 수정</h1>
 					</div>
 					
-					<div class="row" style="margin: 0 auto; width: 900px">
-						<span style="font-size: small" class="offset-md-5">
+					<div class="row">
+						<span style="font-size: small" >
 							*제목과 내용이 수정가능합니다
 						</span>
 					</div>
 					
-					<div class="row">
-						<a href="AnimalBbsController?command=animlist"
-					class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>	
-					</div>
 					<hr>
 
 					<div class="row">

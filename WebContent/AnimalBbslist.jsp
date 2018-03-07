@@ -98,10 +98,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			<div class="row">  <!-- style="margin: 0 auto; width: 900px;" -->
 					<h1>분양 동물 보기</h1> <!-- style="text-decoration: underline;" -->
 			</div>
-			<div>
-				<a href="AnimalBbsController?command=animlist"
-					class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>
-			</div>
 			<hr>
 			<br>
 
