@@ -125,7 +125,7 @@ if(aniBbsDto != null){
 					
 					<div class="row">
 						<span style="font-size: small" >
-							*제목과 내용이 수정가능합니다
+							*제목과 내용이 수정가능합니다.
 						</span>
 					</div>
 					

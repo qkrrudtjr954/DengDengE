@@ -176,17 +176,13 @@ to {
 			</div>
 
 			<div class="row">
-				<h7>&nbsp;&nbsp;-댕댕이를 통해 가족이된 분들의 이야기입니다. </h7>
+				<span style="font-size: small" >*댕댕이를 통해 가족이된 분들의 이야기입니다.</span>
 
 			</div>
 			<hr>
 
 			<%
 				List<AfterBbsDto> afterBbslist = (List<AfterBbsDto>) request.getAttribute("afterBbslist");
-
-				for (int i = 0; i < afterBbslist.size(); i++) {
-					System.out.println(afterBbslist.get(i).toString());
-				}
 			%>
 
 			<%-- <%
@@ -206,49 +202,35 @@ to {
 </c:if> --%>
 
 			
-				<div class="row">
-					<form name="form1" action="AfterBbsController" method="post">
-				<div class="offset-md-1">
-
-					<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
-
-				</div>
-
-			</form>
-				<form name="searchform" class="offset-md-5" method="get" action="AfterBbsController"
-				id="myform">
-				<input type="hidden" name="command" value="AfterBbsSearch">
-
-					<div class="input-group-prepend">
-						<select class="custom-select" id="inputGroupSelect01"
-							name="Searchtype" style="width: 150px">
-							<option value="email">글쓴이</option>
-							<option value="title">제목</option>
-						</select> <input type="text" class="form-control"
-							aria-label="Text input with segmented dropdown button" size="30"
-							name="SearchWord" id="text">
+				<form name="searchform" method="post" action="AfterBbsController" id="myform">
+					<input type="hidden" name="command" value="AfterBbsSearch">
+					<div class="row" style="margin:0 auto;width:900px;">
+						<div class=" offset-md-2 input-group-prepend">
+							<select class="custom-select" id="inputGroupSelect01"
+								name="Searchtype" style="width: 150px">
+								<option value="email">글쓴이</option>
+								<option value="title">제목</option>
+							</select> 
+							<input type="text" class="form-control"
+								aria-label="Text input with segmented dropdown button" size="50"
+								name="SearchWord" id="text">
+						</div>
+						<div class="serach">
 							<input type="button" class="btn btn-success" id="btnsearch" value="검색">
-					</div>
-
-						
-					
+						</div>
+						<div>
+							<a href="AfterBbsController?command=AfterBbswrite" class="offset-md-10 btn btn-outline-secondary"
+							style="width: 90px; background-color: #28A745; color: #fff">글쓰기</a>
+						</div>
+					</div>					
 				</form>
-
-				</div>
-			
-
 		
 			<br><br>
-
-
+			
 			<div class="row">
-
-
 				<c:if test="${afterBbslist.size()==0 }">
-					검색결과 없음.
+					<span style="margin:0 auto;width:900px;">검색결과 없음.</span>
 				</c:if>
-
-
 
 				<c:forEach items="${afterBbslist }" var="item" varStatus="i">
 					<div class="col-md-4">

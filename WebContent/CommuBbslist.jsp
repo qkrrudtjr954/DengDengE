@@ -103,20 +103,7 @@
 			</p>
 		</div>
 	</section>
-	<section>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="nav menu justify-content-center">
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="AnimalBbsController?command=animlist">분양 동물 보기</a></li>
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a></li>
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="CommuBbsController?command=list">커뮤니티</a></li>
-				<li class="nav-item menu-item"><a class="nav-link"
-					href="FindPlaceController?command=findPlace">분양소 찾기</a></li>
-			</ul>
-		</nav>
-	</section>
+	<%@include file="./layout/menubar.jsp" %>
 
 	<div class="album py-5 bg-light">
 		<!--------- 본문페이지         -------->
@@ -131,8 +118,9 @@
 					<form name="form1" action="CommuBbsController">
 						<h1>커뮤니티</h1>
 						<hr>
-						<button type="button" class="btn btn-success" id="btnAll">전체보기</button>
-
+						<a href="CommuBbsController?command=list#hello" class="btn btn-outline-secondary"
+							style="width: 90px; background-color: #28A745; color: #fff">전체보기</a>
+							
 						<c:forEach items="${categories }" var="category" varStatus="i">
 							<button type="button" class="btn btn-success"
 								onclick=" classify(${category.seq})">${category.title }</button>
@@ -260,7 +248,7 @@
 		<div class="offset-md-2"></div>
 	</div>
 	<div class="row offset-md-9 col-md-2">
-		<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
+		<button type="button" class="btn btn-success bt n-lg" id="btnWrite">글쓰기</button>
 	</div>
 
 	<nav class="navbar navbar-light bg-light offset-md-4">
@@ -277,7 +265,7 @@
 					<option value="A.title">제목</option>
 				</select>
 			</div>
-			&nbsp;&nbsp; <input class="form-control mr-sm-2" type="text"
+				<input class="form-control mr-sm-2" type="text"
 				id="SearchWord" name="SearchWord" placeholder="Search"
 				aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" id="search"
@@ -383,10 +371,10 @@
 		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
 		    });
 		    */
-		    $("#btnAll").click(function () {
+		    /* $("#btnAll").click(function () {
 		        location.href="CommuBbsController?command=list#hello";
 	
-		    });
+		    }); */
 		    
 		    $("#btnWrite").click(function () {
 		   	 location.href="CommuBbsController?command=write";
