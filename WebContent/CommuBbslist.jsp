@@ -261,7 +261,7 @@
 		<div class="offset-md-2"></div>
 	</div>
 	<div class="row offset-md-9 col-md-2">
-		<button type="button" class="btn btn-success btn-lg" id="btnWrite">글쓰기</button>
+		<button type="button" class="btn btn-success bt n-lg" id="btnWrite">글쓰기</button>
 	</div>
 
 	<nav class="navbar navbar-light bg-light offset-md-4">
