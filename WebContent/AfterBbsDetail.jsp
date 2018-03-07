@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,12 +39,23 @@ public String toDate(String mdate){
 	         + mdate.substring(8, 10);    // dd
 	return s;
 }
+     
+public String CommenttoDate(String mdate) {
+ 		String s = mdate.substring(1, 4) + "/" // yyyy
+ 				+ mdate.substring(5, 7) + "/" // MM
+ 				+ mdate.substring(8, 10) + "<br>"// dd
+ 				+ mdate.substring(10, 16)
+ 			/* 	+ mdate.substring(14, 17)+"/" */;
+ 		return s;
+ 	}
+
   %>
 
 
 </head>
 
 <body>
+
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
@@ -114,8 +125,8 @@ if(msg !=null){
 		<!-- 본문페이지 -->
 
 			<div class="row">
-				<div class="offset-md-1"></div>
-				<div class="col-md-10">
+				
+				<div class="col-md-12">
 					<form action="AfterBbsController" method="post">
 						<input type="hidden" name="command" value="AfterBbsUpdate">
 						<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
@@ -124,26 +135,21 @@ if(msg !=null){
 						<hr>
 
 						<div class="row">
-							<div class="offset-md-1"></div>
-							<div class="col-md-2" align="right">
+							<div class="offset-md-1 col-md-2" align="right">
 								<div class="p-3 mb-2 bg-success text-white"
 									style="text-align: center;">
 									<b>입양후기</b>
-
 								</div>
 							</div>
-
-							<div class="col-md-8">
+							<div class="col-md-9">
 								<p>
 								<h4><%=bbs1.getTitle() %></h4>
 								</p>
 							</div>
-
-							<div class="offset-md-1"></div>
 						</div>
 
 						<hr>
-						<div class="row offset-md-6">
+						<div class="row offset-md-7">
 							<p>
 								<b>작성자</b>
 								<%=bbs1.getUser_email()%>
@@ -154,21 +160,22 @@ if(msg !=null){
 						</div>
 
 						<div class="row">
-							<div class="offset-md-1"></div>
-							<div class="col-md-10">
+							<div class="col-md-11">
 								<br> <br>
 								<%=bbs1.getContent()%>
 								<br> <br>
-
+								
 							</div>
-							<div class="offset-md-1"></div>
+						
 						</div>
-						<hr>
+						
 					</form>
+					<hr>
 				</div>
+				
 				<!-- 댓글 달기/ 좋아요 -->
 
-				<div class="offset-md-1 col-md-4" id="likeArea">
+				<div class="col-md-4" id="likeArea">
 					<button type="button" id="btnLike">
 						<img
 							src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }"
@@ -176,49 +183,62 @@ if(msg !=null){
 					</button>
 					<span id="like_count">${like_count }</span> &nbsp;&nbsp;&nbsp; 
 					<img src="./img/comment_1.png" height="30px" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;
-					<span id="commentCount">0</span>
+					<span id="commentCount">${comments.size() }</span>
 				</div>
 			</div>
+			<br>
+			
 			<!-- 댓글 달기/ 좋아요 끝 -->
-			<div class="row offset-md-3 col-md-9">
-				<input type="text" name="content" id="content0" size="50"> <input type="button" value="comment" onclick="addComment(${bbs1.seq}, 0, 0, 0)">
+			<div class="row">
+			<div class="offset-md-1 col-md-8">
+				<input type="text" class="form-control" name="content" id="content0" size="90" placeholder="댓글을 입력해주세요"> 
+			</div>
+			<div class="col-md-2">
+				<input type="button" class="btn btn-outline-success" value="comment" onclick="addComment(${bbs1.seq}, 0, 0, 0)">
+			</div>
 			</div>
 			<br><br>
 				<div class="comment-area">
 					<c:forEach begin="0" items="${comments }" var="comment" varStatus="i">
 						<div class="row">
-							<div class="comment-email col-md-2" style="background:pink;height: 50px;">
+							<div class="comment-email col-md-2" style="height: 50px;">
+							<img src="./img/user.png" width="30">&nbsp;
 								${comment.user_email }
 							</div>
-							<div class="comment-box col-md-8" style="background:lightblue;height: 50px;">
+							<div class="comment-box col" style="height: 50px;">
 								<div class="row">
-									<div class="col-md-${comment.depth }" style="background:red; height:50px;text-align:right;">
-										ㄴ>
+									<div class="col-md-${comment.depth }" style="height:50px;text-align:right;">
+								<c:choose>
+								    <c:when test="${comment.depth ==1}">
+								    </c:when>	
+								    <c:otherwise>
+								      	<img src="./img/arrow.png" width="24">
+								    </c:otherwise>
+								</c:choose>
 									</div>
 									<div class="col comment-content">
 										${comment.content }
 									</div>
 								</div>
 							</div>
-							<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">
-								<button onclick="deleteComment(${comment.seq}, ${comment.ref })">X</button>
-								<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">
+							<div class="comment-date col-md-1" style="height: 50px;">
+								<fmt:parseDate value="${comment.reg_date }" pattern="yyyy-MM-dd HH:mm:ss.S" var="tempRegDate"/>
+								<fmt:formatDate value="${tempRegDate }" pattern="yyyy/MM/dd" var="regDate"/>
+								<font size="2em" color="#696969">${regDate }</font>
 							</div>
-							<div class="comment-date col-md-1" style="background:green;height: 50px;">
-								${comment.reg_date }
+							
+							<div class="comment-email col-md-1" style="height: 50px;">
+								<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">
 							</div>
+							
 
-							<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">
-								<input type="text" name="content" id="content${i.index+1 }">
-								<input type="button" value="comment" onclick="addComment(${bbs1.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })">
+							<div class="comment-input col-md-12" style="display:none;margin-top:10px;">
+								<input type="text"  name="content" class="form-control col" id="content${i.index+1 }" size="80">
+								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comment.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
 							</div>
 						</div>
 						<hr>
 					</c:forEach>
-
-
-
-
 
 			</div>
 					<div class="row">
@@ -318,6 +338,8 @@ if(msg !=null){
 	    	 	} else {
 	    	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
 	    	 	}
+	    	 	
+	    	 	
 		}
 
 	     function addComment(ref, step, depth, index) {
@@ -331,11 +353,13 @@ if(msg !=null){
 
 						var comments = JSON.parse(data);
 
+						$('#commentCount').html(comments.length);
 						for(var i= 0; i < comments.length; i++){
 
 							printCommentHtml(comments[i], (i+1));
 
 						}
+						$('#content0').value("");
 					}
 				})
 			}
@@ -343,60 +367,55 @@ if(msg !=null){
 			function printCommentHtml(comment, index) {
 				var html =
 					'<div class="row">'+
-						'<div class="comment-email col-md-2 col-xs-6" style="background:pink;height: 50px;">'+
-							comment.user_email+
+						'<div class="comment-email col-md-2" style="height: 50px;">'+
+							'<img src="./img/user.png" width="30">&nbsp;'+
+								comment.user_email+
 						'</div>'+
-						'<div class="comment-box col-md-8 col-xs-12" style="background:lightblue;height: 50px;">'+
+						'<div class="comment-box col" style="height: 50px;">'+
 							'<div class="row">'+
-								'<div class="col-md-'+comment.depth+' col-xs-'+comment.depth+'" style="background:red; height:50px;text-align:right;">'+
-									'ㄴ>'+
+								'<div class="col-md-'+comment.depth+'" style=" height:50px;text-align:right;">'+
+									depthTest(comment.depth)+
 								'</div>'+
-								'<div class="col col-xs-12 comment-content">'+
+								'<div class="col comment-content">'+
 									comment.content+
 								'</div>'+
 							'</div>'+
 						'</div>'+
-						'<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">'+
-							'<button onclick="deleteComment('+comment.seq+', '+comment.ref+')">X</button>'+
-							'<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">'+
+						'<div class="comment-date col-md-1" style="height: 50px;">'+
+							'<font size="2em" color="#696969">'+dateTest(comment.reg_date)+'</font>'+
 						'</div>'+
-						'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
-							comment.reg_date+
+						'<div class="comment-email col-md-1" style="height: 50px;">'+
+							'<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">'+
 						'</div>'+
-
-						'<div class="comment-input offset-md-2 col-md-8" style="background: red;display:none;">'+
-							'<input type="text" name="content" id="content'+index+'">'+
-							'<input type="button" value="comment" onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
+						'<div class="comment-input col-md-12" style="display:none;margin-top:10px;">'+
+							'<input type="text" name="content" class="form-control col" id="content'+index+'" size="80">'+
+							'<input type="button" value="comment" class="btn btn-outline-success col"  onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
 						'</div>'+
 					'</div>'+
 					'<hr>';
 					console.log(html);
 					$('.comment-area').append(html);
 			}
-		
-			function deleteComment(seq, ref) {
-				$.ajax({
-					url : 'AfterCommentController',
-					data : {command: 'deleteComment', seq : seq, ref : ref},
-					method : 'POST',
-					success : function (data) {
-						if(data == "false"){
-							alert('본인만 삭제가 가능합니다.');
-						} else {
-							
-							$('.comment-area').children().remove();
-	
-							var comments = JSON.parse(data);
-	
-							for(var i= 0; i < comments.length; i++){
-	
-								printCommentHtml(comments[i], (i+1));
-	
-							}
-						}
-					}
-				})
+			function depthTest(depth) {
+				if(depth == 1) return '&nbsp;';
+				else return '<img src="./img/arrow.png" width="24">';
 			}
+			
+			function dateTest(date) {
+				var date = new Date(date);
+				/* var year = today.getFullYear();
+				var month = today.getMonth()+1; 
+				
+				month < 10 ? "0" + month :month;
+				var date = today.getDate();
+				date < 10 ? "0" + date :date; */
+
+				var result =date.getFullYear()+'/'+
+		        ((date.getMonth()+1)<10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1))+'/'+
+		        (date.getDate()<10 ? '0'+date.getDate() : date.getDate() ) ;
+				return result;
+			}
+			
 
 	</script>
 </body>
