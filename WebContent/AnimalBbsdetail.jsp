@@ -535,7 +535,6 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 			type : 'post',
 			data : {listseq : <%=aniBbsDto.getSeq() %>, command : 'finalBook',    email : user_email},
 			success  : function (data) {
-				var isS = JSON.parse(data);
 				alert("예약확정완료");
 				location.href="AnimalBbsController?command=animlist";
 			},  
@@ -563,7 +562,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
          
          $.ajax({
             url:"AnimalBbsController",
-            data: { command: 'like', seq: ${aniBbsDto.seq }, userid: ${current_user.seq }},
+            data: {command: 'like', seq: ${aniBbsDto.seq }, userid: ${current_user.seq }},
             type:"post",
             success : function (data) {
                
@@ -589,7 +588,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   	 	} else {
   	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
   	 	}
-	}
+	};
 
    function addComment(ref, step, depth, index) {
 			$.ajax({
@@ -610,7 +609,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 				}
 
 			})
-		}
+		};
 
 		function printCommentHtml(comment, index) {
 			var html =
@@ -644,6 +643,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 				'<hr>';
 				console.log(html);
 				$('.comment-area').append(html);
+
 		}
 		
 		function deleteComment(seq, ref) {
@@ -670,9 +670,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 			})
 		}
 		
-		
-		
-      
+
       
    </script>
 

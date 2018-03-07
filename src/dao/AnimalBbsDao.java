@@ -396,7 +396,7 @@ public class AnimalBbsDao {
 						+ " FROM ANIMALBBS A, DENGUSER B "
 						+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND A.DEL NOT IN 1 "
 						+ " AND A.LOCATION LIKE '" +searchBtn+"%' "
-						+ " OR A.DEL=0 AND A.TYPE LIKE '"+searchBtn+"%' "
+						+ " OR A.DEL NOT IN 1 AND A.TYPE LIKE '"+searchBtn+"%' "
 		            + " ORDER BY REG_DATE DESC ";
 		   
 		      Connection conn = null;

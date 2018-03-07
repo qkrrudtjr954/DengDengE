@@ -145,10 +145,10 @@ public class BookDao {
 	
 	// 예약확정
 	public boolean finalBook(int listseq, String complete_email) {
-		System.out.println("book:"+listseq+" "+complete_email);
+		//System.out.println("book:"+listseq+" "+complete_email);
 		String sql = " UPDATE BOOK SET "
 				+ " DEL=200, TARGET_COMPLETE_EMAIL=? "
-				+ " WHERE TARGET_LIST_SEQ=?, ";
+				+ " WHERE TARGET_LIST_SEQ=? ";
 		System.out.println("sql"+sql);
 		Connection conn = null;
 		PreparedStatement psmt = null;
