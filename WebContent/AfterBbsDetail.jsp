@@ -201,6 +201,7 @@ if(msg !=null){
 								</div>
 							</div>
 							<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">
+								<button onclick="deleteComment(${comment.seq}, ${comment.ref })">X</button>
 								<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">
 							</div>
 							<div class="comment-date col-md-1" style="background:green;height: 50px;">
@@ -214,6 +215,10 @@ if(msg !=null){
 						</div>
 						<hr>
 					</c:forEach>
+
+
+
+
 
 			</div>
 					<div class="row">
@@ -352,6 +357,7 @@ if(msg !=null){
 							'</div>'+
 						'</div>'+
 						'<div class="comment-email col-md-1" style="background:lightyellow;height: 50px;">'+
+							'<button onclick="deleteComment('+comment.seq+', '+comment.ref+')">X</button>'+
 							'<input type="button" value="comment" id="showComment" onclick="showCommentArea(this)">'+
 						'</div>'+
 						'<div class="comment-date col-md-1" style="background:green;height: 50px;">'+
@@ -367,7 +373,30 @@ if(msg !=null){
 					console.log(html);
 					$('.comment-area').append(html);
 			}
-
+		
+			function deleteComment(seq, ref) {
+				$.ajax({
+					url : 'AfterCommentController',
+					data : {command: 'deleteComment', seq : seq, ref : ref},
+					method : 'POST',
+					success : function (data) {
+						if(data == "false"){
+							alert('본인만 삭제가 가능합니다.');
+						} else {
+							
+							$('.comment-area').children().remove();
+	
+							var comments = JSON.parse(data);
+	
+							for(var i= 0; i < comments.length; i++){
+	
+								printCommentHtml(comments[i], (i+1));
+	
+							}
+						}
+					}
+				})
+			}
 
 	</script>
 </body>
