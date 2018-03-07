@@ -201,10 +201,10 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									</c:if>
 									<c:choose>
 										<c:when test="${item.gender==1 }">
-											<span class="offset-md-8"><img src="./img/male.png" width="50" height="50"></span>
+											<span class="offset-md-10"><img src="./img/male.png" width="50" height="50"></span>
 										</c:when>
 										<c:otherwise>
-											<span class="offset-md-6"><img src="./img/female.png" width="50" height="50"></span>
+											<span class="offset-md-6"><img src="./img/female.png" width="52" height="52"></span>
 										</c:otherwise>
 									</c:choose>
 									<br>													

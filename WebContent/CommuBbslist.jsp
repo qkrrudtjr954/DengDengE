@@ -265,7 +265,7 @@
 					<option value="A.title">제목</option>
 				</select>
 			</div>
-			&nbsp;&nbsp; <input class="form-control mr-sm-2" type="text"
+				<input class="form-control mr-sm-2" type="text"
 				id="SearchWord" name="SearchWord" placeholder="Search"
 				aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" id="search"

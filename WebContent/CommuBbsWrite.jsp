@@ -81,21 +81,18 @@
 						<h1>글쓰기</h1>
 						<hr>
 						<div class="row">
-							<div class="offset-md-1"></div>
-							<div class="col-md-2" align="right">
+							<div class="offset-md-1 col-md-2" align="right">
 								<select class="custom-select" id="category" name="category">
 									<c:forEach items="${categories }" var="category" varStatus="i">
 										<option value="${category.seq }">${category.title }</option>
 									</c:forEach>
 								</select>
 							</div>
-
 							<div class="col-md-8">
-								<input type="text" class="form-control" name="title" id="title"
+								<input type="text" class="form-control" name="title" id="title" size="70"
 									placeholder="제목을 입력해주세요">
 							</div>
 
-							<div class="offset-md-1"></div>
 						</div>
 						<hr>
 						<div class="row">
