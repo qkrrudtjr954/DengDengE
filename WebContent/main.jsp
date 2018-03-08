@@ -72,22 +72,28 @@
 	<%@include file="./layout/menubar.jsp" %>
 
 	<div class="album py-5 bg-light">
-		<div class="container">
+		<div class="container-fluid">
 <!-- 본문시작  -->
 		<div class="row">
-			<div class="col-md-6">
+			<div class="offset-md-1 col-md-5">
+				<br>
+				<br><br>
+				<br>
 				<img src="./img/main_01.jpg" width="100%">
 			</div>
-			<div class="col-md-6">
+			<div class="offset-md-1 col-md-4">
 				<div align="center">
+					<br>
+					<br>
 					<img src="./img/deng.png" width="100">
 					<br><br>
-					<h1>댕댕이</h1>
+					<span id="headname">댕댕이</span>
 					<h5>믿고 맡길 수 있는 분양센터</h5>
 					<hr>
+					<br>
 				</div>
 					<div class="maininfo">
-						<div class="imginfo">
+						<div class="imginfo">						
 							<img src="./img/mainpic_01.png" width="100"><br><br>
 						</div>
 						<span id="main_num">01</span><span id="sentence">입양동물 공고 확인 후 개별 연락</span><br><br>
@@ -103,11 +109,21 @@
 							<img src="./img/mainpic_04.png" width="100"><br><br>
 						</div>
 						<span id="main_num">04</span><span  id="sentence">댕댕이를 통해 입양한 고객님들의 다양한 입양 후기</span><br><br>
+						
+										
+				<br>
+				<br>
+				<br>
+				<br>
 					</div>
+					
 				</div>
-		
+
 		</div>	
-			
+		<hr>
+		<div class="row offset-md-5">
+		(주) DengDengE &nbsp;&nbsp; 대표 전화 : 010 - 6262- 4762
+		</div>	
 			
 			
 			

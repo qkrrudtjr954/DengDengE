@@ -7,7 +7,7 @@
 				<a class="nav-link" href="AnimalBbsController?command=animlist">분양 동물 보기</a>
 			</li>
 			<li class="nav-item menu-item">
-				<a class="nav-link" href="AfterBbsController?command=AfterBbslist">분양 후기 보기</a>
+				<a class="nav-link" href="AfterBbsController?command=AfterBbslist">입양 후기 보기</a>
 			</li>
 			<li class="nav-item menu-item">
 				<a class="nav-link" href="CommuBbsController?command=list">커뮤니티</a>
