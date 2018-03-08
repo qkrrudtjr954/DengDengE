@@ -325,9 +325,6 @@ if(aniBbsDto != null){
                                                    <c:choose>
                                                       <c:when test="${item.user_email eq  aniBbsDto.complete_email}">                                                         
                                                          <button class="btn btn-outline-primary"style="background-color: #28A745; color: #fff" id="bookBtn">분양확정</button>
-                                                         <script type="text/javascript">
-                                                         	alert("분양이 완료된 글입니다");
-                                                         </script>
                                                       </c:when>
                                                       <c:otherwise>
                                                          <button class="btn btn-outline-secondary disabled" style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>

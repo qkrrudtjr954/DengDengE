@@ -114,7 +114,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						</div>
 						<select class="custom-select" id="inputGroupSelect01"
 							style="width: 200px" name="type" class="type">
-							<option value="유기견">유기동물</option>
+							<option value="유기동물">유기동물</option>
 							<option value="개인분양">개인분양</option>
 							<option value="etc">etc</option>
 						</select>
@@ -202,7 +202,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">특이사항</span> <input
-								type="text" class="form-control" name="descrip" size="132"
+								type="text" class="form-control" name="descrip" size="133"
 								id="descrip" placeholder="특이사항 입력">
 						</div>
 					</div>

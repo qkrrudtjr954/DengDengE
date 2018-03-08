@@ -226,12 +226,14 @@ public class AnimalBbsController extends HttpServlet {
 	            dispatch("AnimalBbslist.jsp", req, resp);
 		}
 		else if(command.equals("btnsearch")) {
-			String searchBtn = req.getParameter("searchBtn");			
+			String ssearchBtn = req.getParameter("searchBtn");		
+			
+			String searchBtn = ssearchBtn.substring(0, 2);
 			
 			List<AnimalBbsDto> animlist = aniBbService.getFindBtnlist(searchBtn);
 			req.setAttribute("animlist", animlist);
 			
-			dispatch("AnimalBbslist.jsp", req, resp);
+			dispatch("AnimalBbslist.jsp", req, resp); 
 		}
 		else if(command.equals("btnsearch1")) {
 			

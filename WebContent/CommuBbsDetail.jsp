@@ -113,6 +113,9 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 	<div class="col-md-8">
 			<p><h4><%=comdto.getTitle() %></h4></p>
 	</div> 
+	<div class="offset-md-10 col-md-2">							
+					<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>						
+				</div>
 </div>
 
 <hr>
@@ -218,11 +221,9 @@ if(comdto.getUser_email().equals(sid)){
 
 <button type="button" class="btn btn-outline-secondary col-md-2"  id="btnDelete" >삭제하기</button>
 <%
-}else{%>
-<button type="button" id="btnBack" class="btn btn-outline-secondary  offset-md-5 col-md-2">돌아가기</button>
-<%
 }
 %>
+
 </form>
 </div>
 

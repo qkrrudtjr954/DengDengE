@@ -85,7 +85,7 @@
     			<span class="input-group-text" id="basic-addon1" style="width: 80px">글제목</span>
   			</div>
   		<input type="text" class="form-control" placeholder="제목을 입력해 주세요" aria-label="Username"
-  		aria-describedby="basic-addon1" style="width: 1000px" name="title" id="title">
+  		aria-describedby="basic-addon1" style="width: 1020px" name="title" id="title">
         </div>
         <br>
         <%-- 글내용 --%>
