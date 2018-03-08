@@ -74,9 +74,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 	
 	<form action="AnimalBbsController" method="post" id="form">
 		<input type="hidden" name="command" value="writeAf"> 
-		<div class="row">
-			<a href="AnimalBbsController?command=animlist">list</a>
-		</div>
 
 		<div class="album py-5 bg-light">
 			<div class="container">
