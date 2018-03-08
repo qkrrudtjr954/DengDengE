@@ -52,7 +52,7 @@ public class AnimalCommentController extends HttpServlet {
 				AnimalCommentDto comment = new AnimalCommentDto();
 				comment.setContent(content);
 				comment.setDepth(depth);
-				comment.setRef(ref);;
+				comment.setRef(ref);
 				comment.setStep(step);
 				comment.setTarget_user_seq(current_user.getSeq());
 				comment.setUser_email(current_user.getEmail());

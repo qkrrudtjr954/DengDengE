@@ -21,8 +21,8 @@ public class DBConnection {
 		try {
 
 
-			//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr", "hr");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.32:1521:xe","hr", "hr");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr", "hr");
+			//conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.18:1521:xe","hr", "hr");
 
 
 			//conn = DriverManager.getConnection("jdbc:oracle:thin:@myoracle.czzpf0jkqsrj.ap-northeast-2.rds.amazonaws.com:1521:oracle","root", "Rudtjr1216!");

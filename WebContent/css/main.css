@@ -112,3 +112,8 @@ table td{
 #td_title{
 	text-align:left;
 }
+button#delBtn{
+	 background: url(button_search.png) no-repeat;
+     border: none;
+     outline: none;
+}

@@ -227,6 +227,8 @@ if(msg !=null){
 							
 							<div class="comment-email col-md-1" style="height: 50px;">
 								<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="delBtn"onclick="deleteComment(${comment.seq}, ${comment.ref })"><font size="2em" color="#696969"><u>삭제</u></font></button>
 							</div>
 							
 
@@ -357,7 +359,7 @@ if(msg !=null){
 							printCommentHtml(comments[i], (i+1));
 
 						}
-						$('#content0').value("");
+						$('#content0').val("");
 					}
 				})
 			}
@@ -384,7 +386,9 @@ if(msg !=null){
 						'</div>'+
 						'<div class="comment-email col-md-1" style="height: 50px;">'+
 							'<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">'+
-						'</div>'+
+							'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+							'<button id="delBtn" onclick="deleteComment('+comment.seq+', '+comment.ref+')"><font size="2em" color="#696969"><u>삭제</u></font></button>'+
+							'</div>'+
 						'<div class="comment-input col-md-12" style="display:none;margin-top:10px;">'+
 							'<input type="text" name="content" class="form-control col" id="content'+index+'" size="80">'+
 							'<input type="button" value="comment" class="btn btn-outline-success col"  onclick="addComment(${bbs1.seq}, '+comment.step+', '+comment.depth+', '+index+')">'+
@@ -401,17 +405,36 @@ if(msg !=null){
 			
 			function dateTest(date) {
 				var date = new Date(date);
-				/* var year = today.getFullYear();
-				var month = today.getMonth()+1; 
 				
-				month < 10 ? "0" + month :month;
-				var date = today.getDate();
-				date < 10 ? "0" + date :date; */
 
 				var result =date.getFullYear()+'/'+
 		        ((date.getMonth()+1)<10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1))+'/'+
 		        (date.getDate()<10 ? '0'+date.getDate() : date.getDate() ) ;
 				return result;
+			}
+			
+			function deleteComment(seq, ref) {
+				$.ajax({
+					url : 'AfterCommentController',
+					data : {command: 'deleteComment', seq : seq, ref : ref},
+					method : 'POST',
+					success : function (data) {
+						if(data == "false"){
+							alert('본인만 삭제가 가능합니다.');
+						} else {
+							
+							$('.comment-area').children().remove();
+
+							var comments = JSON.parse(data);
+
+							for(var i= 0; i < comments.length; i++){
+
+								printCommentHtml(comments[i], (i+1));
+
+							}
+						}
+					}
+				})
 			}
 			
 
