@@ -8,9 +8,15 @@
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
-  background-image: url("../img/dd.jpg");
+  background-image: url("../img/mainheader_002.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.main_header{
+	background-color: rgba(76, 76, 76, 0.5);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
 }
 
 .menu {
@@ -40,7 +46,9 @@
 }
 
 .jumbotron-heading {
-  font-weight: 300;
+	font-size: 40px;
+  font-weight: bold;
+  
 }
 
 .jumbotron .container {
@@ -162,7 +170,7 @@ span#animaltitle{
 	
 }
 
-span#afterltitle{
+span#aftertitle{
 	font-weight: bold;
 	font-size: 20px;
 	color: #454e57;
