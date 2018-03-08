@@ -246,7 +246,7 @@ public class AnimalBbsDao {
 	}
 	
 	// 입양하기 글 수정
-	public boolean updateAnimalBbs(int seq, AnimalBbsDto aniBbsDto) {
+	public boolean updateAnimalBbs(AnimalBbsDto aniBbsDto) {
 		String sql = " UPDATE ANIMALBBS SET TITLE=?, "
 				+ " CONTENT=? WHERE SEQ=?";
 		System.out.println("s:"+sql);
@@ -263,7 +263,7 @@ public class AnimalBbsDao {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, aniBbsDto.getTitle());
 			psmt.setString(2, aniBbsDto.getContent());
-			psmt.setInt(3, seq);
+			psmt.setInt(3, aniBbsDto.getSeq());
 		
 			System.out.println("2/6 S detailAnimalBbs");
 				
@@ -279,6 +279,52 @@ public class AnimalBbsDao {
 					
 		return count>0?true:false;
 	}
+	
+	
+	
+	// 입양하기 글 사진수정
+		public boolean updateAnimalBbsPic1(AnimalBbsDto aniBbsDto) {
+			String sql = " UPDATE ANIMALBBS SET TITLE=?, "
+					+ " CONTENT=?, PIC1= ? WHERE SEQ=?";
+			System.out.println("s:"+sql);
+				
+			Connection conn = null;
+			PreparedStatement psmt = null;		
+				
+			int count = 0;
+				
+				
+			try {
+				conn = DBConnection.makeConnection();
+				System.out.println("1/6 S detailAnimalBbs");
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, aniBbsDto.getTitle());
+				psmt.setString(2, aniBbsDto.getContent());
+				psmt.setString(3, aniBbsDto.getPic1());
+				psmt.setInt(4, aniBbsDto.getSeq());
+			
+				System.out.println("2/6 S detailAnimalBbs");
+					
+				count = psmt.executeUpdate();
+				System.out.println("3/6 S detailAnimalBbs");
+					
+			} catch (SQLException e) {			
+				System.out.println(e.getMessage());
+			} finally{
+				DBClose.close(psmt, conn,null);
+				System.out.println("4/6 S detailAnimalBbs");
+			}
+						
+			return count>0?true:false;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 		//조회수 올리기
 	   public void readCount(int seq) {

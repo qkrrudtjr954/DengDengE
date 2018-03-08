@@ -41,8 +41,13 @@ public class AnimalBbsService {
 		}
 
 		// 입양하기 글 수정
-		public boolean updateAnimalBbs(int seq, AnimalBbsDto aniBbsDto) {
-			return aniBbsManager.updateAnimalBbs(seq, aniBbsDto);
+		public boolean updateAnimalBbs(AnimalBbsDto aniBbsDto) {
+			
+			if(aniBbsDto.getPic1()==null || aniBbsDto.getPic1().equals("")) {
+			return aniBbsManager.updateAnimalBbs(aniBbsDto);
+			}else {
+				return aniBbsManager.updateAnimalBbsPic1(aniBbsDto);
+			}
 		}
 
 		// 조회수

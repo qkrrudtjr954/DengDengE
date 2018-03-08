@@ -189,8 +189,14 @@ public class AnimalBbsController extends HttpServlet {
 				int seq = Integer.parseInt(sseq);
 				String title = req.getParameter("title");
 				String content = req.getParameter("content");
+				String pic1 = req.getParameter("pic1");
+				AnimalBbsDto aniBbsDto  = aniBbService.detailAnimalBbs(seq);
+				aniBbsDto.setSeq(seq);
+				aniBbsDto.setTitle(title);
+				aniBbsDto.setContent(content);
+				aniBbsDto.setPic1(pic1);				
 				
-				boolean isS = aniBbService.updateAnimalBbs(seq, new AnimalBbsDto(title, content));
+				boolean isS = aniBbService.updateAnimalBbs(aniBbsDto);
 				if(isS) {
 					req.setAttribute("msg", "글 수정 성공");
 					dispatch("AnimalBbsController?command=animlist", req, resp);
