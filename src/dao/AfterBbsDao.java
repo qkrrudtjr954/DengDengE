@@ -232,6 +232,7 @@ public class AfterBbsDao {
 		return count>0?true:false;
 		
 	}
+	
 	public boolean  AfrerBbsUpdateWithPic1(AfterBbsDto bbs) {
 		String sql=" UPDATE AFTERBBS SET  "
 				+" TITLE=?, CONTENT=?, PIC1 = ? "

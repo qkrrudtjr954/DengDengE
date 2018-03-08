@@ -24,6 +24,9 @@ public interface iCommuBbsDao {
 
 	//수정
 	public boolean udtCommu(CommuBbsDto comdto);
+	
+	//수정 사진 변경
+	public boolean udtCommuPic1(CommuBbsDto comdto);
 
 	//카테고리 별로 구분
 	public List<CommuBbsDto> getCategory(int target_category);

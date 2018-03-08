@@ -82,6 +82,7 @@ public class CommuBbsController extends HttpServlet {
 			int category = Integer.parseInt(Scategory);
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
+		
 
 			System.out.println("category : " + Scategory);
 			System.out.println("title : " + title);
@@ -92,6 +93,8 @@ public class CommuBbsController extends HttpServlet {
 			int target_user_seq = userInfo.getSeq();
 
 			CommuBbsDto dto = new CommuBbsDto(title, content, target_user_seq, category);
+			
+			
 			boolean isS = comService.writeCommu(dto);
 
 			System.out.println("CommuDto : " + dto);
@@ -186,11 +189,13 @@ public class CommuBbsController extends HttpServlet {
 			String seq = req.getParameter("seq");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
+			String pic1 = req.getParameter("pic1");
 
 			CommuBbsDto comdto = new CommuBbsDto();
 			comdto.setSeq(Integer.parseInt(seq));
 			comdto.setTitle(title);
 			comdto.setContent(content);
+			comdto.setPic1(pic1);
 			CommuBbsService comService = CommuBbsService.getInstance();
 
 			boolean isS = comService.udtCommu(comdto);
