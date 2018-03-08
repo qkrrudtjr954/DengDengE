@@ -151,7 +151,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 
 							<div class="comment-input col-md-12" style="display:none;margin-top:10px;">
 								<input type="text"  name="content" class="form-control col" id="content${i.index+1 }" size="80">
-								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comment.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
+								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comment.target_commu_seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
 							</div>
 						</div>
 						<hr>

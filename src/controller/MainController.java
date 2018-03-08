@@ -107,12 +107,18 @@ public class MainController extends HttpServlet{
 			HttpSession session = req.getSession();
 			User userInfo = (User)session.getAttribute("current_user");
 			
-			SendMasterService sendMasterService = SendMasterService.getInstance();
-			List<SendMaster> list = sendMasterService.getAllSendMaster(userInfo.getSeq());
+			if(userInfo != null) {
+				SendMasterService sendMasterService = SendMasterService.getInstance();
+				List<SendMaster> list = sendMasterService.getAllSendMaster(userInfo.getSeq());
+				
+				String json = new Gson().toJson(list);
+				System.out.println(list);
+				
+				resp.getWriter().write(json);
+			} else {
+				resp.getWriter().write("login");
+			}
 			
-			String json = new Gson().toJson(list);
-			System.out.println(list);
-			resp.getWriter().write(json);
 		} else if(command.equals("getInquiry")) {
 			
 			String sseq = req.getParameter("seq");
