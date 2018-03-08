@@ -85,25 +85,25 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			<br>
 
 			<form action="AnimalBbsController" method="post">
-			<input type="hidden" name="command" value="btnsearch">
+			<input type="hidden" name="command" value="btnsearch1">
 
 				<div class="row">
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
+					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="서울">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
+					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="경기도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
+					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="강원도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
+					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="충청도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
+					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="경상도">
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="searchBtn" class="btn btn-success" style="background-color: #28A745; color: #fff"
+					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="전라도">
 				</div>
 			</form>
