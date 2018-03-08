@@ -66,7 +66,6 @@ public class CommuBbsCommentController extends HttpServlet {
 				resp.getWriter().write(json);
 			}
 		}else if(command.equals("deleteComment")) {
-			// System.out.println("del");
 			if(Delegator.checkSession(req, resp)) {
 				HttpSession session = req.getSession();
 				User current_user = (User)session.getAttribute("current_user");
@@ -74,16 +73,15 @@ public class CommuBbsCommentController extends HttpServlet {
 				CommuBbsCommentService service = CommuBbsCommentService.getInstance();
 				
 				String sseq = req.getParameter("seq");
-				int seq = Integer.parseInt(sseq);
-				System.out.println("seq: " +seq);
+				int seq = Integer.parseInt(sseq);	
+				
 				boolean check = service.beforeDeleteCheck(seq, current_user.getSeq());
-				System.out.println("check: "+check);
+				
 				String json = "";
 				
 				if(check) {
 					String sref = req.getParameter("ref");
 					int ref = Integer.parseInt(sref);
-					
 					
 					List<CommuBbsComment> list = service.deleteComment(seq, ref);
 					
@@ -91,9 +89,8 @@ public class CommuBbsCommentController extends HttpServlet {
 				} else {
 					json = "false";
 				}
-
+				
 				resp.getWriter().write(json);
-
 			} 
 		}
 		
