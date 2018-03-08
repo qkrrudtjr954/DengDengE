@@ -93,6 +93,7 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 			<form action="AfterBbsController" method="post">
 				<input type="hidden" name="command" value="AfterBbsUpdateAf">
 				<input type="hidden" name="seq" value="<%=bbs.getSeq() %>">
+				<input type="hidden" name="pic1" value="" id="pic1">
 
 				<div class="row">
 					<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs.getTarget_user_seq() %>&nbsp;&nbsp;작성날짜
@@ -188,19 +189,63 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 
 	<script>
     $(document).ready(function() {
+       
         $('#summernote').summernote({
-        	width : 1100,
-            height: 300,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
-    	});
-	});
+   		width : 1100,
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true,                  // set focus to editable area after initializing summernote
+        lang: 'ko-KR',
+		callbacks: {
+			onImageUpload: function(files, editor, welEditable) {
+			      sendFile(files[0], this);
+				},
+		},
+		toolbar: [
+			['style', ['bold', 'italic', 'underline', 'clear']],
+			['font', ['strikethrough', 'superscript', 'subscript']],
+			['fontsize', ['fontsize']],
+			['color', ['color']],['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['insert', ['picture']]
+		]
+		});
+});
+    
+    
+    function sendFile(file, editor) {
+		formdata = new FormData();
+		formdata.append("userImage", file);
+
+		$.ajax({
+			data: formdata,
+			type: "POST",
+			url: '${initParam.IMG_SERVER_PATH}/upload',
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				console.log(data);
+				var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+
+				if($('#pic1').val() == ''){
+					$('#pic1').val(url);
+				}
+
+				alert(url);
+				$('#hello').html(url);
+				$(editor).summernote('editor.insertImage', url);
+				$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        }
+		});
+	}
 
 
-    $(document).ready(function() {
-    	  $('#summernote').summernote();
-    	});
+
+
+
+    
 
 
   </script>
