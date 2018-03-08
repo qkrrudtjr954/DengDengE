@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 import dao.iCommuBbsDao;
 import dao.CommuBbsDao;
 import dto.CategoryDto;
@@ -48,10 +50,20 @@ public class CommuBbsService {
 
 		public void readCount(int seq) {
 			 manager.readCount(seq);
+			 
 		}
+		
 
 		public boolean udtCommu(CommuBbsDto comdto) {
-			return manager.udtCommu(comdto);
+			System.out.println(comdto.getPic1());
+			if(comdto.getPic1() == null || comdto.getPic1().equals("")) {
+				return manager.udtCommu(comdto);
+			
+			}else {
+				return manager.udtCommuPic1(comdto);
+			}
+			
+			
 		}
 
 		public List<CommuBbsDto> getFindCommulist(String Searchtype, String SearchWord){
