@@ -49,6 +49,10 @@
   font-weight: bold;
 }
 
+container p{
+	color: #fff;
+}
+
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
