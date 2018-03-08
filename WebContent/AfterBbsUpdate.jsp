@@ -15,24 +15,12 @@
 <title>Deng Deng E list</title>
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./css/main.css" rel="stylesheet">
+    
 
-<!-- Custom styles for this template -->
-<link href="./css/main.css" rel="stylesheet">
-
-<%-- summernote --%>
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
-	rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
-	rel="stylesheet">
 
 </head>
 
@@ -57,6 +45,10 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 				<input type="hidden" name="pic1" value="" id="pic1">
 
 				<div class="row">
+						<h1>입양하기 글 수정</h1>
+					</div>
+					<hr>
+				<div class="row">
 					<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs.getTarget_user_seq() %>&nbsp;&nbsp;작성날짜
 						:<%=bbs.getReg_date() %>&nbsp;&nbsp; 조회수 : <%=bbs.getReadcond() %></span>
 				</div>
@@ -68,11 +60,12 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 						<span class="input-group-text" id="basic-addon1"
 							style="width: 80px">글제목</span>
 					</div>
+					<br>
 					<input type="text" class="form-control" placeholder="제목을 입력해 주세요"
 						aria-label="Username" aria-describedby="basic-addon1"
-						style="width: 1000px" name="title" value="<%=bbs.getTitle()%>">
+						style="width: 1020px" name="title" value="<%=bbs.getTitle()%>">
 				</div>
-
+				<br>
 
 
 
@@ -80,7 +73,8 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 				<div class="row">
 					<textarea id="summernote" name="content" value=""><%=bbs.getContent() %></textarea>
 				</div>
-
+				
+				<br>
 				<div class="row">
 					<input type="submit" class="btn btn-success" value="수정하기">
 				</div>
@@ -115,17 +109,11 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+	
 
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {

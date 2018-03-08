@@ -13,23 +13,23 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/main.css" rel="stylesheet">
-    <%-- summernote --%>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    
+	
 
 
 
   </head>
 
   <body>
+
 	<%@include file="./layout/header.jsp" %>
 	<%@include file="./layout/jumbotron.jsp" %>
 
 	<main role="main">
+
 
 	<%@include file="./layout/menubar.jsp" %>
 
@@ -52,26 +52,18 @@
         <br>
         <%-- 글내용 --%>
         <div class="row">
-        <textarea id="summernote" name="content" value=""  ></textarea>
+        	<textarea id="summernote" name="content" value=""  ></textarea>
         </div>
         <br>
         <div class="row">
-        <input type="hidden" name="pic1" value="" id="pic1"/>
-        <input type="button" class="btn btn-success offset-md-4 col-md-2"  value="글쓰기" onclick="" id="btnwrite">&nbsp;
-        <input type="button" class="btn btn-outline-secondary col-md-2 " value="돌아가기" onclick="" id="btnBack">
+        	<input type="hidden" name="pic1" value="" id="pic1"/>
+       		<input type="button" class="btn btn-success offset-md-4 col-md-2"  value="글쓰기" onclick="" id="btnwrite">&nbsp;
+        	<input type="button" class="btn btn-outline-secondary col-md-2 " value="돌아가기" onclick="" id="btnBack">
 
 
         </div>
         </form>
-
-
-
-
        	</div>
-
-
-
-
         </div>
 
 
@@ -93,7 +85,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+	
 
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
