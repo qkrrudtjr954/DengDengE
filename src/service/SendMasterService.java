@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import dao.SendMsgDao;
 import dto.SendMaster;
 
@@ -22,6 +24,13 @@ public class SendMasterService {
 	
 	public boolean sendToMaster(SendMaster sendMaster) {
 		return manager.sendToMaster(sendMaster);
+	}
+	public List<SendMaster> getAllSendMaster(int seq) {
+		return manager.getAllSendMaster(seq);
+	}
+	
+	public SendMaster getInquiry(int seq) {
+		return manager.getInquiry(seq);
 	}
 
 }

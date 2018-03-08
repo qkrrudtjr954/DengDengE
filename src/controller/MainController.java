@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dto.CategoryDto;
+import com.google.gson.Gson;
+
 import dto.SendMaster;
 import dto.User;
 import service.SendMasterService;
@@ -101,7 +102,30 @@ public class MainController extends HttpServlet{
 			}
 		
 			
-		}
+		} else if( command.equals("getSendMaster")){
+			
+			HttpSession session = req.getSession();
+			User userInfo = (User)session.getAttribute("current_user");
+			
+			SendMasterService sendMasterService = SendMasterService.getInstance();
+			List<SendMaster> list = sendMasterService.getAllSendMaster(userInfo.getSeq());
+			
+			String json = new Gson().toJson(list);
+			System.out.println(list);
+			resp.getWriter().write(json);
+		} else if(command.equals("getInquiry")) {
+			
+			String sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(sseq);
+			
+			SendMasterService sendMasterService = SendMasterService.getInstance();
+			SendMaster result = sendMasterService.getInquiry(seq);
+			
+			String json = new Gson().toJson(result);
+
+			resp.getWriter().write(json);
+			
+		} 
 	}
 	
 	public void dispatcher(String url, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

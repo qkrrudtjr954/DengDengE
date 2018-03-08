@@ -62,52 +62,12 @@ if(aniBbsDto != null){
 	}
 %>
   
-	<header>
-		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavDropdown">
-					<ul class="navbar-nav offset-md-7">
-						<c:choose>
-							<c:when test="${current_user == null }">
-							<!-- 로그인 안했을 때 -->
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=goSignIn">로그인</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=goSignUp">회원가입</a>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<!-- 로그인 했을 때 -->
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=signout">로그아웃</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="UserControl?command=myPage">마이 페이지</a>
-							</li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
-		</nav>
-   </header>	    
-    <main role="main">
+	<%@include file="./layout/header.jsp" %>
+	<%@include file="./layout/jumbotron.jsp" %>
 
+	<main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Album example</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-success my-2">Main call to action</a>
-          </p>
-        </div>
-      </section>
-      
-      <%@include file="./layout/menubar.jsp" %>
+	<%@include file="./layout/menubar.jsp" %>
       
 
 	<form action="AnimalBbsController" method="post">
@@ -242,7 +202,7 @@ if(aniBbsDto != null){
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-	
+	<%@include file="./layout/sendmaster.jsp" %>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.form2').hide();
@@ -254,6 +214,10 @@ $(document).ready(function() {
             maxHeight: null,             // set maximum height of editor
             focus: true                  // set focus to editable area after initializing summernote
     });   
+    
+    
+	sendMasterTableSet();
+	
     
 });
 
