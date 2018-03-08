@@ -55,9 +55,13 @@ public class AnimalBbsService {
 			 return aniBbsManager.getFindBbslist(Searchtype, Searchtext);
 		 }
 
-		 // 버튼 검색
+		 // 버튼 검색 분류
 		 public List<AnimalBbsDto> getFindBtnlist(String searchBtn){
 			 return aniBbsManager.getFindBtnlist(searchBtn);
+		 }
+		// 버튼 검색 지역
+		 public List<AnimalBbsDto> getFindBtnlistlocal(String searchBtn1){
+			 return aniBbsManager.getFindBtnlistlocal(searchBtn1);
 		 }
 
 		 // 예약 확정

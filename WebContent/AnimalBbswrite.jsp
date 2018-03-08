@@ -74,9 +74,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 	
 	<form action="AnimalBbsController" method="post" id="form">
 		<input type="hidden" name="command" value="writeAf"> 
-		<div class="row">
-			<a href="AnimalBbsController?command=animlist">list</a>
-		</div>
 
 		<div class="album py-5 bg-light">
 			<div class="container">
@@ -131,71 +128,66 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						<div class="input-group-prepend">
 							<span class="input-group-text">주소</span> 
 							<input type="text"
-								class="form-control" size="50" name="location"
+								class="col-md-12 form-control" name="location" size="35"
 								id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly"
 								style="background-color: #fff">
 							<button class="btn btn-outline-secondary" type="button"
 								onclick="sample4_execDaumPostcode()" id="locationBtn">주소찾기</button>
 						</div>
-					</div>
-
-					<br>
-
-					<div class="row">
 						<div class="input-group-prepend">
-							<span class="input-group-text">접종여부</span>
+							<span class="offset-md-4 input-group-text">접종여부</span>
 							<div class="input-group-text">
 								<input type="radio"
 									aria-label="radio for following text input" name="medi" value="YES">
 							</div>
-							<input type="text" class="form-control"
-								aria-label="Text input with checkbox"  size="2"
+							<input type="text" class="col-md-3 form-control"
+								aria-label="Text input with checkbox" 
 								 value="YES">
 							<div class="input-group-text">
 								<input type="radio"
 									aria-label="radio for following text input" name="medi" value="NO">
 							</div>
-							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" size="2"
+							<input type="text" class="col-md-3 form-control"
+								aria-label="Text input with checkbox" 
 								 value="NO">
 						</div>
+					</div>
+                                
+					<br>
 
-
-						&nbsp;&nbsp;&nbsp;
+					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text">중성화</span>
 							<div class="input-group-text">
 								<input type="radio"
 									aria-label="radio for following text input" name="neu" value="YES">
 							</div>
-							<input type="text" class="form-control"
-								aria-label="Text input with checkbox"  size="2"
+							<input type="text" class="col-md-4 form-control"
+								aria-label="Text input with checkbox"  
 								 value="YES">
 							<div class="input-group-text">
 								<input type="radio"
 									aria-label="radio for following text input" name="neu" value="NO">
 							</div>
-							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" size="2"
+							<input type="text" class="col-md-4 form-control"
+								aria-label="Text input with checkbox" 
 								 value="NO">
 						</div>
-
-						&nbsp;&nbsp;&nbsp;
 						<div class="input-group-prepend">
-							<span class="input-group-text">성별</span>
+							<span class="offset-md-1 input-group-text">성별</span>
 							<div class="input-group-text">
 								<input type="radio"
 									aria-label="radio for following text input" name="gen" value="여아">
 							</div>
-							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" size="2"
+							<input type="text" class="col-md-3 form-control"
+								aria-label="Text input with checkbox" 
 								value="여아">
 							<div class="input-group-text">
 								<input type="radio"
 									aria-label="radio for following text input" name="gen" value="남아">
 							</div> 
-							<input type="text" class="form-control"
-								aria-label="Text input with checkbox" size="2"
+							<input type="text" class="col-md-3 form-control"
+								aria-label="Text input with checkbox" 
 								value="남아">
 						</div>
 					</div>
@@ -204,7 +196,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">제목</span> <input type="text"
-								class="form-control" name="title" size="135" id="title" placeholder="제목 입력">
+								class="form-control" name="title" size="137" id="title" placeholder="제목 입력">
 						</div>
 					</div>
 
@@ -212,7 +204,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">특이사항</span> <input
-								type="text" class="form-control" name="descrip" size="130"
+								type="text" class="form-control" name="descrip" size="132"
 								id="descrip" placeholder="특이사항 입력">
 						</div>
 					</div>
