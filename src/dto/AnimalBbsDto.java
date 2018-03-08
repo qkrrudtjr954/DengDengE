@@ -27,11 +27,47 @@ public class AnimalBbsDto implements Serializable {
    private String complete_email;		// 예약확정자 이메일
    private String user_email;
    
+   private int likecount;
+   
 
    public AnimalBbsDto() {
    }
 
+   
+   
    public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String type, String location,
+		int medicine, int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
+		String contact, String description, String reg_date, String last_update, int del, int readcount,
+		String complete_email, String user_email, int likecount) {
+	super();
+	this.seq = seq;
+	this.title = title;
+	this.name = name;
+	this.age = age;
+	this.kinds = kinds;
+	this.type = type;
+	this.location = location;
+	this.medicine = medicine;
+	this.neutralization = neutralization;
+	this.gender = gender;
+	this.descripttion = descripttion;
+	this.pic1 = pic1;
+	this.content = content;
+	this.userSeq = userSeq;
+	this.contact = contact;
+	this.description = description;
+	this.reg_date = reg_date;
+	this.last_update = last_update;
+	this.del = del;
+	this.readcount = readcount;
+	this.complete_email = complete_email;
+	this.user_email = user_email;
+	this.likecount = likecount;
+}
+
+
+
+public AnimalBbsDto(int seq, String title, String name, int age, String kinds, String type, String location,
          int medicine, int neutralization, int gender, String descripttion, String pic1, String content, int userSeq,
          String contact, String description, String reg_date, String last_update, int del, int readcount,
          String complete_email, String user_email) {
@@ -263,6 +299,23 @@ public String getComplete_email() {
 public void setComplete_email(String complete_email) {
 	this.complete_email = complete_email;
 }
+
+
+
+
+
+
+public int getLikecount() {
+	return likecount;
+}
+
+
+
+public void setLikecount(int likecount) {
+	this.likecount = likecount;
+}
+
+
 
 @Override
 public String toString() {

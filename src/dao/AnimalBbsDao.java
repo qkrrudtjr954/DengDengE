@@ -22,7 +22,7 @@ public class AnimalBbsDao {
 
 	// 글목록
 	public List<AnimalBbsDto> getAnimalBbsList() {
-		String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE, "
+		/*String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE, "
 				+ " A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION, "
 				+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT, "
 				+ " A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION, "
@@ -30,7 +30,18 @@ public class AnimalBbsDao {
 				+ " FROM ANIMALBBS A, DENGUSER B "
 				+ " WHERE A.TARGET_USER_SEQ = B.SEQ "
 				+ " AND A.DEL NOT IN 1"
-				+ " ORDER BY REG_DATE DESC ";
+				+ " ORDER BY REG_DATE DESC ";*/
+		
+		String sql = " SELECT A.SEQ, A.TITLE, A.NAME, A.AGE,  A.KINDS, A.TYPE, A.LOCATION, A.MEDICINE, A.NEUTRALIZATION,  "
+				+ " A.GENDER, A.DESCRIPTTION, A.PIC1, A.CONTENT,  A.TARGET_USER_SEQ, A.TARGET_CONTACT, A.TARGET_DESCRIPTION,  "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT, A.TARGET_COMPLETE_EMAIL, B.EMAIL AS USER_EMAIL,	 "
+				+ " (select count(*) from liketable b where a.seq = b.target_bbs_seq and b.bbs_category=1) as LIKECOUNT  "
+				+ " FROM ANIMALBBS A,  DENGUSER B "
+				+ " WHERE A.TARGET_USER_SEQ = B.SEQ  AND A.DEL NOT IN 1 "
+				+ " ORDER BY REG_DATE DESC  ";
+		
+		
+
 		System.out.println("s"+sql);
 		
 		Connection conn = null;
@@ -70,7 +81,7 @@ public class AnimalBbsDao {
 				aniBbsDto.setDel(rs.getInt("DEL"));
 				aniBbsDto.setReadcount(rs.getInt("READCOUNT"));
 				aniBbsDto.setComplete_email("TARGET_COMPLETE_EMAIL");
-				
+				aniBbsDto.setLikecount(rs.getInt("LIKECOUNT"));
 				list.add(aniBbsDto);
 			}
 			System.out.println("4/6 S getAnimalBbsList");

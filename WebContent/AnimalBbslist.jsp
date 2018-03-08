@@ -158,7 +158,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 										request.setAttribute("range", result);
 									%>
 
-									${item.title }
+									<span id="animaltitle">${item.title }</span>
 									<c:if test="${item.del==200 }"> 
 										<span class="badge badge-pill badge-success">분양 완료</span>
 									</c:if>
@@ -167,17 +167,28 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 											<span class="offset-md-10"><img src="./img/male.png" width="50" height="50"></span>
 										</c:when>
 										<c:otherwise>
-											<span class="offset-md-6"><img src="./img/female.png" width="52" height="52"></span>
+											<span class="offset-md-10"><img src="./img/female.png" width="52" height="52"></span>
 
 										</c:otherwise>
 									</c:choose>
 									<br>													
 								<p>
 									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
+									<c:choose>
+										<c:when test="${item.likecount==0 }">
+											<img src="./img/empty_heart.png" height="40">
+											<span id="likecount">${item.likecount }</span>
+										</c:when>
+									<c:otherwise>
+										<img src="./img/heart.png" height="40">
+										<span id="likecount">${item.likecount }</span>
+										</c:otherwise>
+									</c:choose>
 								</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
 										<a href="AnimalBbsController?command=detail&seq=${item.seq }" class="btn btn-sm btn-outline-secondary">View</a>
+										
 									</div>
 									<small class="text-muted">${range }</small>								
 								</div>
@@ -188,8 +199,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				</c:forEach>
 			</div>			
 			</form>
-			
-			
+
 		</div>
 	</div>
 	</main>
@@ -260,6 +270,10 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 	$(document).ready(function () {
 		sendMasterTableSet();
 	})
+	
+
+
+	
 	</script>
 
 

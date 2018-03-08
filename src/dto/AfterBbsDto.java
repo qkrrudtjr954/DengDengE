@@ -29,12 +29,32 @@ public class AfterBbsDto implements Serializable {
 	private int del;
 	private int readcond;
 	private String user_email;
-	
+	private int likecount;
 	
 	
 	
 	
 	public AfterBbsDto() {}
+
+
+
+
+
+	public AfterBbsDto(int seq, String title, String pic1, String content, int target_user_seq, String reg_date,
+			String last_update, int del, int readcond, String user_email, int likecount) {
+		super();
+		this.seq = seq;
+		this.title = title;
+		this.pic1 = pic1;
+		this.content = content;
+		this.target_user_seq = target_user_seq;
+		this.reg_date = reg_date;
+		this.last_update = last_update;
+		this.del = del;
+		this.readcond = readcond;
+		this.user_email = user_email;
+		this.likecount = likecount;
+	}
 
 
 
@@ -224,6 +244,22 @@ public class AfterBbsDto implements Serializable {
 
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
+	}
+
+
+
+
+
+	public int getLikecount() {
+		return likecount;
+	}
+
+
+
+
+
+	public void setLikecount(int likecount) {
+		this.likecount = likecount;
 	}
 
 

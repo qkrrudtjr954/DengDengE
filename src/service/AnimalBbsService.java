@@ -89,4 +89,7 @@ public class AnimalBbsService {
 	 	public int getLikeCount(int bbs_seq) {
 	 		return aniBbsManager.getLikeCount(bbs_seq);
 	 	}
+	 	
+	 	
+	
 }

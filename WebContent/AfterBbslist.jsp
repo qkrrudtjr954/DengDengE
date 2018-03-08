@@ -201,9 +201,20 @@ to {
 								alt="./img/no-img.png">
 							<div class="card-body">
 								<p class="card-text">
-									${item.title } <br>
+								<span id="aftertitle">
+									${item.title } </span><br>
 								<p>
 									${item.user_email} <span style="font-size: 12px;"></span>
+									<c:choose>
+										<c:when test="${item.likecount==0 }">
+											<img src="./img/empty_heart.png" height="40">
+											<span id="likecount">${item.likecount }</span>
+										</c:when>
+									<c:otherwise>
+										<img src="./img/heart.png" height="40">
+										<span id="likecount">${item.likecount }</span>
+										</c:otherwise>
+									</c:choose>
 								</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">

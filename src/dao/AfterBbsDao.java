@@ -36,7 +36,8 @@ public class AfterBbsDao {
 	//After 게시판 화면 출력
 	public List<AfterBbsDto> getAfterlBbsList(){
 		String sql = "SELECT A.SEQ, A.TITLE, A.PIC1, A.CONTENT, A.TARGET_USER_SEQ,  "
-				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT,B.EMAIL AS USER_EMAIL "
+				+ " A.REG_DATE, A.LAST_UPDATE, A.DEL, A.READCOUNT,B.EMAIL AS USER_EMAIL,"
+				+ " (select count(*) from liketable b where a.seq = b.target_bbs_seq and b.bbs_category=1) as likecount   "
 				+ " FROM AFTERBBS A, DENGUSER B  "
 				+ " WHERE A.TARGET_USER_SEQ = B.SEQ AND DEL=0 "
 				+ " ORDER BY REG_DATE DESC ";
@@ -71,7 +72,8 @@ public class AfterBbsDao {
 												rs.getString(i++),//String ldate,
 												rs.getInt(i++),
 												rs.getInt(i++),
-												rs.getString(i++));
+												rs.getString(i++),
+												rs.getInt(i++));
 				
 						
 				
