@@ -82,7 +82,7 @@ public String toDate(String mdate){
           <h1 class="jumbotron-heading">Album example</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
           <p>
-            <a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
+            <a href="#" class="btn btn-success my-2">Main call to action</a>
           </p>
         </div>
       </section>
@@ -98,9 +98,9 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 	<div class="row">
 		
 		
-		<form name="form1" action="CommuBbsController" method="post">
+		<%-- <form name="form1" action="CommuBbsController" method="post">
    		<input type="hidden" name="seq" value="<%=comdto.getSeq() %>">
-						<h1>커뮤니티</h1>								
+						<h1>커뮤니티</h1>								 --%>
 		
 	</div>
 	<hr>	
@@ -113,9 +113,6 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 	<div class="col-md-8">
 			<p><h4><%=comdto.getTitle() %></h4></p>
 	</div> 
-	<div class="offset-md-10 col-md-2">							
-					<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>						
-				</div>
 </div>
 
 <hr>
@@ -193,7 +190,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 
 							<div class="comment-input col-md-12" style="display:none;margin-top:10px;">
 								<input type="text"  name="content" class="form-control col" id="content${i.index+1 }" size="80">
-								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comdto.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
+								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comment.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
 							</div>
 						</div>
 						<hr>
@@ -221,10 +218,12 @@ if(comdto.getUser_email().equals(sid)){
 
 <button type="button" class="btn btn-outline-secondary col-md-2"  id="btnDelete" >삭제하기</button>
 <%
+}else{%>
+<button type="button" id="btnBack" class="btn btn-outline-secondary  offset-md-5 col-md-2">돌아가기</button>
+<%
 }
 %>
-
-</form>
+<!-- </form> -->
 </div>
 
 
@@ -409,27 +408,24 @@ if(comdto.getUser_email().equals(sid)){
 
 
 <script>
-    $(document).ready(function(){
-        $("#btnDelete").click(function(){
-        if(confirm("정말 삭제하시겠습니까?")==true){
-         document.form1.action ="CommuBbsController?command=delete";
-         document.form1.submit(); 
-        }else{
-        	return;
-        }
-        });
-        
-        $("#btnUpdate").click(function(){    
-            document.form1.action="CommuBbsController?command=update";
-            document.form1.submit();
-        });
-        
-        $("#btnBack").click(function () {
-	        location.href="CommuBbsController?command=list";
-
-	    });
-        
+$("#btnDelete").click(function(){
+    if(confirm("정말 삭제하시겠습니까?")==true){
+     location.href ="CommuBbsController?command=delete&seq=${comdto.seq }";
+     
+    }else{
+       return;
+    }
     });
+    
+    $("#btnUpdate").click(function(){    
+        location.href ="CommuBbsController?command=update&seq=${comdto.seq }";
+        document.form1.submit();
+    });
+    
+    $("#btnBack").click(function () {
+       location.href="CommuBbsController?command=list";
+
+   });
 </script>
 	
 
@@ -451,6 +447,10 @@ $(document).ready(function() {
 
 	    });
 });
+
+
+
+
 
 	</script>
 	

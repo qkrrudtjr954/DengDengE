@@ -77,7 +77,7 @@
 				sweet, but not too short so folks don't simply skip over it
 				entirely.</p>
 			<p>
-				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
+				<a href="#" class="btn btn-success my-2">Main call to action</a>
 			</p>
 		</div>
 	</section>
@@ -93,11 +93,16 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 			<form action="AfterBbsController" method="post">
 				<input type="hidden" name="command" value="AfterBbsUpdateAf">
 				<input type="hidden" name="seq" value="<%=bbs.getSeq() %>">
-				<div clas="row">
-					<h1>수정하기</h1>
-				</div>
-				<hr>
+				<input type="hidden" name="pic1" value="" id="pic1">
+
 				<div class="row">
+					<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs.getTarget_user_seq() %>&nbsp;&nbsp;작성날짜
+						:<%=bbs.getReg_date() %>&nbsp;&nbsp; 조회수 : <%=bbs.getReadcond() %></span>
+				</div>
+
+
+				<div class="row">
+
 					<div class="input-group-prepend ">
 						<span class="input-group-text" id="basic-addon1"
 							style="width: 80px">글제목</span>
@@ -106,18 +111,24 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 						aria-label="Username" aria-describedby="basic-addon1"
 						style="width: 1000px" name="title" value="<%=bbs.getTitle()%>">
 				</div>
-				<br>
+
+
+
+
 
 				<div class="row">
 					<textarea id="summernote" name="content" value=""><%=bbs.getContent() %></textarea>
 				</div>
-				
-				<br>
+
 				<div class="row">
-					<input class="btn btn-success offset-md-4 col-md-2" type="submit" value="수정하기">
-					&nbsp;
-					<button type="button" id="btnBack" class="btn btn-outline-secondary col-md-2">돌아가기</button>
+					<input type="submit" class="btn btn-success" value="수정하기">
 				</div>
+
+
+
+
+
+
 			</form>
 
 
@@ -178,28 +189,65 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 
 	<script>
     $(document).ready(function() {
+       
         $('#summernote').summernote({
-        	width : 1100,
-            height: 300,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
-    	});
-	});
-
-
-    $(document).ready(function() {
-    	  $('#summernote').summernote();
-    	});
-
-
-  </script>
-  
-  <script type="text/javascript">
-  $("#btnBack").click(function() {
-	location.href = "AfterBbsController?command=AfterBbslist";
+   		width : 1100,
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true,                  // set focus to editable area after initializing summernote
+        lang: 'ko-KR',
+		callbacks: {
+			onImageUpload: function(files, editor, welEditable) {
+			      sendFile(files[0], this);
+				},
+		},
+		toolbar: [
+			['style', ['bold', 'italic', 'underline', 'clear']],
+			['font', ['strikethrough', 'superscript', 'subscript']],
+			['fontsize', ['fontsize']],
+			['color', ['color']],['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['insert', ['picture']]
+		]
+		});
 });
-  
+    
+    
+    function sendFile(file, editor) {
+		formdata = new FormData();
+		formdata.append("userImage", file);
+
+		$.ajax({
+			data: formdata,
+			type: "POST",
+			url: '${initParam.IMG_SERVER_PATH}/upload',
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				console.log(data);
+				var url = '${initParam.IMG_SERVER_PATH }/image/'+data.filename;
+
+				if($('#pic1').val() == ''){
+					$('#pic1').val(url);
+				}
+
+				alert(url);
+				$('#hello').html(url);
+				$(editor).summernote('editor.insertImage', url);
+				$('#imageDiv > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        }
+		});
+	}
+
+
+
+
+
+    
+
+
   </script>
 
 
