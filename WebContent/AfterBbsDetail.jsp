@@ -126,6 +126,8 @@ if(msg !=null){
 								<br> <br>
 								<%=bbs1.getContent()%>
 								<br> <br>
+								
+							
 
 							</div>
 
@@ -198,7 +200,7 @@ if(msg !=null){
 
 							<div class="comment-input col-md-12" style="display:none;margin-top:10px;">
 								<input type="text"  name="content" class="form-control col" id="content${i.index+1 }" size="80">
-								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comment.target_after_seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
+								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comment.ref }, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
 							</div>
 						</div>
 						<hr>

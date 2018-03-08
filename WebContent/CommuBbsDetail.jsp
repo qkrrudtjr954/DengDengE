@@ -145,7 +145,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 							<div class="comment-email col-md-1" style="height: 50px;">
 								<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="delBtn"onclick="deleteComment(${comment.seq}, ${comment.ref })"><font size="2em" color="#696969"><u>삭제</u></font></button>
+								<button id="delBtn"onclick="deleteComment(${comment.ref}, ${comment.ref })"><font size="2em" color="#696969"><u>삭제</u></font></button>
 							</div>
 							
 
