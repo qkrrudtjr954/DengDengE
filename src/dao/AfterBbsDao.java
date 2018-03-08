@@ -205,7 +205,7 @@ public class AfterBbsDao {
 	//After list 수정
 	public boolean  AfrerBbsUpdate(AfterBbsDto bbs) {
 		String sql=" UPDATE AFTERBBS SET  "
-				+" TITLE=?, CONTENT=?"
+				+" TITLE=?, CONTENT=? "
 				+ " WHERE SEQ=? ";
 		System.out.println("sql: "+ sql);
 		int count = 0;
@@ -218,6 +218,38 @@ public class AfterBbsDao {
 			psmt.setString(1, bbs.getTitle());
 			psmt.setString(2, bbs.getContent());
 			psmt.setInt(3, bbs.getSeq());
+			System.out.println("2/6 S AfrerBbsUpdate");
+			count = psmt.executeUpdate();
+			System.out.println("3/6 S AfrerBbsUpdate");
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			DBClose.close(psmt, conn, null);	
+			System.out.println("4/6 S AfrerBbsUpdate");
+		}
+		System.out.println("5/6 S AfrerBbsUpdate");
+		return count>0?true:false;
+		
+	}
+	public boolean  AfrerBbsUpdateWithPic1(AfterBbsDto bbs) {
+		String sql=" UPDATE AFTERBBS SET  "
+				+" TITLE=?, CONTENT=?, PIC1 = ? "
+				+ " WHERE SEQ=? ";
+		
+		System.out.println("sql: "+ sql);
+		int count = 0;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		System.out.println("1/6 S AfrerBbsUpdate");
+		try {
+			conn = DBConnection.makeConnection();			
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, bbs.getTitle());
+			psmt.setString(2, bbs.getContent());
+			psmt.setString(3, bbs.getPic1());
+			psmt.setInt(4, bbs.getSeq());
+			
 			System.out.println("2/6 S AfrerBbsUpdate");
 			count = psmt.executeUpdate();
 			System.out.println("3/6 S AfrerBbsUpdate");

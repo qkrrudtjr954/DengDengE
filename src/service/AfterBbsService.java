@@ -37,7 +37,12 @@ public class AfterBbsService {
 	
 	//수정
 	public boolean AfrerBbsUpdate(AfterBbsDto bbs) {
-		return afterBbsDao.AfrerBbsUpdate(bbs);	
+		System.out.println(bbs.getPic1());
+		if(bbs.getPic1() == null || bbs.getPic1().equals("")) {
+			return afterBbsDao.AfrerBbsUpdate(bbs);				
+		}else {
+			return afterBbsDao.AfrerBbsUpdateWithPic1(bbs);
+		}
 	}
 	
 	//수정할때 가져오기

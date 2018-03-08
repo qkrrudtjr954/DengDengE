@@ -54,6 +54,7 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 			<form action="AfterBbsController" method="post">
 				<input type="hidden" name="command" value="AfterBbsUpdateAf">
 				<input type="hidden" name="seq" value="<%=bbs.getSeq() %>">
+				<input type="hidden" name="pic1" value="" id="pic1">
 
 				<div class="row">
 					<span class="offset-md-8" style="font-size: small">작성자 :<%=bbs.getTarget_user_seq() %>&nbsp;&nbsp;작성날짜
@@ -149,6 +150,7 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 
 	<script>
     $(document).ready(function() {
+
         $('#summernote').summernote({
 	        	width : 1100,
 	            height: 300,                 // set editor height
@@ -156,15 +158,16 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 	            maxHeight: null,             // set maximum height of editor
 	            focus: true                  // set focus to editable area after initializing summernote
 	    	});
-        
+
 		sendMasterTableSet();
-		
+
 	});
 
 
-    $(document).ready(function() {
-    	  $('#summernote').summernote();
-    	});
+
+
+
+
 
 
   </script>

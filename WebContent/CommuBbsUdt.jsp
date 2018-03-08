@@ -11,7 +11,7 @@
     <link rel="icon" href="./icon/favicon.ico">
 
     <title>Deng Deng E list</title>
-    
+
    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
@@ -42,10 +42,10 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 					<input type="hidden" name="command" value="updateAf">
 					<input type="hidden" name="seq" value="<%=comdto.getSeq() %>">
 						<h1>수정하기</h1>
-						<hr>				
+						<hr>
 <div class="row">
-	<div class="offset-md-1"></div>	
-	<div class="col-md-2" align="right">	
+	<div class="offset-md-1"></div>
+	<div class="col-md-2" align="right">
 	<div class="p-3 mb-2 bg-success text-white" style="text-align: center;"><b><%=comdto.getCategory_name() %></b></div>
 	</div>
 
@@ -53,15 +53,15 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 			<input type="text" class="form-control" name="title" value="<%=comdto.getTitle() %>">
 		</div>
 
-		<div class="offset-md-1"></div> 
+		<div class="offset-md-1"></div>
 </div>
 <hr>
 <div class="row">
-<div class="offset-md-1"></div>	
+<div class="offset-md-1"></div>
 <div class="col-md-10">
 <textarea name="content" id="summernote" name="content" value=""><%=comdto.getContent() %></textarea>
 </div>
-<div class="offset-md-1"></div>	
+<div class="offset-md-1"></div>
 </div>
 <br>
 <div class="row">
@@ -70,8 +70,8 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 <button type="button" id="btnBack" class="btn btn-outline-secondary col-md-2">돌아가기</button>
 </div>
 </form>
-		
-		
+
+
 		<!-- ---------- -->
         </div>
       </div>
@@ -91,28 +91,28 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
     <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 
 
-	
+
 	<script type="text/javascript">
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
-				
+
 		});
 		$('.menu-item').on('mouseout', function () {
 			$(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
 			$(this).children('.nav-link').css('color', 'white');
 		});
-	
+
 	</script>
-	
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
- <%@include file="./layout/sendmaster.jsp" %>	
+ <%@include file="./layout/sendmaster.jsp" %>
 	<script type="text/javascript">
 $(document).ready(function() {
      $('#summernote').summernote({
@@ -121,15 +121,15 @@ $(document).ready(function() {
              maxHeight: null,             // set maximum height of editor
              focus: true                  // set focus to editable area after initializing summernote
      });
-     
+
      $("#btnBack").click(function () {
 	        location.href="CommuBbsController?command=list";
 
 	    });
-     
-     
+
+
 	sendMasterTableSet();
-		
+
 });
 
 	</script>

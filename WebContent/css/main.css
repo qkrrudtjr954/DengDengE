@@ -118,23 +118,21 @@ button#delBtn{
      outline: none;
 }
 
+div.imginfo{
+	text-align:center;
 
-.dropdown-menu-custom {
-	position: absolute;
-    top: 100%;
-    right: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 10rem;
-    padding: .5rem 0;
-    margin: .125rem 0 0;
-    font-size: 1rem;
-    color: #212529;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: .25rem;
+}
+
+div.maininfo span{
+	margin-left: 50px;
+
+}
+
+div.maininfo span#main_num{
+	font-size: 30px;
+	font-family: Verdana;
+	color: green;
+	font-weight: bold;
+
+
 }

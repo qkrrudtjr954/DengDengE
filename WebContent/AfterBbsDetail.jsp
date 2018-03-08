@@ -39,7 +39,7 @@ public String toDate(String mdate){
 	         + mdate.substring(8, 10);    // dd
 	return s;
 }
-     
+
 public String CommenttoDate(String mdate) {
  		String s = mdate.substring(1, 4) + "/" // yyyy
  				+ mdate.substring(5, 7) + "/" // MM
@@ -84,7 +84,7 @@ if(msg !=null){
 		<!-- 본문페이지 -->
 
 			<div class="row">
-				
+
 				<div class="col-md-12">
 					<form action="AfterBbsController" method="post">
 						<input type="hidden" name="command" value="AfterBbsUpdate">
@@ -105,6 +105,9 @@ if(msg !=null){
 								<h4><%=bbs1.getTitle() %></h4>
 								</p>
 							</div>
+							<div class="offset-md-10 col-md-2">
+								<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>
+							</div>
 						</div>
 
 						<hr>
@@ -123,15 +126,15 @@ if(msg !=null){
 								<br> <br>
 								<%=bbs1.getContent()%>
 								<br> <br>
-								
+
 							</div>
-						
+
 						</div>
-						
+
 					</form>
 					<hr>
 				</div>
-				
+
 				<!-- 댓글 달기/ 좋아요 -->
 
 				<div class="col-md-4" id="likeArea">
@@ -140,17 +143,17 @@ if(msg !=null){
 							src="${ isLiked == true ? './img/heart.png' : './img/empty_heart.png' }"
 							id="like_img" height="50px" width="50px">
 					</button>
-					<span id="like_count">${like_count }</span> &nbsp;&nbsp;&nbsp; 
+					<span id="like_count">${like_count }</span> &nbsp;&nbsp;&nbsp;
 					<img src="./img/comment_1.png" height="30px" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;
 					<span id="commentCount">${comments.size() }</span>
 				</div>
 			</div>
 			<br>
-			
+
 			<!-- 댓글 달기/ 좋아요 끝 -->
 			<div class="row">
 			<div class="offset-md-1 col-md-8">
-				<input type="text" class="form-control" name="content" id="content0" size="90" placeholder="댓글을 입력해주세요"> 
+				<input type="text" class="form-control" name="content" id="content0" size="90" placeholder="댓글을 입력해주세요">
 			</div>
 			<div class="col-md-2">
 				<input type="button" class="btn btn-outline-success" value="comment" onclick="addComment(${bbs1.seq}, 0, 0, 0)">
@@ -169,7 +172,7 @@ if(msg !=null){
 									<div class="col-md-${comment.depth }" style="height:50px;text-align:right;">
 								<c:choose>
 								    <c:when test="${comment.depth ==1}">
-								    </c:when>	
+								    </c:when>
 								    <c:otherwise>
 								      	<img src="./img/arrow.png" width="24">
 								    </c:otherwise>
@@ -185,13 +188,13 @@ if(msg !=null){
 								<fmt:formatDate value="${tempRegDate }" pattern="yyyy/MM/dd" var="regDate"/>
 								<font size="2em" color="#696969">${regDate }</font>
 							</div>
-							
+
 							<div class="comment-email col-md-1" style="height: 50px;">
 								<input type="button" value="comment" class="btn btn-outline-success"  id="showComment" onclick="showCommentArea(this)">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="delBtn"onclick="deleteComment(${comment.seq}, ${comment.ref })"><font size="2em" color="#696969"><u>삭제</u></font></button>
 							</div>
-							
+
 
 							<div class="comment-input col-md-12" style="display:none;margin-top:10px;">
 								<input type="text"  name="content" class="form-control col" id="content${i.index+1 }" size="80">
@@ -216,7 +219,8 @@ if(msg !=null){
 				</form>
 				<%
 					}
-				%>
+					%>
+
 			</div>
 		</div>
 	</div>
@@ -248,7 +252,7 @@ if(msg !=null){
 		$(document).ready(function () {
 			sendMasterTableSet();
 		})
-	
+
 		$('.menu-item').on('mouseover', function () {
 			$(this).css('background', 'green').css('border', '1px solid green').css('border-radius', '15px');
 			$(this).children('.nav-link').css('color', 'white');
@@ -269,10 +273,18 @@ if(msg !=null){
 	     });
 
 	     $("#btndelete").click(function(){
-	        //alert("클릭");
-	         document.form1.action="AfterBbsController?command=AfterDelete";
-	         document.form1.submit();
+	    	 if(confirm("정말 삭제하시겠습니까?")==true){
+	    		 document.form1.action="AfterBbsController?command=AfterDelete";
+		         document.form1.submit();
+	    	 }else{
+	    		 return;
+	    	 }
+
 	     });
+
+	     $("#btnBack").click(function(){
+	    	 location.href="AfterBbsController?command=AfterBbslist";
+		 });
 
 	     $('#btnLike').click(function ()  {
 
@@ -303,8 +315,8 @@ if(msg !=null){
 	    	 	} else {
 	    	 		$(commentArea).parent().parent().find('.comment-input').css('display', 'none');
 	    	 	}
-	    	 	
-	    	 	
+
+
 		}
 
 	     function addComment(ref, step, depth, index) {
@@ -367,17 +379,17 @@ if(msg !=null){
 				if(depth == 1) return '&nbsp;';
 				else return '<img src="./img/arrow.png" width="24">';
 			}
-			
+
 			function dateTest(date) {
 				var date = new Date(date);
-				
+
 
 				var result =date.getFullYear()+'/'+
 		        ((date.getMonth()+1)<10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1))+'/'+
 		        (date.getDate()<10 ? '0'+date.getDate() : date.getDate() ) ;
 				return result;
 			}
-			
+
 			function deleteComment(seq, ref) {
 				$.ajax({
 					url : 'AfterCommentController',
@@ -387,7 +399,7 @@ if(msg !=null){
 						if(data == "false"){
 							alert('본인만 삭제가 가능합니다.');
 						} else {
-							
+
 							$('.comment-area').children().remove();
 
 							var comments = JSON.parse(data);
@@ -401,7 +413,7 @@ if(msg !=null){
 					}
 				})
 			}
-			
+
 
 	</script>
 </body>

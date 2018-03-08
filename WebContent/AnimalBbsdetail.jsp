@@ -102,7 +102,9 @@ if(aniBbsDto != null){
 				<div class="col-md-9">
 					<p><h4><%=aniBbsDto.getTitle() %></h4></p>
 				</div>
-
+				<div class="offset-md-10 col-md-2">							
+					<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>						
+				</div>
 
             </div>
             <hr>
@@ -284,9 +286,6 @@ if(aniBbsDto != null){
                                                    <c:choose>
                                                       <c:when test="${item.user_email eq  aniBbsDto.complete_email}">                                                         
                                                          <button class="btn btn-outline-primary"style="background-color: #28A745; color: #fff" id="bookBtn">분양확정</button>
-                                                         <script type="text/javascript">
-                                                         	alert("분양이 완료된 글입니다");
-                                                         </script>
                                                       </c:when>
                                                       <c:otherwise>
                                                          <button class="btn btn-outline-secondary disabled" style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
@@ -479,7 +478,7 @@ if(aniBbsDto != null){
 				<%if(aniBbsDto.getUser_email().equals(sid)){
 					%>
 					<div class="row">
-						<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-5 btn btn-outline-secondary"
+						<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-5 btn btn-success"
 						style="background-color: #28A745; color: #fff">수정하기</a>
 						&nbsp;&nbsp;
 						<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
@@ -565,6 +564,12 @@ if(aniBbsDto != null){
          $(this).css('background', '').css('border', '1px solid white').css('border-radius', '5px');
          $(this).children('.nav-link').css('color', 'white');
       });
+      
+      $("#btnBack").click(function () {
+          location.href="AnimalBbsController?command=animlist";
+
+      });
+      
       $('#btnLike').click(function ()  {
          
          $.ajax({

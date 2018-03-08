@@ -77,7 +77,7 @@
 						<hr>
 						<a href="CommuBbsController?command=list#hello" class="btn btn-outline-secondary"
 							style="width: 90px; background-color: #28A745; color: #fff">전체보기</a>
-							
+
 						<c:forEach items="${categories }" var="category" varStatus="i">
 							<button type="button" class="btn btn-success"
 								onclick=" classify(${category.seq})">${category.title }</button>
@@ -111,7 +111,7 @@
 							<th>조회수</th>
 						</tr>
 					</thead>
-					
+
 					<tbody>
 						<%
 						if (bbslist == null || bbslist.size() == 0) {
@@ -119,14 +119,14 @@
 						<tr>
 							<td colspan="6">작성된 글이 없습니다</td>
 						</tr>
-	
+
 						<%
 						}
-						
+
 						for (int i = 0; i < bbslist.size(); i++) {
 							CommuBbsDto bbs = bbslist.get(i);
 						%>
-						
+
 						<tr>
 							<td><%=i + 1%></td>
 							<td><%=bbs.getCategory_name()%></td>
@@ -137,10 +137,10 @@
 								<%
 								 String reddate = toDate(bbs.getReg_date());
 								 String today = toDay();
-								 
+
 								 if (reddate.equals(today)) {
-								 %> 
-								 <span class="badge badge-pill badge-success">new</span> 
+								 %>
+								 <span class="badge badge-pill badge-success">new</span>
 								 <%
 								 }
 								 %>
@@ -149,7 +149,7 @@
 							<td><%=toDate(bbs.getReg_date())%></td>
 							<td><%=bbs.getReadcount()%></td>
 						</tr>
-					
+
 						<%
 							}
 						%>
@@ -161,7 +161,7 @@
 		</div>
 
 
-		<%-- 
+		<%--
 			<div class="row">
 				<div class="offset-md-2"></div>
 				<div class="col-md-8">
@@ -170,7 +170,7 @@
 					%>
 					<div class="offset-md-5 col-md-5">작성된 글이 없습니다.</span></div>
 					<hr>
-				
+
 
 					<%
 						}
@@ -288,7 +288,7 @@
 							'1px solid white').css('border-radius', '5px');
 					$(this).children('.nav-link').css('color', 'white');
 				});
-		
+
 		$("#search").click(function () {
 			var strS = document.getElementById('SearchWord');
 			if( strS.value == '' || strS.value == null ){
@@ -297,32 +297,32 @@
 		        return false;
 			}
 			$('#searchform').submit();
-						
-			
+
+
 		});
 	</script>
 	<script>
-		
-		   
+
+
 		/* $(document).ready(function () {
 			 $("#btnAll").click(function () {
 			        location.href="CommuBbsController?command=list#hello";
-		
+
 			    });
-			
+
 		    $("#btnCatg1").click(function () {
 		        $("form[name=form1]")
 		        .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
-		
+
 		    });
-		    
-		
+
+
 		    $("#btnCatg2").click(function () {
 		    	 $("form[name=form1]")
 		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
 		    });
-		    
-		
+
+
 		    $("#btnCatg3").click(function () {
 		    	 $("form[name=form1]")
 		         .attr({action:"CommuBbsController?command=classify&target_category="+$(this).val()+"#hello", method:"post"}).submit();
@@ -330,20 +330,20 @@
 		    */
 		    /* $("#btnAll").click(function () {
 		        location.href="CommuBbsController?command=list#hello";
-	
+
 		    }); */
-		    
+
 		    $("#btnWrite").click(function () {
 		   	 location.href="CommuBbsController?command=write";
 		   });
-		   
+
 		   function classify(seq) {
 			   $("form[name=form1]").attr({action:"CommuBbsController?command=classify&target_category="+seq+"#hello", method:"post"}).submit();
 		   }
-			    
-	
-			
-		 
+
+
+
+
 		</script>
 		<%@include file="./layout/sendmaster.jsp" %>
 		<script type="text/javascript">
@@ -351,10 +351,10 @@
         			$('#myTable').DataTable( {
 	        			"order": [[ 0, "asc" ]]
 	    			});
-        
-        
+
+
 				sendMasterTableSet();
-		
+
 			});
     </script>
 </body>

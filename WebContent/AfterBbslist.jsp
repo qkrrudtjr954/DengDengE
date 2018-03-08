@@ -162,7 +162,7 @@ to {
 	</div>
 </c:if> --%>
 
-			
+
 				<form name="searchform" method="post" action="AfterBbsController" id="myform">
 					<input type="hidden" name="command" value="AfterBbsSearch">
 					<div class="row" style="margin:0 auto;width:900px;">
@@ -171,7 +171,7 @@ to {
 								name="Searchtype" style="width: 150px">
 								<option value="email">글쓴이</option>
 								<option value="title">제목</option>
-							</select> 
+							</select>
 							<input type="text" class="form-control"
 								aria-label="Text input with segmented dropdown button" size="50"
 								name="SearchWord" id="text">
@@ -183,11 +183,11 @@ to {
 							<a href="AfterBbsController?command=AfterBbswrite" class="offset-md-10 btn btn-outline-secondary"
 							style="width: 90px; background-color: #28A745; color: #fff">글쓰기</a>
 						</div>
-					</div>					
+					</div>
 				</form>
-		
+
 			<br><br>
-			
+
 			<div class="row">
 				<c:if test="${afterBbslist.size()==0 }">
 					<span style="margin:0 auto;width:900px;">검색결과 없음.</span>
@@ -267,7 +267,7 @@ to {
 
 			</div>
 
-			
+
 
 
 
@@ -313,7 +313,7 @@ to {
 		$(document).ready(function () {
 			sendMasterTableSet();
 		})
-		
+
 		$('.menu-item').on(
 				'mouseover',
 				function() {

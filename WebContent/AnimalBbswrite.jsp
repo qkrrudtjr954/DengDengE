@@ -40,13 +40,11 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			<div class="container">
 
 
-				<div class="row" style="margin: 0 auto; width: 900px;">
-					<h4 style="text-decoration: underline;" class="offset-md-5">입양하기
-						글 작성</h4>
+				<div class="row">
+					<h1>입양하기 글 작성</h1>
 				</div>
-				<div>
-					<a href="AnimalBbsController?command=animlist"
-						class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>
+				<div class="offset-md-10 col-md-2">							
+					<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>						
 				</div>
 				<hr>
 
@@ -77,7 +75,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 						</div>
 						<select class="custom-select" id="inputGroupSelect01"
 							style="width: 200px" name="type" class="type">
-							<option value="유기견">유기동물</option>
+							<option value="유기동물">유기동물</option>
 							<option value="개인분양">개인분양</option>
 							<option value="etc">etc</option>
 						</select>
@@ -165,7 +163,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					<div class="row">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="">특이사항</span> <input
-								type="text" class="form-control" name="descrip" size="132"
+								type="text" class="form-control" name="descrip" size="133"
 								id="descrip" placeholder="특이사항 입력">
 						</div>
 					</div>
@@ -341,6 +339,10 @@ $(document).ready(function() {
 	        }
 		});
 	}
+    
+    $("#btnBack").click(function(){
+   	 location.href="AnimalBbsController?command=animlist";
+	 });
     
     $('#nextButton').click(function () { 
 

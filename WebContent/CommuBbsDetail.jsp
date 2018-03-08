@@ -1,4 +1,4 @@
-<%@page import="dto.User"%>
+﻿<%@page import="dto.User"%>
 <%@page import="dto.CommuBbsDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
@@ -59,9 +59,9 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 	<div class="row">
 		
 		
-		<form name="form1" action="CommuBbsController" method="post">
-   		<input type="hidden" name="seq" value="<%=comdto.getSeq() %>">
-						<h1>커뮤니티</h1>								
+
+					<h1>커뮤니티</h1>								
+
 		
 	</div>
 	<hr>	
@@ -151,7 +151,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 
 							<div class="comment-input col-md-12" style="display:none;margin-top:10px;">
 								<input type="text"  name="content" class="form-control col" id="content${i.index+1 }" size="80">
-								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comdto.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
+								<input type="button" class="btn btn-outline-success col" value="comment" onclick="addComment(${comment.seq}, ${comment.step }, ${comment.depth }, ${i.index+1 })" >
 							</div>
 						</div>
 						<hr>
@@ -184,7 +184,7 @@ if(comdto.getUser_email().equals(sid)){
 <%
 }
 %>
-</form>
+
 </div>
 
 
@@ -369,19 +369,20 @@ if(comdto.getUser_email().equals(sid)){
 
 
 <script>
-    $(document).ready(function(){
+
+
+
         $("#btnDelete").click(function(){
         if(confirm("정말 삭제하시겠습니까?")==true){
-         document.form1.action ="CommuBbsController?command=delete";
-         document.form1.submit(); 
+         location.href ="CommuBbsController?command=delete&seq=${comdto.seq }";
+         
         }else{
         	return;
         }
         });
         
         $("#btnUpdate").click(function(){    
-            document.form1.action="CommuBbsController?command=update";
-            document.form1.submit();
+        	 location.href ="CommuBbsController?command=update&seq=${comdto.seq }";
         });
         
         $("#btnBack").click(function () {
@@ -389,7 +390,8 @@ if(comdto.getUser_email().equals(sid)){
 
 	    });
         
-    });
+
+
 </script>
 	
 
@@ -413,6 +415,10 @@ if(comdto.getUser_email().equals(sid)){
 		sendMasterTableSet();
 		
 	});
+
+
+
+
 
 	</script>
 	

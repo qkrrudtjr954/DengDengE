@@ -93,7 +93,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
@@ -118,7 +118,7 @@
 				});
 	</script>
 
-	
+
 
 	<%@include file="./layout/sendmaster.jsp" %>
 	<script type="text/javascript">
@@ -146,9 +146,9 @@
 									[ 'height',[ 'height' ] ],
 									[ 'insert',[ 'picture' ] ] ]
 			});
-		
+
 		sendMasterTableSet();
-		
+
 
 	});
 		function sendFile(file, editor) {
@@ -199,7 +199,7 @@
 
 var str = document.getElementById('personName');
 
- 
+
 
 if( str.value == '' || str.value == null ){
     alert( '값을 입력해주세요' );
@@ -212,7 +212,7 @@ if( str.value.replace( blank_pattern, '' ) == "" ){
     return false;
 }
 
- 
+
 
 //공백 금지
 //var blank_pattern = /^\s+|\s+$/g;(/\s/g
