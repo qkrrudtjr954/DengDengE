@@ -21,10 +21,7 @@
 
 
 
-
 <body class="text-center">
-
-
 
 	<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
 		<header class="masthead mb-auto"></header>
