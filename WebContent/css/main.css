@@ -117,3 +117,21 @@ button#delBtn{
      border: none;
      outline: none;
 }
+
+div.imginfo{
+	text-align:center;
+	
+}
+
+div.maininfo span{
+	margin-left: 50px;
+	
+}
+
+div.maininfo span#main_num{
+	font-size: 30px;
+	font-family: Verdana;
+	color: green;
+	font-weight: bold;
+	
+}
