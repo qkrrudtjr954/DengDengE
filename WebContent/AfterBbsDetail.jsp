@@ -96,7 +96,7 @@ public String CommenttoDate(String mdate) {
 				sweet, but not too short so folks don't simply skip over it
 				entirely.</p>
 			<p>
-				<a href="#" class="btn btn-success my-2">Main call to action</a>
+				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
 			</p>
 		</div>
 	</section>
@@ -143,6 +143,9 @@ if(msg !=null){
 								<p>
 								<h4><%=bbs1.getTitle() %></h4>
 								</p>
+							</div>
+							<div class="offset-md-10 col-md-2">							
+								<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>						
 							</div>
 						</div>
 
@@ -255,7 +258,8 @@ if(msg !=null){
 				</form>
 				<%
 					}
-				%>
+					%>
+					
 			</div>
 		</div>
 	</div>
@@ -304,10 +308,18 @@ if(msg !=null){
 	     });
 
 	     $("#btndelete").click(function(){
-	        //alert("클릭");
-	         document.form1.action="AfterBbsController?command=AfterDelete";
-	         document.form1.submit();
+	    	 if(confirm("정말 삭제하시겠습니까?")==true){
+	    		 document.form1.action="AfterBbsController?command=AfterDelete";
+		         document.form1.submit();
+	    	 }else{
+	    		 return;
+	    	 }
+	         
 	     });
+	    
+	     $("#btnBack").click(function(){
+	    	 location.href="AfterBbsController?command=AfterBbslist";
+		 });
 
 	     $('#btnLike').click(function ()  {
 

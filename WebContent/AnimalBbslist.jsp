@@ -123,7 +123,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				</div>
 			</form>
 			<hr>
-			<br>
 			<form action="AnimalBbsController" method="post" id="form">
 				<input type="hidden" name="command" value="search">
 				<div class="row" style="margin:0 auto;width:900px;">

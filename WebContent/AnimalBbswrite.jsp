@@ -79,13 +79,11 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 			<div class="container">
 
 
-				<div class="row" style="margin: 0 auto; width: 900px;">
-					<h4 style="text-decoration: underline;" class="offset-md-5">입양하기
-						글 작성</h4>
+				<div class="row">
+					<h1>입양하기 글 작성</h1>
 				</div>
-				<div>
-					<a href="AnimalBbsController?command=animlist"
-						class="offset-md-11 btn btn-outline-secondary" style="background-color: #28A745; color: #fff">list</a>
+				<div class="offset-md-10 col-md-2">							
+					<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>						
 				</div>
 				<hr>
 
@@ -374,6 +372,10 @@ $(document).ready(function() {
 	        }
 		});
 	}
+    
+    $("#btnBack").click(function(){
+   	 location.href="AnimalBbsController?command=animlist";
+	 });
     
     $('#nextButton').click(function () { 
 

@@ -127,6 +127,9 @@ if(aniBbsDto != null){
 						<span style="font-size: small" >
 							*제목과 내용이 수정가능합니다.
 						</span>
+						<div class="offset-md-10 col-md-2">							
+								<button type="button" id="btnBack" class="offset-md-12 btn btn-outline-secondary">돌아가기</button>						
+							</div>
 					</div>
 					
 					<hr>
@@ -255,6 +258,11 @@ $(document).ready(function() {
             focus: true                  // set focus to editable area after initializing summernote
     });   
     
+});
+
+$("#btnBack").click(function () {
+    location.href="AnimalBbsController?command=animlist";
+
 });
 
 </script>

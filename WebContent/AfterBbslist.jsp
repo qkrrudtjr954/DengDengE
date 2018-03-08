@@ -162,7 +162,7 @@ to {
 				sweet, but not too short so folks don't simply skip over it
 				entirely.</p>
 			<p>
-				<a href="#" class="btn btn-success my-2">Main call to action</a>
+				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
 			</p>
 		</div>
 	</section>

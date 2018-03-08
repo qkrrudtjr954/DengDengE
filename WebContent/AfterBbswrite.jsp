@@ -65,7 +65,7 @@
           <h1 class="jumbotron-heading">Album example</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
           <p>
-            <a href="#" class="btn btn-success my-2">Main call to action</a>
+            <a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
           </p>
         </div>
       </section>
@@ -74,11 +74,10 @@
       <div class="album py-5 bg-light">
         <div class="container">
         	<div class="row">
-
-        	<div class="row">
         	<h1 >글쓰기</h1>
-        	</div>
         </div>
+       
+        <hr>
         <form action="AfterBbsController" method="post" id="myform">
         <input type="hidden" name="command" value="AfterBbswriteAf">
      	<div class="row">
@@ -88,6 +87,7 @@
   		<input type="text" class="form-control" placeholder="제목을 입력해 주세요" aria-label="Username"
   		aria-describedby="basic-addon1" style="width: 1000px" name="title" id="title">
         </div>
+        <br>
         <%-- 글내용 --%>
         <div class="row">
         <textarea id="summernote" name="content" value=""  ></textarea>
