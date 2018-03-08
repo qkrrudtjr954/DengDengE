@@ -66,6 +66,9 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 					&nbsp;&nbsp;&nbsp;
 					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
 					value="전라도">
+					&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="searchBtn1" class="btn btn-success" style="background-color: #28A745; color: #fff"
+					value="제주도">
 				</div>
 			</form>
 
