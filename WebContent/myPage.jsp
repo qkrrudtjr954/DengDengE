@@ -24,7 +24,7 @@
 
 	<div class="container">
 		<div class="py-5 text-center">
-			<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+			<img class="d-block mx-auto mb-4" src="./img/animal (1).png" alt="" width="72" height="72">
 			<h2>내정보 수정</h2>
 			${notice }
 		</div>
