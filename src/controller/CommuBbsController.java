@@ -194,6 +194,16 @@ public class CommuBbsController extends HttpServlet {
 			CommuBbsService comService = CommuBbsService.getInstance();
 
 			boolean isS = comService.udtCommu(comdto);
+			
+			if (isS) {
+				
+				dispatch("CommuBbsController?command=list", req, resp);
+
+			} else {
+				
+				dispatch("CommuBbsController?command=read", req, resp);
+			}
+
 
 		} else if (command.equals("search")) {
 

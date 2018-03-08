@@ -98,9 +98,7 @@ CommuBbsDto comdto = (CommuBbsDto)request.getAttribute("comdto");
 	<div class="row">
 		
 		
-		<form name="form1" action="CommuBbsController" method="post">
-   		<input type="hidden" name="seq" value="<%=comdto.getSeq() %>">
-						<h1>커뮤니티</h1>								
+					<h1>커뮤니티</h1>								
 		
 	</div>
 	<hr>	
@@ -223,7 +221,7 @@ if(comdto.getUser_email().equals(sid)){
 <%
 }
 %>
-</form>
+
 </div>
 
 
@@ -408,19 +406,20 @@ if(comdto.getUser_email().equals(sid)){
 
 
 <script>
-    $(document).ready(function(){
+
+
+
         $("#btnDelete").click(function(){
         if(confirm("정말 삭제하시겠습니까?")==true){
-         document.form1.action ="CommuBbsController?command=delete";
-         document.form1.submit(); 
+         location.href ="CommuBbsController?command=delete&seq=${comdto.seq }";
+         
         }else{
         	return;
         }
         });
         
         $("#btnUpdate").click(function(){    
-            document.form1.action="CommuBbsController?command=update";
-            document.form1.submit();
+        	 location.href ="CommuBbsController?command=update&seq=${comdto.seq }";
         });
         
         $("#btnBack").click(function () {
@@ -428,7 +427,7 @@ if(comdto.getUser_email().equals(sid)){
 
 	    });
         
-    });
+
 </script>
 	
 

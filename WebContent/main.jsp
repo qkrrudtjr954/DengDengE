@@ -73,14 +73,48 @@
 
 	<div class="album py-5 bg-light">
 		<div class="container">
-
-			<div class="row">
-				<div>
-					<iframe width="560" height="315"
-						src="https://www.youtube.com/embed/dHmyY0iX0ww?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1"></iframe>
-				</div>
+<!-- 본문시작  -->
+		<div class="row">
+			<div class="col-md-6">
+				<img src="./img/main_01.jpg" width="100%">
 			</div>
-
+			<div class="col-md-6">
+				<div align="center">
+					<img src="./img/deng.png" width="100">
+					<br><br>
+					<h1>댕댕이</h1>
+					<h5>믿고 맡길 수 있는 분양센터</h5>
+					<hr>
+				</div>
+					<div class="maininfo">
+						<div class="imginfo">
+							<img src="./img/mainpic_01.png" width="100"><br><br>
+						</div>
+						<span id="main_num">01</span><span id="sentence">입양동물 공고 확인 후 개별 연락</span><br><br>
+						<div class="imginfo">
+							<img src="./img/mainpic_02.png" width="100"><br><br>
+						</div>
+						<span id="main_num">02</span><span  id="sentence">예약시스템을 통해 일대일 연락 후 분양</span><br><br>
+						<div class="imginfo">
+							<img src="./img/mainpic_03.png" width="100"><br><br>
+						</div>
+						<span id="main_num">03</span><span  id="sentence">책임분양 계약서 작성을 통한 믿고 맡길 수 있는 분양</span><br><br>
+						<div class="imginfo">
+							<img src="./img/mainpic_04.png" width="100"><br><br>
+						</div>
+						<span id="main_num">04</span><span  id="sentence">댕댕이를 통해 입양한 고객님들의 다양한 입양 후기</span><br><br>
+					</div>
+				</div>
+		
+		</div>	
+			
+			
+			
+			
+			
+			
+			
+<!-- 본문시 끝-->
 		</div>
 	</div>
 
