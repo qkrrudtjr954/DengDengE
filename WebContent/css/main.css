@@ -8,7 +8,7 @@
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
-  background-image: url("../img/main2.jpg");
+  background-image: url("../img/dd.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -120,19 +120,35 @@ button#delBtn{
 
 div.imginfo{
 	text-align:center;
-
+	
 }
 
 div.maininfo span{
 	margin-left: 50px;
-
+	
 }
 
 div.maininfo span#main_num{
 	font-size: 30px;
 	font-family: Verdana;
-	color: green;
+	color: #6ad46a;
 	font-weight: bold;
+	
+}
 
+div.maininfo span#sentence{
+	
+	font-family: 돋움;
+	color: #454e57;
+	
+	
+}
 
+span#headname{
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 맑은고딕;
+	color: #454e57;
+	
+	
 }
