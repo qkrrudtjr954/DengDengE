@@ -25,7 +25,7 @@
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand offset-md-2" href="MainControl?command=start">DengDengE</a>
+			<a class="navbar-brand offset-md-2" href="#">DengDengE</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -57,18 +57,14 @@
 
 	<section class="jumbotron text-center">
 		<div class="container">
-			<h1 class="jumbotron-heading">Album example</h1>
-			<p class="lead text-muted">Something short and leading about the
-				collection below—its contents, the creator, etc. Make it short and
-				sweet, but not too short so folks don't simply skip over it
-				entirely.</p>
+			<h1 class="jumbotron-heading">믿고 맡기는 분양센터</h1>
+			<p class="lead text-muted">새로운 가족을 찾는 아이들과 
+			갈 곳이 없어진 불쌍한 아이들을 <br> 당신의 곁으로 데려가 주세요</p>
 			<p>
 				<a href="AnimalBbsController?command=animlist" class="btn btn-success my-2">분양 동물 보러가기</a>
 			</p>
 		</div>
 	</section>
-
-
 	<%@include file="./layout/menubar.jsp" %>
 
 	<div class="album py-5 bg-light">
