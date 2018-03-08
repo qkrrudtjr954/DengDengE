@@ -27,7 +27,7 @@
 		<header class="masthead mb-auto"></header>
 
 		<main role="main" class="inner cover">
-			<div class="cover-heading">댕댕이</div>
+			
 			<p class="lead">
 				사지 말고 입양하세요. 아이들이 당신을 기다립니다. <br>
 				믿고 분양할 수 있는 <span style="font-size:40px;font-weight:bold;">댕댕이</span>와 함께하세요.
