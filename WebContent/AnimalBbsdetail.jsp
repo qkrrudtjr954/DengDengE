@@ -258,7 +258,7 @@ if(aniBbsDto != null){
                System.out.println(aniBbsDto.getDel());
          %>
             <div class="row">
-               <button type="button" class="offset-md-5 btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="<%=aniBbsDto.getUser_email()%>">분양예약리스트</button>
+               <button type="button" class="offset-md-5 btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" data-whatever="<%=aniBbsDto.getUser_email()%>">분양예약리스트</button>
                   
             </div>
          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -285,10 +285,10 @@ if(aniBbsDto != null){
                                                 <!-- 예약확정 -->
                                                    <c:choose>
                                                       <c:when test="${item.user_email eq  aniBbsDto.complete_email}">                                                         
-                                                         <button class="btn btn-outline-primary"style="background-color: #28A745; color: #fff" id="bookBtn">분양확정</button>
+                                                         <button class="btn btn-outline-success"style="background-color: #28A745; color: #fff" id="bookBtn">분양확정</button>
                                                       </c:when>
                                                       <c:otherwise>
-                                                         <button class="btn btn-outline-secondary disabled" style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
+                                                         <button class="btn btn-outline-success disabled" style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
                                                       </c:otherwise>
                                                    </c:choose>
                                                    
@@ -301,7 +301,7 @@ if(aniBbsDto != null){
                                           <tr>
                                              <td width="200" class="tdVal">${item.user_email}</td>
                                              <td>
-                                                <button onclick="getListTest('${item.user_email}')" class="btn btn-outline-secondary "style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
+                                                <button onclick="getListTest('${item.user_email}')" class="btn btn-outline-success "style="background-color: #28A745; color: #fff" id="bookBtn">reserve</button>
                                              </td>
                                           <tr>
                                     </c:forEach>
@@ -329,7 +329,7 @@ if(aniBbsDto != null){
                   $("#Sbtn").hide();
                   $("#Nbtn").hide();
                </script>         
-               <span class="offset-md-4 btn btn-primary">${aniBbsDto.getComplete_email() }님께 분양확정되었습니다</span>
+               <span class="offset-md-4 btn btn-outline-success">${aniBbsDto.getComplete_email() }님께 분양확정되었습니다</span>
               <br>
             <%
          }      
@@ -343,12 +343,12 @@ if(aniBbsDto != null){
                <%
                   if(bookS){
                      %>
-                        <button type="button" class="offset-md-5 btn btn-primary" id="Sbtn"
+                        <button type="button" class="offset-md-5 btn btn-outline-success" id="Sbtn"
                         >분양예약완료</button>
                      <%
                   }else  if(!bookS){
                      %>
-                        <button type="button" class="offset-md-5 btn btn-primary"
+                        <button type="button" class="offset-md-5 btn btn-outline-success"
                      data-toggle="modal" data-target="#exampleModal"
                      data-whatever="<%=id%>" id="Nbtn">분양예약하기</button>
                      <%                  
