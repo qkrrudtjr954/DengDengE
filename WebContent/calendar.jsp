@@ -60,7 +60,6 @@
 								<div id="map2"></div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" id="addEvent">일정 등록하기</button>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 							</div>
 						</div>
