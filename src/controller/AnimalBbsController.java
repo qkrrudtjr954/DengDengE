@@ -45,6 +45,8 @@ public class AnimalBbsController extends HttpServlet {
 		
 		if(command.equals("animlist")) {
 			List<AnimalBbsDto> animlist = aniBbService.getAnimalBbsList();
+			
+			
 			req.setAttribute("animlist", animlist);
 			dispatch("AnimalBbslist.jsp", req, resp);
 		}
@@ -289,7 +291,6 @@ public class AnimalBbsController extends HttpServlet {
 			
 			
 		}
-			
 			
 			
 		}
