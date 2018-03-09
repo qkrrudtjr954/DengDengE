@@ -268,7 +268,6 @@ if(msg !=null){
 
 		// button
 		$("#btnupdete").click(function(){
-	        alert("수정화면으로 이동 합니다");
 	       document.form1.action ="AfterBbsController?command=AfterBbsUpdate";
 	      document.form1.submit();
 

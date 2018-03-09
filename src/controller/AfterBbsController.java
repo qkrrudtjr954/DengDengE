@@ -131,14 +131,14 @@ public class AfterBbsController extends HttpServlet {
 			// req.setAttribute("seq", seq);
 			req.setAttribute("bbs2", bbs2);
 			dispatch("AfterBbsUpdate.jsp", req, resp);
+			
 
 		} else if (command.equals("AfterBbsUpdateAf")) {
 			String seq = req.getParameter("seq");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			String pic1 = req.getParameter("pic1");
-			// String suserseq = req.getParameter("userseq");
-			// int userseq = Integer.parseInt(suserseq);
+			
 
 			dto.setSeq(Integer.parseInt(seq));
 			dto.setTitle(title);
@@ -150,13 +150,7 @@ public class AfterBbsController extends HttpServlet {
 			boolean isS = bbs.AfrerBbsUpdate(dto);
 			req.setAttribute("isS", isS);
 
-			if (isS) {
-				// JOptionPane.showMessageDialog(null, "수정성공");
-				req.setAttribute("msg", "수정성공");
-			} else {
-				// JOptionPane.showMessageDialog(null, "수정실패");
-				req.setAttribute("msg", "수정실패");
-			}
+			
 			resp.sendRedirect("AfterBbsController?command=AfterBbslist");
 
 		} else if (command.equals("AfterDelete")) {
