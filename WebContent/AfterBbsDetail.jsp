@@ -214,11 +214,10 @@ if(msg !=null){
 					if (current_user.getEmail().equals(bbs1.getUser_email())) {
 				%>
 
-				<form name="form1" class = "offset-md-5" method="post">
-					<input type="hidden" name="seq" value="<%=bbs1.getSeq()%>">
+				<div class = "offset-md-5" method="post">
 					<button id="btnupdete" class="btn btn-success">수정하기</button>
 					<button id="btndelete" class="btn btn-outline-secondary">삭제하기</button>
-				</form>
+				</div>
 				<%
 					}
 					%>
@@ -268,15 +267,15 @@ if(msg !=null){
 
 		// button
 		$("#btnupdete").click(function(){
-	       document.form1.action ="AfterBbsController?command=AfterBbsUpdate";
-	      document.form1.submit();
+			location.href ="AfterBbsController?command=AfterBbsUpdate&seq=${bbs1.seq}";
+	     
 
 	     });
 
 	     $("#btndelete").click(function(){
 	    	 if(confirm("정말 삭제하시겠습니까?")==true){
-	    		 document.form1.action="AfterBbsController?command=AfterDelete";
-		         document.form1.submit();
+	    		 location.href ="AfterBbsController?command=AfterDelete&seq=${bbs1.seq}";
+		        
 	    	 }else{
 	    		 return;
 	    	 }

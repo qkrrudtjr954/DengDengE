@@ -479,12 +479,9 @@ if(aniBbsDto != null){
 				<br>
 				<%if(aniBbsDto.getUser_email().equals(sid)){
 					%>
-					<div class="row">
-						<a href="AnimalBbsController?command=update&seq=<%=aniBbsDto.getSeq() %>" class="offset-md-5 btn btn-success"
-						style="background-color: #28A745; color: #fff">수정하기</a>
-						&nbsp;&nbsp;
-						<a href="AnimalBbsController?command=delete&seq=<%=aniBbsDto.getSeq() %>"
-						class="btn btn-outline-secondary">삭제하기</a>
+					<div class = "offset-md-5" method="post">
+						<button id="btnupdete" class="btn btn-success">수정하기</button>
+						<button id="btndelete" class="btn btn-outline-secondary">삭제하기</button>
 					</div>
 					<%
 				}
@@ -567,10 +564,25 @@ if(aniBbsDto != null){
          $(this).children('.nav-link').css('color', 'white');
       });
       
-      $("#btnBack").click(function () {
-          location.href="AnimalBbsController?command=animlist";
+		$("#btnupdete").click(function(){
+			location.href ="AnimalBbsController?command=update&seq=${aniBbsDto.seq}";
+	     
 
-      });
+	     });
+
+	     $("#btndelete").click(function(){
+	    	 if(confirm("정말 삭제하시겠습니까?")==true){
+	    		 location.href ="AnimalBbsController?command=delete&seq=${aniBbsDto.seq}";
+		        
+	    	 }else{
+	    		 return;
+	    	 }
+
+	     });
+	     
+	     $("#btnBack").click(function () {
+	    	 location.href ="AnimalBbsController?command=animlist";
+		})
       
       $('#btnLike').click(function ()  {
          
