@@ -328,7 +328,9 @@ if(aniBbsDto != null){
                    $("button").hide();
                   $("#Sbtn").hide();
                   $("#Nbtn").hide();
-               </script>
+               </script>         
+               <span class="offset-md-4 btn btn-primary">${aniBbsDto.getComplete_email() }님께 분양확정되었습니다</span>
+              <br>
             <%
          }      
             else{
