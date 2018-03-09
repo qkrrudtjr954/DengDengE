@@ -175,7 +175,7 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									</c:choose>
 									<br>													
 								<p>
-									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
+									아이 이름 : ${item.name} <span style="font-size:12px;">( ${item.type } )</span>
 								</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">

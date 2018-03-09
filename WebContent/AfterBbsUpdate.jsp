@@ -45,7 +45,7 @@ AfterBbsDto bbs = (AfterBbsDto)request.getAttribute("bbs2");
 				<input type="hidden" name="pic1" value="" id="pic1">
 
 				<div class="row">
-						<h1>입양하기 글 수정</h1>
+						<h1>입양후기 글 수정</h1>
 					</div>
 					<hr>
 				<div class="row">

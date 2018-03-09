@@ -201,9 +201,9 @@ to {
 								alt="./img/no-img.png">
 							<div class="card-body">
 								<p class="card-text">
-									${item.title } <br>
+									제목 : ${item.title } <br>
 								<p>
-									${item.user_email} <span style="font-size: 12px;"></span>
+									작성자 : ${item.user_email} <span style="font-size: 12px;"></span>
 								</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
