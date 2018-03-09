@@ -30,7 +30,7 @@
 	<context-param>
 		<description>image server url</description>
 		<param-name>IMG_SERVER_PATH</param-name>
-		<param-value>http://192.168.0.19:3000</param-value>
+		<param-value>http://192.168.10.43:3000</param-value>
 	</context-param>
 
 	<servlet>

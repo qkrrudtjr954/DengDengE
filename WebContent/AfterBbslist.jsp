@@ -198,7 +198,7 @@ to {
 						<div class="card mb-4 box-shadow">
 							<img class="card-img-top"
 								src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }"
-								alt="./img/no-img.png">
+								alt="./img/no-img.png" height="348">
 							<div class="card-body">
 								<p class="card-text">
 								<span id="aftertitle">

@@ -175,9 +175,6 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 									</c:choose>
 									<br>													
 								<p>
-
-									아이 이름 : ${item.name} <span style="font-size:12px;">( ${item.type } )</span>
-
 									${item.name} <span style="font-size:12px;">( ${item.type } )</span>
 									<c:choose>
 										<c:when test="${item.likecount==0 }">
