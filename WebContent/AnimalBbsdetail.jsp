@@ -579,6 +579,10 @@ if(aniBbsDto != null){
 	    	 }
 
 	     });
+	     
+	     $("#btnBack").click(function () {
+	    	 location.href ="AnimalBbsController?command=animlist";
+		})
       
       $('#btnLike').click(function ()  {
          
