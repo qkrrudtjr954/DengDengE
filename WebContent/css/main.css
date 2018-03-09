@@ -133,6 +133,7 @@ div.imginfo{
 
 div.maininfo span{
 	margin-left: 50px;
+	font-size: 13px;
 	
 }
 
@@ -177,3 +178,11 @@ span#aftertitle{
 	
 	
 }
+
+
+	
+ a#commutitle:link { color: black; text-decoration: none;}
+ a#commutitle:visited { color: black; text-decoration: none;}
+ a#commutitle:hover { color: black; text-decoration: none;}
+
+

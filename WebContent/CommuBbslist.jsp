@@ -98,9 +98,9 @@
 						<col width="7%">
 						<col width="13%">
 						<col width="43%">
-						<col width="20%">
+						<col width="19%">
 						<col width="10%">
-						<col width="7%">
+						<col width="8%">
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -131,7 +131,7 @@
 							<td><%=i + 1%></td>
 							<td><%=bbs.getCategory_name()%></td>
 							<td id="td_title">
-								<a href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
+								<a id="commutitle" href="CommuBbsController?command=read&seq=<%=bbs.getSeq()%>">
 									&nbsp;&nbsp;<%=bbs.getTitle()%>
 								</a> &nbsp;
 								<%
