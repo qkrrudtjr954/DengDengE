@@ -132,15 +132,12 @@ div.imginfo{
 }
 
 div.maininfo span{
-<<<<<<< HEAD
+
 	margin-left: 50px;
 	font-size: 13px;
 	
-=======
-   margin-left: 50px;
-   
->>>>>>> fab36655d06b843a262f83765b64969cc614faa2
-}
+
+  }
 
 div.maininfo span#main_num{
    font-size: 30px;
