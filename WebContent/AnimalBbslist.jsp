@@ -92,8 +92,9 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				<div class="row" style="margin:0 auto;width:900px;">
 					<div class="offset-md-2 input-group-prepend">
 						<select class="custom-select" id="inputGroupSelect01"name="Searchtype" style="width: 150px">
+							<option value="target_user_seq">글쓴이</option>
 							<option value="title">제목</option>
-							<option value="target_user_seq">작성자</option>
+							<option value="location">지역</option>
 						</select> 
 						<input type="text" class="form-control"
 							aria-label="Text input with segmented dropdown button" size="50"

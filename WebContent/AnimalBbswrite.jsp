@@ -207,9 +207,9 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 								placeholder="이름" value="<%=sid %>" readonly="readonly" style="background-color: #fff">
 							&nbsp;&nbsp;&nbsp; 
 							
-							<span class="input-group-text" id="">연락처</span>
+							<img src="img/kakaotalk.jpg"  width="40" height="40">
 							<input type="text" class="form-control" size="20" name="contact"
-								placeholder="연락처" id="contact">
+								placeholder="카톡아이디 및 전화번호" id="contact">
 							<button class="btn btn-outline-secondary" type="button" id="contactbutton">인증하기</button>
 						</div>
 					</div>
