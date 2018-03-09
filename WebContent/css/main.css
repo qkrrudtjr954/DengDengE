@@ -14,17 +14,17 @@
 }
 
 .main_header{
-	background-color: rgba(76, 76, 76, 0.5);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	
+   background-color: rgba(76, 76, 76, 0.5);
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
 }
 
 .menu {
-	width: 100%;
+   width: 100%;
 }
 
 .nav-link {
-	color: white;
+   color: white;
 }
 
 .menu-item {
@@ -46,7 +46,7 @@
 }
 
 .jumbotron-heading {
-	font-size: 40px;
+   font-size: 40px;
   font-weight: bold;
   
 }
@@ -70,12 +70,12 @@ footer p {
 
 
 .list-title {
-	text-align: center;
-	margin-bottom: 20px;
+   text-align: center;
+   margin-bottom: 20px;
 }
 
 .map-container {
-	background-color: white;
+   background-color: white;
     height: 100%;
     width: 100%;
 }
@@ -91,7 +91,7 @@ footer p {
 }
 
 .map-result :hover {
-	background: gray;
+   background: gray;
     margin: 10px 0px;
     padding: 10px;
     text-align: center;
@@ -102,7 +102,7 @@ footer p {
 
 
 button#adminQuestion {
-	position: fixed;
+   position: fixed;
     right: 60px;
     bottom: 80px;
     border: none;
@@ -111,69 +111,69 @@ button#adminQuestion {
 }
 
 table th{
-	text-align:center;
+   text-align:center;
 }
 
 table td{
-	text-align:center;
+   text-align:center;
 }
 #td_title{
-	text-align:left;
+   text-align:left;
 }
 button#delBtn{
-	 background: url(button_search.png) no-repeat;
+    background: url(button_search.png) no-repeat;
      border: none;
      outline: none;
 }
 
 div.imginfo{
-	text-align:center;
-	
+   text-align:center;
+   
 }
 
 div.maininfo span{
-	margin-left: 50px;
-	
+   margin-left: 50px;
+   
 }
 
 div.maininfo span#main_num{
-	font-size: 30px;
-	font-family: Verdana;
-	color: #6ad46a;
-	font-weight: bold;
-	
+   font-size: 30px;
+   font-family: Verdana;
+   color: #6ad46a;
+   font-weight: bold;
+   
 }
 
 div.maininfo span#sentence{
-	
-	font-family: 돋움;
-	color: #454e57;
-	
-	
+   
+   font-family: 돋움;
+   color: #454e57;
+   
+   
 }
 
 span#headname{
-	font-size: 40px;
-	font-weight: bold;
-	font-family: 맑은고딕;
-	color: #454e57;
-	
-	
+   font-size: 40px;
+   font-weight: bold;
+   font-family: 맑은고딕;
+   color: #454e57;
+   
+   
 }
 
 
 span#animaltitle{
-	font-weight: bold;
-	font-size: 20px;
-	color: #454e57;
-	
-	
+   font-weight: bold;
+   font-size: 20px;
+   color: #454e57;
+   
+   
 }
 
 span#aftertitle{
-	font-weight: bold;
-	font-size: 20px;
-	color: #454e57;
-	
-	
+   font-weight: bold;
+   font-size: 20px;
+   color: #454e57;
+   
+   
 }
