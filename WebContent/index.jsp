@@ -27,13 +27,18 @@
 		<header class="masthead mb-auto"></header>
 
 		<main role="main" class="inner cover">
-			
-			<p class="lead">
-				사지 말고 입양하세요. 아이들이 당신을 기다립니다. <br>
-				믿고 분양할 수 있는 <span style="font-size:40px;font-weight:bold;">댕댕이</span>와 함께하세요.
+			<p class="lead" style="font-weight: bold">
+				
+				사지 말고 입양하세요. <br>
+				아이들이 당신을 기다립니다.
+				<br> 
+				<br>
+				
+				믿고 분양할 수 있는 <img src="./img/whitedeng.png" alt="댕댕이" width="100" height="40"> 와 함께하세요.
 			</p>
+			<br>
 			<p class="lead">
-				<a href="MainControl?command=start" class="btn btn-lg btn-secondary">Learn more</a>
+				<a href="MainControl?command=start" class="btn btn-lg btn-secondary">입장하기</a>
 			</p>
 		</main>
 

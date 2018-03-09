@@ -23,10 +23,11 @@
 		<input type="hidden" value="signin" name="command">
 
 		<a href="MainControl?command=start">
-			<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+			<img class="mb-4" src="./img/main.png" alt="" width="150" height="150">
+			<img class="mb-4" src="./img/slogo.png" alt="" width="170" height="55">
 		</a>
 
-		<h1 class="h3 mb-3 font-weight-normal">댕댕이</h1>
+		
 
 		<label for="inputEmail" class="sr-only">Email</label>
 		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -40,11 +41,12 @@
 			</label>
 		</div>
 
-		<input class="btn btn-lg btn-primary btn-block" type="button" value="로그인">
-		<a href="UserControl?command=goSignUp">댕댕이가 처음이십니까?</a> 
+		<input class="btn btn-lg btn-success btn-block" type="button" value="로그인">
 		<br>
+		<a href="UserControl?command=goSignUp">댕댕이가 처음이십니까?</a>
+		<br> 
 		<a href="MainControl?command=start">메인화면으로 가기</a> 
-		<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+		<p class="mt-5 mb-3 text-muted">&copy; 2017-2018 &nbsp;&nbsp; DengDengE</p>
 		
 		
 		

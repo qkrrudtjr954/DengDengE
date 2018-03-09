@@ -48,20 +48,24 @@
 			data : { command : 'getSendMaster' },
 			method : 'POST',
 			success : function (data) {
-				var inquiries = JSON.parse(data);
-				for(var i=0; i<inquiries.length; i++){
-					var html = 
-						'<tr>'+
-							'<td>'+(i+1)+'</td>'+
-							'<td>'+
-								'<a href="#" onclick="showInquiry('+inquiries[i].seq+')">'+inquiries[i].title+'</a>'+
-							'</td>'+
-							'<td>'+
-								printStatus(inquiries[i].complete)+
-							'</td>'+
-						'</tr>';
-						
-					$('#sendMasterTable tbody').append(html);
+				if(data=="login"){
+					$('#sendMasterTable tbody').append('<tr><td colspan="3">문의가 없습니다.</td></tr>');
+				}else {
+					var inquiries = JSON.parse(data);
+					for(var i=0; i<inquiries.length; i++){
+						var html = 
+							'<tr>'+
+								'<td>'+(i+1)+'</td>'+
+								'<td>'+
+									'<a href="#" onclick="showInquiry('+inquiries[i].seq+')">'+inquiries[i].title+'</a>'+
+								'</td>'+
+								'<td>'+
+									printStatus(inquiries[i].complete)+
+								'</td>'+
+							'</tr>';
+							
+						$('#sendMasterTable tbody').append(html);
+					}
 				}
 				feather.replace();
 			}

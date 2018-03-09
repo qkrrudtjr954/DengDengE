@@ -116,7 +116,8 @@ List<AnimalBbsDto> animallist = (List<AnimalBbsDto>)request.getAttribute("animli
 				<c:forEach items="${animlist }" var="item" varStatus="i">
 					<div class="col-md-4">
 						<div class="card mb-4 box-shadow">
-							<img class="card-img-top" src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }" alt="./img/no-img.png">
+							<%-- <img class="card-img-top" src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }" alt="./img/no-img.png"> --%>
+							<img class="card-img-top" src="${(empty item.pic1) ? './img/no-img.png' : item.pic1  }" alt="./img/no-img.png" height="348">
 							<div class="card-body">
 								<p class="card-text">
 									<!-- 몇일 전, 몇시간전 방금전 등록 되었는지 표시하는 소스 -->
